@@ -1,0 +1,170 @@
+Extracting prog: 31.172525428s
+Minimizing prog: 2m32.54738542s
+Simplifying prog options: 0s
+Extracting C: 12.467077425s
+Simplifying C: 3m56.056214385s
+
+
+102 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 68 programs
+single: executing 4 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6-connect$inet6-setsockopt$inet6_int-bind$inet6-write$binfmt_misc
+detailed listing:
+executing program 0:
+r0 = socket$inet6(0xa, 0x3, 0x2c)
+connect$inet6(r0, &(0x7f0000000080)={0xa, 0x0, 0x0, @empty}, 0x1c)
+setsockopt$inet6_int(r0, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+bind$inet6(r0, &(0x7f0000000040)={0xa, 0x4e23, 0x800, @dev={0xfe, 0x80, '\x00', 0x33}, 0x38000000}, 0x1c)
+write$binfmt_misc(r0, &(0x7f0000000280)=ANY=[], 0xfff7)
+
+program crashed: KCSAN: data-race in filemap_fault / page_remove_rmap
+single: successfully extracted reproducer
+found reproducer with 5 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6-connect$inet6-setsockopt$inet6_int-bind$inet6
+detailed listing:
+executing program 0:
+r0 = socket$inet6(0xa, 0x3, 0x2c)
+connect$inet6(r0, &(0x7f0000000080)={0xa, 0x0, 0x0, @empty}, 0x1c)
+setsockopt$inet6_int(r0, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+bind$inet6(r0, &(0x7f0000000040)={0xa, 0x4e23, 0x800, @dev={0xfe, 0x80, '\x00', 0x33}, 0x38000000}, 0x1c)
+
+program crashed: KCSAN: data-race in __ext4_new_inode / _find_next_zero_bit
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6-connect$inet6-setsockopt$inet6_int
+detailed listing:
+executing program 0:
+r0 = socket$inet6(0xa, 0x3, 0x2c)
+connect$inet6(r0, &(0x7f0000000080)={0xa, 0x0, 0x0, @empty}, 0x1c)
+setsockopt$inet6_int(r0, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+
+program crashed: KCSAN: data-race in __ext4_new_inode / _find_next_zero_bit
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6-connect$inet6
+detailed listing:
+executing program 0:
+r0 = socket$inet6(0xa, 0x3, 0x2c)
+connect$inet6(r0, &(0x7f0000000080)={0xa, 0x0, 0x0, @empty}, 0x1c)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6-setsockopt$inet6_int
+detailed listing:
+executing program 0:
+r0 = socket$inet6(0xa, 0x3, 0x2c)
+setsockopt$inet6_int(r0, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+detailed listing:
+executing program 0:
+connect$inet6(0xffffffffffffffff, &(0x7f0000000080)={0xa, 0x0, 0x0, @empty}, 0x1c)
+setsockopt$inet6_int(0xffffffffffffffff, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+detailed listing:
+executing program 0:
+connect$inet6(0xffffffffffffffff, 0x0, 0x0)
+setsockopt$inet6_int(0xffffffffffffffff, 0x29, 0xa8, &(0x7f0000000000), 0x4)
+
+program crashed: KCSAN: data-race in ext4_mb_regular_allocator / mb_mark_used
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+detailed listing:
+executing program 0:
+connect$inet6(0xffffffffffffffff, 0x0, 0x0)
+setsockopt$inet6_int(0xffffffffffffffff, 0x29, 0xa8, 0x0, 0x0)
+
+program crashed: KCSAN: data-race in dentry_unlink_inode / step_into
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program crashed: KCSAN: data-race in _find_next_zero_bit / sbitmap_find_bit
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:4 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program crashed: KCSAN: data-race in _find_first_bit
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program crashed: KCSAN: data-race in _find_first_bit
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:true BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): connect$inet6-setsockopt$inet6_int
+program did not crash
+reproducing took 7m12.243224218s
+repro crashed as (corrupted=false):
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+==================================================================
+BUG: KCSAN: data-race in _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+
+race at unknown origin, with read to 0xffffffff9327eac0 of 8 bytes by interrupt on cpu 2:
+ _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+ find_first_bit include/linux/find.h:208 [inline]
+ find_next_bit_wrap include/linux/find.h:433 [inline]
+ find_next_bit_wrap include/linux/find.h:425 [inline]
+ _nohz_idle_balance.isra.0+0x1cb/0x2f0 kernel/sched/fair.c:12095
+ __do_softirq+0xc0/0x293 kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ sysvec_call_function_single+0x94/0xa0 arch/x86/kernel/smp.c:262
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0x1e/0x30 arch/x86/kernel/process.c:742
+ default_idle_call+0x2e/0xe0 kernel/sched/idle.c:96
+ cpuidle_idle_call kernel/sched/idle.c:169 [inline]
+ do_idle+0x181/0x210 kernel/sched/idle.c:281
+ cpu_startup_entry+0x25/0x30 kernel/sched/idle.c:379
+ start_secondary+0xfc/0x100 arch/x86/kernel/smpboot.c:336
+ secondary_startup_64_no_verify+0x178/0x17b
+
+value changed: 0x0000000000000004 -> 0x000000000000000c
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+
+final repro crashed as (corrupted=false):
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+==================================================================
+BUG: KCSAN: data-race in _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+
+race at unknown origin, with read to 0xffffffff9327eac0 of 8 bytes by interrupt on cpu 2:
+ _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+ find_first_bit include/linux/find.h:208 [inline]
+ find_next_bit_wrap include/linux/find.h:433 [inline]
+ find_next_bit_wrap include/linux/find.h:425 [inline]
+ _nohz_idle_balance.isra.0+0x1cb/0x2f0 kernel/sched/fair.c:12095
+ __do_softirq+0xc0/0x293 kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ sysvec_call_function_single+0x94/0xa0 arch/x86/kernel/smp.c:262
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0x1e/0x30 arch/x86/kernel/process.c:742
+ default_idle_call+0x2e/0xe0 kernel/sched/idle.c:96
+ cpuidle_idle_call kernel/sched/idle.c:169 [inline]
+ do_idle+0x181/0x210 kernel/sched/idle.c:281
+ cpu_startup_entry+0x25/0x30 kernel/sched/idle.c:379
+ start_secondary+0xfc/0x100 arch/x86/kernel/smpboot.c:336
+ secondary_startup_64_no_verify+0x178/0x17b
+
+value changed: 0x0000000000000004 -> 0x000000000000000c
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+

@@ -1,0 +1,471 @@
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 18337 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 0 PID: 18337 Comm: syz-executor.5 Not tainted 6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff800009533350
+x29: ffff800009533350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cadd49e5a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cadd1ab380 x21: ffff68cadd49e000
+x20: ffff800009533410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000028
+x14: 000000000000dac8 x13: 0000000000000005 x12: 0000000000000003
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : 00000000c0a3b040 x7 : 000000000000009d x6 : 0000000000002746
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000f963000 x1 : ffff800008072ec8 x0 : 0000000000001115
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1052
+hardirqs last  enabled at (1051): [<ffffc60c383f0538>] __exit_to_kernel_mode data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:84 [inline]
+hardirqs last  enabled at (1051): [<ffffc60c383f0538>] exit_to_kernel_mode+0x38/0x140 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:94
+hardirqs last disabled at (1052): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1044): [<ffffc60c36e104ac>] softirq_handle_end data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/softirq.c:414 [inline]
+softirqs last  enabled at (1044): [<ffffc60c36e104ac>] __do_softirq+0x3ec/0x4ec data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/softirq.c:600
+softirqs last disabled at (1035): [<ffffc60c36e16f14>] ____do_softirq+0x14/0x20 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/irq.c:79
+---[ end trace 0000000000000000 ]---
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.3'.
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 18364 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 0 PID: 18364 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff800009513350
+x29: ffff800009513350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cadb8125a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cac2162580 x21: ffff68cadb812000
+x20: ffff800009513410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cacc52e600 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000f963000 x1 : ffff800008072ec8 x0 : 0000000000000687
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1092
+hardirqs last  enabled at (1091): [<ffffc60c38401ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1091): [<ffffc60c38401ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1092): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1078): [<ffffc60c36e178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1078): [<ffffc60c36e178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1076): [<ffffc60c36e17834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 18402 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 0 PID: 18402 Comm: syz-executor.4 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff800009543350
+x29: ffff800009543350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cac16b45a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cade40dd80 x21: ffff68cac16b4000
+x20: ffff800009543410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cad33a0000 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000fb64000 x1 : ffff800008072ec8 x0 : 000000000000076b
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1460
+hardirqs last  enabled at (1459): [<ffffc60c383f0538>] __exit_to_kernel_mode data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:84 [inline]
+hardirqs last  enabled at (1459): [<ffffc60c383f0538>] exit_to_kernel_mode+0x38/0x140 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:94
+hardirqs last disabled at (1460): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1458): [<ffffc60c36e104ac>] softirq_handle_end data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/softirq.c:414 [inline]
+softirqs last  enabled at (1458): [<ffffc60c36e104ac>] __do_softirq+0x3ec/0x4ec data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/softirq.c:600
+softirqs last disabled at (1451): [<ffffc60c36e16f14>] ____do_softirq+0x14/0x20 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/irq.c:79
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 2 PID: 18413 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 2 PID: 18413 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000954b350
+x29: ffff80000954b350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cadd15c5a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cadd07b980 x21: ffff68cadd15c000
+x20: ffff80000954b410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cac23e3300 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000f963000 x1 : ffff800008072ec8 x0 : 000000000000093d
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 982
+hardirqs last  enabled at (981): [<ffffc60c38401ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (981): [<ffffc60c38401ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (982): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (966): [<ffffc60c36e178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (966): [<ffffc60c36e178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (964): [<ffffc60c36e17834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 3 PID: 18446 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 3 PID: 18446 Comm: syz-executor.4 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff8000095fb350
+x29: ffff8000095fb350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cadd15a5a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cadd19db80 x21: ffff68cadd15a000
+x20: ffff8000095fb410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cac09b6600 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000fb64000 x1 : ffff800008072ec8 x0 : 00000000000008fa
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1392
+hardirqs last  enabled at (1391): [<ffffc60c38401ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1391): [<ffffc60c38401ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1392): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1376): [<ffffc60c36e178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1376): [<ffffc60c36e178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1374): [<ffffc60c36e17834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 18456 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 0 PID: 18456 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000964b350
+x29: ffff80000964b350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cadd4985a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cada31c980 x21: ffff68cadd498000
+x20: ffff80000964b410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cac3649980 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000f963000 x1 : ffff800008072ec8 x0 : 000000000000078b
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1062
+hardirqs last  enabled at (1061): [<ffffc60c38401ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1061): [<ffffc60c38401ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1062): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1046): [<ffffc60c36e178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1046): [<ffffc60c36e178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1044): [<ffffc60c36e17834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 2 PID: 18513 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 2 PID: 18513 Comm: syz-executor.4 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000939b350
+x29: ffff80000939b350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff68cac16b25a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff68cad71fe400 x21: ffff68cac16b2000
+x20: ffff80000939b410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc60c3a324000
+x8 : ffff68cadd13cc80 x7 : 000000003b076b8c x6 : 0000000000018510
+x5 : ffffc60c38db7000 x4 : ffffc60c36e72ec8 x3 : ffffc60c36e00000
+x2 : ffff80000fb64000 x1 : ffff800008072ec8 x0 : 0000000000000679
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1108
+hardirqs last  enabled at (1107): [<ffffc60c38401ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1107): [<ffffc60c38401ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1108): [<ffffc60c383efd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1094): [<ffffc60c36e178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1094): [<ffffc60c36e178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1092): [<ffffc60c36e17834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo left promiscuous mode
+Illegal XDP return value 4294967274 on prog  (id 205) dev N/A, expect packet loss!

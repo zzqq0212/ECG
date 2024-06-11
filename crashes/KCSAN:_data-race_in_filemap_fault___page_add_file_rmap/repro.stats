@@ -1,0 +1,215 @@
+Extracting prog: 43.083747462s
+Minimizing prog: 1m59.415696812s
+Simplifying prog options: 0s
+Extracting C: 29.772034664s
+Simplifying C: 3m40.729052714s
+
+
+858 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 829 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int-ioctl$AUTOFS_DEV_IOCTL_READY-setsockopt$packet_int-setsockopt$inet_mtu-syz_open_procfs-sendto$inet
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+r1 = socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000000100)={{0x1, 0x1, 0x18, <r2=>0xffffffffffffffff, {0x7}}, './file0\x00'}) (rerun: 64)
+setsockopt$packet_int(r2, 0x107, 0x14, &(0x7f0000000140)=0x6722, 0x4) (async)
+setsockopt$inet_mtu(r1, 0x0, 0xa, &(0x7f0000000000)=0x4, 0x4) (async, rerun: 64)
+r3 = syz_open_procfs(0xffffffffffffffff, &(0x7f00000000c0)='net/udp\x00') (rerun: 64)
+sendto$inet(r3, 0x0, 0x0, 0x4000010, &(0x7f0000000040)={0x2, 0x4e20, @rand_addr=0x64010102}, 0x10)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+single: successfully extracted reproducer
+found reproducer with 8 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int-ioctl$AUTOFS_DEV_IOCTL_READY-setsockopt$packet_int-setsockopt$inet_mtu-syz_open_procfs
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+r1 = socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000000100)={{0x1, 0x1, 0x18, <r2=>0xffffffffffffffff, {0x7}}, './file0\x00'}) (rerun: 64)
+setsockopt$packet_int(r2, 0x107, 0x14, &(0x7f0000000140)=0x6722, 0x4) (async)
+setsockopt$inet_mtu(r1, 0x0, 0xa, &(0x7f0000000000)=0x4, 0x4) (async, rerun: 64)
+syz_open_procfs(0xffffffffffffffff, &(0x7f00000000c0)='net/udp\x00') (rerun: 64)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int-ioctl$AUTOFS_DEV_IOCTL_READY-setsockopt$packet_int-setsockopt$inet_mtu
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+r1 = socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000000100)={{0x1, 0x1, 0x18, <r2=>0xffffffffffffffff, {0x7}}, './file0\x00'}) (rerun: 64)
+setsockopt$packet_int(r2, 0x107, 0x14, &(0x7f0000000140)=0x6722, 0x4) (async)
+setsockopt$inet_mtu(r1, 0x0, 0xa, &(0x7f0000000000)=0x4, 0x4) (async, rerun: 64)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int-ioctl$AUTOFS_DEV_IOCTL_READY-setsockopt$packet_int
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000000100)={{0x1, 0x1, 0x18, <r1=>0xffffffffffffffff, {0x7}}, './file0\x00'}) (rerun: 64)
+setsockopt$packet_int(r1, 0x107, 0x14, &(0x7f0000000140)=0x6722, 0x4) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int-ioctl$AUTOFS_DEV_IOCTL_READY
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000000100)={{0x1, 0x1, 0x18, 0xffffffffffffffff, {0x7}}, './file0\x00'}) (rerun: 64)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet-setsockopt$packet_int
+detailed listing:
+executing program 0:
+r0 = socket$packet(0x11, 0x2, 0x300)
+socket$inet(0x2, 0x2, 0x0) (async)
+setsockopt$packet_int(r0, 0x107, 0x9, &(0x7f0000000080)=0x6, 0x4) (async, rerun: 64)
+
+program crashed: KCSAN: data-race in filemap_fault / page_add_file_rmap
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet-socket$inet
+detailed listing:
+executing program 0:
+socket$packet(0x11, 0x2, 0x300)
+socket$inet(0x2, 0x2, 0x0) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+detailed listing:
+executing program 0:
+socket$packet(0x11, 0x2, 0x300)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.NUM
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in filemap_fault / page_add_file_rmap
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in ext4_fill_raw_inode / ext4_orphan_del
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in generic_update_time / generic_update_time
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.NUM
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.NUM
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:true UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program crashed: KCSAN: data-race in filemap_fault / page_add_file_rmap
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$packet
+program did not crash
+reproducing took 6m53.000548761s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in filemap_fault / page_add_file_rmap
+
+read-write (marked) to 0xffffec12c424aac0 of 8 bytes by task 4580 on cpu 0:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ test_and_set_bit_lock include/asm-generic/bitops/instrumented-lock.h:57 [inline]
+ folio_trylock include/linux/pagemap.h:922 [inline]
+ lock_folio_maybe_drop_mmap mm/filemap.c:3108 [inline]
+ filemap_fault+0x153/0xec0 mm/filemap.c:3318
+ __do_fault+0x79/0x1b0 mm/memory.c:4198
+ do_read_fault mm/memory.c:4547 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x12ba/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+read to 0xffffec12c424aac0 of 8 bytes by task 4581 on cpu 1:
+ __lruvec_stat_mod_folio include/linux/vmstat.h:615 [inline]
+ page_add_file_rmap+0x17a/0x210 mm/rmap.c:1357
+ do_set_pte+0x1fc/0x450 mm/memory.c:4342
+ filemap_map_pages+0x434/0x840 mm/filemap.c:3550
+ do_fault_around mm/memory.c:4510 [inline]
+ do_read_fault mm/memory.c:4542 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x184a/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+value changed: 0x02fffc000000203f -> 0x02fffc00000020bf
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 4581 Comm: syz-executor363 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in filemap_fault / page_add_file_rmap
+
+read-write (marked) to 0xffffec12c424aac0 of 8 bytes by task 4580 on cpu 0:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ test_and_set_bit_lock include/asm-generic/bitops/instrumented-lock.h:57 [inline]
+ folio_trylock include/linux/pagemap.h:922 [inline]
+ lock_folio_maybe_drop_mmap mm/filemap.c:3108 [inline]
+ filemap_fault+0x153/0xec0 mm/filemap.c:3318
+ __do_fault+0x79/0x1b0 mm/memory.c:4198
+ do_read_fault mm/memory.c:4547 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x12ba/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+read to 0xffffec12c424aac0 of 8 bytes by task 4581 on cpu 1:
+ __lruvec_stat_mod_folio include/linux/vmstat.h:615 [inline]
+ page_add_file_rmap+0x17a/0x210 mm/rmap.c:1357
+ do_set_pte+0x1fc/0x450 mm/memory.c:4342
+ filemap_map_pages+0x434/0x840 mm/filemap.c:3550
+ do_fault_around mm/memory.c:4510 [inline]
+ do_read_fault mm/memory.c:4542 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x184a/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+value changed: 0x02fffc000000203f -> 0x02fffc00000020bf
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 4581 Comm: syz-executor363 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+

@@ -1,0 +1,721 @@
+Warning: Permanently added '[localhost]:55351' (ED25519) to the list of known hosts.
+syzkaller login: [   58.221068] audit: type=1400 audit(1710313572.012:7): avc:  denied  { execmem } for  pid=265 comm="syz-executor124" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+executing program
+[   58.228022] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+[   59.579397] ata1: found unknown device (class 0)
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   59.586755] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+[   59.587866] BUG: Bad rss-counter state mm:00000000429a99a2 type:MM_ANONPAGES val:1
+[   59.587909] BUG: non-zero pgtables_bytes on freeing mm: 4096
+[   61.627382] ata1: found unknown device (class 0)
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   61.634529] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+[   63.675338] ata1: found unknown device (class 0)
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   63.683565] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+[   64.015699] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN NOPTI
+[   64.016562] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.017101] CPU: 4 PID: 135 Comm: systemd-udevd Not tainted 6.8.0 #1
+[   64.017560] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.018133] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.018522] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.019810] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.020210] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.020728] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.021254] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.021780] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.022507] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.023281] FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   64.024131] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.024722] CR2: 0000562ccdf55168 CR3: 00000000856aa005 CR4: 0000000000770ef0
+[   64.025456] PKRU: 55555554
+[   64.025752] Call Trace:
+[   64.026008]  <TASK>
+[   64.026235]  ? show_regs+0x96/0xa0
+[   64.026602]  ? die_addr+0x50/0xe0
+[   64.026971]  ? exc_general_protection+0x1a1/0x320
+[   64.027465]  ? asm_exc_general_protection+0x26/0x30
+[   64.027973]  ? __wake_up_common+0x5e/0x1d0
+[   64.028437]  ? __wake_up_common+0x6f/0x1d0
+[   64.028924]  __wake_up+0x39/0x60
+[   64.029312]  netlink_release+0x86a/0x1610
+[   64.029758]  ? __entry_text_end+0x102166/0x102169
+[   64.030258]  ? __pfx_netlink_release+0x10/0x10
+[   64.030774]  ? __pfx_down_write+0x10/0x10
+[   64.031254]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.031714]  ? __pfx_locks_remove_file+0x10/0x10
+[   64.032203]  __sock_release+0xb3/0x270
+[   64.032644]  ? __pfx_sock_close+0x10/0x10
+[   64.033108]  sock_close+0x19/0x30
+[   64.033498]  __fput+0x265/0xb70
+[   64.033872]  task_work_run+0x16d/0x250
+[   64.034310]  ? __pfx_task_work_run+0x10/0x10
+[   64.034803]  ? kmem_cache_free+0x97/0x220
+[   64.035228]  do_exit+0xa2d/0x2670
+[   64.035606]  ? __pfx___seccomp_filter+0x10/0x10
+[   64.036094]  ? __pfx_do_exit+0x10/0x10
+[   64.036495]  ? __pfx__raw_spin_lock_irq+0x10/0x10
+[   64.036960]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.037413]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.037904]  ? zap_other_threads+0x29d/0x350
+[   64.038385]  do_group_exit+0xc8/0x280
+[   64.038844]  __x64_sys_exit_group+0x3e/0x50
+[   64.039326]  do_syscall_64+0xb3/0x1b0
+[   64.039745]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   64.040305] RIP: 0033:0x7f15f7c24bd9
+[   64.040699] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.041337] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.042142] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.042908] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.043658] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.044436] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf67c00
+[   64.045030] R13: 0000562ccdf746e0 R14: 00007ffdba06acb0 R15: 0000562ccdf68460
+[   64.045786]  </TASK>
+[   64.046048] Modules linked in:
+[   64.046385] ---[ end trace 0000000000000000 ]---
+[   64.046386] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#2] PREEMPT SMP KASAN NOPTI
+[   64.046901] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.048004] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.048457] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.049167] CPU: 0 PID: 133 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   64.050908] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.051656] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.052192] 
+[   64.052200] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.052976] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.053143] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.053810] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.054305] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.055008] RSP: 0018:ffff8881036efb40 EFLAGS: 00010056
+[   64.056758] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.057438] 
+[   64.057445] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.057955] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.058634] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9f320
+[   64.058838] FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   64.059537] RBP: ffff888100c9f320 R08: 0000000000000000 R09: ffffed10206ddf63
+[   64.060253] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.060930] R10: 0000000000000001 R11: ffff88811ae38a20 R12: 0000000000000001
+[   64.061700] CR2: 0000562ccdf55168 CR3: 00000000856aa005 CR4: 0000000000770ef0
+[   64.062394] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.062831] PKRU: 55555554
+[   64.063520] FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+[   64.064062] note: systemd-udevd[135] exited with irqs disabled
+[   64.064747] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.065093] note: systemd-udevd[135] exited with preempt_count 1
+[   64.065813] CR2: 0000562ccdf55168 CR3: 0000000103922002 CR4: 0000000000770ef0
+[   64.066431] Fixing recursive fault but reboot is needed!
+[   64.066998] PKRU: 55555554
+[   64.069409] Call Trace:
+[   64.069676]  <TASK>
+[   64.069909]  ? show_regs+0x96/0xa0
+[   64.070296]  ? die_addr+0x50/0xe0
+[   64.070684]  ? exc_general_protection+0x1a1/0x320
+[   64.071237]  ? asm_exc_general_protection+0x26/0x30
+[   64.071792]  ? __wake_up_common+0x5e/0x1d0
+[   64.072270]  ? __wake_up_common+0x6f/0x1d0
+[   64.072752]  __wake_up+0x39/0x60
+[   64.073144]  netlink_release+0x86a/0x1610
+[   64.073607]  ? __entry_text_end+0x102166/0x102169
+[   64.074122]  ? __pfx_netlink_release+0x10/0x10
+[   64.074625]  ? __pfx_down_write+0x10/0x10
+[   64.075125]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.075583]  ? __pfx_locks_remove_file+0x10/0x10
+[   64.076101]  __sock_release+0xb3/0x270
+[   64.076535]  ? __pfx_sock_close+0x10/0x10
+[   64.076981]  sock_close+0x19/0x30
+[   64.077381]  __fput+0x265/0xb70
+[   64.077755]  task_work_run+0x16d/0x250
+[   64.078153]  ? __pfx_task_work_run+0x10/0x10
+[   64.078636]  ? kmem_cache_free+0x97/0x220
+[   64.079111]  do_exit+0xa2d/0x2670
+[   64.079529]  ? __pfx___seccomp_filter+0x10/0x10
+[   64.080048]  ? __pfx_do_exit+0x10/0x10
+[   64.080494]  ? __pfx__raw_spin_lock_irq+0x10/0x10
+[   64.080995]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.081495]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.082014]  ? zap_other_threads+0x29d/0x350
+[   64.082510]  do_group_exit+0xc8/0x280
+[   64.082978]  __x64_sys_exit_group+0x3e/0x50
+[   64.083453]  do_syscall_64+0xb3/0x1b0
+[   64.083854]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   64.084429] RIP: 0033:0x7f15f7c24bd9
+[   64.084832] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.085465] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.086241] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.086991] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.087719] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.088464] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf67270
+[   64.089199] R13: 0000562ccdf74370 R14: 00007ffdba06acb0 R15: 0000562ccdf67b00
+[   64.089945]  </TASK>
+[   64.090196] Modules linked in:
+[   64.090535] ---[ end trace 0000000000000000 ]---
+[   64.090537] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#3] PREEMPT SMP KASAN NOPTI
+[   64.091043] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.092172] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.092645] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.093406] CPU: 4 PID: 53 Comm: kworker/4:1 Tainted: G      D            6.8.0 #1
+[   64.095219] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.095970] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.096498] 
+[   64.096504] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.097324] Workqueue: events rht_deferred_worker
+[   64.097485] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.098202] 
+[   64.098654] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.099412] RIP: 0010:rht_deferred_worker+0x5a9/0xfe0
+[   64.099571] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.100295] Code: 01 44 89 ee e8 88 ec 40 ff 45 84 ed 74 10 e9 30 02 00 00 e8 b9 f3 40 ff 48 89 dd 4c 89 eb e8 ae f3 40 ff 48 89 d8 48 c1 e8 03 <42> 80 3c 38 00 0f 85 17 08 00 00 4c 8b 2b 31 ff 45 89 ee 41 83 e6
+[   64.100776] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.101474] RSP: 0018:ffff888101037ce8 EFLAGS: 00010056
+[   64.103180] FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+[   64.103890] 
+[   64.103897] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff83457182
+[   64.104396] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.105207] RDX: ffff888100f41100 RSI: 0000000000000000 RDI: 0000000000000001
+[   64.105372] CR2: 0000562ccdf55168 CR3: 0000000103922002 CR4: 0000000000770ef0
+[   64.106073] RBP: ffff888100c9a410 R08: 0000000000000001 R09: ffffed102012dc0b
+[   64.106644] PKRU: 55555554
+[   64.107399] R10: 0000000000000000 R11: ffff88810ed84000 R12: ffff88810ed84000
+[   64.108071] note: systemd-udevd[133] exited with irqs disabled
+[   64.108767] R13: 0000000000000000 R14: 0000000000000000 R15: dffffc0000000000
+[   64.109251] note: systemd-udevd[133] exited with preempt_count 1
+[   64.109728] FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   64.110310] Fixing recursive fault but reboot is needed!
+[   64.111005] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.113748] CR2: 0000562ccdf55168 CR3: 0000000102b00001 CR4: 0000000000770ef0
+[   64.114478] PKRU: 55555554
+[   64.114787] Call Trace:
+[   64.115010]  <TASK>
+[   64.115263]  ? show_regs+0x96/0xa0
+[   64.115667]  ? die_addr+0x50/0xe0
+[   64.116068]  ? exc_general_protection+0x1a1/0x320
+[   64.116599]  ? asm_exc_general_protection+0x26/0x30
+[   64.117170]  ? rht_deferred_worker+0x5a2/0xfe0
+[   64.117676]  ? rht_deferred_worker+0x5a9/0xfe0
+[   64.118180]  ? rht_deferred_worker+0x5a2/0xfe0
+[   64.118682]  ? read_word_at_a_time+0xe/0x20
+[   64.119169]  process_one_work+0x5d6/0xe80
+[   64.119646]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.120134]  worker_thread+0xa04/0x12d0
+[   64.120544]  ? srso_alias_safe_ret+0x3/0x7
+[   64.120975]  ? __kthread_parkme+0x108/0x190
+[   64.121447]  ? schedule+0xfa/0x250
+[   64.121827]  ? __pfx_worker_thread+0x10/0x10
+[   64.122273]  kthread+0x284/0x350
+[   64.122621]  ? __pfx_kthread+0x10/0x10
+[   64.123048]  ret_from_fork+0x48/0x80
+[   64.123477]  ? __pfx_kthread+0x10/0x10
+[   64.123910]  ret_from_fork_asm+0x1b/0x30
+[   64.124363]  </TASK>
+[   64.124607] Modules linked in:
+[   64.124940] ---[ end trace 0000000000000000 ]---
+[   64.124941] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#4] PREEMPT SMP KASAN NOPTI
+[   64.125407] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.126524] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.127007] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.127721] CPU: 3 PID: 136 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   64.129469] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.130211] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.130230] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.130759] 
+[   64.130766] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.131521] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.131992] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.132156] RSP: 0018:ffff888104087b40 EFLAGS: 00010056
+[   64.132841] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.134560] 
+[   64.134566] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.135229] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.135727] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9d320
+[   64.136401] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.136567] RBP: ffff888100c9d320 R08: 0000000000000000 R09: ffffed1020810f63
+[   64.137263] FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   64.137938] R10: 0000000000000001 R11: ffff88811b138a20 R12: 0000000000000001
+[   64.138619] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.139268] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.139721] CR2: 0000562ccdf55168 CR3: 0000000102b00001 CR4: 0000000000770ef0
+[   64.140485] FS:  0000000000000000(0000) GS:ffff88811b100000(0000) knlGS:0000000000000000
+[   64.141201] PKRU: 55555554
+[   64.141756] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.142469] note: kworker/4:1[53] exited with irqs disabled
+[   64.143156] CR2: 0000562ccdf55168 CR3: 000000010f110001 CR4: 0000000000770ef0
+[   64.144015] note: kworker/4:1[53] exited with preempt_count 1
+[   64.144207] PKRU: 55555554
+[   64.144219] Call Trace:
+[   64.144231]  <TASK>
+[   64.147590]  ? show_regs+0x96/0xa0
+[   64.147959]  ? die_addr+0x50/0xe0
+[   64.148334]  ? exc_general_protection+0x1a1/0x320
+[   64.148846]  ? asm_exc_general_protection+0x26/0x30
+[   64.149386]  ? __wake_up_common+0x5e/0x1d0
+[   64.149848]  ? __wake_up_common+0x6f/0x1d0
+[   64.150316]  __wake_up+0x39/0x60
+[   64.150690]  netlink_release+0x86a/0x1610
+[   64.151179]  ? __entry_text_end+0x102166/0x102169
+[   64.151682]  ? __pfx_netlink_release+0x10/0x10
+[   64.152173]  ? __pfx_down_write+0x10/0x10
+[   64.152604]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.153083]  ? __pfx_locks_remove_file+0x10/0x10
+[   64.153588]  __sock_release+0xb3/0x270
+[   64.154008]  ? __pfx_sock_close+0x10/0x10
+[   64.154442]  sock_close+0x19/0x30
+[   64.154865]  __fput+0x265/0xb70
+[   64.155240]  task_work_run+0x16d/0x250
+[   64.155644]  ? __pfx_task_work_run+0x10/0x10
+[   64.156107]  ? kmem_cache_free+0x97/0x220
+[   64.156558]  do_exit+0xa2d/0x2670
+[   64.156944]  ? __pfx___seccomp_filter+0x10/0x10
+[   64.157459]  ? __pfx_do_exit+0x10/0x10
+[   64.157888]  ? __pfx__raw_spin_lock_irq+0x10/0x10
+[   64.158397]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.158896]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.159393]  ? zap_other_threads+0x29d/0x350
+[   64.159867]  do_group_exit+0xc8/0x280
+[   64.160281]  __x64_sys_exit_group+0x3e/0x50
+[   64.160749]  do_syscall_64+0xb3/0x1b0
+[   64.161148]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   64.161697] RIP: 0033:0x7f15f7c24bd9
+[   64.162080] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.162705] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.163465] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.164175] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.164889] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.165606] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68560
+[   64.166308] R13: 0000562ccdf74b80 R14: 00007ffdba06acb0 R15: 0000562ccdf68dc0
+[   64.167030]  </TASK>
+[   64.167268] Modules linked in:
+[   64.167590] ---[ end trace 0000000000000000 ]---
+[   64.167595] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#5] PREEMPT SMP KASAN NOPTI
+[   64.168030] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.169166] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.169626] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.170388] CPU: 1 PID: 138 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   64.172147] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.172937] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.172959] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.173454] 
+[   64.173460] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.174280] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.174736] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.174907] RSP: 0018:ffff88810353fb40 EFLAGS: 00010056
+[   64.175564] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.177311] 
+[   64.177958] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.178494] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.179177] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.179346] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9a320
+[   64.180000] FS:  0000000000000000(0000) GS:ffff88811b100000(0000) knlGS:0000000000000000
+[   64.180674] RBP: ffff888100c9a320 R08: 0000000000000000 R09: ffffed10206a7f63
+[   64.181333] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.182038] R10: 0000000000000001 R11: ffff88811af38a20 R12: 0000000000000001
+[   64.182801] CR2: 0000562ccdf55168 CR3: 000000010f110001 CR4: 0000000000770ef0
+[   64.183468] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.183994] PKRU: 55555554
+[   64.184657] FS:  0000000000000000(0000) GS:ffff88811af00000(0000) knlGS:0000000000000000
+[   64.185298] note: systemd-udevd[136] exited with irqs disabled
+[   64.186018] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.186394] note: systemd-udevd[136] exited with preempt_count 1
+[   64.187121] CR2: 0000562ccdf55168 CR3: 00000000856aa006 CR4: 0000000000770ef0
+[   64.187665] Fixing recursive fault but reboot is needed!
+[   64.188200] PKRU: 55555554
+[   64.188215] Call Trace:
+[   64.188228]  <TASK>
+[   64.191477]  ? show_regs+0x96/0xa0
+[   64.191886]  ? die_addr+0x50/0xe0
+[   64.192287]  ? exc_general_protection+0x1a1/0x320
+[   64.192800]  ? asm_exc_general_protection+0x26/0x30
+[   64.193359]  ? __wake_up_common+0x5e/0x1d0
+[   64.193825]  ? __wake_up_common+0x6f/0x1d0
+[   64.194332]  __wake_up+0x39/0x60
+[   64.194745]  netlink_release+0x86a/0x1610
+[   64.195220]  ? __entry_text_end+0x102166/0x102169
+[   64.195683]  ? __pfx_netlink_release+0x10/0x10
+[   64.196163]  ? __pfx_down_write+0x10/0x10
+[   64.196602]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.197041]  ? __pfx_locks_remove_file+0x10/0x10
+[   64.197553]  __sock_release+0xb3/0x270
+[   64.197988]  ? __pfx_sock_close+0x10/0x10
+[   64.198420]  sock_close+0x19/0x30
+[   64.198807]  __fput+0x265/0xb70
+[   64.199148]  task_work_run+0x16d/0x250
+[   64.199523]  ? __pfx_task_work_run+0x10/0x10
+[   64.199954]  ? kmem_cache_free+0x97/0x220
+[   64.200367]  do_exit+0xa2d/0x2670
+[   64.200734]  ? __pfx___seccomp_filter+0x10/0x10
+[   64.201180]  ? __pfx_do_exit+0x10/0x10
+[   64.201562]  ? __pfx__raw_spin_lock_irq+0x10/0x10
+[   64.202018]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.202447]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.202954]  ? zap_other_threads+0x29d/0x350
+[   64.203433]  do_group_exit+0xc8/0x280
+[   64.203865]  __x64_sys_exit_group+0x3e/0x50
+[   64.204338]  do_syscall_64+0xb3/0x1b0
+[   64.204739]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   64.205306] RIP: 0033:0x7f15f7c24bd9
+[   64.205712] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.206327] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.207116] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.207800] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.208491] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.209127] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf69820
+[   64.209788] R13: 0000562ccdf752c0 R14: 00007ffdba06acb0 R15: 0000562ccdf6a030
+[   64.210523]  </TASK>
+[   64.210809] Modules linked in:
+[   64.211151] ---[ end trace 0000000000000000 ]---
+[   64.211155] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#6] PREEMPT SMP KASAN NOPTI
+[   64.211595] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.212696] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   64.213167] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.213914] CPU: 2 PID: 137 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   64.215810] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.216591] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.217128] 
+[   64.217136] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.217970] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.218154] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.218913] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.219394] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.220098] RSP: 0018:ffff888103537b40 EFLAGS: 00010056
+[   64.221828] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.222541] 
+[   64.222550] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.223103] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.223806] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c99320
+[   64.223991] FS:  0000000000000000(0000) GS:ffff88811af00000(0000) knlGS:0000000000000000
+[   64.224712] RBP: ffff888100c99320 R08: 0000000000000000 R09: ffffed10206a6f63
+[   64.225434] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.226137] R10: 0000000000000001 R11: ffff88811b038a20 R12: 0000000000000001
+[   64.226996] CR2: 0000562ccdf55168 CR3: 00000000856aa006 CR4: 0000000000770ef0
+[   64.227720] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.228320] PKRU: 55555554
+[   64.229031] FS:  0000000000000000(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+[   64.229767] note: systemd-udevd[138] exited with irqs disabled
+[   64.230494] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.231013] note: systemd-udevd[138] exited with preempt_count 1
+[   64.231608] CR2: 0000562ccdf55168 CR3: 0000000104a44004 CR4: 0000000000770ef0
+[   64.232247] Fixing recursive fault but reboot is needed!
+[   64.232806] PKRU: 55555554
+[   64.235275] Call Trace:
+[   64.235565]  <TASK>
+[   64.235810]  ? show_regs+0x96/0xa0
+[   64.236220]  ? die_addr+0x50/0xe0
+[   64.236613]  ? exc_general_protection+0x1a1/0x320
+[   64.237158]  ? asm_exc_general_protection+0x26/0x30
+[   64.237710]  ? __wake_up_common+0x5e/0x1d0
+[   64.238199]  ? __wake_up_common+0x6f/0x1d0
+[   64.238679]  __wake_up+0x39/0x60
+[   64.239093]  netlink_release+0x86a/0x1610
+[   64.239569]  ? __entry_text_end+0x102166/0x102169
+[   64.240086]  ? __pfx_netlink_release+0x10/0x10
+[   64.240607]  ? __pfx_down_write+0x10/0x10
+[   64.241095]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.241604]  ? __pfx_locks_remove_file+0x10/0x10
+[   64.242130]  __sock_release+0xb3/0x270
+[   64.242582]  ? __pfx_sock_close+0x10/0x10
+[   64.243058]  sock_close+0x19/0x30
+[   64.243469]  __fput+0x265/0xb70
+[   64.243834]  task_work_run+0x16d/0x250
+[   64.244258]  ? __pfx_task_work_run+0x10/0x10
+[   64.244740]  ? kmem_cache_free+0x97/0x220
+[   64.245195]  do_exit+0xa2d/0x2670
+[   64.245589]  ? __pfx___seccomp_filter+0x10/0x10
+[   64.246105]  ? __pfx_do_exit+0x10/0x10
+[   64.246561]  ? __pfx__raw_spin_lock_irq+0x10/0x10
+[   64.247130]  ? __pfx__raw_spin_lock+0x10/0x10
+[   64.247630]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.248163]  ? zap_other_threads+0x29d/0x350
+[   64.248652]  do_group_exit+0xc8/0x280
+[   64.249070]  __x64_sys_exit_group+0x3e/0x50
+[   64.249539]  do_syscall_64+0xb3/0x1b0
+[   64.249962]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   64.250546] RIP: 0033:0x7f15f7c24bd9
+[   64.250957] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.251546] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.252304] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.253010] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.253768] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.254522] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68ec0
+[   64.255288] R13: 0000562ccdf74f20 R14: 00007ffdba06acb0 R15: 0000562ccdf69720
+[   64.256011]  </TASK>
+[   64.256264] Modules linked in:
+[   64.256593] ---[ end trace 0000000000000000 ]---
+[   64.257055] RIP: 0010:__wake_up_common+0x6f/0x1d0
+[   64.257611] Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+[   64.259462] RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+[   64.259998] RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+[   64.260738] RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+[   64.261458] RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+[   64.262170] R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+[   64.262903] R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+[   64.263618] FS:  0000000000000000(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+[   64.264426] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   64.265019] CR2: 0000562ccdf55168 CR3: 0000000104a44004 CR4: 0000000000770ef0
+[   64.265776] PKRU: 55555554
+[   64.266083] note: systemd-udevd[137] exited with irqs disabled
+[   64.266964] note: systemd-udevd[137] exited with preempt_count 1
+[   64.267662] Fixing recursive fault but reboot is needed!
+[   64.268635] BUG: scheduling while atomic: systemd-udevd/137/0x00000000
+[   64.269379] Modules linked in:
+[   64.269732] CPU: 2 PID: 137 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   64.270556] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   64.271428] Call Trace:
+[   64.271723]  <TASK>
+[   64.271987]  dump_stack_lvl+0x72/0xa0
+[   64.272447]  __schedule_bug+0xc1/0x100
+[   64.272899]  __schedule+0x1bf3/0x2460
+[   64.273343]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.273872]  ? __pfx___schedule+0x10/0x10
+[   64.274333]  ? vprintk+0x82/0x90
+[   64.274751]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.275295]  ? _printk+0xbf/0x100
+[   64.275676]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   64.276215]  ? _raw_spin_lock_irqsave+0xbf/0x120
+[   64.276725]  ? __pfx__raw_spin_lock_irqsave+0x10/0x10
+[   64.277292]  do_task_dead+0xa4/0xc0
+[   64.277682]  make_task_dead+0x378/0x3c0
+[   64.278145]  ? __x64_sys_exit_group+0x3e/0x50
+[   64.278642]  rewind_stack_and_make_dead+0x17/0x20
+[   64.279204] RIP: 0033:0x7f15f7c24bd9
+[   64.279595] Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+[   64.280226] RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+[   64.281011] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+[   64.281745] RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+[   64.282479] RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+[   64.283249] R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68ec0
+[   64.283965] R13: 0000562ccdf74f20 R14: 00007ffdba06acb0 R15: 0000562ccdf69720
+[   64.284707]  </TASK>
+[   65.723323] ata1: found unknown device (class 0)
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   65.731748] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+[   67.771344] ata1: found unknown device (class 0)
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   67.778330] program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+
+VM DIAGNOSIS:
+07:06:13  Registers:
+info registers vcpu 0
+RAX=ffff88811ae343c0 RBX=0000000000000000 RCX=ffffffff8555b0e2 RDX=ffffed10235c6879
+RSI=0000000000000004 RDI=00000000000148dc RBP=dffffc0000000000 RSP=ffffffff86407e08
+R8 =0000000000000001 R9 =ffffed10235c6878 R10=ffff88811ae343c3 R11=ffffffff8662a0c8
+R12=ffffffff86c8c710 R13=1ffffffff0c80fc8 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff8555bede RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff88811ae00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe71521ae000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe71521ac000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f077dc36bf0 CR3=00000001072e6001 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 2033313a36303a37 302033312072614d
+YMM01=0000000000000000 0000000000000000 5d3535373638352e 39352020205b203a
+YMM02=0000000000000000 0000000000000000 6e69737520736920 343231726f747563
+YMM03=0000000000000000 0000000000000000 7361656c70202c6c 74636f6920495343
+YMM04=0000000000000000 0000000000000000 766e6f6320657361 656c70202c6c7463
+YMM05=0000000000000000 0000000000000000 6564206120676e69 7375207369203432
+YMM06=0000000000000000 0000000000000000 72676f7270205d35 35373638352e3935
+YMM07=0000000000000000 0000000000000000 6c616b7a79732033 313a36303a373020
+YMM08=0000000000000000 0000000000000000 6f7475636578652d 7a7973223d6d6d6f
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=ffff88811af343c0 RBX=0000000000000000 RCX=ffffffff8555b0e2 RDX=ffffed10235e6879
+RSI=0000000000000004 RDI=000000000000da4c RBP=dffffc0000000000 RSP=ffff8881002cfe58
+R8 =0000000000000001 R9 =ffffed10235e6878 R10=ffff88811af343c3 R11=ffffffff8662a158
+R12=ffffffff86c8c710 R13=1ffff11020059fd2 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff8555bede RFL=00000212 [----A--] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff88811af00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe44aa887000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe44aa885000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=0000000020000088 CR3=00000000856aa005 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 00000000000f4240 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000000000000 00000000000f4240
+YMM02=0000000000000000 0000000000000000 00007f84af4c07e0 00007f84af4c07e0
+YMM03=0000000000000000 0000000000000000 00007fff17f26120 00007fff17f26120
+YMM04=0000000000000000 0000000000000000 0000000000000000 00007fff17f2651f
+YMM05=0000000000000000 0000000000000000 0000000000000000 00007f84af4b54d0
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 00007f84af4a61c0 00007f8400353632
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 2
+RAX=0000000080010058 RBX=ffffffff869e0de0 RCX=ffffffff83493544 RDX=00000000000103f6
+RSI=0000000000010000 RDI=0000000000000007 RBP=ffff888103388000 RSP=ffff88811b009dd8
+R8 =0000000000000001 R9 =ffffed10236013c0 R10=00000000000103f6 R11=ffff88811b009ff8
+R12=00000000000103f6 R13=0000000000000000 R14=ffff88810338bd70 R15=ffff888103388008
+RIP=ffffffff83493548 RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff88811b000000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe7930315000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe7930313000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=0000555668daa2d8 CR3=00000001043fc002 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 ff00000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 ef63d2b7339aa72c 00000000001d5e80
+YMM05=0000000000000000 0000000000000000 d3fdd5f48436fbd7 000000000015cc90
+YMM06=0000000000000000 0000000000000000 7a8fce5bc6dd4a32 000000000015cb48
+YMM07=0000000000000000 0000000000000000 a1fcdcf819d7e1e5 000000000015c8f8
+YMM08=0000000000000000 0000000000000000 44495f474f4c5359 530069253d595449
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 3
+RAX=ffff88811b1343c0 RBX=0000000000000000 RCX=ffffffff8555b0e2 RDX=ffffed1023626879
+RSI=0000000000000004 RDI=000000000001400c RBP=dffffc0000000000 RSP=ffff8881002dfe58
+R8 =0000000000000001 R9 =ffffed1023626878 R10=ffff88811b1343c3 R11=6e6f6e203a475542
+R12=ffffffff86c8c710 R13=1ffff1102005bfd2 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff8555bede RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff88811b100000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe24b4069000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe24b4067000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=0000000020000088 CR3=00000001072e6006 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 2323232323232323 2323232323232323
+YMM01=0000000000000000 0000000000000000 ffffffffffffffff 0000000000000000
+YMM02=0000000000000000 0000000000000000 ffffffffffffffff 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 2367732f7665642f
+YMM04=0000000000000000 0000000000000000 0000000000000000 00007fff17f2651f
+YMM05=0000000000000000 0000000000000000 0000000000000000 00007f84af4b54d0
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 0000000000000000 3067732f7665642f
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 4
+RAX=ffff88811b2343c0 RBX=0000000000000000 RCX=ffffffff8555b0e2 RDX=ffffed1023646879
+RSI=0000000000000004 RDI=000000000001aa7c RBP=dffffc0000000000 RSP=ffff88810035fe58
+R8 =0000000000000001 R9 =ffffed1023646878 R10=ffff88811b2343c3 R11=0000000000000000
+R12=ffffffff86c8c710 R13=1ffff1102006bfd2 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff8555bede RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff88811b200000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe07886c8000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe07886c6000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007ff60922f000 CR3=000000010f110003 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 00000000000f4240 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000000000000 00000000000f4240
+YMM02=0000000000000000 0000000000000000 00007f84af4c07e0 00007f84af4c07e0
+YMM03=0000000000000000 0000000000000000 00007fff17f26120 00007fff17f26120
+YMM04=0000000000000000 0000000000000000 0000000000000000 00007fff17f2651f
+YMM05=0000000000000000 0000000000000000 0000000000000000 00007f84af4b54d0
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 00007f84af4a61c0 00007f8400353632
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

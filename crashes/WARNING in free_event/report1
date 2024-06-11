@@ -1,0 +1,113 @@
+------------[ cut here ]------------
+unexpected event refcount: 2; ptr=00000000e439f488
+WARNING: CPU: 0 PID: 38742 at kernel/events/core.c:5254 free_event+0x8b/0xb0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5254
+Modules linked in:
+CPU: 0 PID: 38742 Comm: syz-executor.1 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:free_event+0x8b/0xb0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5254
+Code: b8 00 00 00 00 00 fc ff df 48 c1 ea 03 80 3c 02 00 75 23 48 8b b5 38 02 00 00 48 89 ea 48 c7 c7 80 5b 0d 86 e8 f6 2b c3 ff 90 <0f> 0b 90 90 5d 41 5c e9 f9 a8 ef ff 4c 89 e7 e8 21 02 1c 00 eb d3
+RSP: 0018:ffff88800730fc30 EFLAGS: 00010282
+RAX: 0000000000000000 RBX: ffff88800730fa30 RCX: ffffffff8311f5b8
+RDX: ffff888003384400 RSI: 0000000000000008 RDI: ffff88800730fa38
+RBP: ffff888002fad748 R08: 0000000000000001 R09: ffffed1000e61f47
+R10: ffff88800730fa3f R11: 7463657078656e75 R12: ffff888002fad980
+R13: ffff88800730fca0 R14: ffff888002fad748 R15: dffffc0000000000
+FS:  0000000000000000(0000) GS:ffff8880a4200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f88e47bd4a0 CR3: 000000000ac5e002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ perf_event_release_kernel+0x4f6/0x750 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5421
+ perf_release+0x37/0x50 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5442
+ __fput+0x235/0xb20 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/fs/file_table.c:394
+ task_work_run+0x15c/0x230 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/task_work.c:180
+ exit_task_work root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/./include/linux/task_work.h:38 [inline]
+ do_exit+0x94c/0x23d0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:869
+ __do_sys_exit root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:985 [inline]
+ __se_sys_exit root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:983 [inline]
+ __x64_sys_exit+0x42/0x50 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:983
+ do_syscall_x64 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x46/0xf0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f8ea578302d
+Code: Unable to access opcode bytes at 0x7f8ea5783003.
+RSP: 002b:00007f8ea4ad0fd8 EFLAGS: 00000246 ORIG_RAX: 000000000000003c
+RAX: ffffffffffffffda RBX: 00007f8ea58bf050 RCX: 00007f8ea578302d
+RDX: 00007f8ea57b6898 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 00007f8ea57e44a6 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000006e R14: 00007f8ea58bf050 R15: 00007f8ea4ab1000
+ </TASK>
+---[ end trace 0000000000000000 ]---
+perf: interrupt took too long (17954 > 17902), lowering kernel.perf_event_max_sample_rate to 11000
+__nla_validate_parse: 15 callbacks suppressed
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+audit: type=1326 audit(2000000018.106:69): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=38849 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f8ea578302d code=0x0
+audit: type=1326 audit(2000000018.948:70): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=38949 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f8ea578302d code=0x0
+binfmt_misc: Bad value for 'defcontext'
+audit: type=1326 audit(2000000019.805:71): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=39048 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f8ea578302d code=0x0
+binfmt_misc: Bad value for 'defcontext'
+binfmt_misc: Bad value for 'defcontext'
+binfmt_misc: Bad value for 'defcontext'
+audit: type=1326 audit(2000000019.911:72): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=39048 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f8ea578302d code=0x0
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 'syz-executor.0': attribute type 11 has an invalid length.
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 'syz-executor.0': attribute type 11 has an invalid length.
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+tmpfs: Unknown parameter 's|–e^$'
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=39411 comm=syz-executor.2
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=39419 comm=syz-executor.2
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=39425 comm=syz-executor.2
+pimreg: entered allmulticast mode
+lo: left allmulticast mode
+lo: entered promiscuous mode
+lo: left promiscuous mode
+lo: entered promiscuous mode
+lo: left promiscuous mode
+lo: entered promiscuous mode
+lo: left promiscuous mode
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=40099 comm=syz-executor.1
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=40138 comm=syz-executor.1
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=40182 comm=syz-executor.1

@@ -1,0 +1,217 @@
+Extracting prog: 33.903885338s
+Minimizing prog: 2m16.181889467s
+Simplifying prog options: 0s
+Extracting C: 18.092322529s
+Simplifying C: 1m13.6322566s
+
+
+326 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 192 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER-syz_genetlink_get_family_id$ethtool-ioctl$TIOCGPGRP-sched_setattr-dup3
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xa, &(0x7f0000000080)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x50000}]})
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000040), 0xffffffffffffffff)
+ioctl$TIOCGPGRP(0xffffffffffffffff, 0x540f, &(0x7f0000000180)=<r1=>0x0)
+sched_setattr(r1, &(0x7f0000000200)={0x38, 0x5, 0x10000020, 0x7, 0x4, 0x994, 0x7ff, 0x0, 0x9f5d, 0x9}, 0x0)
+dup3(0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+
+program crashed: KCSAN: data-race in audit_log_start.part.NUM / skb_queue_tail
+single: successfully extracted reproducer
+found reproducer with 9 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER-syz_genetlink_get_family_id$ethtool-ioctl$TIOCGPGRP-sched_setattr
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xa, &(0x7f0000000080)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x50000}]})
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000040), 0xffffffffffffffff)
+ioctl$TIOCGPGRP(0xffffffffffffffff, 0x540f, &(0x7f0000000180)=<r1=>0x0)
+sched_setattr(r1, &(0x7f0000000200)={0x38, 0x5, 0x10000020, 0x7, 0x4, 0x994, 0x7ff, 0x0, 0x9f5d, 0x9}, 0x0)
+
+program crashed: KCSAN: data-race in audit_log_start.part.NUM / skb_dequeue
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER-syz_genetlink_get_family_id$ethtool-ioctl$TIOCGPGRP
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xa, &(0x7f0000000080)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x50000}]})
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000040), 0xffffffffffffffff)
+ioctl$TIOCGPGRP(0xffffffffffffffff, 0x540f, &(0x7f0000000180))
+
+program crashed: KCSAN: data-race in kauditd_thread / skb_queue_tail
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER-syz_genetlink_get_family_id$ethtool
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xa, &(0x7f0000000080)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x50000}]})
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000040), 0xffffffffffffffff)
+
+program crashed: KCSAN: data-race in audit_log_start.part.NUM / skb_queue_tail
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xa, &(0x7f0000000080)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x50000}]})
+
+program crashed: KCSAN: data-race in kauditd_thread / skb_queue_tail
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs-perf_event_open
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler-ptrace$setregs
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+ptrace$setregs(0xf, r0, 0x0, &(0x7f00000001c0)="20437e547676726454402ed9e2c44d8be285d318f1c0846a863e36bb1e004786fdc54565d33a9a32f0e3c1ab3a2c87336c6dbd9f4d26a4287eb4f3f2e51b62")
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid-sched_setscheduler
+detailed listing:
+executing program 0:
+r0 = getpid()
+sched_setscheduler(r0, 0x5, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+detailed listing:
+executing program 0:
+getpid()
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program crashed: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): getpid
+program did not crash
+reproducing took 4m21.81037649s
+repro crashed as (corrupted=false):
+scp (330) used greatest stack depth: 11664 bytes left
+==================================================================
+BUG: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer
+
+write to 0xffffffffad8a1650 of 4 bytes by task 0 on cpu 0:
+ tick_nohz_stop_tick kernel/time/tick-sched.c:903 [inline]
+ tick_nohz_idle_stop_tick+0x426/0x550 kernel/time/tick-sched.c:1130
+ cpuidle_idle_call kernel/sched/idle.c:168 [inline]
+ do_idle+0x1d2/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ rest_init+0xfd/0x100 init/main.c:726
+ arch_call_rest_init+0xe/0x30 init/main.c:823
+ start_kernel+0x5f9/0x960 init/main.c:1068
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x179/0x17b
+
+read to 0xffffffffad8a1650 of 4 bytes by interrupt on cpu 1:
+ tick_sched_do_timer+0x26/0x150 kernel/time/tick-sched.c:200
+ tick_sched_timer+0x3e/0xd0 kernel/time/tick-sched.c:1485
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x28b/0x530 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x1f0/0x420 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0xb3/0x210 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0xf/0x20 arch/x86/kernel/process.c:730
+ default_idle_call+0x2a/0xd0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1d7/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ start_secondary+0xf4/0x100 arch/x86/kernel/smpboot.c:326
+ secondary_startup_64_no_verify+0x179/0x17b
+
+value changed: 0x00000000 -> 0xffffffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 0 Comm: swapper/1 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1400 audit(1698662630.139:8): avc:  denied  { execmem } for  pid=354 comm="syz-executor363" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+
+final repro crashed as (corrupted=false):
+scp (330) used greatest stack depth: 11664 bytes left
+==================================================================
+BUG: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer
+
+write to 0xffffffffad8a1650 of 4 bytes by task 0 on cpu 0:
+ tick_nohz_stop_tick kernel/time/tick-sched.c:903 [inline]
+ tick_nohz_idle_stop_tick+0x426/0x550 kernel/time/tick-sched.c:1130
+ cpuidle_idle_call kernel/sched/idle.c:168 [inline]
+ do_idle+0x1d2/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ rest_init+0xfd/0x100 init/main.c:726
+ arch_call_rest_init+0xe/0x30 init/main.c:823
+ start_kernel+0x5f9/0x960 init/main.c:1068
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x179/0x17b
+
+read to 0xffffffffad8a1650 of 4 bytes by interrupt on cpu 1:
+ tick_sched_do_timer+0x26/0x150 kernel/time/tick-sched.c:200
+ tick_sched_timer+0x3e/0xd0 kernel/time/tick-sched.c:1485
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x28b/0x530 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x1f0/0x420 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0xb3/0x210 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0xf/0x20 arch/x86/kernel/process.c:730
+ default_idle_call+0x2a/0xd0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1d7/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ start_secondary+0xf4/0x100 arch/x86/kernel/smpboot.c:326
+ secondary_startup_64_no_verify+0x179/0x17b
+
+value changed: 0x00000000 -> 0xffffffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 0 Comm: swapper/1 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1400 audit(1698662630.139:8): avc:  denied  { execmem } for  pid=354 comm="syz-executor363" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+

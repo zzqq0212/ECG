@@ -1,0 +1,148 @@
+loop2: detected capacity change from 0 to 512
+------------[ cut here ]------------
+different return values (11 and 6) from vsnprintf("kmmpd-%.*s", ...)
+WARNING: CPU: 0 PID: 150472 at lib/kasprintf.c:30 kvasprintf+0x14e/0x160 lib/kasprintf.c:30
+Modules linked in:
+CPU: 0 PID: 150472 Comm: syz-executor.2 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:kvasprintf+0x14e/0x160 lib/kasprintf.c:30
+Code: 5b 5d 41 5c 41 5d 41 5e 41 5f e9 e8 2f 2d 02 e8 08 54 43 ff 90 48 c7 c7 40 62 de 94 4c 89 e9 44 89 e2 89 ee e8 d3 62 13 ff 90 <0f> 0b 90 90 eb 99 e8 27 96 12 02 0f 1f 80 00 00 00 00 90 90 90 90
+RSP: 0018:ffff8880596cf760 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: 1ffff1100b2d9eec RCX: ffffffff91967582
+RDX: ffff8881020d4400 RSI: 0000000000000000 RDI: 0000000000000001
+RBP: 000000000000000b R08: 0000000000000001 R09: ffffed1022a05121
+R10: 0000000000000000 R11: 000000002d2d2d2d R12: 0000000000000006
+R13: ffffffff94d42a20 R14: ffff88810080dfc0 R15: 000000000000000c
+FS:  00007fed3067f640(0000) GS:ffff888115000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2620665000 CR3: 0000000104950006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __kthread_create_on_node+0x17f/0x3c0 kernel/kthread.c:444
+ kthread_create_on_node+0xbf/0x100 kernel/kthread.c:512
+ ext4_multi_mount_protect+0x953/0xb10 fs/ext4/mmp.c:392
+ __ext4_fill_super fs/ext4/super.c:5363 [inline]
+ ext4_fill_super+0xa76d/0xc290 fs/ext4/super.c:5703
+ get_tree_bdev+0x35a/0x5d0 fs/super.c:1614
+ vfs_get_tree+0x8c/0x320 fs/super.c:1779
+ do_new_mount fs/namespace.c:3352 [inline]
+ path_mount+0x6b3/0x1db0 fs/namespace.c:3679
+ do_mount fs/namespace.c:3692 [inline]
+ __do_sys_mount fs/namespace.c:3898 [inline]
+ __se_sys_mount fs/namespace.c:3875 [inline]
+ __x64_sys_mount+0x286/0x310 fs/namespace.c:3875
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fed31311dfe
+Code: 48 c7 c0 ff ff ff ff eb aa e8 be 0d 00 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fed3067ee38 EFLAGS: 00000202 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00000000000004b4 RCX: 00007fed31311dfe
+RDX: 0000000020000040 RSI: 0000000020000500 RDI: 00007fed3067ee90
+RBP: 00007fed3067eed0 R08: 00007fed3067eed0 R09: 0000000000004500
+R10: 0000000000004500 R11: 0000000000000202 R12: 0000000020000040
+R13: 0000000020000500 R14: 00007fed3067ee90 R15: 0000000020000540
+ </TASK>
+---[ end trace 0000000000000000 ]---
+EXT4-fs warning (device loop2): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs (loop2): get root inode failed
+EXT4-fs (loop2): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): couldn't mount as ext3 due to feature incompatibilities
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): couldn't mount as ext3 due to feature incompatibilities
+audit: type=1326 audit(2000000680.282:422): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=150545 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fb1a8f3e02d code=0x0
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): couldn't mount as ext3 due to feature incompatibilities
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4080294788/syzkaller.J1zZg5/470/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4080294788/syzkaller.J1zZg5/472/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): couldn't mount as ext2 due to feature incompatibilities
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): couldn't mount as ext2 due to feature incompatibilities
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): couldn't mount as ext2 due to feature incompatibilities
+loop2: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'debug_want_extra'
+loop2: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'debug_want_extra'
+loop2: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'debug_want_extra'
+loop2: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'debug_want_extra'
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+audit: type=1326 audit(2000000681.140:423): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=150673 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fb1a8f3e02d code=0x0
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=65535 sclass=netlink_xfrm_socket pid=150943 comm=syz-executor.2
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=150961 comm=syz-executor.2
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=65535 sclass=netlink_xfrm_socket pid=150971 comm=syz-executor.2
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop2): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop2): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop2): 1 truncate cleaned up
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop2): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop2): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop2): 1 truncate cleaned up
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+audit: type=1326 audit(2000000684.233:424): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=151099 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f262052d02d code=0x0
+tc_dump_action: action bad kind
+tc_dump_action: action bad kind
+tc_dump_action: action bad kind
+tc_dump_action: action bad kind
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+audit: type=1326 audit(2000000685.093:425): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=151195 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f262052d02d code=0x0
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+I/O error, dev loop2, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 0
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.
+audit: type=1326 audit(2000000685.951:426): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=151313 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f262052d02d code=0x0
+audit: type=1107 audit(2000000686.661:427): pid=151388 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.699:428): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.699:429): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.699:430): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.700:431): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.700:432): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.700:433): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+audit: type=1107 audit(2000000686.701:434): pid=151393 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='¤'
+9pnet_fd: Insufficient options for proto=fd
+9pnet_fd: Insufficient options for proto=fd
+9pnet_fd: Insufficient options for proto=fd
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 234: padding at end of block bitmap is not set
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 234: padding at end of block bitmap is not set
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=151708 comm=syz-executor.3
+netlink: 25 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=151746 comm=syz-executor.3
+netlink: 25 bytes leftover after parsing attributes in process `syz-executor.3'.

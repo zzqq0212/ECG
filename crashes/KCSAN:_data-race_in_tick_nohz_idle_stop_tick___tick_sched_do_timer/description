@@ -1,0 +1,1 @@
+KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer

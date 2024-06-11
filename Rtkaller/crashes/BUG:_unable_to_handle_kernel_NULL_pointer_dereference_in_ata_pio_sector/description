@@ -1,1 +1,0 @@
-BUG: unable to handle kernel NULL pointer dereference in ata_pio_sector

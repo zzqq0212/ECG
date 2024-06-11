@@ -1,0 +1,103 @@
+==================================================================
+BUG: KCSAN: data-race in inode_update_timestamps / inode_update_timestamps
+
+write to 0xffffa1fb02afda90 of 8 bytes by task 7451 on cpu 2:
+ inode_set_mtime_to_ts include/linux/fs.h:1567 [inline]
+ inode_update_timestamps+0x135/0x2b0 fs/inode.c:1901
+ generic_update_time+0x1f/0xa0 fs/inode.c:1936
+ inode_update_time fs/inode.c:1956 [inline]
+ __file_update_time fs/inode.c:2144 [inline]
+ file_update_time+0xda/0xe0 fs/inode.c:2174
+ pipe_write+0x8e3/0xc20 fs/pipe.c:610
+ call_write_iter include/linux/fs.h:2020 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x583/0x6a0 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+read to 0xffffa1fb02afda90 of 8 bytes by task 7452 on cpu 1:
+ inode_get_mtime include/linux/fs.h:1561 [inline]
+ inode_update_timestamps+0xa2/0x2b0 fs/inode.c:1895
+ generic_update_time+0x1f/0xa0 fs/inode.c:1936
+ inode_update_time fs/inode.c:1956 [inline]
+ __file_update_time fs/inode.c:2144 [inline]
+ file_update_time+0xda/0xe0 fs/inode.c:2174
+ pipe_write+0x8e3/0xc20 fs/pipe.c:610
+ call_write_iter include/linux/fs.h:2020 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x583/0x6a0 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+value changed: 0x00000000075e57e8 -> 0x00000000076d9a28
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 7452 Comm: syz-executor280 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+read-write (marked) to 0xffffa1fb006c0280 of 4 bytes by task 21498 on cpu 0:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2782 [inline]
+ d_splice_alias+0x3c5/0x8a0 fs/dcache.c:3181
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3441
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3472
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:325
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1694
+ lookup_slow fs/namei.c:1711 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:2002
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2326
+ link_path_walk fs/namei.c:2254 [inline]
+ path_openat+0x13a/0x1cb0 fs/namei.c:3775
+ do_filp_open+0x15b/0x280 fs/namei.c:3809
+ do_sys_openat2+0xc6/0x110 fs/open.c:1437
+ do_sys_open fs/open.c:1452 [inline]
+ __do_sys_openat fs/open.c:1468 [inline]
+ __se_sys_openat fs/open.c:1463 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1463
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+read to 0xffffa1fb006c0280 of 4 bytes by task 21499 on cpu 2:
+ start_dir_add fs/dcache.c:2601 [inline]
+ __d_add fs/dcache.c:2782 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3181
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3441
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3472
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:325
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1694
+ lookup_slow fs/namei.c:1711 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:2002
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2326
+ link_path_walk fs/namei.c:2254 [inline]
+ path_openat+0x13a/0x1cb0 fs/namei.c:3775
+ do_filp_open+0x15b/0x280 fs/namei.c:3809
+ do_sys_openat2+0xc6/0x110 fs/open.c:1437
+ do_sys_open fs/open.c:1452 [inline]
+ __do_sys_openat fs/open.c:1468 [inline]
+ __se_sys_openat fs/open.c:1463 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1463
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+value changed: 0x0000a734 -> 0x0000a736
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 2 PID: 21499 Comm: syz-executor280 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

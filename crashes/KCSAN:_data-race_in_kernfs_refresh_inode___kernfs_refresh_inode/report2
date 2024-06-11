@@ -1,0 +1,144 @@
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff8e1d0052a2c8 of 16 bytes by task 87 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff8e1d0052a2c8 of 16 bytes by task 2175 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ user_path_at include/linux/namei.h:57 [inline]
+ do_faccessat+0x1e0/0x500 fs/open.c:483
+ __do_sys_access fs/open.c:542 [inline]
+ __se_sys_access fs/open.c:540 [inline]
+ __x64_sys_access+0x36/0x40 fs/open.c:540
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 2175 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+syz-executor.1 (2503) used greatest stack depth: 11464 bytes left
+==================================================================
+BUG: KCSAN: data-race in jbd2_journal_commit_transaction / jbd2_journal_get_write_access
+
+write to 0xffff8e1d01a3f000 of 8 bytes by task 54 on cpu 0:
+ jbd2_journal_commit_transaction+0x353b/0x3a40 fs/jbd2/commit.c:1140
+ kjournald2+0x106/0x470 fs/jbd2/journal.c:209
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+read to 0xffff8e1d01a3f000 of 8 bytes by task 2585 on cpu 1:
+ is_journal_aborted include/linux/jbd2.h:1688 [inline]
+ is_handle_aborted include/linux/jbd2.h:1695 [inline]
+ jbd2_journal_get_write_access+0x5a/0xe0 fs/jbd2/transaction.c:1240
+ __ext4_journal_get_write_access+0x101/0x270 fs/ext4/ext4_jbd2.c:241
+ ext4_reserve_inode_write+0x100/0x150 fs/ext4/inode.c:5711
+ __ext4_mark_inode_dirty+0x7e/0x420 fs/ext4/inode.c:5885
+ ext4_add_nondir+0xaf/0x140 fs/ext4/namei.c:2794
+ ext4_symlink+0x275/0x610 fs/ext4/namei.c:3431
+ vfs_symlink fs/namei.c:4477 [inline]
+ vfs_symlink+0x1d9/0x300 fs/namei.c:4461
+ do_symlinkat+0xcb/0x1c0 fs/namei.c:4503
+ __do_sys_symlinkat fs/namei.c:4519 [inline]
+ __se_sys_symlinkat fs/namei.c:4516 [inline]
+ __x64_sys_symlinkat+0x61/0x70 fs/namei.c:4516
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000000002b0 -> 0x00000000000000b0
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 2585 Comm: syz-executor.0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_nohz_idle_stop_tick
+
+write to 0xffffffff87ea1650 of 4 bytes by task 0 on cpu 1:
+ tick_nohz_stop_tick kernel/time/tick-sched.c:903 [inline]
+ tick_nohz_idle_stop_tick+0x426/0x550 kernel/time/tick-sched.c:1130
+ cpuidle_idle_call kernel/sched/idle.c:168 [inline]
+ do_idle+0x1d2/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ start_secondary+0xf4/0x100 arch/x86/kernel/smpboot.c:326
+ secondary_startup_64_no_verify+0x179/0x17b
+
+read to 0xffffffff87ea1650 of 4 bytes by task 0 on cpu 0:
+ tick_nohz_stop_tick kernel/time/tick-sched.c:902 [inline]
+ tick_nohz_idle_stop_tick+0x14f/0x550 kernel/time/tick-sched.c:1130
+ cpuidle_idle_call kernel/sched/idle.c:168 [inline]
+ do_idle+0x1d2/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ rest_init+0xfd/0x100 init/main.c:726
+ arch_call_rest_init+0xe/0x30 init/main.c:823
+ start_kernel+0x5f9/0x960 init/main.c:1068
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x179/0x17b
+
+value changed: 0x00000001 -> 0xffffffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 0 Comm: swapper/0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in process_one_work+0x2fb/0x9c0 kernel/workqueue.c:2533
+
+race at unknown origin, with read to 0xffff8e1d008991c8 of 8 bytes by task 36 on cpu 1:
+ process_one_work+0x2fb/0x9c0 kernel/workqueue.c:2533
+ worker_thread+0x33d/0x8d0 kernel/workqueue.c:2751
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+value changed: 0x00000000040017eb -> 0x000000000400893d
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 36 Comm: kworker/1:1H Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: kblockd blk_mq_run_work_fn
+==================================================================

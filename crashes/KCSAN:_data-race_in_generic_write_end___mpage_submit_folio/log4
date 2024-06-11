@@ -1,0 +1,377 @@
+syzkaller login: [   17.802601] ==================================================================
+[   17.803161] BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+[   17.803737] 
+[   17.803929] write to 0xffff908444e51378 of 8 bytes by task 326 on cpu 1:
+[   17.804418]  generic_write_end+0x9d/0x200
+[   17.804755]  ext4_da_write_end+0xfb/0x600
+[   17.805075]  generic_perform_write+0x205/0x360
+[   17.805468]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.805841]  ext4_file_write_iter+0xcd/0xdd0
+[   17.806191]  vfs_write+0x5d0/0x700
+[   17.806463]  ksys_write+0x9e/0x160
+[   17.806747]  __x64_sys_write+0x41/0x50
+[   17.807079]  do_syscall_64+0x3e/0x90
+[   17.807390]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.807931] 
+[   17.808086] read to 0xffff908444e51378 of 8 bytes by task 31 on cpu 0:
+[   17.808620]  mpage_submit_folio+0x58/0x130
+[   17.808928]  mpage_map_and_submit_buffers+0x31c/0x5a0
+[   17.809301]  ext4_do_writepages+0xcd5/0x1830
+[   17.809646]  ext4_writepages+0x19c/0x320
+[   17.809990]  do_writepages+0xb5/0x2e0
+[   17.810303]  __writeback_single_inode+0x72/0x650
+[   17.810667]  writeback_sb_inodes+0x463/0x930
+[   17.811014]  __writeback_inodes_wb+0x72/0x160
+[   17.811344]  wb_writeback+0x211/0x4e0
+[   17.811656]  wb_workfn+0x5df/0x8e0
+[   17.811942]  process_one_work+0x545/0x9c0
+[   17.812262]  worker_thread+0x33d/0x8d0
+[   17.812565]  kthread+0x1b1/0x200
+[   17.812836]  ret_from_fork+0x2f/0x50
+[   17.813122]  ret_from_fork_asm+0x1b/0x30
+[   17.813438] 
+[   17.813565] value changed: 0x000000000146b000 -> 0x000000000146c000
+[   17.814077] 
+[   17.814207] Reported by Kernel Concurrency Sanitizer on:
+[   17.814596] CPU: 0 PID: 31 Comm: kworker/u4:2 Not tainted 6.5.0 #8
+[   17.815047] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.815676] Workqueue: writeback wb_workfn (flush-8:0)
+[   17.816087] ==================================================================
+[   17.991707] sshd (320) used greatest stack depth: 11664 bytes left
+Warning: Permanently added '[localhost]:16438' (ED25519) to the list of known hosts.
+2023/10/30 08:03:05 fuzzer started
+2023/10/30 08:03:05 dialing manager at localhost:37497
+[   19.347264] cgroup: Unknown subsys name 'net'
+[   19.352116] cgroup: Unknown subsys name 'rlimit'
+[   19.352650] cgroup: Unknown subsys name 'memory'
+[   19.388409] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 08:03:05 syscalls: 2193
+2023/10/30 08:03:05 code coverage: enabled
+2023/10/30 08:03:05 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 08:03:05 extra coverage: enabled
+2023/10/30 08:03:05 delay kcov mmap: enabled
+2023/10/30 08:03:05 setuid sandbox: enabled
+2023/10/30 08:03:05 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 08:03:05 Android sandbox: enabled
+2023/10/30 08:03:05 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 08:03:05 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 08:03:05 net packet injection: /dev/net/tun does not exist
+2023/10/30 08:03:05 net device setup: enabled
+2023/10/30 08:03:05 concurrency sanitizer: enabled
+2023/10/30 08:03:05 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 08:03:05 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 08:03:05 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 08:03:05 hci packet injection: /dev/vhci does not exist
+2023/10/30 08:03:05 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 08:03:05 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 08:03:05 swap file: enabled
+[   19.403875] kcsan: could not find function: 'should_defer_flush'
+[   19.407894] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 08:03:05 suppressing KCSAN reports in functions: 'folio_unlock' 'ktime_get_mono_fast_ns' '__folio_start_writeback' 'blk_mq_sched_dispatch_requests' 'ext4_free_inodes_count' 'd_splice_alias' 'atime_needs_update' 'e1000_clean' 'wq_worker_tick' 'delayacct_add_tsk' 'step_into' 'tick_nohz_idle_stop_tick' 'xas_find_marked' '_find_next_zero_bit' 'mas_wr_node_store' 'n_tty_lookahead_flow_ctrl' 'lru_add_fn' '_find_first_bit' 'audit_log_start' 'should_defer_flush' 'tick_sched_do_timer' 'folio_mark_accessed' '__filemap_add_folio' 'kernfs_refresh_inode' 'xas_clear_mark' 'ext4_fill_raw_inode' 'do_readlinkat' 'lookup_fast' 'e1000_clean_rx_irq' 'poll_schedule_timeout' 'jbd2_journal_commit_transaction' 'process_one_work' 'next_uptodate_page' 'filemap_fault' 'tick_nohz_next_event' 'dput' 'generic_fillattr' 'wq_worker_running' 'generic_write_end' 'folio_clear_dirty_for_io' 'kauditd_thread' 
+2023/10/30 08:03:05 fetching corpus: 50, signal 15362/17165 (executing program)
+2023/10/30 08:03:05 fetching corpus: 100, signal 28395/31606 (executing program)
+2023/10/30 08:03:05 fetching corpus: 150, signal 38359/42762 (executing program)
+2023/10/30 08:03:05 fetching corpus: 200, signal 44170/49703 (executing program)
+2023/10/30 08:03:05 fetching corpus: 250, signal 48279/54916 (executing program)
+2023/10/30 08:03:05 fetching corpus: 300, signal 51977/59622 (executing program)
+2023/10/30 08:03:05 fetching corpus: 350, signal 54762/63403 (executing program)
+2023/10/30 08:03:05 fetching corpus: 400, signal 59472/68817 (executing program)
+2023/10/30 08:03:05 fetching corpus: 450, signal 62054/72229 (executing program)
+2023/10/30 08:03:05 fetching corpus: 500, signal 63815/74874 (executing program)
+2023/10/30 08:03:05 fetching corpus: 550, signal 65484/77411 (executing program)
+2023/10/30 08:03:05 fetching corpus: 600, signal 67883/80480 (executing program)
+2023/10/30 08:03:06 fetching corpus: 650, signal 69894/83176 (executing program)
+2023/10/30 08:03:06 fetching corpus: 700, signal 72353/86208 (executing program)
+2023/10/30 08:03:06 fetching corpus: 750, signal 73555/88148 (executing program)
+2023/10/30 08:03:06 fetching corpus: 800, signal 74851/90099 (executing program)
+2023/10/30 08:03:06 fetching corpus: 850, signal 76262/92113 (executing program)
+2023/10/30 08:03:06 fetching corpus: 900, signal 77387/93882 (executing program)
+2023/10/30 08:03:06 fetching corpus: 950, signal 78588/95715 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1000, signal 79528/97277 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1050, signal 80656/98962 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1100, signal 81868/100647 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1150, signal 83222/102490 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1200, signal 84693/104286 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1250, signal 86048/105938 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1300, signal 86978/107301 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1350, signal 88580/109118 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1400, signal 89850/110669 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1450, signal 91069/112134 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1500, signal 92559/113749 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1550, signal 93199/114812 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1600, signal 94021/115977 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1650, signal 94618/116974 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1700, signal 95402/118068 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1750, signal 95898/119004 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1800, signal 96560/120006 (executing program)
+2023/10/30 08:03:06 fetching corpus: 1850, signal 97239/120996 (executing program)
+2023/10/30 08:03:07 fetching corpus: 1900, signal 98109/122042 (executing program)
+2023/10/30 08:03:07 fetching corpus: 1950, signal 98817/123002 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2000, signal 99789/124053 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2050, signal 100520/124982 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2100, signal 101179/125824 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2150, signal 101937/126720 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2200, signal 102579/127540 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2250, signal 103397/128454 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2300, signal 104322/129333 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2350, signal 104894/130097 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2400, signal 105274/130732 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2450, signal 105957/131452 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2500, signal 106420/132104 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2550, signal 106921/132748 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2600, signal 107447/133427 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2650, signal 108293/134137 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2700, signal 108817/134785 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2750, signal 109240/135365 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2800, signal 109969/135970 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2850, signal 110417/136517 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2900, signal 110861/137073 (executing program)
+2023/10/30 08:03:07 fetching corpus: 2950, signal 111341/137570 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3000, signal 111771/138069 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3050, signal 112325/138577 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3100, signal 112866/139058 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3150, signal 113369/139506 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3200, signal 113800/139952 (executing program)
+2023/10/30 08:03:07 fetching corpus: 3250, signal 114124/140398 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3300, signal 114528/140811 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3350, signal 114888/141227 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3400, signal 115460/141640 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3450, signal 115895/142051 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3500, signal 116230/142447 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3550, signal 116568/142841 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3600, signal 117017/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3650, signal 117230/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3700, signal 118032/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3750, signal 118342/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3800, signal 118689/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3850, signal 119129/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3900, signal 119466/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 3950, signal 119948/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4000, signal 120261/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4050, signal 120611/142966 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4100, signal 120860/142975 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4150, signal 121218/142976 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4200, signal 121522/142977 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4250, signal 121860/142980 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4300, signal 122403/142980 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4350, signal 122791/142982 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4400, signal 123031/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4450, signal 123345/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4500, signal 123730/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4550, signal 124003/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4600, signal 124275/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4650, signal 124793/142983 (executing program)
+2023/10/30 08:03:08 fetching corpus: 4700, signal 125292/142983 (executing program)
+2023/10/30 08:03:09 fetching corpus: 4750, signal 125602/142983 (executing program)
+2023/10/30 08:03:09 fetching corpus: 4800, signal 125824/142983 (executing program)
+2023/10/30 08:03:09 fetching corpus: 4850, signal 126123/142983 (executing program)
+2023/10/30 08:03:09 fetching corpus: 4900, signal 126401/142983 (executing program)
+2023/10/30 08:03:09 fetching corpus: 4950, signal 126784/143000 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5000, signal 127040/143000 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5050, signal 127391/143008 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5100, signal 127779/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5150, signal 128152/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5200, signal 128431/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5250, signal 128742/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5300, signal 129058/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5350, signal 129448/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5400, signal 129700/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5450, signal 130003/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5500, signal 130225/143011 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5550, signal 130506/143012 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5600, signal 130759/143012 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5650, signal 131021/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5700, signal 131213/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5750, signal 131451/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5800, signal 131742/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5850, signal 132572/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5900, signal 132818/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 5950, signal 133015/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 6000, signal 133243/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 6050, signal 133574/143017 (executing program)
+2023/10/30 08:03:09 fetching corpus: 6100, signal 133720/143019 (executing program)
+2023/10/30 08:03:09 fetching corpus: 6150, signal 133885/143019 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6200, signal 134119/143019 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6250, signal 134330/143019 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6300, signal 134506/143022 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6350, signal 134730/143022 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6400, signal 135056/143022 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6450, signal 135462/143022 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6500, signal 135706/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6550, signal 135916/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6600, signal 136122/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6650, signal 136331/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6700, signal 136504/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6750, signal 136757/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6800, signal 136946/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6850, signal 137195/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6900, signal 137399/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 6950, signal 137617/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7000, signal 137891/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7050, signal 138150/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7100, signal 138370/143024 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7150, signal 138663/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7200, signal 138863/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7250, signal 139156/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7300, signal 139422/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7350, signal 139591/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7400, signal 139816/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7450, signal 139957/143039 (executing program)
+2023/10/30 08:03:10 fetching corpus: 7500, signal 140193/143039 (executing program)
+2023/10/30 08:03:11 fetching corpus: 7550, signal 140326/143039 (executing program)
+2023/10/30 08:03:11 fetching corpus: 7600, signal 140471/143039 (executing program)
+2023/10/30 08:03:11 fetching corpus: 7650, signal 140666/143042 (executing program)
+2023/10/30 08:03:11 fetching corpus: 7672, signal 140770/143042 (executing program)
+2023/10/30 08:03:11 fetching corpus: 7672, signal 140770/143042 (executing program)
+2023/10/30 08:03:12 starting 2 fuzzer processes
+[   26.428897] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=352 'syz-fuzzer'
+08:03:12 executing program 0:
+ioctl$F2FS_IOC_GET_COMPRESS_BLOCKS(0xffffffffffffffff, 0x8008f511, &(0x7f0000000000))
+ioctl$FIBMAP(0xffffffffffffffff, 0x1, &(0x7f0000000040)=0x5)
+ioctl$EXT4_IOC_GROUP_EXTEND(0xffffffffffffffff, 0x40086607, &(0x7f0000000080))
+readahead(0xffffffffffffffff, 0x40, 0x9)
+pipe2$watch_queue(&(0x7f00000000c0)={<r0=>0xffffffffffffffff, <r1=>0xffffffffffffffff}, 0x80)
+sendfile(0xffffffffffffffff, r1, &(0x7f0000000100)=0x2, 0x100000000)
+ioctl$KDDISABIO(r1, 0x4b37)
+r2 = dup(0xffffffffffffffff)
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000140), r1)
+ioctl$BTRFS_IOC_DEV_INFO(r1, 0xd000941e, &(0x7f0000000180)={0x0, "918e4e45a5cac5ceb6dde220820fd4e0"})
+ioctl$BTRFS_IOC_DEV_REPLACE(0xffffffffffffffff, 0xca289435, &(0x7f0000001180)={0x1, 0x3800000000000000, @status={[0x1, 0x7, 0x7, 0x4, 0x9, 0x2]}, [0xfffffffffffffe01, 0x1, 0x1, 0x2, 0xd8, 0x80000001, 0x80000000, 0xffffffff, 0x5, 0xfffffffffffffffa, 0x8000000000000001, 0x0, 0xeae, 0x7, 0xffffffffffffe59b, 0xfff, 0x20, 0x3ff, 0x1, 0xff, 0x6, 0x8001, 0x5, 0x0, 0xfffffffffffffffc, 0x9b, 0x3, 0x6, 0x8, 0x0, 0x9, 0x100000000, 0xc16, 0x80000001, 0x0, 0x6df, 0x8000, 0x5, 0x1, 0xffffffffffffffff, 0x8, 0xe3, 0x9, 0x8, 0x6c, 0x2, 0x1, 0x0, 0x3, 0x303, 0x0, 0xfdc7, 0x8, 0x1, 0x0, 0x9, 0x7a, 0x3ff, 0x3, 0x3, 0x4, 0x7, 0x9, 0xffffffff]})
+r3 = syz_genetlink_get_family_id$tipc2(&(0x7f0000001c00), r2)
+sendmsg$TIPC_NL_PUBL_GET(r1, &(0x7f0000001d00)={&(0x7f0000001bc0)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f0000001cc0)={&(0x7f0000001c40)={0x70, r3, 0x200, 0x70bd26, 0x25dfdbfc, {}, [@TIPC_NLA_NET={0x5c, 0x7, 0x0, 0x1, [@TIPC_NLA_NET_ADDR={0x8, 0x2, 0x8000}, @TIPC_NLA_NET_ADDR={0x8, 0x2, 0x10000}, @TIPC_NLA_NET_ADDR={0x8, 0x2, 0xffffff01}, @TIPC_NLA_NET_ADDR={0x8, 0x2, 0x5}, @TIPC_NLA_NET_NODEID={0xc, 0x3, 0x21}, @TIPC_NLA_NET_ADDR={0x8}, @TIPC_NLA_NET_NODEID={0xc, 0x3, 0x8000000000000001}, @TIPC_NLA_NET_NODEID={0xc, 0x3, 0x1}, @TIPC_NLA_NET_NODEID={0xc, 0x3, 0x1}]}]}, 0x70}, 0x1, 0x0, 0x0, 0x4800}, 0x4048054)
+syz_genetlink_get_family_id$smc(&(0x7f0000001d40), r1)
+ioctl$TCSETS(0xffffffffffffffff, 0x5402, &(0x7f0000001d80)={0x3, 0xfffffffa, 0x80000000, 0x9, 0x4, "194f82d9b22b1699bda2e9ec707c4f4e694648"})
+fallocate(0xffffffffffffffff, 0x25, 0x0, 0x200)
+r4 = ioctl$TIOCGPTPEER(r0, 0x5441, 0x22)
+fallocate(r4, 0x3a, 0x3, 0x4c)
+setsockopt$IP_VS_SO_SET_TIMEOUT(r2, 0x0, 0x48a, &(0x7f0000001dc0)={0x5, 0x0, 0x4b49}, 0xc)
+ioctl$sock_SIOCGPGRP(r1, 0x8904, &(0x7f0000001ec0)=<r5=>0x0)
+r6 = openat$sr(0xffffffffffffff9c, &(0x7f0000001f00), 0x4200, 0x0)
+r7 = perf_event_open(&(0x7f0000001e40)={0x2, 0x80, 0x81, 0x81, 0x6, 0x3f, 0x0, 0x7, 0x1000, 0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x1, 0x0, 0x6, 0x2, @perf_bp={&(0x7f0000001e00), 0xc}, 0x4, 0x1ff, 0x3f, 0x9, 0x8, 0x3, 0x6, 0x0, 0x8, 0x0, 0x8}, r5, 0x10, r6, 0x1)
+ioctl$EXT4_IOC_SETFSUUID(r7, 0x4008662c, &(0x7f0000001f40)={0x0, 0x0, "cc1b34c48f370f70c65293fc5a1fddca"})
+r8 = socket$unix(0x1, 0x2, 0x0)
+r9 = openat$vcsa(0xffffffffffffff9c, &(0x7f0000001f80), 0x90000, 0x0)
+ioctl$AUTOFS_DEV_IOCTL_SETPIPEFD(r2, 0xc0189378, &(0x7f0000001fc0)={{0x1, 0x1, 0x18, <r10=>r8, {<r11=>r9}}, './file0\x00'})
+setsockopt$inet_icmp_ICMP_FILTER(r10, 0x1, 0x1, &(0x7f0000002000)={0x6}, 0x4)
+fsetxattr$trusted_overlay_upper(r6, &(0x7f0000002040), &(0x7f0000002080)={0x0, 0xfb, 0xb8, 0x2, 0xca, "881235da9002c022d8e8541b085ac70f", "7da5e7c386b17089a82d2a76b103c17a446acb5746a9612dacd168262e8ff71346ef8504b062a436c0f1381754bda3d162c5a4f371aa5a2f5b1975ed1855476607070b14ab9461a47f7cd58cb2b89db931920ca79d30b5e495722d1bba9667550cc2dee6d9175ca9893f39afaf6147498ed52b945446d38d7d24f5c95f38bc3530d291691ba71471d602150824db2fd2e079ce87ce4bd03fd78c79f9a7af4248e39f98"}, 0xb8, 0x1)
+r12 = socket$inet(0x2, 0x800, 0x514d)
+io_submit(0x0, 0x8, &(0x7f0000002800)=[&(0x7f0000002180)={0x0, 0x0, 0x0, 0x2, 0x7, r0, &(0x7f0000002140)="7ac34ebd41f7ec5f075b7958", 0xc, 0x8000000000000001}, &(0x7f0000002240)={0x0, 0x0, 0x0, 0x7, 0x1c, r12, &(0x7f00000021c0)="b680977691337d2d2bee45e460822981ff902aca43995cec038c43076f5d676d8ef74c3644f2a6d25e9df73e9cee4b569dff614773069848cf8baa400c7eedbccc0c6db1e11c0c4b39bb10963277e4", 0x4f, 0xfb2, 0x0, 0x1, r11}, &(0x7f0000002340)={0x0, 0x0, 0x0, 0x7, 0x1, r4, &(0x7f0000002280)="a3c52e7131ffa1a28310ca4cf981a4c1dc1ea3d68bd2b474824b82c950db5c454ef5c7529bb677a8b35eaeaf2b8b63e86cb6a2a93d4fdffb69f58cf93ec04207fc41a8dd4a2af04dc12ba9bb52561fb052cc97485e619e92e1a55f33c7306eca4cefe07906e5f9e351a72741ddb67a3025ebfe276d29b31b2bead1b11e9ee673eae0f58e904f0a88a862036252dae93636a84a397462d4b72975fc235557832b3e55f1f4e57aa368874ef666ca8f27", 0xaf, 0x7ff, 0x0, 0x0, r10}, &(0x7f00000023c0)={0x0, 0x0, 0x0, 0x8, 0x1, r1, &(0x7f0000002380)="6225a17c935d321ef30e89a11fe501efdd921851cd5e617398440b775de8431ad81c22", 0x23, 0x3, 0x0, 0x1}, &(0x7f0000002440)={0x0, 0x0, 0x0, 0x8, 0x7, r7, &(0x7f0000002400)="7a55c49d6265fd75da7ed9102f58caf1c3d7c97d98ce81f6e85820920d", 0x1d, 0xffff, 0x0, 0x0, r2}, &(0x7f0000002500)={0x0, 0x0, 0x0, 0x6, 0x9, r7, &(0x7f0000002480)="db289c7873e395f183835f49941f6e0b42b49eb99c3d920e276fcd9e38f478a036997bbe4e1040efca707561946b68394e051e951f5dec7d6521fe38ef2ad79b749cc06012e9c15a0ae224d8e5880d5ecf5ef6e998ad69f874b8a9283eef85b8ee436e88dade07db804f292ebf9bcc9086619d81ee5529", 0x77, 0x1c23, 0x0, 0x1}, &(0x7f0000002700)={0x0, 0x0, 0x0, 0x5, 0x3, 0xffffffffffffffff, &(0x7f00000025c0)="8a9261455fa482c6c70da685c75c0bc97972f4d5b290e35d26d1f9421628a02ac29526597be8fd1a31e056c55a6061d42c4758addc94e83bbe206ce87a35d2e76fbb6a28dc69e2a32a20dff6c8c4352c9aee271bf2bb494559c64afd8ce8929856114d72523cee31530427a416c3bf21ed3df6d7f25cb731d2c0508dd705bc240ad83b18eddbd4d7877057a80f6637f240a69aa73a67bfd54edac694962463f5bab2b1bc5dc79533368743ec0dd60db3577d62e5adf77172fef06f1d3847ec562a17dcb05c323b98ee9b1513e3baf191697c333924d979f1e95385a290d3ec24628d60d157582b1f7c0c05390fc167f1a38576e1c9fc54b18a88d2", 0xfb, 0x7ff}, &(0x7f00000027c0)={0x0, 0x0, 0x0, 0x3, 0x1, 0xffffffffffffffff, &(0x7f0000002740)="00da182897a3d8792f1d0bd582a0110f2ab01762eb2bdb87b2617a9ddf83914836c4388d1a30cbf729649931d2fa112acf72f79350af082f2f3cf82c2fb01d81bc3e3732807d282df47951cca4726b56ca96dddf609886088eb6af5aa766f7a179e8e8eb0cb88e0ec6967debe72315cd4eebbaa2be323e25", 0x78, 0x4, 0x0, 0x1, r10}])
+
+08:03:12 executing program 1:
+r0 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+ioctl$sock_SIOCGIFINDEX_802154(0xffffffffffffffff, 0x8933, &(0x7f0000000040)={'wpan0\x00', <r1=>0x0})
+sendmsg$NL802154_CMD_SET_SEC_PARAMS(r0, &(0x7f0000000140)={&(0x7f0000000000)={0x10, 0x0, 0x0, 0x800000}, 0xc, &(0x7f0000000100)={&(0x7f0000000080)={0x48, 0x0, 0x4, 0x70bd25, 0x4, {}, [@NL802154_ATTR_SEC_OUT_LEVEL={0x8}, @NL802154_ATTR_SEC_FRAME_COUNTER={0x8, 0x2a, 0x7fffffff}, @NL802154_ATTR_SEC_OUT_LEVEL={0x8, 0x28, 0x7}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x300000003}, @NL802154_ATTR_IFINDEX={0x8, 0x3, r1}, @NL802154_ATTR_SEC_FRAME_COUNTER={0x8, 0x2a, 0x9}]}, 0x48}, 0x1, 0x0, 0x0, 0x20000800}, 0x40)
+r2 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+r3 = syz_genetlink_get_family_id$nl802154(&(0x7f0000000180), r2)
+sendmsg$NFULNL_MSG_CONFIG(0xffffffffffffffff, &(0x7f0000000280)={&(0x7f00000001c0)={0x10, 0x0, 0x0, 0x100}, 0xc, &(0x7f0000000240)={&(0x7f0000000200)={0x2c, 0x1, 0x4, 0x201, 0x0, 0x0, {0xa, 0x0, 0x7}, [@NFULA_CFG_TIMEOUT={0x8, 0x4, 0x1, 0x0, 0x5}, @NFULA_CFG_QTHRESH={0x8, 0x5, 0x1, 0x0, 0xfffffff7}, @NFULA_CFG_QTHRESH={0x8, 0x5, 0x1, 0x0, 0x400}]}, 0x2c}, 0x1, 0x0, 0x0, 0x81}, 0x40984)
+sendmsg$TIPC_NL_LINK_SET(0xffffffffffffffff, &(0x7f0000000440)={&(0x7f00000002c0)={0x10, 0x0, 0x0, 0x1000}, 0xc, &(0x7f0000000400)={&(0x7f0000000300)={0xf4, 0x0, 0x800, 0x70bd25, 0x25dfdbff, {}, [@TIPC_NLA_NODE={0x54, 0x6, 0x0, 0x1, [@TIPC_NLA_NODE_KEY={0x3c, 0x4, {'gcm(aes)\x00', 0x14, "696150f3fdd31b52c0919079d9f40a012f4cc0ec"}}, @TIPC_NLA_NODE_ADDR={0x8, 0x1, 0x6c}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_KEY_MASTER={0x4}]}, @TIPC_NLA_BEARER={0x3c, 0x1, 0x0, 0x1, [@TIPC_NLA_BEARER_UDP_OPTS={0x38, 0x4, {{0x14, 0x1, @in={0x2, 0x4e20, @multicast1}}, {0x20, 0x2, @in6={0xa, 0x4e24, 0x7f, @local, 0x35}}}}]}, @TIPC_NLA_LINK={0x50, 0x4, 0x0, 0x1, [@TIPC_NLA_LINK_PROP={0x4c, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_MTU={0x8, 0x4, 0xb}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0xcb}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0xff}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0x7ff}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x16}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x16}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x2}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0xfffff106}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0x4}]}]}]}, 0xf4}, 0x1, 0x0, 0x0, 0x44810}, 0x44002)
+ioctl$sock_SIOCGIFINDEX_802154(r0, 0x8933, &(0x7f0000000480)={'wpan0\x00', <r4=>0x0})
+r5 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+r6 = syz_genetlink_get_family_id$netlbl_cipso(&(0x7f00000004c0), r0)
+sendmsg$NLBL_CIPSOV4_C_ADD(r5, &(0x7f0000000780)={&(0x7f0000000500)={0x10, 0x0, 0x0, 0x400}, 0xc, &(0x7f0000000740)={&(0x7f0000000540)={0x200, r6, 0x2, 0x70bd28, 0x25dfdbfc, {}, [@NLBL_CIPSOV4_A_MTYPE={0x8, 0x2, 0x1}, @NLBL_CIPSOV4_A_TAGLST={0x2c, 0x4, 0x0, 0x1, [{0x5, 0x3, 0x6}, {0x5, 0x3, 0x5}, {0x5, 0x3, 0x5}, {0x5}, {0x5, 0x3, 0x7}]}, @NLBL_CIPSOV4_A_MLSCATLST={0x134, 0xc, 0x0, 0x1, [{0x24, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x450ba2b0}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x7db8248f}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x9a1e}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x416ed65a}]}, {0x3c, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xeac6}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x775b}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x7da49769}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x763e}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xfab0}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x749ea5a3}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xc538}]}, {0xc, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x3bce}]}, {0x44, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x2d08}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x7ed6d807}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x7168}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x50d5}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x4098ead2}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x9e45}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x55a5}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0xeed5d74}]}, {0x3c, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0xe784ead}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x2b1842f4}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x3f24}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x22}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x83bf}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x23511c8c}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x7b50a77d}]}, {0xc, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x65dd8fe1}]}, {0x24, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0xf3f2632}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xa14}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x6d579335}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x49d8}]}, {0x14, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xf166}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x89464d6}]}]}, @NLBL_CIPSOV4_A_TAGLST={0xc, 0x4, 0x0, 0x1, [{0x5, 0x3, 0x2}]}, @NLBL_CIPSOV4_A_MLSCATLST={0x4c, 0xc, 0x0, 0x1, [{0x14, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x6118}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x429fd5de}]}, {0x34, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x267}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x1fed405a}, @NLBL_CIPSOV4_A_MLSCATLOC={0x8, 0x9, 0x7320548c}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x33ed}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xdd0a}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xb06}]}]}, @NLBL_CIPSOV4_A_MLSCATLST={0x2c, 0xc, 0x0, 0x1, [{0x14, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0xb7a3}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x5926}]}, {0x14, 0xb, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x94ed}, @NLBL_CIPSOV4_A_MLSCATREM={0x8, 0xa, 0x5a2a}]}]}]}, 0x200}, 0x1, 0x0, 0x0, 0x4000000}, 0x4000041)
+sendmsg$TIPC_NL_LINK_GET(0xffffffffffffffff, &(0x7f0000000900)={&(0x7f00000007c0)={0x10, 0x0, 0x0, 0x20000}, 0xc, &(0x7f00000008c0)={&(0x7f0000000800)={0xa0, 0x0, 0x1, 0x70bd28, 0x25dfdbfc, {}, [@TIPC_NLA_NODE={0x60, 0x6, 0x0, 0x1, [@TIPC_NLA_NODE_REKEYING={0x8, 0x6, 0x5}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_UP={0x4}, @TIPC_NLA_NODE_KEY={0x3c, 0x4, {'gcm(aes)\x00', 0x14, "0f1d9cbfba69bf9139ac152f48aaf4f444f7ba15"}}, @TIPC_NLA_NODE_REKEYING={0x8, 0x6, 0x1f}, @TIPC_NLA_NODE_UP={0x4}, @TIPC_NLA_NODE_KEY_MASTER={0x4}]}, @TIPC_NLA_NET={0x2c, 0x7, 0x0, 0x1, [@TIPC_NLA_NET_NODEID_W1={0xc, 0x4, 0x3}, @TIPC_NLA_NET_ID={0x8, 0x1, 0x7}, @TIPC_NLA_NET_ADDR={0x8, 0x2, 0x3}, @TIPC_NLA_NET_NODEID_W1={0xc, 0x4, 0x200}]}]}, 0xa0}, 0x1, 0x0, 0x0, 0x44000}, 0x8000)
+syz_clone3(&(0x7f0000000c40)={0x0, &(0x7f0000000980), &(0x7f00000009c0), &(0x7f0000000a00)=<r7=>0x0, {0x33}, &(0x7f0000000a40)=""/252, 0xfc, &(0x7f0000000b40)=""/185, &(0x7f0000000c00)=[0xffffffffffffffff, 0xffffffffffffffff, 0xffffffffffffffff, 0xffffffffffffffff, 0x0], 0x5}, 0x58)
+sendmsg$NL802154_CMD_SET_WPAN_PHY_NETNS(r2, &(0x7f0000000d40)={&(0x7f0000000940)={0x10, 0x0, 0x0, 0x10}, 0xc, &(0x7f0000000d00)={&(0x7f0000000cc0)={0x2c, r3, 0x400, 0x70bd2c, 0x25dfdbfc, {}, [@NL802154_ATTR_PID={0x8, 0x1c, r7}, @NL802154_ATTR_IFINDEX={0x8, 0x3, r4}, @NL802154_ATTR_PID={0x8}]}, 0x2c}, 0x1, 0x0, 0x0, 0x20008001}, 0x4044000)
+pidfd_send_signal(0xffffffffffffffff, 0x3f, &(0x7f0000000d80)={0xf, 0x2}, 0x0)
+r8 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+r9 = syz_genetlink_get_family_id$ieee802154(&(0x7f0000000e40), r0)
+sendmsg$IEEE802154_LLSEC_ADD_SECLEVEL(r8, &(0x7f0000000f00)={&(0x7f0000000e00)={0x10, 0x0, 0x0, 0x100000}, 0xc, &(0x7f0000000ec0)={&(0x7f0000000e80)={0x1c, r9, 0x10, 0x70bd25, 0x25dfdbfc, {}, [@IEEE802154_ATTR_LLSEC_CMD_FRAME_ID={0x5, 0x34, 0x81}]}, 0x1c}, 0x1, 0x0, 0x0, 0x4010}, 0x881)
+sendmsg$NLBL_CIPSOV4_C_ADD(r0, &(0x7f00000010c0)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x400000}, 0xc, &(0x7f0000001080)={&(0x7f0000000f80)={0xe8, r6, 0x800, 0x70bd2d, 0x25dfdbfc, {}, [@NLBL_CIPSOV4_A_MLSLVLLST={0xd4, 0x8, 0x0, 0x1, [{0x34, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x6}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x5d}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x61}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x87}, @NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0xac14e88}, @NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x2ca0eeb8}]}, {0x14, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x14df8d24}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0xee}]}, {0xc, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x502bf87}]}, {0x24, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x374288fb}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x12}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0xe4}, @NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x6b751652}]}, {0xc, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x49e09b7d}]}, {0x2c, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x5ea4989e}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x9b}, @NLBL_CIPSOV4_A_MLSLVLLOC={0x8, 0x5, 0x7ab5f10e}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x4c}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x27}]}, {0x14, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x4a}, @NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0x10}]}, {0xc, 0x7, 0x0, 0x1, [@NLBL_CIPSOV4_A_MLSLVLREM={0x8, 0x6, 0xc7}]}]}]}, 0xe8}, 0x1, 0x0, 0x0, 0xc}, 0x20040080)
+sendmsg$IEEE802154_LLSEC_DEL_DEVKEY(r0, &(0x7f00000011c0)={&(0x7f0000001100)={0x10, 0x0, 0x0, 0x400000}, 0xc, &(0x7f0000001180)={&(0x7f0000001140)={0x20, r9, 0x8, 0x70bd2c, 0x25dfdbfc, {}, [@IEEE802154_ATTR_HW_ADDR={0xc, 0x5, {0xaaaaaaaaaaaa0202}}]}, 0x20}, 0x1, 0x0, 0x0, 0x4000000}, 0x4000000)
+sendmsg$NL802154_CMD_GET_SEC_LEVEL(0xffffffffffffffff, &(0x7f00000012c0)={&(0x7f0000001200)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f0000001280)={&(0x7f0000001240)={0x38, r3, 0x300, 0x70bd2d, 0x25dfdbfe, {}, [@NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x300000003}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x100000001}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x2}]}, 0x38}, 0x1, 0x0, 0x0, 0x41}, 0x4000)
+r10 = socket$inet_tcp(0x2, 0x1, 0x0)
+ioctl$AUTOFS_DEV_IOCTL_CATATONIC(0xffffffffffffffff, 0xc0189379, &(0x7f0000001300)={{0x1, 0x1, 0x18, <r11=>r10}, './file0\x00'})
+syz_genetlink_get_family_id$netlbl_mgmt(&(0x7f0000001340), r8)
+openat$cgroup_subtree(r11, &(0x7f0000001380), 0x2, 0x0)
+syz_genetlink_get_family_id$netlbl_mgmt(&(0x7f00000013c0), r2)
+syz_genetlink_get_family_id$netlbl_unlabel(&(0x7f0000001400), 0xffffffffffffffff)
+r12 = syz_genetlink_get_family_id$netlbl_mgmt(&(0x7f0000001480), r0)
+sendmsg$NLBL_MGMT_C_REMOVEDEF(r2, &(0x7f0000001540)={&(0x7f0000001440)={0x10, 0x0, 0x0, 0x400}, 0xc, &(0x7f0000001500)={&(0x7f00000014c0)={0x1c, r12, 0x400, 0x70bd28, 0x25dfdbfe, {}, [@NLBL_MGMT_A_FAMILY={0x6, 0xb, 0x23}]}, 0x1c}, 0x1, 0x0, 0x0, 0x4}, 0x840)
+sendmsg$NL802154_CMD_GET_SEC_LEVEL(0xffffffffffffffff, &(0x7f0000001700)={&(0x7f0000001580)={0x10, 0x0, 0x0, 0x4}, 0xc, &(0x7f00000016c0)={&(0x7f0000001640)={0x6c, r3, 0x0, 0x70bd2a, 0x25dfdbfc, {}, [@NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x2}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x2}, @NL802154_ATTR_IFINDEX={0x8}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x380000003}, @NL802154_ATTR_IFINDEX={0x8, 0x3, r4}, @NL802154_ATTR_IFINDEX={0x8, 0x3, r4}, @NL802154_ATTR_IFINDEX={0x8, 0x3, r1}, @NL802154_ATTR_IFINDEX={0x8}, @NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x3}]}, 0x6c}, 0x1, 0x0, 0x0, 0x4008000}, 0x8880)
+
+[   26.453802] audit: type=1400 audit(1698652992.447:8): avc:  denied  { execmem } for  pid=372 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+
+VM DIAGNOSIS:
+08:03:04  Registers:
+info registers vcpu 0
+RAX=ffff9084431c8ae8 RBX=ffff9c0ac069fd70 RCX=00019c0ac069fda8 RDX=00000000000004a7
+RSI=0001ffffffffffff RDI=ffff9c0ac069fda8 RBP=ffff9c0ac069fbb8 RSP=ffff9c0ac069fb48
+R8 =ffffffffa92c43d0 R9 =0000000000000000 R10=ffffffffa5e6acca R11=0001ffffffffffff
+R12=ffff90844105c0c0 R13=ffff9084402983e0 R14=0000000000000002 R15=0000000000000051
+RIP=ffffffffa5e6acce RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007ff7cc9788c0 00000000 00000000
+GS =0000 ffff908577c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe64e4374000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe64e4372000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007ffcfcd6bf80 CR3=0000000100188004 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000ff0000 ff00000000000000
+YMM01=0000000000000000 0000000000000000 2525252525252525 2525252525252525
+YMM02=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 0000000000ff0000 ff00000000000000
+YMM05=0000000000000000 0000000000000000 0000000000000000 00ff000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 80f09f19808d26a3 0000000000162930
+YMM08=0000000000000000 0000000000000000 725a5564c8c9eb71 00000000001ddac8
+YMM09=0000000000000000 0000000000000000 ffff00ffffff0000 0000ffffff00ffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000001 RBX=0000000aff4f44af RCX=0000000000000000 RDX=0000000000000000
+RSI=ffffffffa7cc1c84 RDI=ffffffffa7cd3d9c RBP=0000000aff4f3375 RSP=ffff9c0ac061be58
+R8 =0000000000000000 R9 =0009908442023310 R10=0000000000000000 R11=0000000000000023
+R12=0000000000000001 R13=000000000000dc1f R14=ffffffffa5bd125a R15=0000000000000086
+RIP=ffffffffa7464780 RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0000 0000000000000000 00000000 00000000
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f4b8c65b8c0 00000000 00000000
+GS =0000 ffff908577d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe49c7603000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe49c7601000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f4b8c665314 CR3=0000000105244006 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 20322e322e302e30 313d726464612032
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM03=0000000000000000 0000000000000000 223d657865202274 6f6f72223d746363
+YMM04=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000ffff000000ff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000002000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

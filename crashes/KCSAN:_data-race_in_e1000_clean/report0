@@ -1,0 +1,68 @@
+==================================================================
+BUG: KCSAN: data-race in e1000_clean_tx_irq drivers/net/ethernet/intel/e1000/e1000_main.c:3842 [inline]
+BUG: KCSAN: data-race in e1000_clean+0x2bf/0x12b0 drivers/net/ethernet/intel/e1000/e1000_main.c:3801
+
+race at unknown origin, with read to 0xffff9af64103f74c of 4 bytes by interrupt on cpu 0:
+ e1000_clean_tx_irq drivers/net/ethernet/intel/e1000/e1000_main.c:3842 [inline]
+ e1000_clean+0x2bf/0x12b0 drivers/net/ethernet/intel/e1000/e1000_main.c:3801
+ __napi_poll+0x66/0x390 net/core/dev.c:6460
+ napi_poll net/core/dev.c:6527 [inline]
+ net_rx_action+0x694/0x7b0 net/core/dev.c:6660
+ __do_softirq+0xea/0x2e3 kernel/softirq.c:553
+ do_softirq kernel/softirq.c:454 [inline]
+ do_softirq+0x73/0x90 kernel/softirq.c:441
+ __local_bh_enable_ip+0x68/0x80 kernel/softirq.c:381
+ __raw_spin_unlock_bh include/linux/spinlock_api_smp.h:167 [inline]
+ _raw_spin_unlock_bh+0x1f/0x30 kernel/locking/spinlock.c:210
+ spin_unlock_bh include/linux/spinlock.h:396 [inline]
+ __release_sock+0x92/0x1c0 net/core/sock.c:2974
+ release_sock+0x44/0x110 net/core/sock.c:3518
+ tcp_recvmsg+0xa9/0x340 net/ipv4/tcp.c:2567
+ inet_recvmsg+0xac/0x240 net/ipv4/af_inet.c:862
+ sock_recvmsg_nosec net/socket.c:1020 [inline]
+ sock_recvmsg+0xf7/0x120 net/socket.c:1041
+ sock_read_iter+0x13c/0x1e0 net/socket.c:1107
+ call_read_iter include/linux/fs.h:1871 [inline]
+ new_sync_read fs/read_write.c:389 [inline]
+ vfs_read+0x54a/0x5a0 fs/read_write.c:470
+ ksys_read+0x11c/0x160 fs/read_write.c:613
+ __do_sys_read fs/read_write.c:623 [inline]
+ __se_sys_read fs/read_write.c:621 [inline]
+ __x64_sys_read+0x41/0x50 fs/read_write.c:621
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000200 -> 0x00000201
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 343 Comm: syz-fuzzer Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=343 'syz-fuzzer'
+audit: type=1400 audit(1698651402.933:8): avc:  denied  { execmem } for  pid=373 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+hrtimer: interrupt took 41170 ns
+netlink: 'syz-executor.0': attribute type 21 has an invalid length.
+netlink: 'syz-executor.0': attribute type 21 has an invalid length.
+netlink: 'syz-executor.0': attribute type 21 has an invalid length.
+netlink: 'syz-executor.0': attribute type 21 has an invalid length.
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44371 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop1: detected capacity change from 0 to 128

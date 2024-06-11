@@ -1,0 +1,4 @@
+pimreg (unregistering): left allmulticast mode
+BUG: Bad rss-counter state mm:0000000003d371c8 type:MM_SHMEMPAGES val:16
+BUG: non-zero pgtables_bytes on freeing mm: 4096
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 135254021 (only 32 groups)

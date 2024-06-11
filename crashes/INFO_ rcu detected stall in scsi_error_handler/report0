@@ -1,0 +1,334 @@
+ata1: lost interrupt (Status 0x58)
+rcu: INFO: rcu_sched self-detected stall on CPU
+rcu: 	1-...!: (1 ticks this GP) idle=7c5/1/0x4000000000000000 softirq=173454/173454 fqs=1 
+	(t=25712 jiffies g=292341 q=6)
+NMI backtrace for cpu 1
+CPU: 1 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002e6fc60 EFLAGS: 00000286
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff8bf8f5e0
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffff8880046d6400
+RBP: ffff8880045b0000 R08: 0000000000000001 R09: ffffed10005cdf82
+R10: 0000000000000003 R11: ffffed10005cdf81 R12: 0000000000000246
+R13: ffff8880045b0010 R14: ffff8880045b0130 R15: ffff8880045b0008
+ ata_bmdma_error_handler+0x2a7/0x5d0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+Sending NMI from CPU 1 to CPUs 2:
+NMI backtrace for cpu 2
+CPU: 2 PID: 73986 Comm: kworker/2:3 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: events_freezable_power_ disk_events_workfn
+RIP: 0010:queued_spin_lock_slowpath+0x120/0x910
+Code: 8b 84 24 88 00 00 00 65 48 33 04 25 28 00 00 00 0f 85 e0 06 00 00 48 81 c4 90 00 00 00 5b 5d 41 5c 41 5d 41 5e 41 5f c3 f3 90 <e9> 75 ff ff ff 44 8b 7c 24 50 41 81 ff 00 01 00 00 0f 84 e5 00 00
+RSP: 0018:ffff888004027568 EFLAGS: 00000002
+RAX: 0000000000000000 RBX: ffff8880046d6400 RCX: ffffffff8aa29bd7
+RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff8880046d6400
+RBP: 1ffff11000804eaf R08: 0000000000000001 R09: ffffed10008dac81
+R10: ffff8880046d6403 R11: ffffed10008dac80 R12: 0000000000000001
+R13: 0000000000000003 R14: ffffed10008dac80 R15: 0000000000000001
+FS:  0000000000000000(0000) GS:ffff88809fd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f37021895d0 CR3: 0000000009f2e006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ _raw_spin_lock_irqsave+0xc7/0xd0
+ ata_scsi_queuecmd+0x87/0x190
+ scsi_queue_rq+0x13c2/0x2860
+ blk_mq_dispatch_rq_list+0x3bf/0x1ed0
+ __blk_mq_sched_dispatch_requests+0x29a/0x4f0
+ blk_mq_sched_dispatch_requests+0xd8/0x140
+ __blk_mq_run_hw_queue+0x5e/0xd0
+ __blk_mq_delay_run_hw_queue+0x48e/0x4e0
+ blk_mq_run_hw_queue+0x132/0x2b0
+ blk_mq_sched_insert_request+0x28f/0x3e0
+ blk_execute_rq+0xd1/0x350
+ __scsi_execute+0x283/0x590
+ sr_check_events+0x174/0x8d0
+ cdrom_check_events+0x64/0x110
+ sr_block_check_events+0x173/0x260
+ disk_check_events+0xbf/0x360
+ process_one_work+0x89d/0x1240
+ worker_thread+0x93/0x1030
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1.00: exception Emask 0x0 SAct 0x0 SErr 0x0 action 0x6 frozen
+ata1.00: failed command: WRITE DMA EXT
+ata1.00: cmd 35/00:48:10:c8:2b/00:03:00:00:00/e0 tag 0 dma 430080 out
+         res 40/00:00:00:00:0a/00:00:00:00:00/a4 Emask 0x4 (timeout)
+ata1.00: status: { DRDY }
+systemd[1]: systemd-journald.service: State 'stop-watchdog' timed out. Killing.
+systemd[1]: systemd-journald.service: Killing process 111 (systemd-journal) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Killing process 74489 (journal-offline) with signal SIGKILL.
+rcu: INFO: rcu_sched self-detected stall on CPU
+rcu: 	1-....: (63 ticks this GP) idle=7c5/1/0x4000000000000000 softirq=173455/173455 fqs=415 
+	(t=165272 jiffies g=292341 q=39)
+NMI backtrace for cpu 1
+CPU: 1 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002e6f890 EFLAGS: 00000286
+RAX: 0000000000000004 RBX: ffff8880045b24c0 RCX: ffffffff8bfb006f
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffffffff8ed289c0
+RBP: ffff8880045b0000 R08: 0000000000000001 R09: ffffed10005cdeed
+R10: 0000000000000003 R11: ffffed10005cdeec R12: 0000000000000040
+R13: ffff88800206b000 R14: 000000000000c004 R15: ffff8880045b002c
+ piix_set_timings+0x320/0x580
+ ata_eh_reset+0x3dd/0x22d0
+ ata_eh_recover+0x7ff/0x3a30
+ ata_do_eh+0x43/0xb0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+systemd[1]: systemd-journald.service: Processes still around after SIGKILL. Ignoring.
+rcu: INFO: rcu_sched self-detected stall on CPU
+rcu: 	1-....: (65 ticks this GP) idle=7c5/1/0x4000000000000000 softirq=173455/173455 fqs=417 
+	(t=261583 jiffies g=292341 q=51)
+NMI backtrace for cpu 1
+CPU: 1 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002e6f890 EFLAGS: 00000286
+RAX: 0000000000000004 RBX: ffff8880045b2cc0 RCX: ffffffff8bfb006f
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffffffff8ed289c0
+RBP: ffff8880045b0000 R08: 0000000000000001 R09: ffffed10005cdef3
+R10: 0000000000000003 R11: ffffed10005cdef2 R12: 0000000000000040
+R13: ffff88800206b000 R14: 0000000000000000 R15: ffff8880045b002c
+ piix_set_timings+0x320/0x580
+ ata_eh_reset+0x3dd/0x22d0
+ ata_eh_recover+0x7ff/0x3a30
+ ata_do_eh+0x43/0xb0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1: soft resetting link
+ata1.00: configured for MWDMA2
+ata1: EH complete
+ata1: lost interrupt (Status 0x58)
+ata1.00: exception Emask 0x0 SAct 0x0 SErr 0x0 action 0x6 frozen
+ata1.00: failed command: WRITE DMA
+ata1.00: cmd ca/00:08:18:cc:26/00:00:00:00:00/e0 tag 0 dma 4096 out
+         res 40/00:00:00:00:0a/00:00:00:00:00/a4 Emask 0x4 (timeout)
+systemd[1]: systemd-journald.service: State 'final-sigterm' timed out. Killing.
+ata1.00: status: { DRDY }
+systemd[1]: systemd-journald.service: Killing process 111 (systemd-journal) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Killing process 74489 (journal-offline) with signal SIGKILL.
+rcu: INFO: rcu_sched self-detected stall on CPU
+rcu: 	2-...0: (4 ticks this GP) idle=6a1/1/0x4000000000000000 softirq=168222/168222 fqs=234 
+	(t=23385 jiffies g=292397 q=8)
+NMI backtrace for cpu 2
+CPU: 2 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002e6f890 EFLAGS: 00000286
+RAX: 0000000000000004 RBX: ffff8880045b24c0 RCX: ffffffff8bfb006f
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffffffff8ed289c0
+RBP: ffff8880045b0000 R08: 0000000000000001 R09: ffffed10005cdeed
+R10: 0000000000000003 R11: ffffed10005cdeec R12: 0000000000000040
+R13: ffff88800206b000 R14: 000000000000c004 R15: ffff8880045b002c
+ piix_set_timings+0x320/0x580
+ ata_eh_reset+0x3dd/0x22d0
+ ata_eh_recover+0x7ff/0x3a30
+ ata_do_eh+0x43/0xb0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1: soft resetting link
+systemd[1]: systemd-journald.service: Processes still around after final SIGKILL. Entering failed mode.
+rcu: INFO: rcu_sched self-detected stall on CPU
+systemd[1]: systemd-journald.service: Failed with result 'watchdog'.
+rcu: 	2-....: (1 ticks this GP) idle=87b/1/0x4000000000000000 softirq=168233/168233 fqs=8 
+	(t=39057 jiffies g=292413 q=2)
+NMI backtrace for cpu 2
+CPU: 2 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002e6f780 EFLAGS: 00000282
+RAX: 0000000000000004 RBX: ffff8880045b24c0 RCX: ffffffff8bfb006f
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffffffff8ed289c0
+RBP: ffff8880045b0000 R08: 0000000000000001 R09: ffffed10005cdecb
+R10: 0000000000000003 R11: ffffed10005cdeca R12: 0000000000000040
+R13: ffff88800206b000 R14: 000000000000e307 R15: ffff8880045b002c
+ piix_set_timings+0x320/0x580
+ do_pata_set_dmamode+0x31b/0x3e0
+ ata_do_set_mode+0xd35/0x1f20
+ ata_set_mode+0x362/0x430
+ ata_eh_recover+0x2484/0x3a30
+ ata_do_eh+0x43/0xb0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1.00: configured for MWDMA2
+systemd[1]: systemd-journald.service: Unit process 111 (systemd-journal) remains running after unit stopped.
+systemd[1]: systemd-journald.service: Consumed 2.685s CPU time.
+systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+systemd[1]: Stopping Flush Journal to Persistent Storage...
+ata1: EH complete
+systemd[1]: systemd-journal-flush.service: Succeeded.
+systemd[1]: Stopped Flush Journal to Persistent Storage.
+systemd[1]: Stopped Journal Service.
+systemd[1]: systemd-journald.service: Consumed 2.685s CPU time.
+systemd[1]: systemd-journald.service: Found left-over process 111 (systemd-journal) in control group while starting unit. Ignoring.
+systemd[1]: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+systemd[1]: Starting Journal Service...
+ata1: lost interrupt (Status 0x58)
+systemd[1]: systemd-journald.service: start operation timed out. Terminating.
+ata1.00: exception Emask 0x0 SAct 0x0 SErr 0x0 action 0x6 frozen
+ata1.00: failed command: WRITE DMA
+ata1.00: cmd ca/00:18:78:e5:32/00:00:00:00:00/e0 tag 0 dma 12288 out
+         res 40/00:00:00:00:0a/00:00:00:00:00/a4 Emask 0x4 (timeout)
+ata1.00: status: { DRDY }
+ata1: soft resetting link
+rcu: INFO: rcu_sched detected stalls on CPUs/tasks:
+rcu: 	1-...!: (0 ticks this GP) idle=9b7/1/0x4000000000000000 softirq=173532/173532 fqs=13 
+	(detected by 2, t=25154 jiffies, g=292517, q=4)
+Sending NMI from CPU 2 to CPUs 1:
+NMI backtrace for cpu 1
+CPU: 1 PID: 69 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:pci_conf1_write+0xed/0x120
+Code: 09 05 0f 00 e8 24 8a c7 fd 44 89 e0 5b 5d 41 5c 41 5d 41 5e 41 5f c3 e8 11 8a c7 fd 83 e5 02 44 89 f0 8d 95 fc 0c 00 00 66 ef <eb> c1 e8 fc 89 c7 fd 83 e5 03 44 89 f0 8d 95 fc 0c 00 00 ee eb ad
+RSP: 0018:ffff888002e6f6b0 EFLAGS: 00000046
+RAX: 000000000000e307 RBX: 0000000000000000 RCX: ffffffff8cf03fbf
+RDX: 0000000000000cfc RSI: 0000000000000000 RDI: ffff888002e6f650
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10005cdecb
+R10: 0000000000000003 R11: ffffed10005cdeca R12: 0000000000000002
+R13: 0000000000000046 R14: 000000000000e307 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88809fc80000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00005587505c399c CR3: 0000000009f2e001 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ raw_pci_write+0x102/0x130
+ pci_bus_write_config_word+0x86/0xb0
+ pci_write_config_word+0xa6/0xf0
+ piix_set_timings+0x2cf/0x580
+ do_pata_set_dmamode+0x31b/0x3e0
+ ata_do_set_mode+0xd35/0x1f20
+ ata_set_mode+0x362/0x430
+ ata_eh_recover+0x2484/0x3a30
+ ata_do_eh+0x43/0xb0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1.00: configured for MWDMA2
+ata1: EH complete
+systemd[1]: systemd-journald.service: State 'stop-sigterm' timed out. Killing.
+systemd[1]: systemd-journald.service: Killing process 74495 (systemd-journal) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Killing process 111 (systemd-journal) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Killing process 74489 (journal-offline) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Main process exited, code=killed, status=9/KILL
+systemd[1]: systemd-journald.service: Failed with result 'timeout'.
+systemd[1]: Failed to start Journal Service.
+systemd[1]: Dependency failed for Flush Journal to Persistent Storage.
+systemd[1]: systemd-journal-flush.service: Job systemd-journal-flush.service/start failed with result 'dependency'.
+systemd[1]: systemd-journald.service: Consumed 1.431s CPU time.
+systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 2.
+systemd[1]: Stopped Journal Service.
+systemd[1]: systemd-journald.service: Consumed 1.431s CPU time.
+systemd[1]: Starting Journal Service...
+systemd-journald[74502]: File /var/log/journal/495cb7baaf694f459d942b793c107665/system.journal corrupted or uncleanly shut down, renaming and replacing.
+systemd[1]: Started Journal Service.

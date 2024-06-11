@@ -1,0 +1,314 @@
+syzkaller login: [   17.869968] ==================================================================
+[   17.870583] BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+[   17.871106] 
+[   17.871228] write to 0xffffae0dc0737a60 of 4 bytes by task 333 on cpu 0:
+[   17.871688]  pollwake+0xd0/0x120
+[   17.871942]  __wake_up_common+0x74/0x140
+[   17.872220]  __wake_up_common_lock+0x7e/0xd0
+[   17.872520]  pipe_read+0x70b/0x7c0
+[   17.872777]  vfs_read+0x54a/0x5a0
+[   17.873026]  ksys_read+0x11c/0x160
+[   17.873282]  __x64_sys_read+0x41/0x50
+[   17.873551]  do_syscall_64+0x3e/0x90
+[   17.873824]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.874181] 
+[   17.874302] read to 0xffffae0dc0737a60 of 4 bytes by task 327 on cpu 1:
+[   17.874731]  poll_schedule_timeout.constprop.0+0x44/0xb0
+[   17.875108]  do_select+0xc9d/0xe00
+[   17.875372]  core_sys_select+0x217/0x4e0
+[   17.875748]  kern_select+0xe2/0x140
+[   17.876021]  __x64_sys_select+0x65/0x80
+[   17.876290]  do_syscall_64+0x3e/0x90
+[   17.876562]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.876914] 
+[   17.877034] value changed: 0x00000000 -> 0x00000001
+[   17.877354] 
+[   17.877475] Reported by Kernel Concurrency Sanitizer on:
+[   17.877818] CPU: 1 PID: 327 Comm: sshd Not tainted 6.5.0 #8
+[   17.878194] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.878714] ==================================================================
+[   18.222056] scp (333) used greatest stack depth: 11664 bytes left
+[   18.234478] sshd (327) used greatest stack depth: 11560 bytes left
+Warning: Permanently added '[localhost]:46966' (ED25519) to the list of known hosts.
+2023/10/30 07:48:22 fuzzer started
+2023/10/30 07:48:22 dialing manager at localhost:37497
+[   20.099756] cgroup: Unknown subsys name 'net'
+[   20.104303] cgroup: Unknown subsys name 'rlimit'
+[   20.104706] cgroup: Unknown subsys name 'memory'
+[   20.138429] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 07:48:23 syscalls: 2193
+2023/10/30 07:48:23 code coverage: enabled
+2023/10/30 07:48:23 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 07:48:23 extra coverage: enabled
+2023/10/30 07:48:23 delay kcov mmap: enabled
+2023/10/30 07:48:23 setuid sandbox: enabled
+2023/10/30 07:48:23 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 07:48:23 Android sandbox: enabled
+2023/10/30 07:48:23 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 07:48:23 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 07:48:23 net packet injection: /dev/net/tun does not exist
+2023/10/30 07:48:23 net device setup: enabled
+2023/10/30 07:48:23 concurrency sanitizer: enabled
+2023/10/30 07:48:23 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 07:48:23 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 07:48:23 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 07:48:23 hci packet injection: /dev/vhci does not exist
+2023/10/30 07:48:23 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 07:48:23 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 07:48:23 swap file: enabled
+[   20.148076] kcsan: could not find function: 'should_defer_flush'
+[   20.150745] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 07:48:23 suppressing KCSAN reports in functions: 'tick_nohz_idle_stop_tick' 'xas_find_marked' '_find_next_zero_bit' 'delayacct_add_tsk' 'n_tty_lookahead_flow_ctrl' '_find_first_bit' 'audit_log_start' 'should_defer_flush' 'mas_wr_node_store' 'folio_mark_accessed' 'kernfs_refresh_inode' 'xas_clear_mark' 'ext4_fill_raw_inode' 'tick_sched_do_timer' 'e1000_clean_rx_irq' 'poll_schedule_timeout' 'jbd2_journal_commit_transaction' 'do_readlinkat' 'filemap_fault' 'tick_nohz_next_event' 'dput' 'process_one_work' 'wq_worker_running' 'generic_write_end' 'folio_clear_dirty_for_io' 'kauditd_thread' 'generic_fillattr' 'ktime_get_mono_fast_ns' '__folio_start_writeback' 'd_splice_alias' 'atime_needs_update' 'e1000_clean' 'wq_worker_tick' 'ext4_free_inodes_count' 
+2023/10/30 07:48:23 fetching corpus: 0, signal 0/2000 (executing program)
+2023/10/30 07:48:23 fetching corpus: 50, signal 19089/22509 (executing program)
+2023/10/30 07:48:23 fetching corpus: 100, signal 31045/35694 (executing program)
+2023/10/30 07:48:23 fetching corpus: 150, signal 36971/42827 (executing program)
+2023/10/30 07:48:23 fetching corpus: 200, signal 40967/47999 (executing program)
+2023/10/30 07:48:23 fetching corpus: 250, signal 44823/52923 (executing program)
+2023/10/30 07:48:23 fetching corpus: 300, signal 47966/57051 (executing program)
+2023/10/30 07:48:23 fetching corpus: 349, signal 51757/61708 (executing program)
+2023/10/30 07:48:23 fetching corpus: 399, signal 54016/64918 (executing program)
+2023/10/30 07:48:23 fetching corpus: 449, signal 56796/68533 (executing program)
+2023/10/30 07:48:23 fetching corpus: 499, signal 58751/71353 (executing program)
+2023/10/30 07:48:24 fetching corpus: 549, signal 61268/74546 (executing program)
+2023/10/30 07:48:24 fetching corpus: 599, signal 62959/77047 (executing program)
+2023/10/30 07:48:24 fetching corpus: 649, signal 65879/80489 (executing program)
+2023/10/30 07:48:24 fetching corpus: 699, signal 67900/83122 (executing program)
+2023/10/30 07:48:24 fetching corpus: 749, signal 69185/85116 (executing program)
+2023/10/30 07:48:24 fetching corpus: 799, signal 71368/87724 (executing program)
+2023/10/30 07:48:24 fetching corpus: 849, signal 73049/89940 (executing program)
+2023/10/30 07:48:24 fetching corpus: 899, signal 75124/92386 (executing program)
+2023/10/30 07:48:24 fetching corpus: 949, signal 76696/94393 (executing program)
+2023/10/30 07:48:24 fetching corpus: 999, signal 79155/97034 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1049, signal 80425/98750 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1099, signal 81702/100435 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1149, signal 82840/102027 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1199, signal 84273/103765 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1249, signal 85324/105222 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1299, signal 86436/106675 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1349, signal 87359/107966 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1399, signal 88270/109219 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1449, signal 88908/110338 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1499, signal 90000/111660 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1549, signal 91256/113085 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1599, signal 92250/114269 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1649, signal 93091/115358 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1699, signal 93765/116356 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1749, signal 95210/117698 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1799, signal 96212/118780 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1849, signal 96959/119721 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1899, signal 97523/120535 (executing program)
+2023/10/30 07:48:24 fetching corpus: 1949, signal 98089/121401 (executing program)
+2023/10/30 07:48:25 fetching corpus: 1999, signal 99041/122358 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2049, signal 99782/123230 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2099, signal 100261/123949 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2149, signal 100858/124740 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2199, signal 101539/125540 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2249, signal 102362/126397 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2299, signal 102863/127070 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2349, signal 103766/127855 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2399, signal 104403/128550 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2449, signal 104933/129179 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2499, signal 105634/129847 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2549, signal 106281/130527 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2599, signal 106903/131138 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2649, signal 107416/131683 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2699, signal 107928/132200 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2749, signal 108463/132773 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2799, signal 109158/133330 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2849, signal 109622/133863 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2899, signal 110350/134395 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2949, signal 110772/134852 (executing program)
+2023/10/30 07:48:25 fetching corpus: 2999, signal 111143/135264 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3049, signal 111766/135701 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3099, signal 112147/136115 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3148, signal 112640/136519 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3198, signal 112959/136906 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3248, signal 113300/137311 (executing program)
+2023/10/30 07:48:25 fetching corpus: 3298, signal 113825/137709 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3348, signal 114339/138072 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3398, signal 114721/138406 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3448, signal 115227/138424 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3498, signal 115811/138448 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3548, signal 116300/138457 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3598, signal 116871/138459 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3648, signal 117253/138459 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3698, signal 117609/138459 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3748, signal 117985/138460 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3798, signal 118308/138466 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3848, signal 118706/138467 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3898, signal 119006/138476 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3948, signal 119368/138479 (executing program)
+2023/10/30 07:48:26 fetching corpus: 3998, signal 119681/138479 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4048, signal 120075/138479 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4098, signal 120415/138479 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4148, signal 120901/138484 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4198, signal 121098/138485 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4248, signal 121366/138485 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4298, signal 121683/138491 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4348, signal 122268/138491 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4398, signal 122513/138498 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4447, signal 122831/138498 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4497, signal 123102/138506 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4547, signal 123311/138506 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4597, signal 123604/138508 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4647, signal 124038/138508 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4697, signal 124388/138525 (executing program)
+2023/10/30 07:48:26 fetching corpus: 4747, signal 124649/138540 (executing program)
+2023/10/30 07:48:27 fetching corpus: 4797, signal 125004/138550 (executing program)
+2023/10/30 07:48:27 fetching corpus: 4847, signal 125352/138550 (executing program)
+2023/10/30 07:48:27 fetching corpus: 4897, signal 125660/138550 (executing program)
+2023/10/30 07:48:27 fetching corpus: 4947, signal 126227/138552 (executing program)
+2023/10/30 07:48:27 fetching corpus: 4997, signal 126594/138552 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5047, signal 126830/138552 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5097, signal 127068/138554 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5147, signal 127299/138556 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5197, signal 127660/138559 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5247, signal 127855/138560 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5297, signal 128075/138560 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5347, signal 128271/138574 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5397, signal 128610/138575 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5447, signal 128813/138575 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5497, signal 129258/138575 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5547, signal 129916/138576 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5597, signal 130177/138576 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5647, signal 130417/138581 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5697, signal 130586/138583 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5747, signal 130798/138583 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5797, signal 131264/138584 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5847, signal 131494/138584 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5897, signal 131774/138584 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5947, signal 132054/138584 (executing program)
+2023/10/30 07:48:27 fetching corpus: 5997, signal 132246/138584 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6047, signal 132478/138584 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6097, signal 132635/138584 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6147, signal 132883/138585 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6197, signal 133139/138585 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6247, signal 133325/138585 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6297, signal 133526/138585 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6347, signal 133693/138585 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6397, signal 133865/138586 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6447, signal 134087/138594 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6497, signal 134298/138594 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6547, signal 134508/138595 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6597, signal 134790/138595 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6647, signal 134985/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6697, signal 135152/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6747, signal 135395/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6797, signal 135586/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6847, signal 135857/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6897, signal 136083/138609 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6947, signal 136298/138611 (executing program)
+2023/10/30 07:48:28 fetching corpus: 6997, signal 136508/138611 (executing program)
+2023/10/30 07:48:28 fetching corpus: 7047, signal 136763/138611 (executing program)
+2023/10/30 07:48:28 fetching corpus: 7092, signal 137012/138613 (executing program)
+2023/10/30 07:48:28 fetching corpus: 7092, signal 137012/138613 (executing program)
+2023/10/30 07:48:28 fetching corpus: 7092, signal 137012/138613 (executing program)
+2023/10/30 07:48:30 starting 2 fuzzer processes
+[   26.564023] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=347 'syz-fuzzer'
+07:48:30 executing program 0:
+r0 = socket$inet6(0xa, 0x800000000000002, 0x0)
+dup3(r0, r0, 0x80000)
+connect$inet6(r0, &(0x7f0000000000)={0xa, 0x0, 0x0, @mcast1, 0x2}, 0x1c)
+setsockopt$sock_linger(r0, 0x1, 0x3c, &(0x7f0000000180)={0x200000000000001}, 0x8)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = socket$inet_udplite(0x2, 0x2, 0x88)
+getsockopt$sock_cred(r1, 0x1, 0x11, &(0x7f0000000240)={0x0, <r2=>0x0}, &(0x7f0000000280)=0x5)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000840), 0x802, 0x0)
+ioctl$sock_inet_udp_SIOCINQ(r1, 0x541b, &(0x7f00000000c0))
+setuid(r2)
+sendmmsg(r0, &(0x7f0000004d80)=[{{0x0, 0x200e402, &(0x7f0000001500)=[{&(0x7f0000000040)="d3622fe131479ceef6fb607a9585dc0b411519fd3b65066522d73df58b9257b566c6fc626776defc3a2e249c9120cab00220bc31d41e44f96f67971b8ed8a3dc9eb4123a903d58da02dd1eca653150422bc91e9585fb38", 0x57}, {&(0x7f00000011c0)="7cc3be44ec866303c11f9ec49c2fe80d4ccef580f3bf717b5e129f1dc7766fdf864b7bc35924f34bb5fd1dd89172a4b0db90eea51bdfec78bb53e8d41773cba7f1305a8a40b7368445a71ef7870273f1544930baf73a8bfa6ece09d54376b821b65fdf1e0704f1f3c5a823fa67f635159af010053f5b909f8e944c43d6fb1c4fca639b470d3e6ad140d0838958ecf0fc98a780205474fdeb93a97d27b4f3314a9585129aaec893d7fe36d87fd746841ac5c60b31e1732a1a3ca0afcc4068cdde63b142700c563c1ab59dc0b7200723bf21c694583ed8fed1b2bc5c204df3812c223ce0de2f40b69e7f4e8ba1c3ebc31de2f4190e3f1ceb", 0xf7}, {&(0x7f00000012c0), 0x80fe}, {&(0x7f0000000280)="0c22fcc306e8a4d628dc3f33cd1758b784d34ef62ecd943b96c5573b05e34886b55503a08eeac42aafc204e9fec654b4b0853f4c32d8d6f8968a96b81710a9ed49ae96ea22eb07accdc99ed31fb48b921b4c9af7278829eb32247169da3593e5e73371e82e3558cd87b9c876b91e091e933496ae3a6b5a00a79f50110980c83af2fd44e0f08908f806be4146080def894a3ac87c3d214e32b0e031c8873b6ed3cdb9c160ee236576cb5a749ee356d4f5df961b35ec3667bcfa641e2c812a5eefbd78546783b6bd280dc4ec1cd015bee7d07f0993d6", 0xd5}, {&(0x7f0000001440)="7b18908bcd34b2f4eef2193c5f89bb79551b5d7000ccc31628374b04e7f0b8bbfe45", 0x22}], 0x5, 0x0, 0x0, 0xffffffe0}}], 0x400000000000132, 0x4000000)
+recvmmsg(r0, &(0x7f0000002a80)=[{{&(0x7f00000001c0)=@generic, 0x80, &(0x7f00000006c0)=[{&(0x7f0000000380)=""/28, 0x1c}, {&(0x7f00000003c0)=""/185, 0xb9}, {&(0x7f0000000480)=""/189, 0xbd}, {&(0x7f0000000540)=""/113, 0x71}, {&(0x7f00000005c0)=""/235, 0xeb}], 0x5, &(0x7f0000000700)=""/94, 0x5e}, 0x3a}, {{&(0x7f0000000780)=@qipcrtr, 0x80, &(0x7f0000000800)=[{&(0x7f0000000880)=""/84, 0x54}, {&(0x7f0000000900)=""/129, 0x81}, {&(0x7f00000009c0)=""/220, 0xdc}], 0x3, &(0x7f0000000ac0)=""/53, 0x35}, 0xfff}, {{&(0x7f0000000b00)=@nfc, 0x80, &(0x7f0000000c00)=[{&(0x7f0000000b80)=""/111, 0x6f}], 0x1, &(0x7f0000000c40)=""/175, 0xaf}, 0x8}, {{&(0x7f0000000d00), 0x80, &(0x7f0000000f80)=[{&(0x7f0000000d80)=""/183, 0xb7}, {0x0}, {&(0x7f0000000ec0)=""/119, 0x77}, {&(0x7f0000000f40)}], 0x4, &(0x7f0000000fc0)=""/36, 0x24}, 0xeb6}, {{0x0, 0x0, &(0x7f00000012c0)=[{&(0x7f0000001540)=""/4096, 0x1000}, {&(0x7f0000001000)=""/131, 0x83}, {&(0x7f00000010c0)=""/61, 0x3d}, {&(0x7f0000001100)=""/154, 0x9a}], 0x4}, 0x6}, {{&(0x7f0000001300)=@nfc, 0x80, &(0x7f0000001480)=[{&(0x7f0000002540)=""/231, 0xe7}, {&(0x7f0000001380)=""/143, 0x8f}, {&(0x7f0000002640)=""/212, 0xd4}], 0x3, &(0x7f0000002740)=""/109, 0x6d}, 0x1}, {{&(0x7f00000027c0)=@isdn, 0x80, &(0x7f0000002a40)=[{&(0x7f0000002840)=""/192, 0xc0}, {&(0x7f00000014c0)=""/22, 0x16}, {&(0x7f0000002900)=""/138, 0x8a}, {&(0x7f00000029c0)=""/73, 0x49}], 0x4}, 0x3}], 0x7, 0x10000, &(0x7f0000002bc0))
+
+07:48:30 executing program 1:
+rt_sigprocmask(0x0, &(0x7f0000000080)={[0xfffffffffffffffd]}, 0x0, 0x8)
+setrlimit(0x1, &(0x7f0000000000))
+r0 = creat(&(0x7f0000000280)='./bus\x00', 0x0)
+fallocate(r0, 0x10, 0x0, 0x7fff)
+
+[   26.587033] audit: type=1400 audit(1698652110.046:8): avc:  denied  { execmem } for  pid=380 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+
+VM DIAGNOSIS:
+07:48:22  Registers:
+info registers vcpu 0
+RAX=0000000080000001 RBX=0000000000000000 RCX=ffffffffbbdaa04b RDX=ffff89b582252200
+RSI=0000000080000001 RDI=ffff89b58552b00c RBP=000055583789b000 RSP=ffffae0dc083fb00
+R8 =ffffffffbf2c4430 R9 =0000000000000000 R10=ffffffffbbdca48d R11=0001ffffffffffff
+R12=ffffe3eec4163b40 R13=000055583789c000 R14=ffffe3eec4163b48 R15=ffff89b5855084d8
+RIP=ffffffffbbc72721 RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff89b6b7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe0804781000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe080477f000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f658ce620e1 CR3=0000000104422001 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 20322e322e302e30 313d726464612032
+YMM03=0000000000000000 0000000000000000 736572206873733d 6c616e696d726574
+YMM04=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000ffff000000ff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000001 RBX=0000000000000001 RCX=ffffffffbd4515b4 RDX=0000000000000005
+RSI=ffffffffbdcc1c84 RDI=000000000001e7cc RBP=ffff89b580209100 RSP=ffffae0dc008bee8
+R8 =ffffffffbf2c4410 R9 =0000000000000000 R10=0000000000000005 R11=0001ffffffffffff
+R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffffbd4524bf RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff89b6b7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe5e6d470000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe5e6d46e000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007ffcf275d948 CR3=000000010018e001 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 d3fdd5f48436fbd7 0000000000162798
+YMM01=0000000000000000 0000000000000000 b88e692e1ee72780 00000000001626f0
+YMM02=0000000000000000 0000000000000000 2c427dc1ccbafff7 00000000001cd4b0
+YMM03=0000000000000000 0000000000000000 b3285ca56c489dff 00000000001bd4c0
+YMM04=0000000000000000 0000000000000000 ee7587d5db12e8e3 00000000001b3640
+YMM05=0000000000000000 0000000000000000 2fccd54c36d8a3f3 00000000001b2e38
+YMM06=0000000000000000 0000000000000000 693bd129e125714a 00000000001b0ee0
+YMM07=0000000000000000 0000000000000000 2e86c1e8fc577532 00000000001b0978
+YMM08=0000000000000000 0000000000000000 d1d065e2a39d6916 00000000001dc408
+YMM09=0000000000000000 0000000000000000 ffff00ffffff0000 0000ffffff00ffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

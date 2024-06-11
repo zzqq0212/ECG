@@ -1,0 +1,71 @@
+==================================================================
+BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+
+write to 0xffffaaf2008dba60 of 4 bytes by interrupt on cpu 0:
+ __pollwake fs/select.c:198 [inline]
+ pollwake+0xd0/0x120 fs/select.c:218
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ sock_def_readable+0x73/0x180 net/core/sock.c:3322
+ tcp_data_ready+0x80/0x1a0 net/ipv4/tcp_input.c:5012
+ tcp_data_queue+0x129f/0x1fa0 net/ipv4/tcp_input.c:5086
+ tcp_rcv_established+0x404/0xe90 net/ipv4/tcp_input.c:6025
+ tcp_v4_do_rcv+0x31d/0x540 net/ipv4/tcp_ipv4.c:1728
+ tcp_v4_rcv+0x1c09/0x1c90 net/ipv4/tcp_ipv4.c:2150
+ ip_protocol_deliver_rcu+0x4c/0x5e0 net/ipv4/ip_input.c:205
+ ip_local_deliver_finish+0x133/0x180 net/ipv4/ip_input.c:233
+ NF_HOOK include/linux/netfilter.h:303 [inline]
+ NF_HOOK include/linux/netfilter.h:297 [inline]
+ ip_local_deliver+0xd0/0x1e0 net/ipv4/ip_input.c:254
+ dst_input include/net/dst.h:468 [inline]
+ ip_sublist_rcv_finish+0xeb/0x100 net/ipv4/ip_input.c:580
+ ip_list_rcv_finish net/ipv4/ip_input.c:630 [inline]
+ ip_sublist_rcv+0x269/0x390 net/ipv4/ip_input.c:638
+ ip_list_rcv+0x208/0x240 net/ipv4/ip_input.c:673
+ __netif_receive_skb_list_ptype net/core/dev.c:5495 [inline]
+ __netif_receive_skb_list_core+0x4bc/0x500 net/core/dev.c:5543
+ __netif_receive_skb_list net/core/dev.c:5595 [inline]
+ netif_receive_skb_list_internal+0x483/0x620 net/core/dev.c:5686
+ gro_normal_list include/net/gro.h:439 [inline]
+ gro_normal_one include/net/gro.h:452 [inline]
+ napi_skb_finish net/core/gro.c:579 [inline]
+ napi_gro_receive+0x44d/0x4a0 net/core/gro.c:609
+ e1000_receive_skb drivers/net/ethernet/intel/e1000/e1000_main.c:4008 [inline]
+ e1000_clean_rx_irq+0x35c/0x980 drivers/net/ethernet/intel/e1000/e1000_main.c:4461
+ e1000_clean+0x4f3/0x12b0 drivers/net/ethernet/intel/e1000/e1000_main.c:3803
+ __napi_poll+0x66/0x390 net/core/dev.c:6460
+ napi_poll net/core/dev.c:6527 [inline]
+ net_rx_action+0x694/0x7b0 net/core/dev.c:6660
+ __do_softirq+0xea/0x2e3 kernel/softirq.c:553
+ run_ksoftirqd kernel/softirq.c:921 [inline]
+ run_ksoftirqd+0x29/0x30 kernel/softirq.c:913
+ smpboot_thread_fn+0x2e1/0x410 kernel/smpboot.c:164
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+read to 0xffffaaf2008dba60 of 4 bytes by task 345 on cpu 1:
+ poll_schedule_timeout.constprop.0+0x44/0xb0 fs/select.c:243
+ do_select+0xc9d/0xe00 fs/select.c:607
+ core_sys_select+0x217/0x4e0 fs/select.c:681
+ kern_select+0xe2/0x140 fs/select.c:722
+ __do_sys_select fs/select.c:729 [inline]
+ __se_sys_select fs/select.c:726 [inline]
+ __x64_sys_select+0x65/0x80 fs/select.c:726
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000 -> 0x00000001
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 345 Comm: sshd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=368 'syz-fuzzer'
+audit: type=1400 audit(1698661193.991:8): avc:  denied  { execmem } for  pid=385 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+9pnet_fd: p9_fd_create_unix (1301): problem connecting socket: ./file1: -2
+9pnet_fd: p9_fd_create_unix (1317): problem connecting socket: ./file1: -2
+netlink: 44 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 44 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 3 bytes leftover after parsing attributes in process `syz-executor.0'.

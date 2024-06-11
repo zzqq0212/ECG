@@ -1,0 +1,171 @@
+==================================================================
+BUG: KCSAN: data-race in _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+
+race at unknown origin, with read to 0xffffffff95a7eac0 of 8 bytes by interrupt on cpu 2:
+ _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+ find_first_bit include/linux/find.h:208 [inline]
+ find_next_bit_wrap include/linux/find.h:433 [inline]
+ find_next_bit_wrap include/linux/find.h:425 [inline]
+ _nohz_idle_balance.isra.0+0x1cb/0x2f0 kernel/sched/fair.c:12095
+ __do_softirq+0xc0/0x293 kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ sysvec_call_function_single+0x94/0xa0 arch/x86/kernel/smp.c:262
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0x1e/0x30 arch/x86/kernel/process.c:742
+ default_idle_call+0x2e/0xe0 kernel/sched/idle.c:96
+ cpuidle_idle_call kernel/sched/idle.c:169 [inline]
+ do_idle+0x181/0x210 kernel/sched/idle.c:281
+ cpu_startup_entry+0x25/0x30 kernel/sched/idle.c:379
+ start_secondary+0xfc/0x100 arch/x86/kernel/smpboot.c:336
+ secondary_startup_64_no_verify+0x178/0x17b
+
+value changed: 0x0000000000000004 -> 0x0000000000000006
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1400 audit(1710042212.902:7): avc:  denied  { execmem } for  pid=290 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+UDPLite: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Warning: mounting with data=journal disables delayed allocation, dioread_nolock, O_DIRECT and fast_commit support!
+EXT4-fs (loop1): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop1): Cannot turn on journaled quota: type 1: error -13
+EXT4-fs error (device loop1): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.1: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+UDPLite6: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop1): Cannot turn on journaled quota: type 1: error -13
+EXT4-fs error (device loop1): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.1: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop1): Cannot turn on journaled quota: type 1: error -13
+EXT4-fs error (device loop1): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.1: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop1): Cannot turn on journaled quota: type 1: error -13
+EXT4-fs error (device loop1): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.1: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed oldalloc option
+EXT4-fs: Project quota feature not enabled. Cannot enable project quota enforcement.
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed oldalloc option
+EXT4-fs: Project quota feature not enabled. Cannot enable project quota enforcement.
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed oldalloc option
+EXT4-fs: Project quota feature not enabled. Cannot enable project quota enforcement.
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed oldalloc option
+EXT4-fs: Project quota feature not enabled. Cannot enable project quota enforcement.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop2): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop2): This should not happen!! Data will be lost
+
+EXT4-fs (loop2): Total free blocks count 0
+EXT4-fs (loop2): Free/Dirty block details
+EXT4-fs (loop2): free_blocks=2415919104
+EXT4-fs (loop2): dirty_blocks=1568
+EXT4-fs (loop2): Block reservation details
+EXT4-fs (loop2): i_reserved_data_blocks=98
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+syz-executor.2 (2333) used greatest stack depth: 11240 bytes left
+loop2: detected capacity change from 0 to 2048
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop1): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop1): This should not happen!! Data will be lost
+
+EXT4-fs (loop1): Total free blocks count 0
+EXT4-fs (loop1): Free/Dirty block details
+EXT4-fs (loop1): free_blocks=2415919104
+EXT4-fs (loop1): dirty_blocks=1568
+EXT4-fs (loop1): Block reservation details
+EXT4-fs (loop1): i_reserved_data_blocks=98
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs error (device loop2): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop2): This should not happen!! Data will be lost
+
+EXT4-fs (loop2): Total free blocks count 0
+EXT4-fs (loop2): Free/Dirty block details
+EXT4-fs (loop2): free_blocks=2415919104
+EXT4-fs (loop2): dirty_blocks=1568
+EXT4-fs (loop2): Block reservation details
+EXT4-fs (loop2): i_reserved_data_blocks=98
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop1): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop1): This should not happen!! Data will be lost
+
+EXT4-fs (loop1): Total free blocks count 0
+EXT4-fs (loop1): Free/Dirty block details
+EXT4-fs (loop1): free_blocks=2415919104
+EXT4-fs (loop1): dirty_blocks=1568
+EXT4-fs (loop1): Block reservation details
+EXT4-fs (loop1): i_reserved_data_blocks=98
+EXT4-fs error (device loop2): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop2): This should not happen!! Data will be lost
+
+EXT4-fs (loop2): Total free blocks count 0
+EXT4-fs (loop2): Free/Dirty block details
+EXT4-fs (loop2): free_blocks=2415919104
+EXT4-fs (loop2): dirty_blocks=1568
+EXT4-fs (loop2): Block reservation details
+EXT4-fs (loop2): i_reserved_data_blocks=98
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-a357-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop1): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop1): This should not happen!! Data will be lost
+
+EXT4-fs (loop1): Total free blocks count 0
+EXT4-fs (loop1): Free/Dirty block details
+EXT4-fs (loop1): free_blocks=2415919104
+EXT4-fs (loop1): dirty_blocks=1568
+EXT4-fs (loop1): Block reservation details
+EXT4-fs (loop1): i_reserved_data_blocks=98
+EXT4-fs (loop1): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs error (device loop2): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 2 with max blocks 1553 with error 28
+EXT4-fs (loop2): This should not happen!! Data will be lost
+
+EXT4-fs (loop2): Total free blocks count 0
+EXT4-fs (loop2): Free/Dirty block details
+EXT4-fs (loop2): free_blocks=2415919104
+EXT4-fs (loop2): dirty_blocks=1568
+EXT4-fs (loop2): Block reservation details
+EXT4-fs (loop2): i_reserved_data_blocks=98
+netlink: 'syz-executor.3': attribute type 5 has an invalid length.
+EXT4-fs (loop2): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+netlink: 'syz-executor.3': attribute type 5 has an invalid length.
+netlink: 'syz-executor.3': attribute type 5 has an invalid length.
+netlink: 'syz-executor.3': attribute type 5 has an invalid length.

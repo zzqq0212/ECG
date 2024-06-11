@@ -1,0 +1,408 @@
+program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+BUG: Bad rss-counter state mm:00000000429a99a2 type:MM_ANONPAGES val:1
+BUG: non-zero pgtables_bytes on freeing mm: 4096
+ata1: found unknown device (class 0)
+program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+ata1: found unknown device (class 0)
+program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+CPU: 4 PID: 135 Comm: systemd-udevd Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000562ccdf55168 CR3: 00000000856aa005 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up+0x39/0x60 kernel/sched/wait.c:127
+ netlink_release+0x86a/0x1610 net/netlink/af_netlink.c:785
+ __sock_release+0xb3/0x270 net/socket.c:659
+ sock_close+0x19/0x30 net/socket.c:1421
+ __fput+0x265/0xb70 fs/file_table.c:376
+ task_work_run+0x16d/0x250 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xa2d/0x2670 kernel/exit.c:871
+ do_group_exit+0xc8/0x280 kernel/exit.c:1020
+ __do_sys_exit_group kernel/exit.c:1031 [inline]
+ __se_sys_exit_group kernel/exit.c:1029 [inline]
+ __x64_sys_exit_group+0x3e/0x50 kernel/exit.c:1029
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf67c00
+R13: 0000562ccdf746e0 R14: 00007ffdba06acb0 R15: 0000562ccdf68460
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#2] PREEMPT SMP KASAN NOPTI
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+CPU: 0 PID: 133 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+RSP: 0018:ffff8881036efb40 EFLAGS: 00010056
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9f320
+FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+RBP: ffff888100c9f320 R08: 0000000000000000 R09: ffffed10206ddf63
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+R10: 0000000000000001 R11: ffff88811ae38a20 R12: 0000000000000001
+CR2: 0000562ccdf55168 CR3: 00000000856aa005 CR4: 0000000000770ef0
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+PKRU: 55555554
+FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+note: systemd-udevd[135] exited with irqs disabled
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+note: systemd-udevd[135] exited with preempt_count 1
+CR2: 0000562ccdf55168 CR3: 0000000103922002 CR4: 0000000000770ef0
+Fixing recursive fault but reboot is needed!
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up+0x39/0x60 kernel/sched/wait.c:127
+ netlink_release+0x86a/0x1610 net/netlink/af_netlink.c:785
+ __sock_release+0xb3/0x270 net/socket.c:659
+ sock_close+0x19/0x30 net/socket.c:1421
+ __fput+0x265/0xb70 fs/file_table.c:376
+ task_work_run+0x16d/0x250 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xa2d/0x2670 kernel/exit.c:871
+ do_group_exit+0xc8/0x280 kernel/exit.c:1020
+ __do_sys_exit_group kernel/exit.c:1031 [inline]
+ __se_sys_exit_group kernel/exit.c:1029 [inline]
+ __x64_sys_exit_group+0x3e/0x50 kernel/exit.c:1029
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf67270
+R13: 0000562ccdf74370 R14: 00007ffdba06acb0 R15: 0000562ccdf67b00
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#3] PREEMPT SMP KASAN NOPTI
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+CPU: 4 PID: 53 Comm: kworker/4:1 Tainted: G      D            6.8.0 #1
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+Workqueue: events rht_deferred_worker
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+RIP: 0010:rhashtable_rehash_one lib/rhashtable.c:244 [inline]
+RIP: 0010:rhashtable_rehash_chain lib/rhashtable.c:288 [inline]
+RIP: 0010:rhashtable_rehash_table lib/rhashtable.c:328 [inline]
+RIP: 0010:rht_deferred_worker+0x5a9/0xfe0 lib/rhashtable.c:432
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+Code: 01 44 89 ee e8 88 ec 40 ff 45 84 ed 74 10 e9 30 02 00 00 e8 b9 f3 40 ff 48 89 dd 4c 89 eb e8 ae f3 40 ff 48 89 d8 48 c1 e8 03 <42> 80 3c 38 00 0f 85 17 08 00 00 4c 8b 2b 31 ff 45 89 ee 41 83 e6
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+RSP: 0018:ffff888101037ce8 EFLAGS: 00010056
+FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff83457182
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RDX: ffff888100f41100 RSI: 0000000000000000 RDI: 0000000000000001
+CR2: 0000562ccdf55168 CR3: 0000000103922002 CR4: 0000000000770ef0
+RBP: ffff888100c9a410 R08: 0000000000000001 R09: ffffed102012dc0b
+PKRU: 55555554
+R10: 0000000000000000 R11: ffff88810ed84000 R12: ffff88810ed84000
+note: systemd-udevd[133] exited with irqs disabled
+R13: 0000000000000000 R14: 0000000000000000 R15: dffffc0000000000
+note: systemd-udevd[133] exited with preempt_count 1
+FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+Fixing recursive fault but reboot is needed!
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000562ccdf55168 CR3: 0000000102b00001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ process_one_work+0x5d6/0xe80 kernel/workqueue.c:2633
+ process_scheduled_works kernel/workqueue.c:2706 [inline]
+ worker_thread+0xa04/0x12d0 kernel/workqueue.c:2787
+ kthread+0x284/0x350 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:243
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#4] PREEMPT SMP KASAN NOPTI
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+CPU: 3 PID: 136 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+RSP: 0018:ffff888104087b40 EFLAGS: 00010056
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9d320
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+RBP: ffff888100c9d320 R08: 0000000000000000 R09: ffffed1020810f63
+FS:  0000000000000000(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+R10: 0000000000000001 R11: ffff88811b138a20 R12: 0000000000000001
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+CR2: 0000562ccdf55168 CR3: 0000000102b00001 CR4: 0000000000770ef0
+FS:  0000000000000000(0000) GS:ffff88811b100000(0000) knlGS:0000000000000000
+PKRU: 55555554
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+note: kworker/4:1[53] exited with irqs disabled
+CR2: 0000562ccdf55168 CR3: 000000010f110001 CR4: 0000000000770ef0
+note: kworker/4:1[53] exited with preempt_count 1
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up+0x39/0x60 kernel/sched/wait.c:127
+ netlink_release+0x86a/0x1610 net/netlink/af_netlink.c:785
+ __sock_release+0xb3/0x270 net/socket.c:659
+ sock_close+0x19/0x30 net/socket.c:1421
+ __fput+0x265/0xb70 fs/file_table.c:376
+ task_work_run+0x16d/0x250 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xa2d/0x2670 kernel/exit.c:871
+ do_group_exit+0xc8/0x280 kernel/exit.c:1020
+ __do_sys_exit_group kernel/exit.c:1031 [inline]
+ __se_sys_exit_group kernel/exit.c:1029 [inline]
+ __x64_sys_exit_group+0x3e/0x50 kernel/exit.c:1029
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68560
+R13: 0000562ccdf74b80 R14: 00007ffdba06acb0 R15: 0000562ccdf68dc0
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#5] PREEMPT SMP KASAN NOPTI
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+CPU: 1 PID: 138 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+RSP: 0018:ffff88810353fb40 EFLAGS: 00010056
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9a320
+FS:  0000000000000000(0000) GS:ffff88811b100000(0000) knlGS:0000000000000000
+RBP: ffff888100c9a320 R08: 0000000000000000 R09: ffffed10206a7f63
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+R10: 0000000000000001 R11: ffff88811af38a20 R12: 0000000000000001
+CR2: 0000562ccdf55168 CR3: 000000010f110001 CR4: 0000000000770ef0
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+PKRU: 55555554
+FS:  0000000000000000(0000) GS:ffff88811af00000(0000) knlGS:0000000000000000
+note: systemd-udevd[136] exited with irqs disabled
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+note: systemd-udevd[136] exited with preempt_count 1
+CR2: 0000562ccdf55168 CR3: 00000000856aa006 CR4: 0000000000770ef0
+Fixing recursive fault but reboot is needed!
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up+0x39/0x60 kernel/sched/wait.c:127
+ netlink_release+0x86a/0x1610 net/netlink/af_netlink.c:785
+ __sock_release+0xb3/0x270 net/socket.c:659
+ sock_close+0x19/0x30 net/socket.c:1421
+ __fput+0x265/0xb70 fs/file_table.c:376
+ task_work_run+0x16d/0x250 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xa2d/0x2670 kernel/exit.c:871
+ do_group_exit+0xc8/0x280 kernel/exit.c:1020
+ __do_sys_exit_group kernel/exit.c:1031 [inline]
+ __se_sys_exit_group kernel/exit.c:1029 [inline]
+ __x64_sys_exit_group+0x3e/0x50 kernel/exit.c:1029
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf69820
+R13: 0000562ccdf752c0 R14: 00007ffdba06acb0 R15: 0000562ccdf6a030
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#6] PREEMPT SMP KASAN NOPTI
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+CPU: 2 PID: 137 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+RSP: 0018:ffff888103537b40 EFLAGS: 00010056
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c99320
+FS:  0000000000000000(0000) GS:ffff88811af00000(0000) knlGS:0000000000000000
+RBP: ffff888100c99320 R08: 0000000000000000 R09: ffffed10206a6f63
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+R10: 0000000000000001 R11: ffff88811b038a20 R12: 0000000000000001
+CR2: 0000562ccdf55168 CR3: 00000000856aa006 CR4: 0000000000770ef0
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+PKRU: 55555554
+FS:  0000000000000000(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+note: systemd-udevd[138] exited with irqs disabled
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+note: systemd-udevd[138] exited with preempt_count 1
+CR2: 0000562ccdf55168 CR3: 0000000104a44004 CR4: 0000000000770ef0
+Fixing recursive fault but reboot is needed!
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up+0x39/0x60 kernel/sched/wait.c:127
+ netlink_release+0x86a/0x1610 net/netlink/af_netlink.c:785
+ __sock_release+0xb3/0x270 net/socket.c:659
+ sock_close+0x19/0x30 net/socket.c:1421
+ __fput+0x265/0xb70 fs/file_table.c:376
+ task_work_run+0x16d/0x250 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xa2d/0x2670 kernel/exit.c:871
+ do_group_exit+0xc8/0x280 kernel/exit.c:1020
+ __do_sys_exit_group kernel/exit.c:1031 [inline]
+ __se_sys_exit_group kernel/exit.c:1029 [inline]
+ __x64_sys_exit_group+0x3e/0x50 kernel/exit.c:1029
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68ec0
+R13: 0000562ccdf74f20 R14: 00007ffdba06acb0 R15: 0000562ccdf69720
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RSP: 0018:ffff88810409fb40 EFLAGS: 00010056
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff8268aa3e
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffff888100c9c320
+RBP: ffff888100c9c320 R08: 0000000000000000 R09: ffffed1020813f63
+R10: 0000000000000001 R11: ffff88811b238a20 R12: 0000000000000001
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000562ccdf55168 CR3: 0000000104a44004 CR4: 0000000000770ef0
+PKRU: 55555554
+note: systemd-udevd[137] exited with irqs disabled
+note: systemd-udevd[137] exited with preempt_count 1
+Fixing recursive fault but reboot is needed!
+BUG: scheduling while atomic: systemd-udevd/137/0x00000000
+Modules linked in:
+CPU: 2 PID: 137 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ __schedule_bug+0xc1/0x100 kernel/sched/core.c:5943
+ schedule_debug kernel/sched/core.c:5970 [inline]
+ __schedule+0x1bf3/0x2460 kernel/sched/core.c:6620
+ do_task_dead+0xa4/0xc0 kernel/sched/core.c:6743
+ make_task_dead+0x378/0x3c0 kernel/exit.c:979
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1494
+RIP: 0033:0x7f15f7c24bd9
+Code: Unable to access opcode bytes at 0x7f15f7c24baf.
+RSP: 002b:00007ffdba06ac38 EFLAGS: 00000202 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f15f7c24bd9
+RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000000
+RBP: 0000562ccd6f6270 R08: fffffffffffffe00 R09: 0000000000000004
+R10: 0000000000000018 R11: 0000000000000202 R12: 0000562ccdf68ec0
+R13: 0000562ccdf74f20 R14: 00007ffdba06acb0 R15: 0000562ccdf69720
+ </TASK>
+ata1: found unknown device (class 0)
+program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+ata1: found unknown device (class 0)
+program syz-executor124 is using a deprecated SCSI ioctl, please convert it to SG_IO
+----------------
+Code disassembly (best guess):
+   0:	00 00                	add    %al,(%rax)
+   2:	48 8b 5b 08          	mov    0x8(%rbx),%rbx
+   6:	4c 8d 6b e8          	lea    -0x18(%rbx),%r13
+   a:	48 3b 1c 24          	cmp    (%rsp),%rbx
+   e:	0f 84 07 01 00 00    	je     0x11b
+  14:	e8 f2 ba 1d 00       	call   0x1dbb0b
+  19:	48 89 da             	mov    %rbx,%rdx
+  1c:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  23:	fc ff df
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	0f 85 2d 01 00 00    	jne    0x161
+  34:	48 bd 00 00 00 00 00 	movabs $0xdffffc0000000000,%rbp
+  3b:	fc ff df
+  3e:	48                   	rex.W
+  3f:	8b                   	.byte 0x8b

@@ -1,0 +1,1430 @@
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+------------[ cut here ]------------
+different return values (11 and 6) from vsnprintf("kmmpd-%.*s", ...)
+WARNING: CPU: 0 PID: 18743 at lib/kasprintf.c:30 kvasprintf+0x14e/0x160 lib/kasprintf.c:30
+Modules linked in:
+CPU: 0 PID: 18743 Comm: syz-executor.0 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:kvasprintf+0x14e/0x160 lib/kasprintf.c:30
+Code: 5b 5d 41 5c 41 5d 41 5e 41 5f e9 e8 2f 2d 02 e8 08 54 43 ff 90 48 c7 c7 40 62 fe a1 4c 89 e9 44 89 e2 89 ee e8 d3 62 13 ff 90 <0f> 0b 90 90 eb 99 e8 27 96 12 02 0f 1f 80 00 00 00 00 90 90 90 90
+RSP: 0018:ffff88810485f760 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: 1ffff1102090beec RCX: ffffffff9eb67582
+RDX: ffff888104dfe600 RSI: 0000000000000000 RDI: 0000000000000001
+RBP: 000000000000000b R08: 0000000000000001 R09: ffffed10235c5121
+R10: 0000000000000000 R11: 000000002d2d2d2d R12: 0000000000000006
+R13: ffffffffa1f42a20 R14: ffff888100b62900 R15: 000000000000000c
+FS:  00007f8db8f7e640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+loop2: detected capacity change from 0 to 512
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffcd493ab98 CR3: 00000001063fe004 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+loop3: detected capacity change from 0 to 512
+ __kthread_create_on_node+0x17f/0x3c0 kernel/kthread.c:444
+ kthread_create_on_node+0xbf/0x100 kernel/kthread.c:512
+loop1: detected capacity change from 0 to 512
+ ext4_multi_mount_protect+0x953/0xb10 fs/ext4/mmp.c:392
+ __ext4_fill_super fs/ext4/super.c:5363 [inline]
+ ext4_fill_super+0xa76d/0xc290 fs/ext4/super.c:5703
+ get_tree_bdev+0x35a/0x5d0 fs/super.c:1614
+ vfs_get_tree+0x8c/0x320 fs/super.c:1779
+ do_new_mount fs/namespace.c:3352 [inline]
+ path_mount+0x6b3/0x1db0 fs/namespace.c:3679
+ do_mount fs/namespace.c:3692 [inline]
+ __do_sys_mount fs/namespace.c:3898 [inline]
+ __se_sys_mount fs/namespace.c:3875 [inline]
+ __x64_sys_mount+0x286/0x310 fs/namespace.c:3875
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f8db9410dfe
+Code: 48 c7 c0 ff ff ff ff eb aa e8 be 0d 00 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f8db8f7de38 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00000000000004b4 RCX: 00007f8db9410dfe
+RDX: 0000000020000040 RSI: 0000000020000500 RDI: 00007f8db8f7de90
+RBP: 00007f8db8f7ded0 R08: 00007f8db8f7ded0 R09: 0000000000004500
+R10: 0000000000004500 R11: 0000000000000246 R12: 0000000020000040
+R13: 0000000020000500 R14: 00007f8db8f7de90 R15: 0000000020000540
+ </TASK>
+---[ end trace 0000000000000000 ]---
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/791/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): Remounting filesystem read-only
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/777/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/799/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/792/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/784/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/793/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/778/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/785/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/801/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/795/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop3): group descriptors corrupted!
+EXT4-fs (loop0): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop0): group descriptors corrupted!
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+loop2: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/796/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/797/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/787/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/781/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/798/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/799/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/799/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/790/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/807/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): ext4_read_block_bitmap_nowait:482: comm syz-executor.1: Invalid block bitmap block 0 in block_group 0
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): 1 orphan inode deleted
+SELinux: (dev loop1, type ext4) getxattr errno 5
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/808/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/791/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/785/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/809/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/803/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/787/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/793/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/804/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/810/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/804/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/788/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/794/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/805/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/812/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/789/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/806/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): Magic mismatch, very weird!
+EXT4-fs (loop0): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/797/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/790/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+loop4: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/814/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/808/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/808/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/791/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/792/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/810/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/801/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/811/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop4): group descriptors corrupted!
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/793/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/802/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/819/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/812/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop3): ext4_ext_check_inode:520: inode #2: comm syz-executor.3: pblk 0 bad header/extent: invalid extent entries - magic f30a, entries 1, max 4(4), depth 0(0)
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/813/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/820/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/804/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/795/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/814/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/821/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/815/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/815/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/796/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/805/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/822/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/816/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/817/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/824/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/808/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop4): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop4): __ext4_fill_super:5473: comm syz-executor.4: inode #2: comm syz-executor.4: iget: illegal inode #
+EXT4-fs (loop4): Remounting filesystem read-only
+EXT4-fs (loop4): get root inode failed
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/799/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop1): read_mmp_block:114: Error -117 while reading MMP block 8
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/818/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/809/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/800/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/828/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/820/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs error (device loop2): __ext4_fill_super:5473: comm syz-executor.2: inode #2: comm syz-executor.2: iget: illegal inode #
+EXT4-fs (loop2): Remounting filesystem read-only
+EXT4-fs (loop2): get root inode failed
+EXT4-fs (loop2): mount failed
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/813/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/821/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs error (device loop3): __ext4_fill_super:5473: comm syz-executor.3: inode #2: comm syz-executor.3: iget: illegal inode #
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/825/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/830/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/814/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/804/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/831/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/823/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/827/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/824/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/828/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop0): group descriptors corrupted!
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop3): group descriptors corrupted!
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/833/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/807/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/826/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/830/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/834/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/819/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/831/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop3): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs error (device loop3): __ext4_fill_super:5473: comm syz-executor.3: inode #2: comm syz-executor.3: iget: illegal inode #
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/827/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/836/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/820/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/832/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/837/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop3): group descriptors corrupted!
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/821/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop4): group descriptors corrupted!
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/833/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/830/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/838/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/822/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/814/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/836/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/823/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/832/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop2): group descriptors corrupted!
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/816/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/841/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/824/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/833/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): Remounting filesystem read-only
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/826/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/844/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/840/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/836/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop3): __ext4_fill_super:5473: inode #2: comm syz-executor.3: iget: special inode unallocated
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/829/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/845/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/837/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/843/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/822/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/830/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/839/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/844/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/840/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop2): group descriptors corrupted!
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/845/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/825/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/843/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): Remounting filesystem read-only
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/827/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/849/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/853/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/836/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/844/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop2): group descriptors corrupted!
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/850/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/829/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/838/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/855/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop1): group descriptors corrupted!
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/848/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/853/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/840/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/832/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/857/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/850/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/854/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/834/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/858/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): Magic mismatch, very weird!
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/843/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/856/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/860/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/853/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop0): Remounting filesystem read-only
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/837/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/861/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/854/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/859/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/846/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs unmount: 1915 callbacks suppressed
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/839/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop2: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/847/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/864/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/861/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): 1 orphan inode deleted
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/865/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/859/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/850/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop2): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop2): __ext4_fill_super:5473: comm syz-executor.2: inode #2: comm syz-executor.2: iget: illegal inode #
+EXT4-fs (loop2): Remounting filesystem read-only
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): get root inode failed
+EXT4-fs (loop2): mount failed
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/843/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/851/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/868/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/844/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): read_mmp_block:114: Error -117 while reading MMP block 8
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+EXT4-fs error (device loop3): __ext4_fill_super:5473: comm syz-executor.3: inode #2: comm syz-executor.3: iget: illegal inode #
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/852/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/863/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/846/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/869/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/870/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop3): group descriptors corrupted!
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/873/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/856/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/867/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/849/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/871/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/868/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/858/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/875/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/850/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/878/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/875/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop3): __ext4_fill_super:5473: inode #2: comm syz-executor.3: iget: special inode unallocated
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/861/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/879/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/854/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/872/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop1): 1 orphan inode deleted
+EXT4-fs (loop0): Remounting filesystem read-only
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/876/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/873/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/880/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/855/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/864/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/875/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/879/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/858/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/866/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop0): Remounting filesystem read-only
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/859/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop2): read_mmp_block:114: Error -117 while reading MMP block 8
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/881/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/868/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/879/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop0): group descriptors corrupted!
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/862/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): Magic mismatch, very weird!
+EXT4-fs (loop2): 1 orphan inode deleted
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/888/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/870/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/886/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop3): Magic mismatch, very weird!
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/871/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/890/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/887/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/873/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/892/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/884/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/867/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/889/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/894/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/875/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/869/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/886/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/891/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/895/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/892/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/897/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/872/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/893/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/878/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/873/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/899/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/894/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/891/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/880/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/875/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/895/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/882/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/902/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/876/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/896/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/894/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/884/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/904/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/878/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/898/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/885/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/896/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/880/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/906/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/897/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/900/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/881/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/887/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/882/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/899/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/911/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/888/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/902/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/900/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/885/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+EXT4-fs warning (device loop3): read_mmp_block:114: Error -117 while reading MMP block 8
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/903/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/887/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/892/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/904/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/907/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/916/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/889/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+loop4: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/894/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/917/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/908/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/891/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop0): Remounting filesystem read-only
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/907/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/909/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): group descriptors corrupted!
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/910/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/909/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): kmmpd:167: kmmpd being stopped since MMP feature has been disabled.
+EXT4-fs error (device loop0): __ext4_fill_super:5473: comm syz-executor.0: inode #2: comm syz-executor.0: iget: illegal inode #
+EXT4-fs (loop0): Remounting filesystem read-only
+EXT4-fs (loop0): get root inode failed
+EXT4-fs (loop0): mount failed
+loop3: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/920/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/895/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop1): read_mmp_block:114: Error -117 while reading MMP block 8
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/900/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/910/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/921/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/896/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/913/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/911/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/901/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/923/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/898/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/914/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs error (device loop3): __ext4_fill_super:5473: comm syz-executor.3: inode #2: comm syz-executor.3: iget: illegal inode #
+EXT4-fs (loop3): Remounting filesystem read-only
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/916/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/904/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/925/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/916/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/918/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/901/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/926/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/917/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/907/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/919/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/902/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/918/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+EXT4-fs (loop1): ext4_check_descriptors: Block bitmap for group 0 overlaps superblock
+EXT4-fs (loop1): group descriptors corrupted!
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/904/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/919/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/930/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+EXT4-fs (loop0): VFS: Can't find ext4 filesystem
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/906/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): VFS: Can't find ext4 filesystem
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop2): __ext4_fill_super:5473: comm syz-executor.2: inode #2: comm syz-executor.2: iget: illegal inode #
+EXT4-fs (loop2): Remounting filesystem read-only
+EXT4-fs (loop2): get root inode failed
+EXT4-fs (loop2): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/921/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/933/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/923/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/907/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/912/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): VFS: Can't find ext4 filesystem
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): __ext4_fill_super:5473: comm syz-executor.1: inode #2: comm syz-executor.1: iget: illegal inode #
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): Remounting filesystem read-only
+EXT4-fs (loop1): get root inode failed
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop4): VFS: Can't find ext4 filesystem
+EXT4-fs (loop2): VFS: Can't find ext4 filesystem
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir2698038090/syzkaller.JZ5fzd/925/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir2635657468/syzkaller.omewzA/935/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1420273273/syzkaller.qIIT3c/925/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir4126804549/syzkaller.fRGUs0/914/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop3): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir946454433/syzkaller.cDTVqM/909/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512

@@ -1,0 +1,95 @@
+==================================================================
+BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+
+write to 0xffffa1fec3e7fc40 of 4 bytes by task 3607 on cpu 1:
+ __pollwake fs/select.c:198 [inline]
+ pollwake+0xd0/0x120 fs/select.c:218
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ unix_dgram_peer_wake_relay+0xc0/0xe0 net/unix/af_unix.c:459
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ __unix_dgram_recvmsg+0x1f0/0xa10 net/unix/af_unix.c:2389
+ unix_dgram_recvmsg+0x36/0x50 net/unix/af_unix.c:2459
+ sock_recvmsg_nosec net/socket.c:1020 [inline]
+ ____sys_recvmsg+0x352/0x360 net/socket.c:2711
+ ___sys_recvmsg+0xb4/0x130 net/socket.c:2755
+ do_recvmmsg+0x143/0x4a0 net/socket.c:2849
+ __sys_recvmmsg net/socket.c:2928 [inline]
+ __do_sys_recvmmsg net/socket.c:2951 [inline]
+ __se_sys_recvmmsg net/socket.c:2944 [inline]
+ __x64_sys_recvmmsg+0x117/0x140 net/socket.c:2944
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa1fec3e7fc40 of 4 bytes by task 3612 on cpu 0:
+ poll_schedule_timeout.constprop.0+0x44/0xb0 fs/select.c:243
+ do_poll fs/select.c:965 [inline]
+ do_sys_poll+0x591/0x840 fs/select.c:1015
+ __do_sys_ppoll fs/select.c:1121 [inline]
+ __se_sys_ppoll fs/select.c:1101 [inline]
+ __x64_sys_ppoll+0x121/0x160 fs/select.c:1101
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000 -> 0x00000001
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 3612 Comm: syz-executor.0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+
+write to 0xffffa1fec3e33c40 of 4 bytes by task 3646 on cpu 0:
+ __pollwake fs/select.c:198 [inline]
+ pollwake+0xd0/0x120 fs/select.c:218
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ unix_dgram_peer_wake_relay+0xc0/0xe0 net/unix/af_unix.c:459
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ __unix_dgram_recvmsg+0x1f0/0xa10 net/unix/af_unix.c:2389
+ unix_dgram_recvmsg+0x36/0x50 net/unix/af_unix.c:2459
+ sock_recvmsg_nosec net/socket.c:1020 [inline]
+ ____sys_recvmsg+0x352/0x360 net/socket.c:2711
+ ___sys_recvmsg+0xb4/0x130 net/socket.c:2755
+ do_recvmmsg+0x143/0x4a0 net/socket.c:2849
+ __sys_recvmmsg net/socket.c:2928 [inline]
+ __do_sys_recvmmsg net/socket.c:2951 [inline]
+ __se_sys_recvmmsg net/socket.c:2944 [inline]
+ __x64_sys_recvmmsg+0x117/0x140 net/socket.c:2944
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa1fec3e33c40 of 4 bytes by task 3649 on cpu 1:
+ poll_schedule_timeout.constprop.0+0x44/0xb0 fs/select.c:243
+ do_poll fs/select.c:965 [inline]
+ do_sys_poll+0x591/0x840 fs/select.c:1015
+ __do_sys_ppoll fs/select.c:1121 [inline]
+ __se_sys_ppoll fs/select.c:1101 [inline]
+ __x64_sys_ppoll+0x121/0x160 fs/select.c:1101
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000 -> 0x00000001
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 3649 Comm: syz-executor.0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+netlink: 'syz-executor.0': attribute type 27 has an invalid length.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 'syz-executor.1': attribute type 4 has an invalid length.
+syz-executor.1 (3921) used greatest stack depth: 10976 bytes left
+new mount options do not match the existing superblock, will be ignored
+new mount options do not match the existing superblock, will be ignored
+new mount options do not match the existing superblock, will be ignored
+new mount options do not match the existing superblock, will be ignored
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.1'.

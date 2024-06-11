@@ -1,0 +1,1227 @@
+Extracting prog: 30.670923573s
+Minimizing prog: 2m29.243781809s
+Simplifying prog options: 0s
+Extracting C: 15.215850941s
+Simplifying C: 1m55.904152146s
+
+
+118 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 33 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs-getsockopt$sock_cred-syz_mount_image$tmpfs-socket$inet_udplite-write$P9_RREADLINK-sendfile
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+r0 = open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+getsockopt$sock_cred(r0, 0x1, 0x11, &(0x7f0000000300), 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f00000001c0)='./file0\x00', 0xfffffffffffffff8, 0x0, 0x0, 0x0, 0x0)
+socket$inet_udplite(0x2, 0x2, 0x88)
+write$P9_RREADLINK(r0, &(0x7f0000000380)=ANY=[], 0x44)
+sendfile(r0, r0, &(0x7f0000000240), 0x7fff)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+single: successfully extracted reproducer
+found reproducer with 10 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs-getsockopt$sock_cred-syz_mount_image$tmpfs-socket$inet_udplite-write$P9_RREADLINK
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+r0 = open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+getsockopt$sock_cred(r0, 0x1, 0x11, &(0x7f0000000300), 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f00000001c0)='./file0\x00', 0xfffffffffffffff8, 0x0, 0x0, 0x0, 0x0)
+socket$inet_udplite(0x2, 0x2, 0x88)
+write$P9_RREADLINK(r0, &(0x7f0000000380)=ANY=[], 0x44)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs-getsockopt$sock_cred-syz_mount_image$tmpfs-socket$inet_udplite
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+r0 = open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+getsockopt$sock_cred(r0, 0x1, 0x11, &(0x7f0000000300), 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f00000001c0)='./file0\x00', 0xfffffffffffffff8, 0x0, 0x0, 0x0, 0x0)
+socket$inet_udplite(0x2, 0x2, 0x88)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs-getsockopt$sock_cred-syz_mount_image$tmpfs
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+r0 = open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+getsockopt$sock_cred(r0, 0x1, 0x11, &(0x7f0000000300), 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f00000001c0)='./file0\x00', 0xfffffffffffffff8, 0x0, 0x0, 0x0, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs-getsockopt$sock_cred
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+r0 = open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+getsockopt$sock_cred(r0, 0x1, 0x11, &(0x7f0000000300), 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open-syz_mount_image$tmpfs
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(0x0, &(0x7f0000000240)='./file0/file0\x00', 0x9, 0xfffffffffffffffd, 0x0, 0x0, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open-perf_event_open
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+perf_event_open(&(0x7f0000000440)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c29}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+
+program crashed: KCSAN: data-race in _find_next_zero_bit / ext4_free_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir-open
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+open(&(0x7f0000000040)='./file0\x00', 0x141042, 0x0)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-chdir
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+chdir(&(0x7f0000000140)='./file0\x00')
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000440)='./file0\x00', 0x200000, 0xffffffffffffffff, 0x0, 0x0, &(0x7f00000000c0)=ANY=[])
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+reproducing took 5m11.03475384s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702c8 of 16 bytes by task 4213 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_open fs/open.c:1430 [inline]
+ __se_sys_open fs/open.c:1426 [inline]
+ __x64_sys_open+0xac/0x110 fs/open.c:1426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702c8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_getattr+0x86/0xb0 fs/kernfs/inode.c:193
+ vfs_getattr_nosec+0x18d/0x200 fs/stat.c:133
+ vfs_getattr fs/stat.c:170 [inline]
+ vfs_statx+0xe6/0x270 fs/stat.c:242
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 365 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3064 callbacks suppressed
+syz-executor373[6558]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6559]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6560]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6561]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6562]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6563]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6564]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6565]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6566]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6567]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ vfs_statx+0xab/0x270 fs/stat.c:238
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 6476 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 6476 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3144 callbacks suppressed
+syz-executor373[9712]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9713]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9714]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9715]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9716]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9717]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9718]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9719]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9720]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9721]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+----------------
+Code disassembly (best guess):
+   0:	fa                   	cli
+   1:	49 89 d0             	mov    %rdx,%r8
+   4:	4d 85 c0             	test   %r8,%r8
+   7:	0f 84 40 09 00 00    	je     0x94d
+   d:	48 89 f1             	mov    %rsi,%rcx
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	c5 f9 ef c0          	vpxor  %xmm0,%xmm0,%xmm0
+  17:	83 e1 7f             	and    $0x7f,%ecx
+  1a:	83 f9 40             	cmp    $0x40,%ecx
+  1d:	0f 86 78 02 00 00    	jbe    0x29b
+  23:	48 83 e6 e0          	and    $0xffffffffffffffe0,%rsi
+  27:	83 e1 1f             	and    $0x1f,%ecx
+* 2a:	c5 fd 74 0e          	vpcmpeqb (%rsi),%ymm0,%ymm1 <-- trapping instruction
+  2e:	c5 fd d7 d1          	vpmovmskb %ymm1,%edx
+  32:	48 d3 ea             	shr    %cl,%rdx
+  35:	49 c7 c2 21 00 00 00 	mov    $0x21,%r10
+  3c:	49 29 ca             	sub    %rcx,%r10
+  3f:	4d                   	rex.WRB
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702c8 of 16 bytes by task 4213 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_open fs/open.c:1430 [inline]
+ __se_sys_open fs/open.c:1426 [inline]
+ __x64_sys_open+0xac/0x110 fs/open.c:1426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702c8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_getattr+0x86/0xb0 fs/kernfs/inode.c:193
+ vfs_getattr_nosec+0x18d/0x200 fs/stat.c:133
+ vfs_getattr fs/stat.c:170 [inline]
+ vfs_statx+0xe6/0x270 fs/stat.c:242
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 365 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3064 callbacks suppressed
+syz-executor373[6558]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6559]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6560]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6561]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6562]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6563]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6564]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6565]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6566]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6567]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ vfs_statx+0xab/0x270 fs/stat.c:238
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 6476 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 6476 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3144 callbacks suppressed
+syz-executor373[9712]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9713]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9714]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9715]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9716]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9717]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9718]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9719]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9720]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9721]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+----------------
+Code disassembly (best guess):
+   0:	fa                   	cli
+   1:	49 89 d0             	mov    %rdx,%r8
+   4:	4d 85 c0             	test   %r8,%r8
+   7:	0f 84 40 09 00 00    	je     0x94d
+   d:	48 89 f1             	mov    %rsi,%rcx
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	c5 f9 ef c0          	vpxor  %xmm0,%xmm0,%xmm0
+  17:	83 e1 7f             	and    $0x7f,%ecx
+  1a:	83 f9 40             	cmp    $0x40,%ecx
+  1d:	0f 86 78 02 00 00    	jbe    0x29b
+  23:	48 83 e6 e0          	and    $0xffffffffffffffe0,%rsi
+  27:	83 e1 1f             	and    $0x1f,%ecx
+* 2a:	c5 fd 74 0e          	vpcmpeqb (%rsi),%ymm0,%ymm1 <-- trapping instruction
+  2e:	c5 fd d7 d1          	vpmovmskb %ymm1,%edx
+  32:	48 d3 ea             	shr    %cl,%rdx
+  35:	49 c7 c2 21 00 00 00 	mov    $0x21,%r10
+  3c:	49 29 ca             	sub    %rcx,%r10
+  3f:	4d                   	rex.WRB
+
+failed to init instance: failed to create VM: can't ssh into the instance
+failed to run ["ssh" "-p" "23887" "-F" "/dev/null" "-o" "UserKnownHostsFile=/dev/null" "-o" "BatchMode=yes" "-o" "IdentitiesOnly=yes" "-o" "StrictHostKeyChecking=no" "-o" "ConnectTimeout=10" "-i" "/data/schefuzz/img/stretch.id_rsa" "root@localhost" "pwd"]: exit status 255
+Connection timed out during banner exchange
+Connection to 127.0.0.1 port 23887 timed out
+[    0.000000] Linux version 6.5.0 (root@yuheng) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #8 SMP PREEMPT_DYNAMIC Mon Oct 30 07:29:42 UTC 2023
+[    0.000000] Command line: root=/dev/sda console=ttyS0 net.ifnames=0
+[    0.000000] [Firmware Bug]: TSC doesn't count with P0 frequency!
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000bffe0000-0x00000000bfffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000023fffffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000001] kvm-clock: using sched offset of 441374597 cycles
+[    0.000008] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000019] tsc: Detected 2449.998 MHz processor
+[    0.006057] last_pfn = 0x240000 max_arch_pfn = 0x400000000
+[    0.006095] MTRR map: 4 entries (3 fixed + 1 variable; max 19), built from 8 variable MTRRs
+[    0.006106] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.006153] last_pfn = 0xbffe0 max_arch_pfn = 0x400000000
+[    0.009567] found SMP MP-table at [mem 0x000f5b90-0x000f5b9f]
+[    0.009598] Using GB pages for direct mapping
+[    0.009930] ACPI: Early table checksum verification disabled
+[    0.009937] ACPI: RSDP 0x00000000000F59B0 000014 (v00 BOCHS )
+[    0.009954] ACPI: RSDT 0x00000000BFFE1967 000034 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.009977] ACPI: FACP 0x00000000BFFE1813 000074 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.010002] ACPI: DSDT 0x00000000BFFE0040 0017D3 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.010022] ACPI: FACS 0x00000000BFFE0000 000040
+[    0.010036] ACPI: APIC 0x00000000BFFE1887 000080 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.010056] ACPI: HPET 0x00000000BFFE1907 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.010076] ACPI: WAET 0x00000000BFFE193F 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.010094] ACPI: Reserving FACP table memory at [mem 0xbffe1813-0xbffe1886]
+[    0.010102] ACPI: Reserving DSDT table memory at [mem 0xbffe0040-0xbffe1812]
+[    0.010109] ACPI: Reserving FACS table memory at [mem 0xbffe0000-0xbffe003f]
+[    0.010117] ACPI: Reserving APIC table memory at [mem 0xbffe1887-0xbffe1906]
+[    0.010124] ACPI: Reserving HPET table memory at [mem 0xbffe1907-0xbffe193e]
+[    0.010132] ACPI: Reserving WAET table memory at [mem 0xbffe193f-0xbffe1966]
+[    0.010628] No NUMA configuration found
+[    0.010632] Faking a node at [mem 0x0000000000000000-0x000000023fffffff]
+[    0.010645] NODE_DATA(0) allocated [mem 0x23fffc000-0x23fffffff]
+[    0.010868] Zone ranges:
+[    0.010871]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.010882]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.010891]   Normal   [mem 0x0000000100000000-0x000000023fffffff]
+[    0.010900] Movable zone start for each node
+[    0.010904] Early memory node ranges
+[    0.010907]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.010915]   node   0: [mem 0x0000000000100000-0x00000000bffdffff]
+[    0.010924]   node   0: [mem 0x0000000100000000-0x000000023fffffff]
+[    0.010935] Initmem setup node 0 [mem 0x0000000000001000-0x000000023fffffff]
+[    0.011129] On node 0, zone DMA: 1 pages in unavailable ranges
+[    0.011711] On node 0, zone DMA: 97 pages in unavailable ranges
+[    0.316083] On node 0, zone Normal: 32 pages in unavailable ranges
+[    0.316338] ACPI: PM-Timer IO Port: 0x608
+[    0.316356] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.316394] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.316407] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.316417] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.316425] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.316434] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.316443] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.316463] ACPI: Using ACPI (MADT) for SMP configuration information
+[    0.316469] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.316480] TSC deadline timer available
+[    0.316486] smpboot: Allowing 2 CPUs, 0 hotplug CPUs
+[    0.316515] kvm-guest: KVM setup pv remote TLB flush
+[    0.316521] kvm-guest: setup PV sched yield
+[    0.316557] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.316575] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.316586] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.316595] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.316609] PM: hibernation: Registered nosave memory: [mem 0xbffe0000-0xbfffffff]
+[    0.316618] PM: hibernation: Registered nosave memory: [mem 0xc0000000-0xfeffbfff]
+[    0.316628] PM: hibernation: Registered nosave memory: [mem 0xfeffc000-0xfeffffff]
+[    0.316637] PM: hibernation: Registered nosave memory: [mem 0xff000000-0xfffbffff]
+[    0.316646] PM: hibernation: Registered nosave memory: [mem 0xfffc0000-0xffffffff]
+[    0.316661] [mem 0xc0000000-0xfeffbfff] available for PCI devices
+[    0.316668] Booting paravirtualized kernel on KVM
+[    0.316675] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.325229] setup_percpu: NR_CPUS:64 nr_cpumask_bits:2 nr_cpu_ids:2 nr_node_ids:1
+[    0.325492] percpu: Embedded 54 pages/cpu s182824 r8192 d30168 u1048576
+[    0.325635] Kernel command line: root=/dev/sda console=ttyS0 net.ifnames=0
+[    0.325861] random: crng init done
+[    0.326682] Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes, linear)
+[    0.327095] Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.327166] Fallback order for Node 0: 0 
+[    0.327177] Built 1 zonelists, mobility grouping on.  Total pages: 2064096
+[    0.327185] Policy zone: Normal
+[    0.327189] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.327200] software IO TLB: area num 2.
+[    0.351701] Memory: 8117564K/8388088K available (30720K kernel code, 2730K rwdata, 6604K rodata, 8092K init, 2436K bss, 270264K reserved, 0K cma-reserved)
+[    0.351837] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.353833] Dynamic Preempt: none
+[    0.354058] rcu: Preemptible hierarchical RCU implementation.
+[    0.354063] rcu: 	RCU event tracing is enabled.
+[    0.354066] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=2.
+[    0.354074] 	Trampoline variant of Tasks RCU enabled.
+[    0.354078] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+[    0.354084] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.364136] NR_IRQS: 4352, nr_irqs: 440, preallocated irqs: 16
+[    0.364492] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.367855] Console: colour VGA+ 80x25
+[    0.367901] printk: console [ttyS0] enabled
+[    0.426068] ACPI: Core revision 20230331
+[    0.426604] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.427475] APIC: Switch to symmetric I/O mode setup
+[    0.427932] kvm-guest: setup PV IPIs
+[    0.429185] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.429758] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x2350b6af5f8, max_idle_ns: 440795252949 ns
+[    0.430700] Calibrating delay loop (skipped) preset value.. 4899.99 BogoMIPS (lpj=2449998)
+[    0.431719] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.432368] Last level iTLB entries: 4KB 512, 2MB 255, 4MB 127
+[    0.432697] Last level dTLB entries: 4KB 512, 2MB 255, 4MB 127, 1GB 0
+[    0.433260] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.433698] Spectre V2 : Mitigation: Retpolines
+[    0.434093] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.434695] Spectre V2 : Spectre v2 / SpectreRSB : Filling RSB on VMEXIT
+[    0.435696] Spectre V2 : Enabling Restricted Speculation for firmware calls
+[    0.436304] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.436698] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+[    0.437703] Speculative Return Stack Overflow: IBPB-extending microcode not applied!
+[    0.438696] Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.
+[    0.438705] Speculative Return Stack Overflow: Mitigation: safe RET, no microcode
+[    0.440713] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.441360] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.441695] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.442234] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.442696] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.443695] x86/fpu: xstate_offset[9]:  832, xstate_sizes[9]:    8
+[    0.444239] x86/fpu: Enabled xstate features 0x207, context size is 840 bytes, using 'compacted' format.
+[    0.594679] Freeing SMP alternatives memory: 44K
+[    0.595107] pid_max: default: 32768 minimum: 301
+[    0.595606] LSM: initializing lsm=capability,selinux,integrity
+[    0.595705] SELinux:  Initializing.
+[    0.596147] Mount-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    0.597360] Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    0.599082] kcsan: enabled early
+[    0.599386] kcsan: non-strict mode configured - use CONFIG_KCSAN_STRICT=y to see all data races
+[    0.600060] smpboot: CPU0: AMD EPYC 7763 64-Core Processor (family: 0x19, model: 0x1, stepping: 0x1)
+[    0.601310] RCU Tasks: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1.
+[    0.601764] Performance Events: Fam17h+ core perfctr, AMD PMU driver.
+[    0.602496] ... version:                0
+[    0.602701] ... bit width:              48
+[    0.603127] ... generic registers:      6
+[    0.603500] ... value mask:             0000ffffffffffff
+[    0.603700] ... max period:             00007fffffffffff
+[    0.604186] ... fixed-purpose events:   0
+[    0.604592] ... event mask:             000000000000003f
+[    0.605112] signal: max sigframe size: 3376
+[    0.605660] rcu: Hierarchical SRCU implementation.
+[    0.605702] rcu: 	Max phase no-delay instances is 400.
+[    0.607370] smp: Bringing up secondary CPUs ...
+[    0.608155] smpboot: x86: Booting SMP configuration:
+[    0.608604] .... node  #0, CPUs:      #1
+[    0.608852] smp: Brought up 1 node, 2 CPUs
+[    0.610091] smpboot: Max logical packages: 1
+[    0.610511] smpboot: Total of 2 processors activated (9799.99 BogoMIPS)
+[    0.611996] devtmpfs: initialized
+[    0.616364] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.616711] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.617917] PM: RTC time: 12:06:01, date: 2023-10-30
+[    0.619233] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.621552] audit: initializing netlink subsys (disabled)
+[    0.621771] audit: type=2000 audit(1698667562.546:1): state=initialized audit_enabled=0 res=1
+[    0.628420] kcsan: selftest: 3/3 tests passed
+[    0.629424] thermal_sys: Registered thermal governor 'step_wise'
+[    0.629440] thermal_sys: Registered thermal governor 'user_space'
+[    0.629745] cpuidle: using governor menu
+[    0.632351] PCI: Using configuration type 1 for base access
+[    0.632700] PCI: Using configuration type 1 for extended access
+[    0.635779] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.638143] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.638701] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.640395] ACPI: Added _OSI(Module Device)
+[    0.640705] ACPI: Added _OSI(Processor Device)
+[    0.641102] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.641536] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.652746] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    4.903525] ACPI: Interpreter enabled
+[    4.903888] ACPI: PM: (supports S0 S3 S4 S5)
+[    4.904363] ACPI: Using IOAPIC for interrupt routing
+[    4.904843] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    4.905700] PCI: Using E820 reservations for host bridge windows
+[    4.907685] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    4.941769] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    4.942449] acpi PNP0A03:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI HPX-Type3]
+[    4.944667] PCI host bridge to bus 0000:00
+[    4.944705] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    4.945391] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    4.945704] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    4.946403] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+[    4.946703] pci_bus 0000:00: root bus resource [mem 0x240000000-0x2bfffffff window]
+[    4.947435] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    4.947924] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    4.953341] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    4.955049] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    4.956847] pci 0000:00:01.1: reg 0x20: [io  0xc060-0xc06f]
+[    4.957870] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    4.958543] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    4.958704] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    4.959369] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    4.960246] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    4.961083] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    4.961711] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    4.963123] pci 0000:00:02.0: [1234:1111] type 00 class 0x030000
+[    4.965009] pci 0000:00:02.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+[    4.966705] pci 0000:00:02.0: reg 0x18: [mem 0xfebb0000-0xfebb0fff]
+[    4.970040] pci 0000:00:02.0: reg 0x30: [mem 0xfeba0000-0xfebaffff pref]
+[    4.970820] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    4.976191] pci 0000:00:03.0: [1af4:1005] type 00 class 0x00ff00
+[    4.977170] pci 0000:00:03.0: reg 0x10: [io  0xc040-0xc05f]
+[    4.979289] pci 0000:00:03.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+[    4.984843] pci 0000:00:04.0: [8086:100e] type 00 class 0x020000
+[    4.985979] pci 0000:00:04.0: reg 0x10: [mem 0xfeb80000-0xfeb9ffff]
+[    4.986964] pci 0000:00:04.0: reg 0x14: [io  0xc000-0xc03f]
+[    4.990081] pci 0000:00:04.0: reg 0x30: [mem 0xfeb00000-0xfeb7ffff pref]
+[    4.999650] ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+[    5.000338] ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+[    5.001476] ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+[    5.002291] ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+[    5.003130] ACPI: PCI: Interrupt link LNKS configured for IRQ 9
+[    5.005633] iommu: Default domain type: Translated
+[    5.005701] iommu: DMA domain TLB invalidation policy: lazy mode
+[    5.006987] SCSI subsystem initialized
+[    5.008045] ACPI: bus type USB registered
+[    5.008576] usbcore: registered new interface driver usbfs
+[    5.008755] usbcore: registered new interface driver hub
+[    5.009354] usbcore: registered new device driver usb
+[    5.009889] pps_core: LinuxPPS API ver. 1 registered
+[    5.010340] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    5.010796] PTP clock support registered
+[    5.011833] Advanced Linux Sound Architecture Driver Initialized.
+[    5.015302] NetLabel: Initializing
+[    5.015615] NetLabel:  domain hash size = 128
+[    5.015700] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    5.016613] NetLabel:  unlabeled traffic allowed by default
+[    5.016864] PCI: Using ACPI for IRQ routing
+[    5.017783] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    5.018327] pci 0000:00:02.0: vgaarb: bridge control possible
+[    5.018692] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    5.018715] vgaarb: loaded
+[    5.019349] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    5.019712] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    5.022872] clocksource: Switched to clocksource kvm-clock
+[    5.024073] VFS: Disk quotas dquot_6.6.0
+[    5.024531] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    5.025750] pnp: PnP ACPI init
+[    5.029915] pnp: PnP ACPI: found 6 devices
+[    5.052112] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    5.053216] NET: Registered PF_INET protocol family
+[    5.054177] IP idents hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    5.076396] tcp_listen_portaddr_hash hash table entries: 4096 (order: 4, 65536 bytes, linear)
+[    5.077632] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    5.078410] TCP established hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    5.085182] TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+[    5.100426] TCP: Hash tables configured (established 65536 bind 65536)
+[    5.101122] UDP hash table entries: 4096 (order: 5, 131072 bytes, linear)
+[    5.103461] UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes, linear)
+[    5.105616] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    5.106889] RPC: Registered named UNIX socket transport module.
+[    5.107470] RPC: Registered udp transport module.
+[    5.107903] RPC: Registered tcp transport module.
+[    5.108340] RPC: Registered tcp-with-tls transport module.
+[    5.108912] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    5.121400] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    5.121997] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    5.122594] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    5.123234] pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window]
+[    5.123947] pci_bus 0000:00: resource 8 [mem 0x240000000-0x2bfffffff window]
+[    5.125070] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    5.125702] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    5.126774] PCI: CLS 0 bytes, default 64
+[    5.127161] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    5.127821] software IO TLB: mapped [mem 0x00000000bbfe0000-0x00000000bffe0000] (64MB)
+[    5.128916] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x2350b6af5f8, max_idle_ns: 440795252949 ns
+[    5.170831] clocksource: Switched to clocksource tsc
+[    5.176602] Initialise system trusted keyrings
+[    5.177269] workingset: timestamp_bits=56 max_order=21 bucket_order=0
+[    5.178733] NFS: Registering the id_resolver key type
+[    5.179295] Key type id_resolver registered
+[    5.179689] Key type id_legacy registered
+[    5.180340] 9p: Installing v9fs 9p2000 file system support
+[    5.328236] Key type asymmetric registered
+[    5.328583] Asymmetric key parser 'x509' registered
+[    5.329019] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    5.329687] io scheduler mq-deadline registered
+[    5.330083] io scheduler kyber registered
+[    5.331305] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    5.332159] ACPI: button: Power Button [PWRF]
+[    5.541907] ACPI: \_SB_.LNKC: Enabled at IRQ 11
+[    5.543579] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    5.544728] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    5.549106] Non-volatile memory driver v1.3
+[    5.549521] Linux agpgart interface v0.103
+[    5.550555] ACPI: bus type drm_connector registered
+[    5.566957] loop: module loaded
+[    5.571566] scsi host0: ata_piix
+[    5.572737] scsi host1: ata_piix
+[    5.573549] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc060 irq 14
+[    5.574277] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc068 irq 15
+[    5.578271] e100: Intel(R) PRO/100 Network Driver
+[    5.578706] e100: Copyright(c) 1999-2006 Intel Corporation
+[    5.579431] e1000: Intel(R) PRO/1000 Network Driver
+[    5.579828] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    5.732435] ata1: found unknown device (class 0)
+[    5.733218] ata2: found unknown device (class 0)
+[    5.734062] ata2.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+[    5.735018] ata1.00: ATA-7: QEMU HARDDISK, 2.5+, max UDMA/100
+[    5.735508] ata1.00: 4194304 sectors, multi 16: LBA48 
+[    5.737496] scsi 0:0:0:0: Direct-Access     ATA      QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+[    5.740624] scsi 0:0:0:0: Attached scsi generic sg0 type 0
+[    5.741916] scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+[    5.744306] sd 0:0:0:0: [sda] 4194304 512-byte logical blocks: (2.15 GB/2.00 GiB)
+[    5.745109] sd 0:0:0:0: [sda] Write Protect is off
+[    5.745681] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    5.746701] sd 0:0:0:0: [sda] Preferred minimum I/O size 512 bytes
+[    5.750300] sd 0:0:0:0: [sda] Attached SCSI disk
+[    5.779688] sr 1:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+[    5.780251] cdrom: Uniform CD-ROM driver Revision: 3.20
+[    5.787180] sr 1:0:0:0: Attached scsi generic sg1 type 5
+[    5.901608] ACPI: \_SB_.LNKD: Enabled at IRQ 10
+[    6.196044] e1000 0000:00:04.0 eth0: (PCI:33MHz:32-bit) 52:54:00:12:34:56
+[    6.196704] e1000 0000:00:04.0 eth0: Intel(R) PRO/1000 Network Connection
+[    6.197519] e1000e: Intel(R) PRO/1000 Network Driver
+[    6.198055] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    6.198820] sky2: driver version 1.30
+[    6.200597] usbcore: registered new interface driver usblp
+[    6.201146] usbcore: registered new interface driver usb-storage
+[    6.202102] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    6.203765] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    6.204264] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    6.205711] rtc_cmos 00:05: RTC can wake from S4
+[    6.208185] rtc_cmos 00:05: registered as rtc0
+[    6.209055] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    6.210772] device-mapper: ioctl: 4.48.0-ioctl (2023-03-01) initialised: dm-devel@redhat.com
+[    6.211623] hid: raw HID events driver (C) Jiri Kosina
+[    6.214114] usbcore: registered new interface driver usbhid
+[    6.214655] usbhid: USB HID core driver
+[    6.223153] Initializing XFRM netlink socket
+[    6.223596] NET: Registered PF_INET6 protocol family
+[    6.226819] Segment Routing with IPv6
+[    6.227317] In-situ OAM (IOAM) with IPv6
+[    6.227990] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    6.230250] NET: Registered PF_PACKET protocol family
+[    6.231115] 9pnet: Installing 9P2000 support
+[    6.231554] Key type dns_resolver registered
+[    6.233704] IPI shorthand broadcast: enabled
+[    6.290395] sched_clock: Marking stable (6226061487, 64188167)->(6384293004, -94043350)
+[    6.292155] registered taskstats version 1
+[    6.292555] Loading compiled-in X.509 certificates
+[    6.320260] PM:   Magic number: 11:616:128
+[    6.320786] acpi device:03: hash matches
+[    6.321224] printk: console [netcon0] enabled
+[    6.321647] netconsole: network logging started
+[    6.322477] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    6.323796] kworker/u4:2 (51) used greatest stack depth: 14368 bytes left
+[    6.324740] kworker/u4:2 (52) used greatest stack depth: 13920 bytes left
+[    6.328897] Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    6.329435] ALSA device list:
+[    6.329776]   No soundcards found.
+[    6.330385] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    6.331125] cfg80211: failed to load regulatory.db
+[    6.830651] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input2
+[    6.832804] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    6.834478] md: Waiting for all devices to be available before autodetect
+[    6.834884] md: If you don't use raid, use raid=noautodetect
+[    6.835241] md: Autodetecting RAID arrays.
+[    6.835538] md: autorun ...
+[    6.835711] md: ... autorun DONE.
+[    6.840495] EXT4-fs (sda): INFO: recovery required on readonly filesystem
+[    6.840894] EXT4-fs (sda): write access will be enabled during recovery
+[    6.861061] EXT4-fs (sda): recovery complete
+[    6.862398] EXT4-fs (sda): mounted filesystem ee4218fc-be90-4146-b01f-77196d330fe6 ro with ordered data mode. Quota mode: none.
+[    6.863227] VFS: Mounted root (ext4 filesystem) readonly on device 8:0.
+[    6.864146] devtmpfs: mounted
+[    6.869112] Freeing unused kernel image (initmem) memory: 8092K
+[    6.869539] Write protecting the kernel read-only data: 38912k
+[    6.875382] Freeing unused kernel image (rodata/data gap) memory: 1588K
+[    7.244221] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    7.244633] Run /sbin/init as init process
+[    7.668686] SELinux:  Permission getrlimit in class process not defined in policy.
+[    7.669200] SELinux:  Class process2 not defined in policy.
+[    7.669634] SELinux:  Permission watch in class filesystem not defined in policy.
+[    7.670091] SELinux:  Permission map in class file not defined in policy.
+[    7.670505] SELinux:  Permission watch in class file not defined in policy.
+[    7.670905] SELinux:  Permission watch_mount in class file not defined in policy.
+[    7.671414] SELinux:  Permission watch_sb in class file not defined in policy.
+[    7.671880] SELinux:  Permission watch_with_perm in class file not defined in policy.
+[    7.672339] SELinux:  Permission watch_reads in class file not defined in policy.
+[    7.672885] SELinux:  Permission map in class dir not defined in policy.
+[    7.673341] SELinux:  Permission watch in class dir not defined in policy.
+[    7.673741] SELinux:  Permission watch_mount in class dir not defined in policy.
+[    7.674218] SELinux:  Permission watch_sb in class dir not defined in policy.
+[    7.674680] SELinux:  Permission watch_with_perm in class dir not defined in policy.
+[    7.675251] SELinux:  Permission watch_reads in class dir not defined in policy.
+[    7.675792] SELinux:  Permission map in class lnk_file not defined in policy.
+[    7.676275] SELinux:  Permission watch in class lnk_file not defined in policy.
+[    7.676736] SELinux:  Permission watch_mount in class lnk_file not defined in policy.
+[    7.677302] SELinux:  Permission watch_sb in class lnk_file not defined in policy.
+[    7.677793] SELinux:  Permission watch_with_perm in class lnk_file not defined in policy.
+[    7.678370] SELinux:  Permission watch_reads in class lnk_file not defined in policy.
+[    7.678904] SELinux:  Permission map in class chr_file not defined in policy.
+[    7.679387] SELinux:  Permission watch in class chr_file not defined in policy.
+[    7.680101] SELinux:  Permission watch_mount in class chr_file not defined in policy.
+[    7.680679] SELinux:  Permission watch_sb in class chr_file not defined in policy.
+[    7.681162] SELinux:  Permission watch_with_perm in class chr_file not defined in policy.
+[    7.681753] SELinux:  Permission watch_reads in class chr_file not defined in policy.
+[    7.682277] SELinux:  Permission map in class blk_file not defined in policy.
+[    7.682801] SELinux:  Permission watch in class blk_file not defined in policy.
+[    7.683280] SELinux:  Permission watch_mount in class blk_file not defined in policy.
+[    7.683840] SELinux:  Permission watch_sb in class blk_file not defined in policy.
+[    7.684334] SELinux:  Permission watch_with_perm in class blk_file not defined in policy.
+[    7.684918] SELinux:  Permission watch_reads in class blk_file not defined in policy.
+[    7.685445] SELinux:  Permission map in class sock_file not defined in policy.
+[    7.685927] SELinux:  Permission watch in class sock_file not defined in policy.
+[    7.686417] SELinux:  Permission watch_mount in class sock_file not defined in policy.
+[    7.686929] SELinux:  Permission watch_sb in class sock_file not defined in policy.
+[    7.687481] SELinux:  Permission watch_with_perm in class sock_file not defined in policy.
+[    7.688020] SELinux:  Permission watch_reads in class sock_file not defined in policy.
+[    7.688628] SELinux:  Permission map in class fifo_file not defined in policy.
+[    7.689139] SELinux:  Permission watch in class fifo_file not defined in policy.
+[    7.689705] SELinux:  Permission watch_mount in class fifo_file not defined in policy.
+[    7.690273] SELinux:  Permission watch_sb in class fifo_file not defined in policy.
+[    7.690758] SELinux:  Permission watch_with_perm in class fifo_file not defined in policy.
+[    7.691337] SELinux:  Permission watch_reads in class fifo_file not defined in policy.
+[    7.691844] SELinux:  Permission map in class socket not defined in policy.
+[    7.692335] SELinux:  Permission map in class tcp_socket not defined in policy.
+[    7.692834] SELinux:  Permission map in class udp_socket not defined in policy.
+[    7.693334] SELinux:  Permission map in class rawip_socket not defined in policy.
+[    7.693867] SELinux:  Permission map in class netlink_socket not defined in policy.
+[    7.694493] SELinux:  Permission map in class packet_socket not defined in policy.
+[    7.695060] SELinux:  Permission map in class key_socket not defined in policy.
+[    7.695584] SELinux:  Permission map in class unix_stream_socket not defined in policy.
+[    7.696149] SELinux:  Permission map in class unix_dgram_socket not defined in policy.
+[    7.696807] SELinux:  Permission map in class netlink_route_socket not defined in policy.
+[    7.697400] SELinux:  Permission map in class netlink_tcpdiag_socket not defined in policy.
+[    7.697958] SELinux:  Permission map in class netlink_nflog_socket not defined in policy.
+[    7.698508] SELinux:  Permission map in class netlink_xfrm_socket not defined in policy.
+[    7.699090] SELinux:  Permission map in class netlink_selinux_socket not defined in policy.
+[    7.699718] SELinux:  Permission map in class netlink_iscsi_socket not defined in policy.
+[    7.700323] SELinux:  Permission map in class netlink_audit_socket not defined in policy.
+[    7.700881] SELinux:  Permission map in class netlink_fib_lookup_socket not defined in policy.
+[    7.701457] SELinux:  Permission map in class netlink_connector_socket not defined in policy.
+[    7.702094] SELinux:  Permission map in class netlink_netfilter_socket not defined in policy.
+[    7.702717] SELinux:  Permission map in class netlink_dnrt_socket not defined in policy.
+[    7.703345] SELinux:  Permission map in class netlink_kobject_uevent_socket not defined in policy.
+[    7.703927] SELinux:  Permission map in class netlink_generic_socket not defined in policy.
+[    7.704701] SELinux:  Permission map in class netlink_scsitransport_socket not defined in policy.
+[    7.705330] SELinux:  Permission map in class netlink_rdma_socket not defined in policy.
+[    7.705903] SELinux:  Permission map in class netlink_crypto_socket not defined in policy.
+[    7.706555] SELinux:  Permission map in class appletalk_socket not defined in policy.
+[    7.707203] SELinux:  Permission map in class dccp_socket not defined in policy.
+[    7.707698] SELinux:  Permission perfmon in class capability2 not defined in policy.
+[    7.708295] SELinux:  Permission bpf in class capability2 not defined in policy.
+[    7.708794] SELinux:  Permission checkpoint_restore in class capability2 not defined in policy.
+[    7.709439] SELinux:  Permission map in class tun_socket not defined in policy.
+[    7.710049] SELinux:  Permission perfmon in class cap2_userns not defined in policy.
+[    7.710564] SELinux:  Permission bpf in class cap2_userns not defined in policy.
+[    7.711033] SELinux:  Permission checkpoint_restore in class cap2_userns not defined in policy.
+[    7.711634] SELinux:  Class sctp_socket not defined in policy.
+[    7.712008] SELinux:  Class icmp_socket not defined in policy.
+[    7.712447] SELinux:  Class ax25_socket not defined in policy.
+[    7.712824] SELinux:  Class ipx_socket not defined in policy.
+[    7.713211] SELinux:  Class netrom_socket not defined in policy.
+[    7.713608] SELinux:  Class atmpvc_socket not defined in policy.
+[    7.714053] SELinux:  Class x25_socket not defined in policy.
+[    7.714474] SELinux:  Class rose_socket not defined in policy.
+[    7.714873] SELinux:  Class decnet_socket not defined in policy.
+[    7.715277] SELinux:  Class atmsvc_socket not defined in policy.
+[    7.715670] SELinux:  Class rds_socket not defined in policy.
+[    7.716039] SELinux:  Class irda_socket not defined in policy.
+[    7.716431] SELinux:  Class pppox_socket not defined in policy.
+[    7.716817] SELinux:  Class llc_socket not defined in policy.
+[    7.717252] SELinux:  Class can_socket not defined in policy.
+[    7.717636] SELinux:  Class tipc_socket not defined in policy.
+[    7.718009] SELinux:  Class bluetooth_socket not defined in policy.
+[    7.718532] SELinux:  Class iucv_socket not defined in policy.
+[    7.718911] SELinux:  Class rxrpc_socket not defined in policy.
+[    7.719307] SELinux:  Class isdn_socket not defined in policy.
+[    7.719693] SELinux:  Class phonet_socket not defined in policy.
+[    7.720080] SELinux:  Class ieee802154_socket not defined in policy.
+[    7.720528] SELinux:  Class caif_socket not defined in policy.
+[    7.720911] SELinux:  Class alg_socket not defined in policy.
+[    7.721296] SELinux:  Class nfc_socket not defined in policy.
+[    7.721676] SELinux:  Class vsock_socket not defined in policy.
+[    7.722078] SELinux:  Class kcm_socket not defined in policy.
+[    7.722465] SELinux:  Class qipcrtr_socket not defined in policy.
+[    7.722890] SELinux:  Class smc_socket not defined in policy.
+[    7.723277] SELinux:  Class infiniband_pkey not defined in policy.
+[    7.723671] SELinux:  Class infiniband_endport not defined in policy.
+[    7.724095] SELinux:  Class bpf not defined in policy.
+[    7.724476] SELinux:  Class xdp_socket not defined in policy.
+[    7.724824] SELinux:  Class mctp_socket not defined in policy.
+[    7.725221] SELinux:  Class perf_event not defined in policy.
+[    7.725565] SELinux:  Class anon_inode not defined in policy.
+[    7.725909] SELinux:  Class io_uring not defined in policy.
+[    7.726245] SELinux:  Class user_namespace not defined in policy.
+[    7.726629] SELinux: the above unknown classes and permissions will be allowed
+[    7.747038] SELinux:  policy capability network_peer_controls=1
+[    7.747472] SELinux:  policy capability open_perms=1
+[    7.747769] SELinux:  policy capability extended_socket_class=0
+[    7.748122] SELinux:  policy capability always_check_network=0
+[    7.748478] SELinux:  policy capability cgroup_seclabel=0
+[    7.748792] SELinux:  policy capability nnp_nosuid_transition=0
+[    7.749134] SELinux:  policy capability genfs_seclabel_symlinks=0
+[    7.749561] SELinux:  policy capability ioctl_skip_cloexec=0
+[    7.930390] audit: type=1403 audit(1698667569.854:2): auid=4294967295 ses=4294967295 lsm=selinux res=1
+[    7.941429] systemd[1]: Successfully loaded SELinux policy in 602.175ms.
+[    7.964426] audit: type=1400 audit(1698667569.888:3): avc:  denied  { associate } for  pid=1 comm="systemd" name="pts" scontext=system_u:object_r:devpts_t:s0 tcontext=system_u:object_r:device_t:s0 tclass=filesystem permissive=1
+[    7.989948] systemd[1]: Relabelled /dev and /run in 19.212ms.
+[    8.020240] systemd[1]: systemd 232 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN)
+[    8.021958] systemd[1]: Detected virtualization qemu.
+[    8.022485] systemd[1]: Detected architecture x86-64.
+
+Welcome to [1mDebian GNU/Linux 9 (stretch)[0m!
+
+[    8.024580] systemd[1]: Set hostname to <syzkaller>.
+[    8.088401] systemd-fstab-g (58) used greatest stack depth: 12384 bytes left
+[    8.254667] systemd[1]: Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on udev Kernel Socket.
+[    8.256221] systemd[1]: Reached target Swap.
+[[0;32m  OK  [0m] Reached target Swap.
+[    8.258874] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[[0;32m  OK  [0m] Set up automount Arbitrary Executab…rmats File System Automount Point.
+[    8.262296] systemd[1]: Listening on Syslog Socket.
+[[0;32m  OK  [0m] Listening on Syslog Socket.
+[    8.264977] systemd[1]: Listening on udev Control Socket.
+[[0;32m  OK  [0m] Listening on udev Control Socket.
+[    8.267591] systemd[1]: Created slice System Slice.
+[[0;32m  OK  [0m] Created slice System Slice.
+         Mounting /sys/kernel/debug...
+         Mounting /sys/kernel/config...
+[    8.298566] mount (70) used greatest stack depth: 12248 bytes left
+         Mounting /proc/sys/fs/binfmt_misc...
+         Mounting POSIX Message Queue File System...
+[[0;32m  OK  [0m] Reached target Slices.
+[[0;32m  OK  [0m] Reached target Remote File Systems.
+[[0;32m  OK  [0m] Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Created slice system-getty.slice.
+[    8.328069] audit: type=1400 audit(1698667570.251:4): avc:  denied  { audit_read } for  pid=1 comm="systemd" capability=37  scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=capability2 permissive=1
+[[0;32m  OK  [0m] Listening on Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on /dev/initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Started Dispatch Password Requests to Console Directory Watch.
+[[0;32m  OK  [0m] Listening on Journal Socket.
+         Starting Load Kernel Modules...
+         Starting Remount Root and Kernel File Systems...
+         Starting Create Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Listening on Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Reached target Sockets.
+         Starting Journal Service...
+[[0;32m  OK  [0m] Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Reached target Paths.
+[[0;32m  OK  [0m] Reached target Encrypted Volumes.
+[[0;32m  OK  [0m] Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted /sys/kernel/debug.
+[[0;32m  OK  [0m] Mounted /sys/kernel/config.
+[[0;32m  OK  [0m] Mounted /proc/sys/fs/binfmt_misc.
+[    8.463457] EXT4-fs (sda): re-mounted ee4218fc-be90-4146-b01f-77196d330fe6 r/w. Quota mode: none.
+[[0;32m  OK  [0m] Started Load Kernel Modules.
+[[0;32m  OK  [0m] Started Remount Root and Kernel File Systems.
+         Starting udev Coldplug all Devices...
+         Starting Load/Save Random Seed...
+         Starting Apply Kernel Variables...
+[[0;32m  OK  [0m] Started Create Static Device Nodes in /dev.
+         Starting udev Kernel Device Manager...
+[[0;32m  OK  [0m] Reached target Local File Systems (Pre).
+[[0;32m  OK  [0m] Reached target Local File Systems.
+[[0;32m  OK  [0m] Started Apply Kernel Variables.
+[[0;32m  OK  [0m] Started Load/Save Random Seed.
+         Starting Raise network interfaces...
+[[0;32m  OK  [0m] Started udev Kernel Device Manager.
+[[0;32m  OK  [0m] Started Journal Service.
+         Starting Flush Journal to Persistent Storage...
+[    8.815301] audit: type=1107 audit(1698667570.738:5): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:kernel_t:s0 msg='avc:  denied  { stop } for auid=n/a uid=0 gid=0 path="/lib/systemd/system/systemd-journald.service" cmdline="/bin/journalctl --flush" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:unlabeled_t:s0 tclass=service
+[    8.815301]  exe="/lib/systemd/systemd" sauid=0 hostname=? addr=? terminal=?'
+[    8.815521] systemd-journald[81]: Received request to flush runtime journal from PID 1
+[[0;32m  OK  [0m] Started Flush Journal to Persistent Storage.
+         Starting Create Volatile Files and Directories...
+[    8.854472] ==================================================================
+[    8.854940] BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+[    8.855417] 
+[    8.855530] write to 0xffff992b0042f5c8 of 16 bytes by task 1 on cpu 1:
+[    8.855915]  kernfs_refresh_inode+0xb2/0x160
+[    8.856207]  kernfs_iop_permission+0x79/0xc0
+[    8.856499]  inode_permission+0x1b1/0x2d0
+[    8.856765]  link_path_walk.part.0.constprop.0+0x46b/0x660
+[    8.857100]  path_openat+0x128/0x1c90
+[    8.857337]  do_filp_open+0x15b/0x280
+[    8.857586]  do_sys_openat2+0xc6/0x110
+[    8.857843]  __x64_sys_open+0xac/0x110
+[    8.858100]  do_syscall_64+0x3e/0x90
+[    8.858349]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[    8.858671] 
+[    8.858782] write to 0xffff992b0042f5c8 of 16 bytes by task 104 on cpu 0:
+[    8.859178]  kernfs_refresh_inode+0xb2/0x160
+[    8.859467]  kernfs_iop_permission+0x79/0xc0
+[    8.859756]  inode_permission+0x1b1/0x2d0
+[    8.860024]  link_path_walk.part.0.constprop.0+0x46b/0x660
+[    8.860358]  path_lookupat+0x64/0x3d0
+[    8.860596]  filename_lookup+0x186/0x360
+[    8.860849]  vfs_statx+0xab/0x270
+[    8.861084]  vfs_fstatat+0x6f/0x90
+[    8.861328]  __do_sys_newfstatat+0x43/0xa0
+[    8.861622]  __x64_sys_newfstatat+0x52/0x60
+[    8.861923]  do_syscall_64+0x3e/0x90
+[    8.862170]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[    8.862489] 
+[    8.862598] Reported by Kernel Concurrency Sanitizer on:
+[    8.862905] CPU: 0 PID: 104 Comm: (tmpfiles) Not tainted 6.5.0 #8
+[    8.863267] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[    8.863733] ==================================================================
+[    8.891610] ip (109) used greatest stack depth: 12208 bytes left
+[    9.086853] systemd-tmpfile (104) used greatest stack depth: 12024 bytes left
+[[0;32m  OK  [0m] Started Create Volatile Files and Directories.
+         Starting Network Time Synchronization...
+         Starting Update UTMP about System Boot/Shutdown...
+[[0;32m  OK  [0m] Started Update UTMP about System Boot/Shutdown.
+[    9.443659] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[[0;32m  OK  [0m] Started Network Time Synchronization.
+[[0;32m  OK  [0m] Reached target System Time Synchronized.
+[[0;32m  OK  [0m] Started udev Coldplug all Devices.
+[[0;32m  OK  [0m] Reached target System Initialization.
+[[0;32m  OK  [0m] Started Daily Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Started Daily apt download activities.
+[[0;32m  OK  [0m] Started Daily apt upgrade and clean activities.
+[[0;32m  OK  [0m] Reached target Timers.
+[[0;32m  OK  [0m] Reached target Basic System.
+[[0;32m  OK  [0m] Started Regular background program processing daemon.
+         Starting getty on tty2-tty6 if dbus and logind are not available...
+         Starting System Logging Service...
+[[0;32m  OK  [0m] Found device /dev/ttyS0.
+[    9.818874] audit: type=1107 audit(1698667571.742:6): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:kernel_t:s0 msg='avc:  denied  { start } for auid=n/a uid=0 gid=0 path="/lib/systemd/system/getty@.service" cmdline="/bin/systemctl --no-block start getty@tty2.service getty@tty3.service getty@tty4.service getty@tty5.service getty@tty6.service" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:unlabeled_t:s0 tclass=service
+[    9.818874]  exe="/lib/systemd/systemd" sauid=0 hostname=? addr=? terminal=?'
+[    9.823709] audit: type=1107 audit(1698667571.747:7): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:kernel_t:s0 msg='avc:  denied  { status } for auid=n/a uid=0 gid=0 path="/lib/systemd/system/getty@.service" cmdline="/bin/systemctl --no-block start getty@tty2.service getty@tty3.service getty@tty4.service getty@tty5.service getty@tty6.service" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:unlabeled_t:s0 tclass=service
+[    9.823709]  exe="/lib/systemd/systemd" sauid=0 hostname=? addr=? terminal=?'
+[[0;32m  OK  [0m] Started System Logging Service.
+[[0;32m  OK  [0m] Started getty on tty2-tty6 if dbus and logind are not available.
+[[0;32m  OK  [0m] Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+[[0;32m  OK  [0m] Started Raise network interfaces.
+[[0;32m  OK  [0m] Reached target Network.
+         Starting Permit User Sessions...
+         Starting OpenBSD Secure Shell server...
+[[0;32m  OK  [0m] Reached target Network is Online.
+         Starting Daily apt download activities...
+[[0;32m  OK  [0m] Started Permit User Sessions.
+[[0;32m  OK  [0m] Started Serial Getty on ttyS0.
+[[0;32m  OK  [0m] Started Getty on tty6.
+[[0;32m  OK  [0m] Started Getty on tty5.
+[[0;32m  OK  [0m] Started Getty on tty3.
+[[0;32m  OK  [0m] Started Getty on tty1.
+[[0;32m  OK  [0m] Started Getty on tty2.
+[[0;32m  OK  [0m] Started Getty on tty4.
+[[0;32m  OK  [0m] Reached target Login Prompts.
+[[0;32m  OK  [0m] Started OpenBSD Secure Shell server.
+[[0;32m  OK  [0m] Reached target Multi-User System.
+[[0;32m  OK  [0m] Reached target Graphical Interface.
+         Starting Update UTMP about System Runlevel Changes...
+[[0;32m  OK  [0m] Started Update UTMP about System Runlevel Changes.
+[[0;32m  OK  [0m] Started Daily apt download activities.
+         Starting Daily apt upgrade and clean activities...
+[[0;32m  OK  [0m] Started Daily apt upgrade and clean activities.
+
+, attempt 1/3

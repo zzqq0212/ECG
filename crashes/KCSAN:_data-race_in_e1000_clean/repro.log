@@ -1,0 +1,1984 @@
+syzkaller login: [   17.177502] ==================================================================
+[   17.178155] BUG: KCSAN: data-race in e1000_clean+0xfa/0x12b0
+[   17.178588] 
+[   17.178718] race at unknown origin, with read to 0xffffa32cc100255c of 4 bytes by interrupt on cpu 0:
+[   17.179359]  e1000_clean+0xfa/0x12b0
+[   17.179685]  __napi_poll+0x66/0x390
+[   17.179977]  net_rx_action+0x694/0x7b0
+[   17.180278]  __do_softirq+0xea/0x2e3
+[   17.180554]  irq_exit_rcu+0x70/0xc0
+[   17.180837]  common_interrupt+0xa8/0xc0
+[   17.181153]  asm_common_interrupt+0x26/0x40
+[   17.181482]  srso_alias_safe_ret+0x5/0xfbefc
+[   17.181837]  __ext4_journal_start_sb+0x37/0x2d0
+[   17.182188]  ext4_dirty_inode+0x60/0xb0
+[   17.182495]  __mark_inode_dirty+0xa1/0x630
+[   17.182814]  generic_write_end+0x1aa/0x200
+[   17.183136]  ext4_da_write_end+0xfb/0x600
+[   17.183455]  generic_perform_write+0x205/0x360
+[   17.183824]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.184181]  ext4_file_write_iter+0xcd/0xdd0
+[   17.184510]  vfs_write+0x5d0/0x700
+[   17.184778]  ksys_write+0x9e/0x160
+[   17.185043]  __x64_sys_write+0x41/0x50
+[   17.185345]  do_syscall_64+0x3e/0x90
+[   17.185642]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.186034] 
+[   17.186165] value changed: 0x00000200 -> 0x00000201
+[   17.186531] 
+[   17.186669] Reported by Kernel Concurrency Sanitizer on:
+[   17.187055] CPU: 0 PID: 337 Comm: scp Not tainted 6.5.0 #8
+[   17.187487] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.188104] ==================================================================
+[   17.418368] ==================================================================
+[   17.418940] BUG: KCSAN: data-race in e1000_clean_rx_irq+0x38e/0x980
+[   17.419400] 
+[   17.419527] race at unknown origin, with read to 0xffffa32cc100330c of 1 bytes by interrupt on cpu 0:
+[   17.420175]  e1000_clean_rx_irq+0x38e/0x980
+[   17.420489]  e1000_clean+0x4f3/0x12b0
+[   17.420787]  __napi_poll+0x66/0x390
+[   17.421072]  net_rx_action+0x694/0x7b0
+[   17.421376]  __do_softirq+0xea/0x2e3
+[   17.421657]  irq_exit_rcu+0x70/0xc0
+[   17.421931]  common_interrupt+0xa8/0xc0
+[   17.422253]  asm_common_interrupt+0x26/0x40
+[   17.422576]  __rcu_read_lock+0x0/0x50
+[   17.422873]  jbd2_write_access_granted+0x61/0x130
+[   17.423241]  jbd2_journal_get_write_access+0x76/0xe0
+[   17.423607]  __ext4_journal_get_write_access+0x101/0x270
+[   17.424001]  ext4_reserve_inode_write+0x100/0x150
+[   17.424358]  __ext4_mark_inode_dirty+0x7e/0x420
+[   17.424707]  ext4_dirty_inode+0x88/0xb0
+[   17.425004]  __mark_inode_dirty+0xa1/0x630
+[   17.425329]  generic_write_end+0x1aa/0x200
+[   17.425663]  ext4_da_write_end+0xfb/0x600
+[   17.425983]  generic_perform_write+0x205/0x360
+[   17.426333]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.426694]  ext4_file_write_iter+0xcd/0xdd0
+[   17.427032]  vfs_write+0x5d0/0x700
+[   17.427313]  ksys_write+0x9e/0x160
+[   17.427590]  __x64_sys_write+0x41/0x50
+[   17.427907]  do_syscall_64+0x3e/0x90
+[   17.428211]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.428605] 
+[   17.428736] value changed: 0x00 -> 0x07
+[   17.429017] 
+[   17.429139] Reported by Kernel Concurrency Sanitizer on:
+[   17.429522] CPU: 0 PID: 337 Comm: scp Not tainted 6.5.0 #8
+[   17.429922] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.430517] ==================================================================
+[   17.722564] scp (337) used greatest stack depth: 11504 bytes left
+Warning: Permanently added '[localhost]:45028' (ED25519) to the list of known hosts.
+[   26.670533] audit: type=1400 audit(1698661065.194:8): avc:  denied  { execmem } for  pid=361 comm="syz-executor164" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms fa
+VM DIAGNOSIS:
+10:17:44  Registers:
+info registers vcpu 0
+RAX=0000000000000000 RBX=0000000000000014 RCX=ffffffff99af22f7 RDX=ffffa32dc1bdc400
+RSI=0000000000000000 RDI=ffffa32dc03b5ed8 RBP=ffffa32dc03b5e68 RSP=ffffbddf4062fe30
+R8 =ffffffff9cac4480 R9 =0000000000000000 R10=ffffffff99af2276 R11=0001ffffffffffff
+R12=ffffa32dc03b5e40 R13=0000000000000000 R14=ffffa32dc03b5ec4 R15=0000000000000040
+RIP=ffffffff996913ab RFL=00000256 [---ZAP-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f816e7238c0 00000000 00000000
+GS =0000 ffffa32ef7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe2a23e5b000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe2a23e59000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f816ba85090 CR3=00000001003d0002 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000ff0000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2525252525252525 2525252525252525
+YMM02=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 0000000000ff0000 0000000000000000
+YMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 80f09f19808d26a3 0000000000162930
+YMM08=0000000000000000 0000000000000000 90bcf6aa357c7412 00000000001e1688
+YMM09=0000000000000000 0000000000000000 ffff00ffffff0000 0000ffffff00ffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000080000000 RBX=0000000000000000 RCX=ffffffff99683bea RDX=0000000080000000
+RSI=0000000080000000 RDI=ffffffff9b93dce0 RBP=ffffa32dc12ad3c0 RSP=ffffbddf4067bb38
+R8 =ffffffff9cac44c0 R9 =0000000000000000 R10=ffffffff993be639 R11=0001ffffffffffff
+R12=ffffa32dc41ca598 R13=ffffa32dc41ca550 R14=ffffa32dc41ca570 R15=ffffa32dc12ad3c0
+RIP=ffffffff99472721 RFL=00000282 [--S----] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007ffa4bcce8c0 00000000 00000000
+GS =0000 ffffa32ef7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe27200eb000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe27200e9000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007ffdca0d6968 CR3=00000001003d2002 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 0000000000000000 ff00000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM05=0000000000000000 0000000000000000 000055bf182003e0 0000000300000002
+YMM06=0000000000000000 0000000000000000 00000002ffffffff 000055bf18200400
+YMM07=0000000000000000 0000000000000000 000055bf1813f970 000055bf1813f950
+YMM08=0000000000000000 0000000000000000 0000000000000040 000000ff00000100
+YMM09=0000000000000000 0000000000000000 ffffff0000ffffff ffffffffffffffff
+YMM10=0000000000000000 0000000000000000 2020200000202020 2020202020202020
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

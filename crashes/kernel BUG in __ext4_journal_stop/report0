@@ -1,0 +1,625 @@
+loop5: detected capacity change from 0 to 512
+EXT4-fs error (device loop7): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+------------[ cut here ]------------
+kernel BUG at fs/ext4/ext4_jbd2.c:53!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 7 PID: 34330 Comm: syz-executor.7 Not tainted 6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888105ae7418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: ffffffff9aee6c39
+RDX: ffff888119e8e600 RSI: 0000000000000329 RDI: ffffffff9d724e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10210e45c5
+R10: ffff888108722e2b R11: ffff88810849a100 R12: ffffea000528b8c0
+R13: ffffffff9d724e20 R14: 0000000000000329 R15: ffff888100604708
+FS:  00007f841f153640(0000) GS:ffff8881f7380000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f841f152f88 CR3: 0000000146028001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_write_inline_data_end+0x39a/0x9d0 fs/ext4/inline.c:809
+ ext4_da_write_end+0x4b2/0xd10 fs/ext4/inode.c:3027
+ generic_perform_write+0x2f8/0x550 mm/filemap.c:3938
+ ext4_buffered_write_iter+0xfe/0x360 fs/ext4/file.c:299
+ ext4_file_write_iter+0x32f/0x1210 fs/ext4/file.c:698
+ call_write_iter include/linux/fs.h:2020 [inline]
+ do_iter_readv_writev+0x1d3/0x360 fs/read_write.c:735
+ do_iter_write+0x15e/0x710 fs/read_write.c:860
+ vfs_iter_write+0x7a/0xb0 fs/read_write.c:901
+ iter_file_splice_write+0x642/0xb50 fs/splice.c:736
+ do_splice_from fs/splice.c:933 [inline]
+ direct_splice_actor+0x119/0x180 fs/splice.c:1142
+ splice_direct_to_actor+0x2f4/0x8c0 fs/splice.c:1088
+ do_splice_direct+0x182/0x250 fs/splice.c:1194
+ do_sendfile+0x9d6/0xf50 fs/read_write.c:1254
+ __do_sys_sendfile64 fs/read_write.c:1322 [inline]
+ __se_sys_sendfile64 fs/read_write.c:1308 [inline]
+ __x64_sys_sendfile64+0x196/0x1e0 fs/read_write.c:1308
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x46/0xf0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f841fe0502d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f841f153028 EFLAGS: 00000246 ORIG_RAX: 0000000000000028
+RAX: ffffffffffffffda RBX: 00007f841ff41050 RCX: 00007f841fe0502d
+RDX: 0000000000000000 RSI: 0000000000000005 RDI: 0000000000000004
+RBP: 00007f841fe664a6 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000004 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007f841ff41050 R15: 00007f841f133000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888105ae7418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: ffffffff9aee6c39
+RDX: ffff888119e8e600 RSI: 0000000000000329 RDI: ffffffff9d724e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10210e45c5
+R10: ffff888108722e2b R11: ffff88810849a100 R12: ffffea000528b8c0
+R13: ffffffff9d724e20 R14: 0000000000000329 R15: ffff888100604708
+FS:  00007f841f153640(0000) GS:ffff8881f7380000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f841f152f88 CR3: 0000000146028001 CR4: 0000000000770ef0
+PKRU: 55555554
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+netlink: 44302 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop2: detected capacity change from 0 to 1024
+ext4: Bad value for 'max_batch_time'
+loop5: detected capacity change from 0 to 512
+netlink: 44302 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 44302 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop5: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 1024
+ext4: Bad value for 'max_batch_time'
+loop5: detected capacity change from 0 to 512
+netlink: 'syz-executor.6': attribute type 4 has an invalid length.
+loop2: detected capacity change from 0 to 1024
+ext4: Bad value for 'max_batch_time'
+loop5: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 1024
+ext4: Bad value for 'max_batch_time'
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=27 sclass=netlink_route_socket pid=34403 comm=syz-executor.1
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Warning: mounting with an experimental mount option 'dioread_nolock' for blocksize < PAGE_SIZE
+[EXT4 FS bs=1024, gc=1, bpg=32, ipg=32, mo=a064e01c, mo2=0000]
+System zones: 1-12
+netlink: 'syz-executor.6': attribute type 4 has an invalid length.
+netlink: 'syz-executor.6': attribute type 4 has an invalid length.
+netlink: 'syz-executor.6': attribute type 4 has an invalid length.
+netlink: 'syz-executor.6': attribute type 4 has an invalid length.
+EXT4-fs (loop1): ext4_process_orphan: truncating inode 12 to 60 bytes
+EXT4-fs (loop1): 1 truncate cleaned up
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=27 sclass=netlink_route_socket pid=34449 comm=syz-executor.1
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=27 sclass=netlink_route_socket pid=34450 comm=syz-executor.1
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Warning: mounting with an experimental mount option 'dioread_nolock' for blocksize < PAGE_SIZE
+[EXT4 FS bs=1024, gc=1, bpg=32, ipg=32, mo=a064e01c, mo2=0000]
+System zones: 1-12
+EXT4-fs (loop1): ext4_process_orphan: truncating inode 12 to 60 bytes
+EXT4-fs (loop1): 1 truncate cleaned up
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'W]i9×«^½Ù.
+rððu°¶ ï¶‹ÌÜ##H@íuQ÷ª>¥ÿÏÉòL[vÎŸ²D¦áé…Œ¥Y‹7¹Ë‚ñ3Ê¾F½N@æIÄ#B«>@{¦'
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'W]i9×«^½Ù.
+rððu°¶ ï¶‹ÌÜ##H@íuQ÷ª>¥ÿÏÉòL[vÎŸ²D¦áé…Œ¥Y‹7¹Ë‚ñ3Ê¾F½N@æIÄ#B«>@{¦'
+loop5: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir3760553734/syzkaller.VnIAPR/838/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'W]i9×«^½Ù.
+rððu°¶ ï¶‹ÌÜ##H@íuQ÷ª>¥ÿÏÉòL[vÎŸ²D¦áé…Œ¥Y‹7¹Ë‚ñ3Ê¾F½N@æIÄ#B«>@{¦'
+loop4: detected capacity change from 0 to 1024
+loop5: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir3760553734/syzkaller.VnIAPR/839/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=27 sclass=netlink_route_socket pid=34583 comm=syz-executor.6
+loop5: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir3760553734/syzkaller.VnIAPR/840/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+lo: entered promiscuous mode
+loop3: detected capacity change from 0 to 512
+lo: left promiscuous mode
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps block group descriptors
+EXT4-fs (loop3): ext4_check_descriptors: Inode bitmap for group 0 overlaps superblock
+EXT4-fs error (device loop3): __ext4_fill_super:5482: inode #2: comm syz-executor.3: iget: bad extended attribute block 2037609061
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop3): ext4_check_descriptors: Block bitmap for group 0 overlaps block group descriptors
+EXT4-fs (loop3): ext4_check_descriptors: Inode bitmap for group 0 overlaps superblock
+EXT4-fs error (device loop3): __ext4_fill_super:5482: inode #2: comm syz-executor.3: iget: bad extended attribute block 2037609061
+EXT4-fs (loop3): get root inode failed
+EXT4-fs (loop3): mount failed
+loop1: detected capacity change from 0 to 2048
+lo: entered promiscuous mode
+ext4: Unknown parameter 'team0'
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.5'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'nginit_itable'
+lo: left promiscuous mode
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'team0'
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'nginit_itable'
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'team0'
+netlink: 188 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter 'nginit_itable'
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+netlink: 188 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 12 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 188 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop1): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+EXT4-fs error (device loop1): ext4_read_inode_bitmap:139: comm syz-executor.1: Invalid inode bitmap blk 4 in block_group 0
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop3): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop3): 1 truncate cleaned up
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop1): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop3): __ext4_get_inode_loc:4386: comm syz-executor.3: Invalid inode table block 5 in block_group 0
+EXT4-fs error (device loop3): ext4_read_inode_bitmap:139: comm syz-executor.3: Invalid inode bitmap blk 4 in block_group 0
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+EXT4-fs error (device loop1): ext4_read_inode_bitmap:139: comm syz-executor.1: Invalid inode bitmap blk 4 in block_group 0
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm kworker/u16:12: Invalid inode table block 5 in block_group 0
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop1): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+EXT4-fs error (device loop1): ext4_read_inode_bitmap:139: comm syz-executor.1: Invalid inode bitmap blk 4 in block_group 0
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/685/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs: dax option not supported
+loop1: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 256
+loop2: detected capacity change from 0 to 512
+EXT4-fs: dax option not supported
+loop4: detected capacity change from 0 to 2048
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/686/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+FAT-fs (loop6): IO charset cp737 not found
+loop2: detected capacity change from 0 to 512
+EXT4-fs: dax option not supported
+loop6: detected capacity change from 0 to 256
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 2048
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/687/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+FAT-fs (loop6): IO charset cp737 not found
+9pnet_fd: Insufficient options for proto=fd
+loop6: detected capacity change from 0 to 256
+loop4: detected capacity change from 0 to 2048
+FAT-fs (loop6): IO charset cp737 not found
+9pnet_fd: Insufficient options for proto=fd
+9pnet_fd: Insufficient options for proto=fd
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop1): ext4_validate_block_bitmap:431: comm syz-executor.1: bg 0: block 46: invalid block bitmap
+loop3: detected capacity change from 0 to 512
+ext4: Unknown parameter '0000000000000000000000000000000000000000000000'
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop1): ext4_validate_block_bitmap:431: comm syz-executor.1: bg 0: block 46: invalid block bitmap
+loop3: detected capacity change from 0 to 512
+ext4: Unknown parameter '0000000000000000000000000000000000000000000000'
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+loop3: detected capacity change from 0 to 512
+ext4: Unknown parameter '0000000000000000000000000000000000000000000000'
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs error (device loop1): ext4_validate_block_bitmap:431: comm syz-executor.1: bg 0: block 46: invalid block bitmap
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=35222 comm=syz-executor.6
+IPv4: Oversized IP packet from 172.20.20.187
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/694/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): ext4_dirty_inode:5965: inode #2: comm syz-executor.1: mark_inode_dirty error
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=35295 comm=syz-executor.6
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): __ext4_ext_dirty:202: inode #2: comm syz-executor.1: mark_inode_dirty error
+cgroup: fork rejected by pids controller in /syz5
+IPv4: Oversized IP packet from 172.20.20.187
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=35312 comm=syz-executor.6
+IPv4: Oversized IP packet from 172.20.20.187
+loop1: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/695/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): ext4_dirty_inode:5965: inode #2: comm syz-executor.1: mark_inode_dirty error
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): __ext4_ext_dirty:202: inode #2: comm syz-executor.1: mark_inode_dirty error
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs error (device loop3): ext4_validate_block_bitmap:431: comm syz-executor.3: bg 0: block 5: invalid block bitmap
+EXT4-fs (loop3): 1 truncate cleaned up
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Bad value for 'commit'
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/696/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): ext4_dirty_inode:5965: inode #2: comm syz-executor.1: mark_inode_dirty error
+EXT4-fs error (device loop1): ext4_do_update_inode:5105: inode #2: comm syz-executor.1: corrupted inode contents
+EXT4-fs error (device loop1): __ext4_ext_dirty:202: inode #2: comm syz-executor.1: mark_inode_dirty error
+loop2: detected capacity change from 0 to 2048
+ext4: Unknown parameter './bus'
+loop5: detected capacity change from 0 to 512
+ext4: Bad value for 'commit'
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+loop5: detected capacity change from 0 to 512
+ext4: Bad value for 'commit'
+EXT4-fs error (device loop3): ext4_validate_block_bitmap:431: comm syz-executor.3: bg 0: block 5: invalid block bitmap
+EXT4-fs (loop3): 1 truncate cleaned up
+loop5: detected capacity change from 0 to 2048
+loop2: detected capacity change from 0 to 2048
+ext4: Unknown parameter './bus'
+9pnet_virtio: no channels available for device syz
+EXT4-fs error (device loop5): ext4_validate_block_bitmap:440: comm syz-executor.5: bg 0: block 234: padding at end of block bitmap is not set
+EXT4-fs (loop5): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 117
+EXT4-fs (loop5): This should not happen!! Data will be lost
+
+loop5: detected capacity change from 0 to 2048
+EXT4-fs warning (device loop5): ext4_multi_mount_protect:397: Unable to create kmmpd thread for loop5.
+loop5: detected capacity change from 0 to 2048
+9pnet_virtio: no channels available for device syz
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+loop6: detected capacity change from 0 to 2048
+EXT4-fs error (device loop5): ext4_validate_block_bitmap:440: comm syz-executor.5: bg 0: block 234: padding at end of block bitmap is not set
+EXT4-fs error (device loop3): ext4_validate_block_bitmap:431: comm syz-executor.3: bg 0: block 5: invalid block bitmap
+EXT4-fs (loop5): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 117
+EXT4-fs (loop5): This should not happen!! Data will be lost
+
+EXT4-fs (loop3): 1 truncate cleaned up
+loop6: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+loop5: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'ÿÿ'
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'ÿÿ'
+ext4 filesystem being mounted at /syzkaller-testdir1854999523/syzkaller.HfHmlT/124/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+IPv6: ip_vti0: Disabled Multicast RS
+------------[ cut here ]------------
+kernel BUG at fs/ext4/inode.c:2569!
+invalid opcode: 0000 [#2] PREEMPT SMP KASAN NOPTI
+CPU: 1 PID: 545 Comm: kworker/u16:12 Tainted: G      D            6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:7)
+RIP: 0010:ext4_do_writepages+0x1d04/0x2a30 fs/ext4/inode.c:2569
+Code: 00 fc ff df 48 c1 ea 03 44 89 64 24 68 80 3c 02 00 0f 84 9c f4 ff ff 4c 89 ff e8 c7 af d5 ff e9 8f f4 ff ff e8 4d ba a9 ff 90 <0f> 0b 4c 89 94 24 80 00 00 00 44 89 eb e8 3a ba a9 ff 48 8b 8c 24
+RSP: 0018:ffff8881191e7518 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88813c38e000 RCX: ffffffff9af4e0a3
+RDX: ffff888118bb3300 RSI: 0000000000000008 RDI: ffff8881006045e0
+RBP: ffff8881006045e0 R08: 0000000000000000 R09: ffffed10200c08bc
+R10: ffff8881006045e7 R11: dffffc0000000009 R12: 0000000000000001
+R13: ffff8881191e7718 R14: ffff8881006046b8 R15: ffff8881191e7a20
+FS:  0000000000000000(0000) GS:ffff8881f7080000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d225000 CR3: 00000001014f6001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_writepages+0x280/0x570 fs/ext4/inode.c:2774
+ do_writepages+0x181/0x5d0 mm/page-writeback.c:2553
+ __writeback_single_inode+0xa9/0x8e0 fs/fs-writeback.c:1625
+ writeback_sb_inodes+0x4a9/0xc50 fs/fs-writeback.c:1916
+ __writeback_inodes_wb+0xbc/0x230 fs/fs-writeback.c:1987
+ wb_writeback+0x330/0x740 fs/fs-writeback.c:2094
+ wb_check_background_flush fs/fs-writeback.c:2164 [inline]
+ wb_do_writeback fs/fs-writeback.c:2252 [inline]
+ wb_workfn+0x68a/0xb90 fs/fs-writeback.c:2279
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888105ae7418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: ffffffff9aee6c39
+RDX: ffff888119e8e600 RSI: 0000000000000329 RDI: ffffffff9d724e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10210e45c5
+R10: ffff888108722e2b R11: ffff88810849a100 R12: ffffea000528b8c0
+R13: ffffffff9d724e20 R14: 0000000000000329 R15: ffff888100604708
+FS:  0000000000000000(0000) GS:ffff8881f7080000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d225000 CR3: 00000001014f6001 CR4: 0000000000770ef0
+PKRU: 55555554
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 545 at kernel/exit.c:818 do_exit+0x1842/0x23d0 kernel/exit.c:818
+Modules linked in:
+CPU: 1 PID: 545 Comm: kworker/u16:12 Tainted: G      D            6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:7)
+RIP: 0010:do_exit+0x1842/0x23d0 kernel/exit.c:818
+Code: c1 e0 2a 48 c1 ea 03 80 3c 02 00 0f 85 37 0a 00 00 48 8b bb 70 05 00 00 31 f6 e8 49 9d ff ff e9 3c f7 ff ff e8 af 96 2b 00 90 <0f> 0b 90 e9 a8 e9 ff ff e8 a1 96 2b 00 4c 89 e6 bf 05 06 00 00 e8
+RSP: 0018:ffff8881191e7e50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff888118bb3300 RCX: ffffffff9a730441
+RDX: ffff888118bb3300 RSI: 0000000000000004 RDI: ffff888118bb3b58
+RBP: ffff888118ee8500 R08: 0000000000000001 R09: ffffed102323cfbf
+R10: 0000000000000003 R11: 3030303030302043 R12: 000000000000000b
+R13: ffff888118bb3a70 R14: ffff88810be23d40 R15: ffff888118bb3300
+FS:  0000000000000000(0000) GS:ffff8881f7080000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d225000 CR3: 00000001014f6001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ make_task_dead+0x11b/0x340 kernel/exit.c:980
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1472
+RIP: 0000:0x0
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+RSP: 0000:0000000000000000 EFLAGS: 00000000 ORIG_RAX: 0000000000000000
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+ </TASK>
+---[ end trace 0000000000000000 ]---
+loop5: detected capacity change from 0 to 2048
+loop2: detected capacity change from 0 to 512
+ext4: Unknown parameter 'ÿÿ'
+ext4 filesystem being mounted at /syzkaller-testdir1854999523/syzkaller.HfHmlT/125/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+validate_nla: 64 callbacks suppressed
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+loop2: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1854999523/syzkaller.HfHmlT/126/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+netlink: 'syz-executor.5': attribute type 4 has an invalid length.
+netlink: 'syz-executor.7': attribute type 4 has an invalid length.
+netlink: 'syz-executor.7': attribute type 4 has an invalid length.
+netlink: 'syz-executor.7': attribute type 4 has an invalid length.
+netlink: 'syz-executor.7': attribute type 4 has an invalid length.
+pimreg (unregistering): left allmulticast mode
+loop3: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'nodelallã'
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop1): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop1): 1 truncate cleaned up
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+EXT4-fs warning (device loop1): ext4_read_inode_bitmap:147: Cannot read inode bitmap - block_group = 0, inode_bitmap = 1975409586
+EXT4-fs (loop2): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop2): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop2): 1 truncate cleaned up
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop2): warning: checktime reached, running e2fsck is recommended
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop1): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop2): 1 truncate cleaned up
+EXT4-fs (loop1): 1 truncate cleaned up
+lo (unregistering): left allmulticast mode
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+EXT4-fs warning (device loop1): ext4_read_inode_bitmap:147: Cannot read inode bitmap - block_group = 0, inode_bitmap = 1975409586
+EXT4-fs warning (device loop1): ext4_read_inode_bitmap:147: Cannot read inode bitmap - block_group = 0, inode_bitmap = 1975409586
+EXT4-fs error (device loop1): __ext4_get_inode_loc:4386: comm syz-executor.1: Invalid inode table block 5 in block_group 0
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop2): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop2): 1 truncate cleaned up
+cgroup: fork rejected by pids controller in /syz1
+loop2: detected capacity change from 0 to 2048
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'com.apple.system.Security'
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'com.apple.system.Security'
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'com.apple.system.Security'
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop1: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'com.apple.system.Security'
+9pnet_fd: p9_fd_create_tcp (36361): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_unix (36361): problem connecting socket: ./file0: -111
+9pnet_fd: p9_fd_create_tcp (36377): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_unix (36376): problem connecting socket: ./file0: -111
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_unix (36396): problem connecting socket: ./file0: -111
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+9pnet_fd: p9_fd_create_tcp (36393): problem connecting socket to 127.0.0.1
+loop1: detected capacity change from 0 to 2048
+loop1: detected capacity change from 0 to 2048
+loop1: detected capacity change from 0 to 2048
+__nla_validate_parse: 20 callbacks suppressed
+netlink: 768 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 768 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 768 bytes leftover after parsing attributes in process `syz-executor.1'.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36605 comm=syz-executor.1
+netlink: 64122 bytes leftover after parsing attributes in process `syz-executor.1'.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36683 comm=syz-executor.1
+netlink: 64122 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): ext4_ext_check_inode:520: inode #15: comm syz-executor.1: pblk 0 bad header/extent: invalid eh_entries - magic f30a, entries 24833, max 4(4), depth 0(0)
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/754/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): ext4_ext_check_inode:520: inode #15: comm syz-executor.1: pblk 0 bad header/extent: invalid eh_entries - magic f30a, entries 24833, max 4(4), depth 0(0)
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/755/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop1: detected capacity change from 0 to 512
+EXT4-fs error (device loop1): ext4_ext_check_inode:520: inode #15: comm syz-executor.1: pblk 0 bad header/extent: invalid eh_entries - magic f30a, entries 24833, max 4(4), depth 0(0)
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+ext4 filesystem being mounted at /syzkaller-testdir1060265325/syzkaller.q2IM5G/756/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop2): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop2): 1 truncate cleaned up
+EXT4-fs mount: 203 callbacks suppressed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop2): __ext4_get_inode_loc:4386: comm syz-executor.2: Invalid inode table block 5 in block_group 0
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop2): mounting ext3 file system using the ext4 subsystem
+EXT4-fs error (device loop2): ext4_read_inode_bitmap:139: comm syz-executor.2: Invalid inode bitmap blk 4 in block_group 0
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop2): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop2): 1 truncate cleaned up
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop2): ext4_map_blocks:577: inode #2: block 13: comm syz-executor.2: lblock 0 mapped to illegal pblock 13 (length 1)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs: Warning: mounting with an experimental mount option 'dioread_nolock' for blocksize < PAGE_SIZE
+[EXT4 FS bs=1024, gc=1, bpg=8192, ipg=32, mo=a842c018, mo2=0003]
+System zones: 1-12
+EXT4-fs (loop2): orphan cleanup on readonly fs
+EXT4-fs (loop2): ext4_process_orphan: deleting unreferenced inode 15
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs: Warning: mounting with an experimental mount option 'dioread_nolock' for blocksize < PAGE_SIZE
+[EXT4 FS bs=1024, gc=1, bpg=8192, ipg=32, mo=a842c018, mo2=0003]
+System zones: 1-12
+EXT4-fs (loop2): orphan cleanup on readonly fs
+EXT4-fs (loop2): ext4_process_orphan: deleting unreferenced inode 15
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 2048
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+I/O error, dev loop2, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2

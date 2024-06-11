@@ -1,0 +1,838 @@
+Extracting prog: 1m59.108584334s
+Minimizing prog: 8m31.392188306s
+Simplifying prog options: 0s
+Extracting C: 19.99001962s
+Simplifying C: 1m35.941404239s
+
+
+318 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 297 programs
+single: executing 8 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ptrace$PTRACE_SECCOMP_GET_FILTER-shmget$private-syz_clone-prlimit64-prlimit64-sched_rr_get_interval-sched_getaffinity-setrlimit-sched_rr_get_interval-shmat-syz_open_dev$sg-ptrace$PTRACE_SECCOMP_GET_FILTER-ioctl$SG_BLKTRACETEARDOWN
+detailed listing:
+executing program 0:
+ptrace$PTRACE_SECCOMP_GET_FILTER(0x420c, 0x0, 0x5, 0x0)
+r0 = shmget$private(0x0, 0x1000, 0x54000000, &(0x7f0000fff000/0x1000)=nil)
+r1 = syz_clone(0x80000080, 0x0, 0x0, &(0x7f0000000100), 0x0, 0x0)
+prlimit64(r1, 0xd, &(0x7f0000000000)={0x5, 0x8}, &(0x7f0000000040))
+prlimit64(0x0, 0x3, 0x0, 0x0)
+sched_rr_get_interval(0x0, 0x0)
+sched_getaffinity(0x0, 0x0, 0x0)
+setrlimit(0x0, 0x0)
+sched_rr_get_interval(0xffffffffffffffff, &(0x7f000000b500))
+shmat(r0, &(0x7f0000fff000/0x1000)=nil, 0x4000)
+r2 = syz_open_dev$sg(&(0x7f0000000080), 0x0, 0x0)
+ptrace$PTRACE_SECCOMP_GET_FILTER(0x420c, r1, 0x8000, &(0x7f0000000140)=""/254)
+ioctl$SG_BLKTRACETEARDOWN(r2, 0x1276, 0x0)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$nl_generic-syz_genetlink_get_family_id$batadv-syz_genetlink_get_family_id$batadv-sendmsg$BATADV_CMD_SET_VLAN-syz_genetlink_get_family_id$batadv-syz_genetlink_get_family_id$batadv
+detailed listing:
+executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+syz_genetlink_get_family_id$batadv(0x0, 0xffffffffffffffff)
+r1 = syz_genetlink_get_family_id$batadv(&(0x7f0000000000), r0)
+sendmsg$BATADV_CMD_SET_VLAN(r0, &(0x7f00000004c0)={0x0, 0x0, &(0x7f0000000480)={&(0x7f0000000040)=ANY=[@ANYBLOB="14000000573ef225ef73389ebcd3e7ba7493731dec2c1f72a6e9ea4268f7601231cdcc6e4e3282bb100e0329572463da8e9a2d18d1008c849b58d5a5005ab1dc88a75112d2b76ccb0f6d", @ANYRES16=r1, @ANYBLOB="000000000000fedbdf2512000000"], 0x14}}, 0x0)
+syz_genetlink_get_family_id$batadv(&(0x7f0000000700), r0) (async)
+syz_genetlink_get_family_id$batadv(&(0x7f0000000700), r0)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): gettid-socketpair$unix-ioctl$int_in-recvmmsg-fcntl$setsig-fcntl$setsig-poll-ioctl$PTP_CLOCK_GETCAPS-dup2-getpid-socketpair$unix-socketpair$unix-sendmmsg$unix-recvmmsg-fcntl$setown-fcntl$setown-tkill-tkill
+detailed listing:
+executing program 0:
+r0 = gettid()
+socketpair$unix(0x1, 0x5, 0x0, &(0x7f0000029000)={<r1=>0xffffffffffffffff, <r2=>0xffffffffffffffff})
+ioctl$int_in(r1, 0x5452, &(0x7f0000b28000)=0x3e)
+recvmmsg(r1, &(0x7f0000000400)=[{{0x0, 0x0, 0x0}}], 0x300, 0x0, 0x0)
+fcntl$setsig(r1, 0xa, 0x12) (async)
+fcntl$setsig(r1, 0xa, 0x12)
+poll(&(0x7f0000b2c000)=[{r2}], 0x1, 0xfffffffffffffff8)
+ioctl$PTP_CLOCK_GETCAPS(0xffffffffffffffff, 0x80503d01, &(0x7f0000000000))
+dup2(r1, r2)
+r3 = getpid()
+socketpair$unix(0x1, 0x2, 0x0, &(0x7f0000000200)) (async)
+socketpair$unix(0x1, 0x2, 0x0, &(0x7f0000000200)={<r4=>0xffffffffffffffff, <r5=>0xffffffffffffffff})
+sendmmsg$unix(r5, &(0x7f00000bd000), 0x318, 0x0)
+recvmmsg(r4, &(0x7f00000000c0), 0x10106, 0x2, 0x0)
+fcntl$setown(r2, 0x8, r3) (async)
+fcntl$setown(r2, 0x8, r3)
+tkill(r0, 0x14) (async)
+tkill(r0, 0x14)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_FAIL-ioctl$RTC_SET_TIME-openat$sr-ioctl$AUTOFS_DEV_IOCTL_FAIL-ioctl$RTC_SET_TIME-openat$sr
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_FAIL(0xffffffffffffffff, 0xc0189377, &(0x7f0000000000)={{0x1, 0x1, 0x18, <r0=>0xffffffffffffffff, {0x6, 0x20b6}}, './file0\x00'})
+ioctl$RTC_SET_TIME(r0, 0x4024700a, &(0x7f0000000040)={0x1d, 0x2d, 0x0, 0x1f, 0xb, 0x7, 0x2, 0x5d})
+openat$sr(0xffffffffffffff9c, &(0x7f00000002c0), 0x801, 0x0)
+ioctl$AUTOFS_DEV_IOCTL_FAIL(0xffffffffffffffff, 0xc0189377, &(0x7f0000000000)={{0x1, 0x1, 0x18, 0xffffffffffffffff, {0x6, 0x20b6}}, './file0\x00'}) (async)
+ioctl$RTC_SET_TIME(r0, 0x4024700a, &(0x7f0000000040)={0x1d, 0x2d, 0x0, 0x1f, 0xb, 0x7, 0x2, 0x5d}) (async)
+openat$sr(0xffffffffffffff9c, &(0x7f00000002c0), 0x801, 0x0) (async)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int-ioctl$EXT4_IOC_CLEAR_ES_CACHE-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+r3 = openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r5 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r5, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r5, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r6 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r7 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r7, 0x0)
+ftruncate(r7, 0x3)
+write$binfmt_elf64(r6, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r4, &(0x7f0000000200), 0xf000)
+ioctl$EXT4_IOC_CLEAR_ES_CACHE(r0, 0x6628)
+write$cgroup_int(r3, &(0x7f0000000200)=0x200000ff, 0x12)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+single: successfully extracted reproducer
+found reproducer with 19 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int-ioctl$EXT4_IOC_CLEAR_ES_CACHE
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r6 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r6, 0x0)
+ftruncate(r6, 0x3)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+ioctl$EXT4_IOC_CLEAR_ES_CACHE(r0, 0x6628)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r6 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r6, 0x0)
+ftruncate(r6, 0x3)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r3, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r3, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r4 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r5 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r5, 0x0)
+ftruncate(r5, 0x3)
+write$binfmt_elf64(r4, &(0x7f0000000580)=ANY=[], 0x1ab0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r5 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r5, 0x0)
+ftruncate(r5, 0x3)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r6 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r6, 0x0)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-memfd_secret-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r6 = memfd_secret(0x0)
+ftruncate(r6, 0x3)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-creat-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, 0xffffffffffffffff, 0x0)
+ftruncate(0xffffffffffffffff, 0x3)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-setsockopt$inet_MCAST_JOIN_GROUP-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+setsockopt$inet_MCAST_JOIN_GROUP(r4, 0x0, 0x2a, &(0x7f0000000100)={0xcb1, {{0x2, 0x4e22, @loopback}}}, 0x88)
+r5 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r5, 0x0)
+ftruncate(r5, 0x3)
+write$binfmt_elf64(0xffffffffffffffff, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-ioctl$FITRIM-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+ioctl$FITRIM(r4, 0xc0185879, &(0x7f0000000000)={0xd56d, 0x40000000000004})
+r5 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r6 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r6, 0x0)
+ftruncate(r6, 0x3)
+write$binfmt_elf64(r5, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='blkio.bfq.sectors_recursive\x00', 0x275a, 0x0)
+r4 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r5 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r5, 0x0)
+ftruncate(r5, 0x3)
+write$binfmt_elf64(r4, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r4 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r5 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r5, 0x0)
+ftruncate(r5, 0x3)
+write$binfmt_elf64(r4, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r3, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r2 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r2, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r1, 0x40086602, &(0x7f00000000c0))
+openat$cgroup_ro(r0, &(0x7f0000000080)='memory.events\x00', 0x7a05, 0x1700)
+r3 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r4 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r4, 0x0)
+ftruncate(r4, 0x3)
+write$binfmt_elf64(r3, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(0xffffffffffffffff, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-ioctl$FS_IOC_SETFLAGS-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r1 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r1, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+ioctl$FS_IOC_SETFLAGS(r0, 0x40086602, &(0x7f00000000c0))
+r2 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r3 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r4 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r4, 0x0)
+ftruncate(r4, 0x3)
+write$binfmt_elf64(r3, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r2, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-ioctl$sock_inet_SIOCADDRT-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r0 = socket$inet(0x2, 0x3, 0x8d)
+ioctl$sock_inet_SIOCADDRT(r0, 0x890b, &(0x7f0000000080)={0x0, {0x2, 0x0, @loopback}, {0x2, 0x0, @multicast2}, {0x2, 0x0, @broadcast}, 0x2ca})
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r2 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r3 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r3, 0x0)
+ftruncate(r3, 0x3)
+write$binfmt_elf64(r2, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r1, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-socket$inet-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+socket$inet(0x2, 0x3, 0x8d)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-unshare-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+unshare(0x40000000)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000002c0)='memory.events\x00', 0x7a05, 0x1700)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, 0x0, 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, 0x0, 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(0x0, 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, 0x0, 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+detailed listing:
+executing program 0:
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, 0x0, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$cgroup_ro-openat$cgroup_ro-creat-memfd_secret-mmap$IORING_OFF_SQ_RING-ftruncate-write$binfmt_elf64-write$cgroup_int
+program crashed: BUG: unable to handle kernel paging request in swiotlb_bounce
+reproducing took 12m26.432224408s
+repro crashed as (corrupted=false):
+audit: type=1400 audit(1710177382.840:7): avc:  denied  { execmem } for  pid=294 comm="syz-executor240" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+BUG: unable to handle page fault for address: ffff8881040c0200
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 7ca01067 P4D 7ca01067 PUD 100915063 PMD 104087063 PTE 800ffffefbf3f060
+Oops: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 5 PID: 294 Comm: syz-executor240 Not tainted 6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff888111fdee98 EFLAGS: 00010093
+RAX: ffff8880bee4b000 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881040c0200 RDI: ffff8880bee4b000
+RBP: ffff888100f300b8 R08: 0000000000000000 R09: fffffbfff4462b00
+R10: ffffffffa2315807 R11: 00000000000b1008 R12: ffff8881040c0200
+R13: 0000000000000e00 R14: ffff8880bee4b000 R15: 0000000000000000
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ swiotlb_bounce+0x2ed/0x510 kernel/dma/swiotlb.c:899
+ swiotlb_tbl_map_single+0xc2b/0xf90 kernel/dma/swiotlb.c:1343
+ swiotlb_map+0xde/0x6e0 kernel/dma/swiotlb.c:1480
+ dma_direct_map_page kernel/dma/direct.h:103 [inline]
+ dma_direct_map_sg+0x3d8/0x840 kernel/dma/direct.c:492
+ __dma_map_sg_attrs+0xbb/0x1d0 kernel/dma/mapping.c:199
+ dma_map_sg_attrs+0x34/0x50 kernel/dma/mapping.c:236
+ ata_sg_setup drivers/ata/libata-core.c:4741 [inline]
+ ata_qc_issue+0x5e9/0xb30 drivers/ata/libata-core.c:5043
+ ata_scsi_translate drivers/ata/libata-scsi.c:1717 [inline]
+ __ata_scsi_queuecmd+0x890/0x1150 drivers/ata/libata-scsi.c:4153
+ ata_scsi_queuecmd+0x132/0x200 drivers/ata/libata-scsi.c:4198
+ scsi_dispatch_cmd drivers/scsi/scsi_lib.c:1518 [inline]
+ scsi_queue_rq+0xb73/0x2bd0 drivers/scsi/scsi_lib.c:1760
+ blk_mq_dispatch_rq_list+0x3b6/0x1b50 block/blk-mq.c:2070
+ __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
+ blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
+ __blk_mq_sched_dispatch_requests+0xbf4/0x13c0 block/blk-mq-sched.c:309
+ blk_mq_sched_dispatch_requests+0xbb/0x110 block/blk-mq-sched.c:331
+ blk_mq_run_hw_queue+0x443/0x530 block/blk-mq.c:2285
+ blk_mq_dispatch_plug_list block/blk-mq.c:2785 [inline]
+ blk_mq_flush_plug_list.part.0+0x4e4/0x1330 block/blk-mq.c:2833
+ blk_mq_flush_plug_list+0x51/0x60 block/blk-mq.c:2803
+ __blk_flush_plug+0x25d/0x3e0 block/blk-core.c:1176
+ blk_finish_plug block/blk-core.c:1200 [inline]
+ blk_finish_plug+0x54/0xa0 block/blk-core.c:1197
+ __iomap_dio_rw+0xc23/0x16a0 fs/iomap/direct-io.c:667
+ iomap_dio_rw+0x40/0x90 fs/iomap/direct-io.c:748
+ ext4_dio_write_iter fs/ext4/file.c:577 [inline]
+ ext4_file_write_iter+0x96c/0x1210 fs/ext4/file.c:696
+ call_write_iter include/linux/fs.h:2087 [inline]
+ new_sync_write fs/read_write.c:497 [inline]
+ vfs_write+0x9c1/0xd10 fs/read_write.c:590
+ ksys_write+0x104/0x210 fs/read_write.c:643
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fea76bac54d
+Code: 28 c3 e8 56 20 00 00 66 0f 1f 44 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fff2b6aa998 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007fff2b6aa9a8 RCX: 00007fea76bac54d
+RDX: 000000000000f000 RSI: 0000000020000200 RDI: 0000000000000004
+RBP: 00007fff2b6aa9a0 R08: 00007fff2b6aa9a0 R09: 00007fea76b65c60
+R10: 00007fff2b6aa9a0 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff2b6aac38 R14: 00007fea76c29530 R15: 0000000000000001
+ </TASK>
+Modules linked in:
+CR2: ffff8881040c0200
+---[ end trace 0000000000000000 ]---
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff888111fdee98 EFLAGS: 00010093
+RAX: ffff8880bee4b000 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881040c0200 RDI: ffff8880bee4b000
+RBP: ffff888100f300b8 R08: 0000000000000000 R09: fffffbfff4462b00
+R10: ffffffffa2315807 R11: 00000000000b1008 R12: ffff8881040c0200
+R13: 0000000000000e00 R14: ffff8880bee4b000 R15: 0000000000000000
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+note: syz-executor240[294] exited with irqs disabled
+note: syz-executor240[294] exited with preempt_count 1
+------------[ cut here ]------------
+WARNING: CPU: 5 PID: 294 at kernel/exit.c:820 do_exit+0x1840/0x23d0 kernel/exit.c:820
+Modules linked in:
+CPU: 5 PID: 294 Comm: syz-executor240 Tainted: G      D            6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:do_exit+0x1840/0x23d0 kernel/exit.c:820
+Code: c1 e0 2a 48 c1 ea 03 80 3c 02 00 0f 85 37 0a 00 00 48 8b bb 70 05 00 00 31 f6 e8 eb 9d ff ff e9 3c f7 ff ff e8 11 a0 2b 00 90 <0f> 0b 90 e9 aa e9 ff ff e8 03 a0 2b 00 4c 89 e6 bf 05 06 00 00 e8
+RSP: 0018:ffff888111fdfe50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88810ce68000 RCX: ffffffff9cd3406f
+RDX: ffff88810ce68000 RSI: 0000000000000004 RDI: ffff88810ce68858
+RBP: ffff8881172cc100 R08: 0000000000000001 R09: ffffed10223fbfbf
+R10: 0000000000000003 R11: 7973203a65746f6e R12: 0000000000000009
+R13: ffff88810ce68770 R14: ffff8881172c71c0 R15: ffffffff9fe7a220
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ make_task_dead+0x11b/0x340 kernel/exit.c:982
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1494
+RIP: 0033:0x7fea76bac54d
+Code: 28 c3 e8 56 20 00 00 66 0f 1f 44 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fff2b6aa998 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007fff2b6aa9a8 RCX: 00007fea76bac54d
+RDX: 000000000000f000 RSI: 0000000020000200 RDI: 0000000000000004
+RBP: 00007fff2b6aa9a0 R08: 00007fff2b6aa9a0 R09: 00007fea76b65c60
+R10: 00007fff2b6aa9a0 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff2b6aac38 R14: 00007fea76c29530 R15: 0000000000000001
+ </TASK>
+---[ end trace 0000000000000000 ]---
+syz-executor240 (294) used greatest stack depth: 23984 bytes left
+----------------
+Code disassembly (best guess):
+   0:	e9 f4 fd ff ff       	jmp    0xfffffdf9
+   5:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+   c:	00 00
+   e:	90                   	nop
+   f:	90                   	nop
+  10:	90                   	nop
+  11:	90                   	nop
+  12:	90                   	nop
+  13:	90                   	nop
+  14:	90                   	nop
+  15:	90                   	nop
+  16:	90                   	nop
+  17:	90                   	nop
+  18:	90                   	nop
+  19:	90                   	nop
+  1a:	90                   	nop
+  1b:	90                   	nop
+  1c:	90                   	nop
+  1d:	90                   	nop
+  1e:	f3 0f 1e fa          	endbr64
+  22:	66 90                	xchg   %ax,%ax
+  24:	48 89 f8             	mov    %rdi,%rax
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 58 55 32 00       	jmp    0x325589
+  31:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00 00
+  3c:	66 90                	xchg   %ax,%ax
+  3e:	90                   	nop
+  3f:	90                   	nop
+
+final repro crashed as (corrupted=false):
+audit: type=1400 audit(1710177382.840:7): avc:  denied  { execmem } for  pid=294 comm="syz-executor240" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+BUG: unable to handle page fault for address: ffff8881040c0200
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 7ca01067 P4D 7ca01067 PUD 100915063 PMD 104087063 PTE 800ffffefbf3f060
+Oops: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 5 PID: 294 Comm: syz-executor240 Not tainted 6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff888111fdee98 EFLAGS: 00010093
+RAX: ffff8880bee4b000 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881040c0200 RDI: ffff8880bee4b000
+RBP: ffff888100f300b8 R08: 0000000000000000 R09: fffffbfff4462b00
+R10: ffffffffa2315807 R11: 00000000000b1008 R12: ffff8881040c0200
+R13: 0000000000000e00 R14: ffff8880bee4b000 R15: 0000000000000000
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ swiotlb_bounce+0x2ed/0x510 kernel/dma/swiotlb.c:899
+ swiotlb_tbl_map_single+0xc2b/0xf90 kernel/dma/swiotlb.c:1343
+ swiotlb_map+0xde/0x6e0 kernel/dma/swiotlb.c:1480
+ dma_direct_map_page kernel/dma/direct.h:103 [inline]
+ dma_direct_map_sg+0x3d8/0x840 kernel/dma/direct.c:492
+ __dma_map_sg_attrs+0xbb/0x1d0 kernel/dma/mapping.c:199
+ dma_map_sg_attrs+0x34/0x50 kernel/dma/mapping.c:236
+ ata_sg_setup drivers/ata/libata-core.c:4741 [inline]
+ ata_qc_issue+0x5e9/0xb30 drivers/ata/libata-core.c:5043
+ ata_scsi_translate drivers/ata/libata-scsi.c:1717 [inline]
+ __ata_scsi_queuecmd+0x890/0x1150 drivers/ata/libata-scsi.c:4153
+ ata_scsi_queuecmd+0x132/0x200 drivers/ata/libata-scsi.c:4198
+ scsi_dispatch_cmd drivers/scsi/scsi_lib.c:1518 [inline]
+ scsi_queue_rq+0xb73/0x2bd0 drivers/scsi/scsi_lib.c:1760
+ blk_mq_dispatch_rq_list+0x3b6/0x1b50 block/blk-mq.c:2070
+ __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
+ blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
+ __blk_mq_sched_dispatch_requests+0xbf4/0x13c0 block/blk-mq-sched.c:309
+ blk_mq_sched_dispatch_requests+0xbb/0x110 block/blk-mq-sched.c:331
+ blk_mq_run_hw_queue+0x443/0x530 block/blk-mq.c:2285
+ blk_mq_dispatch_plug_list block/blk-mq.c:2785 [inline]
+ blk_mq_flush_plug_list.part.0+0x4e4/0x1330 block/blk-mq.c:2833
+ blk_mq_flush_plug_list+0x51/0x60 block/blk-mq.c:2803
+ __blk_flush_plug+0x25d/0x3e0 block/blk-core.c:1176
+ blk_finish_plug block/blk-core.c:1200 [inline]
+ blk_finish_plug+0x54/0xa0 block/blk-core.c:1197
+ __iomap_dio_rw+0xc23/0x16a0 fs/iomap/direct-io.c:667
+ iomap_dio_rw+0x40/0x90 fs/iomap/direct-io.c:748
+ ext4_dio_write_iter fs/ext4/file.c:577 [inline]
+ ext4_file_write_iter+0x96c/0x1210 fs/ext4/file.c:696
+ call_write_iter include/linux/fs.h:2087 [inline]
+ new_sync_write fs/read_write.c:497 [inline]
+ vfs_write+0x9c1/0xd10 fs/read_write.c:590
+ ksys_write+0x104/0x210 fs/read_write.c:643
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fea76bac54d
+Code: 28 c3 e8 56 20 00 00 66 0f 1f 44 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fff2b6aa998 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007fff2b6aa9a8 RCX: 00007fea76bac54d
+RDX: 000000000000f000 RSI: 0000000020000200 RDI: 0000000000000004
+RBP: 00007fff2b6aa9a0 R08: 00007fff2b6aa9a0 R09: 00007fea76b65c60
+R10: 00007fff2b6aa9a0 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff2b6aac38 R14: 00007fea76c29530 R15: 0000000000000001
+ </TASK>
+Modules linked in:
+CR2: ffff8881040c0200
+---[ end trace 0000000000000000 ]---
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff888111fdee98 EFLAGS: 00010093
+RAX: ffff8880bee4b000 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881040c0200 RDI: ffff8880bee4b000
+RBP: ffff888100f300b8 R08: 0000000000000000 R09: fffffbfff4462b00
+R10: ffffffffa2315807 R11: 00000000000b1008 R12: ffff8881040c0200
+R13: 0000000000000e00 R14: ffff8880bee4b000 R15: 0000000000000000
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+note: syz-executor240[294] exited with irqs disabled
+note: syz-executor240[294] exited with preempt_count 1
+------------[ cut here ]------------
+WARNING: CPU: 5 PID: 294 at kernel/exit.c:820 do_exit+0x1840/0x23d0 kernel/exit.c:820
+Modules linked in:
+CPU: 5 PID: 294 Comm: syz-executor240 Tainted: G      D            6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:do_exit+0x1840/0x23d0 kernel/exit.c:820
+Code: c1 e0 2a 48 c1 ea 03 80 3c 02 00 0f 85 37 0a 00 00 48 8b bb 70 05 00 00 31 f6 e8 eb 9d ff ff e9 3c f7 ff ff e8 11 a0 2b 00 90 <0f> 0b 90 e9 aa e9 ff ff e8 03 a0 2b 00 4c 89 e6 bf 05 06 00 00 e8
+RSP: 0018:ffff888111fdfe50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88810ce68000 RCX: ffffffff9cd3406f
+RDX: ffff88810ce68000 RSI: 0000000000000004 RDI: ffff88810ce68858
+RBP: ffff8881172cc100 R08: 0000000000000001 R09: ffffed10223fbfbf
+R10: 0000000000000003 R11: 7973203a65746f6e R12: 0000000000000009
+R13: ffff88810ce68770 R14: ffff8881172c71c0 R15: ffffffff9fe7a220
+FS:  0000555555b2b480(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881040c0200 CR3: 00000001153b4001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ make_task_dead+0x11b/0x340 kernel/exit.c:982
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1494
+RIP: 0033:0x7fea76bac54d
+Code: 28 c3 e8 56 20 00 00 66 0f 1f 44 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fff2b6aa998 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007fff2b6aa9a8 RCX: 00007fea76bac54d
+RDX: 000000000000f000 RSI: 0000000020000200 RDI: 0000000000000004
+RBP: 00007fff2b6aa9a0 R08: 00007fff2b6aa9a0 R09: 00007fea76b65c60
+R10: 00007fff2b6aa9a0 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff2b6aac38 R14: 00007fea76c29530 R15: 0000000000000001
+ </TASK>
+---[ end trace 0000000000000000 ]---
+syz-executor240 (294) used greatest stack depth: 23984 bytes left
+----------------
+Code disassembly (best guess):
+   0:	e9 f4 fd ff ff       	jmp    0xfffffdf9
+   5:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+   c:	00 00
+   e:	90                   	nop
+   f:	90                   	nop
+  10:	90                   	nop
+  11:	90                   	nop
+  12:	90                   	nop
+  13:	90                   	nop
+  14:	90                   	nop
+  15:	90                   	nop
+  16:	90                   	nop
+  17:	90                   	nop
+  18:	90                   	nop
+  19:	90                   	nop
+  1a:	90                   	nop
+  1b:	90                   	nop
+  1c:	90                   	nop
+  1d:	90                   	nop
+  1e:	f3 0f 1e fa          	endbr64
+  22:	66 90                	xchg   %ax,%ax
+  24:	48 89 f8             	mov    %rdi,%rax
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 58 55 32 00       	jmp    0x325589
+  31:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00 00
+  3c:	66 90                	xchg   %ax,%ax
+  3e:	90                   	nop
+  3f:	90                   	nop
+

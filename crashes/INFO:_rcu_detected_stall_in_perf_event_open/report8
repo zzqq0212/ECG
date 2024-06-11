@@ -1,0 +1,113 @@
+rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+rcu: 	0-....: (1 GPs behind) idle=5b7c/1/0x4000000000000000 softirq=152924/152925 fqs=25649
+rcu: 	(detected by 3, t=105003 jiffies, g=99561, q=8473 ncpus=4)
+Sending NMI from CPU 3 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 PID: 5365 Comm: syz-executor.4 Not tainted 6.5.0 #14
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:native_apic_mem_write+0xc/0x20 arch/x86/include/asm/apic.h:110
+Code: 1f 00 b8 01 00 00 00 e9 b2 82 03 03 66 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 89 ff 89 b7 00 c0 5f ff <e9> 8f 82 03 03 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 90 90
+RSP: 0018:ffff8881f7009908 EFLAGS: 00000046
+RAX: ffffffffb890bbe0 RBX: ffffffffbca6bcc0 RCX: ffffffffb891a191
+RDX: 1ffffffff794d799 RSI: 0000000000000000 RDI: 00000000000000b0
+RBP: ffff8881f7009938 R08: 0000000000000001 R09: ffffed103ee05059
+R10: ffff8881f70282cf R11: 0000000000000000 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+FS:  00007fdaf8a2a640(0000) GS:ffff8881f7000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffe86e985d8 CR3: 00000001059da005 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <IRQ>
+ apic_eoi arch/x86/include/asm/apic.h:399 [inline]
+ ack_APIC_irq arch/x86/include/asm/apic.h:445 [inline]
+ __sysvec_irq_work+0x55/0x2a0 arch/x86/kernel/irq_work.c:19
+ sysvec_irq_work+0x33/0x90 arch/x86/kernel/irq_work.c:17
+ asm_sysvec_irq_work+0x1a/0x20 arch/x86/include/asm/idtentry.h:671
+RIP: 0010:get_current arch/x86/include/asm/current.h:41 [inline]
+RIP: 0010:__rcu_read_unlock+0xd3/0x4f0 kernel/rcu/tree_plugin.h:429
+Code: 48 89 fa 48 c1 ea 03 0f b6 14 02 48 89 f8 83 e0 07 83 c0 03 38 d0 7c 08 84 d2 0f 85 9d 01 00 00 8b 85 f8 03 00 00 85 c0 75 5a <65> 48 8b 1c 25 c0 a9 03 00 48 8d bb f4 03 00 00 48 b8 00 00 00 00
+RSP: 0018:ffff8881f70099e0 EFLAGS: 00000206
+RAX: 0000000000002682 RBX: ffff8881f703c1c0 RCX: 1ffffffff7dc7822
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffffb8b73af1
+RBP: 0000000000000001 R08: 0000000000000001 R09: fffffbfff7dbf384
+R10: ffffffffbedf9c27 R11: 0000000000000000 R12: ffffffffbce15a80
+R13: 00007fdaf96b9d00 R14: 0000000000000200 R15: ffff8881198a2b01
+ rcu_read_unlock include/linux/rcupdate.h:781 [inline]
+ __is_insn_slot_addr+0x103/0x220 kernel/kprobes.c:309
+ is_kprobe_optinsn_slot include/linux/kprobes.h:378 [inline]
+ kernel_text_address kernel/extable.c:123 [inline]
+ kernel_text_address+0x48/0xe0 kernel/extable.c:94
+ __kernel_text_address+0xd/0x40 kernel/extable.c:79
+ unwind_get_return_address arch/x86/kernel/unwind_orc.c:369 [inline]
+ unwind_get_return_address+0x59/0xa0 arch/x86/kernel/unwind_orc.c:364
+ arch_stack_walk+0x9d/0xf0 arch/x86/kernel/stacktrace.c:26
+ stack_trace_save+0x90/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x22/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x25/0x30 mm/kasan/common.c:52
+ kasan_save_free_info+0x2b/0x50 mm/kasan/generic.c:522
+ ____kasan_slab_free mm/kasan/common.c:236 [inline]
+ ____kasan_slab_free mm/kasan/common.c:200 [inline]
+ __kasan_slab_free+0x10a/0x190 mm/kasan/common.c:244
+ kasan_slab_free include/linux/kasan.h:162 [inline]
+ slab_free_hook mm/slub.c:1792 [inline]
+ slab_free_freelist_hook mm/slub.c:1818 [inline]
+ slab_free mm/slub.c:3801 [inline]
+ kmem_cache_free+0x10d/0x4d0 mm/slub.c:3823
+ rcu_do_batch kernel/rcu/tree.c:2135 [inline]
+ rcu_core+0x8d9/0x29e0 kernel/rcu/tree.c:2399
+ __do_softirq+0x1b7/0x7d7 kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0x93/0xc0 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0x6e/0x90 arch/x86/kernel/apic/apic.c:1109
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:orc_ip arch/x86/kernel/unwind_orc.c:80 [inline]
+RIP: 0010:__orc_find+0x86/0xf0 arch/x86/kernel/unwind_orc.c:102
+Code: f2 48 d1 fa 48 8d 5c 95 00 48 89 da 48 c1 ea 03 0f b6 34 0a 48 89 da 83 e2 07 83 c2 03 40 38 f2 7c 05 40 84 f6 75 4b 48 63 13 <48> 01 da 49 39 d5 73 af 4c 8d 63 fc 49 39 ec 73 b2 4d 29 f7 49 c1
+RSP: 0018:ffff8881343777c8 EFLAGS: 00000246
+RAX: ffffffffbd8f4a9e RBX: ffffffffbd5bab44 RCX: dffffc0000000000
+RDX: fffffffffbb3057c RSI: 0000000000000000 RDI: ffffffffbd5bab0c
+RBP: ffffffffbd5bab34 R08: ffffffffbd8f48ec R09: ffff888134377878
+R10: 0000000000008eb0 R11: 0000000000034001 R12: ffffffffbd5bab58
+R13: ffffffffb90eb0b8 R14: ffffffffbd5bab0c R15: ffffffffbd5bab30
+ orc_find arch/x86/kernel/unwind_orc.c:227 [inline]
+ unwind_next_frame+0x2a7/0x2370 arch/x86/kernel/unwind_orc.c:494
+ arch_stack_walk+0x87/0xf0 arch/x86/kernel/stacktrace.c:25
+ stack_trace_save+0x90/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x22/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x25/0x30 mm/kasan/common.c:52
+ __kasan_slab_alloc+0x59/0x70 mm/kasan/common.c:328
+ kasan_slab_alloc include/linux/kasan.h:186 [inline]
+ slab_post_alloc_hook mm/slab.h:762 [inline]
+ slab_alloc_node mm/slub.c:3470 [inline]
+ slab_alloc mm/slub.c:3478 [inline]
+ __kmem_cache_alloc_lru mm/slub.c:3485 [inline]
+ kmem_cache_alloc+0x17b/0x390 mm/slub.c:3494
+ mem_pool_alloc mm/kmemleak.c:458 [inline]
+ __create_object+0x3c/0xc90 mm/kmemleak.c:635
+ kmemleak_alloc_recursive include/linux/kmemleak.h:42 [inline]
+ slab_post_alloc_hook mm/slab.h:765 [inline]
+ slab_alloc_node mm/slub.c:3470 [inline]
+ __kmem_cache_alloc_node+0x20b/0x310 mm/slub.c:3509
+ kmalloc_trace+0x26/0xc0 mm/slab_common.c:1076
+ kmalloc include/linux/slab.h:582 [inline]
+ kzalloc include/linux/slab.h:703 [inline]
+ find_get_pmu_context+0x86/0x960 kernel/events/core.c:4830
+ __do_sys_perf_event_open+0x1044/0x2390 kernel/events/core.c:12590
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3f/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7fdaf96b9d2d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fdaf8a2a028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007fdaf97f6f80 RCX: 00007fdaf96b9d2d
+RDX: ffffffffffffffff RSI: 0000000000000000 RDI: 0000000020000180
+RBP: 00007fdaf971b4a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007fdaf97f6f80 R15: 00007fdaf8a0a000
+ </TASK>

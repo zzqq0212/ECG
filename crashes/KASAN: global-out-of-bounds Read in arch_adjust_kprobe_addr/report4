@@ -1,0 +1,146 @@
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+==================================================================
+BUG: KASAN: global-out-of-bounds in arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+Read of size 4 at addr ffffffffa0452380 by task syz-executor.4/12123
+
+CPU: 4 PID: 12123 Comm: syz-executor.4 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+ _kprobe_addr+0x11b/0x150 kernel/kprobes.c:1479
+ kprobe_on_func_entry kernel/kprobes.c:2183 [inline]
+ register_kretprobe+0xe2/0x750 kernel/kprobes.c:2200
+ __register_trace_kprobe kernel/trace/trace_kprobe.c:508 [inline]
+ __register_trace_kprobe+0x23a/0x2d0 kernel/trace/trace_kprobe.c:478
+ create_local_trace_kprobe+0x2db/0x490 kernel/trace/trace_kprobe.c:1821
+ perf_kprobe_init+0x119/0x200 kernel/trace/trace_event_perf.c:267
+ perf_kprobe_event_init+0xfc/0x1d0 kernel/events/core.c:10342
+ perf_try_init_event+0x130/0x570 kernel/events/core.c:11672
+ perf_init_event kernel/events/core.c:11742 [inline]
+ perf_event_alloc.part.0+0xefa/0x34d0 kernel/events/core.c:12022
+ perf_event_alloc kernel/events/core.c:12431 [inline]
+ __do_sys_perf_event_open+0x4da/0x23e0 kernel/events/core.c:12529
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f40756a102d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f4074a10028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007f40757dcf80 RCX: 00007f40756a102d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000180
+RBP: 00007f40757024a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000002 R14: 00007f40757dcf80 R15: 00007f40749f0000
+ </TASK>
+EXT4-fs error (device loop0): ext4_validate_block_bitmap:440: comm syz-executor.0: bg 0: block 234: padding at end of block bitmap is not set
+
+The buggy address belongs to the variable:
+ brightness_switch_enabled+0x0/0x1920
+
+The buggy address belongs to the physical page:
+page:000000004a2b4d92 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x105c52
+flags: 0x200000000004000(reserved|node=0|zone=2)
+page_type: 0xffffffff()
+raw: 0200000000004000 ffffea0004171488 ffffea0004171488 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffffa0452280: 00 00 00 00 f9 f9 f9 f9 00 00 00 00 f9 f9 f9 f9
+ ffffffffa0452300: 04 f9 f9 f9 f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9
+>ffffffffa0452380: 01 f9 f9 f9 f9 f9 f9 f9 00 00 00 00 00 00 00 00
+                   ^
+ ffffffffa0452400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffffa0452480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+EXT4-fs (loop0): Total free blocks count 0
+EXT4-fs (loop0): Free/Dirty block details
+EXT4-fs (loop0): free_blocks=0
+EXT4-fs (loop0): dirty_blocks=16
+EXT4-fs (loop0): Block reservation details
+EXT4-fs (loop0): i_reserved_data_blocks=1
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 2048
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop0): ext4_validate_block_bitmap:440: comm syz-executor.0: bg 0: block 234: padding at end of block bitmap is not set
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 117
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 2048
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+audit: type=1400 audit(6842299322.041:30): avc:  denied  { watch_reads } for  pid=12199 comm="syz-executor.2" path="/syzkaller-testdir1113326371/syzkaller.MLd8Un/436/file0" dev="sda" ino=132434 scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:unlabeled_t:s0 tclass=file permissive=1
+loop0: detected capacity change from 0 to 512
+ext4: Bad value for 'debug_want_extra_isize'
+loop0: detected capacity change from 0 to 512
+ext4: Bad value for 'debug_want_extra_isize'
+loop0: detected capacity change from 0 to 512
+ext4: Bad value for 'debug_want_extra_isize'
+loop0: detected capacity change from 0 to 512
+ext4: Bad value for 'debug_want_extra_isize'
+audit: type=1326 audit(6842299323.181:31): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=12320 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f231c14802d code=0x0
+audit: type=1326 audit(6842299324.114:32): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=12396 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f231c14802d code=0x0
+audit: type=1326 audit(6842299324.117:33): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=12396 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f231c14802d code=0x0
+selinux_netlink_send: 14 callbacks suppressed
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=38 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=17 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=54 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=51 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=17 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=40 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=35 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=9 nlmsg_type=28 sclass=netlink_audit_socket pid=12436 comm=syz-executor.0
+audit: type=1400 audit(6842299325.106:34): avc:  denied  { ingress } for  pid=12469 comm="syz-executor.0" saddr=::1 daddr=::1 dest=50250 netif=lo scontext=system_u:object_r:file_context_t:s0 tcontext=system_u:object_r:netif_t:s0 tclass=netif permissive=1
+audit: type=1400 audit(6842299325.107:35): avc:  denied  { recvfrom } for  pid=12469 comm="syz-executor.0" saddr=::1 daddr=::1 dest=50250 netif=lo scontext=system_u:object_r:file_context_t:s0 tcontext=system_u:object_r:node_t:s0 tclass=node permissive=1
+audit: type=1400 audit(6842299325.108:36): avc:  denied  { recv } for  pid=12469 comm="syz-executor.0" saddr=::1 daddr=::1 dest=50250 netif=lo scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:file_context_t:s0 tclass=peer permissive=1
+loop0: detected capacity change from 0 to 512
+=======================================================
+WARNING: The mand mount option has been deprecated and
+         and is ignored by this kernel. Remove the mand
+         option from the mount to silence this warning.
+=======================================================
+loop0: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+9pnet_fd: Insufficient options for proto=fd
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+9pnet_fd: Insufficient options for proto=fd
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+9pnet_fd: Insufficient options for proto=fd
+TCP: request_sock_TCP: Possible SYN flooding on port [::]:2. Sending cookies.
+9pnet_fd: Insufficient options for proto=fd
+audit: type=1107 audit(6842299330.015:37): pid=13016 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.092:38): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.093:39): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.093:40): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.093:41): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.094:42): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.094:43): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.094:44): pid=13029 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.144:45): pid=13041 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+audit: type=1107 audit(6842299330.191:46): pid=13041 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg=''
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs error (device loop1): ext4_orphan_get:1394: inode #15: comm syz-executor.1: casefold flag without casefold feature
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs error (device loop1): ext4_orphan_get:1394: inode #15: comm syz-executor.1: casefold flag without casefold feature
+EXT4-fs error (device loop1): ext4_orphan_get:1397: comm syz-executor.1: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir3570244324/syzkaller.M4F818/580/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.

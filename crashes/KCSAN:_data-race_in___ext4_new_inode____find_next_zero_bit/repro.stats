@@ -1,0 +1,267 @@
+Extracting prog: 30.684751487s
+Minimizing prog: 53.663838651s
+Simplifying prog options: 0s
+Extracting C: 21.393269326s
+Simplifying C: 2m16.011068285s
+
+
+670 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 580 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall-mbind-mbind-msync
+detailed listing:
+executing program 0:
+mlockall(0x6)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00002, 0x0, 0x0, 0x0, 0x10000000002) (async)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00002, 0x0, 0x0, 0x0, 0x10000000002)
+msync(&(0x7f0000ffd000/0x1000)=nil, 0x1000, 0x0)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+single: successfully extracted reproducer
+found reproducer with 4 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall-mbind-mbind
+detailed listing:
+executing program 0:
+mlockall(0x6)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00002, 0x0, 0x0, 0x0, 0x10000000002) (async)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00002, 0x0, 0x0, 0x0, 0x10000000002)
+
+program crashed: KCSAN: data-race in inode_permission / inode_permission
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall-mbind
+detailed listing:
+executing program 0:
+mlockall(0x6)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00002, 0x0, 0x0, 0x0, 0x10000000002) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+detailed listing:
+executing program 0:
+mlockall(0x6)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program crashed: KCSAN: data-race in ext4_fill_raw_inode / ext4_orphan_del
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program crashed: KCSAN: data-race in ext4_fill_raw_inode / ext4_orphan_del
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mlockall
+program crashed: KCSAN: data-race in __ext4_new_inode / _find_next_zero_bit
+reproducing took 4m1.75295995s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in __ext4_new_inode / _find_next_zero_bit
+
+write to 0xffff9081d3a333e0 of 8 bytes by task 467 on cpu 0:
+ instrument_write include/linux/instrumented.h:41 [inline]
+ __instrument_read_write_bitop include/asm-generic/bitops/instrumented-non-atomic.h:82 [inline]
+ ___test_and_set_bit include/asm-generic/bitops/instrumented-non-atomic.h:99 [inline]
+ __test_and_set_bit_le include/asm-generic/bitops/le.h:56 [inline]
+ __ext4_new_inode+0xc7a/0x2b90 fs/ext4/ialloc.c:1095
+ ext4_symlink+0x314/0x610 fs/ext4/namei.c:3393
+ vfs_symlink fs/namei.c:4477 [inline]
+ vfs_symlink+0x1d9/0x300 fs/namei.c:4461
+ do_symlinkat+0xcb/0x1c0 fs/namei.c:4503
+ __do_sys_symlink fs/namei.c:4524 [inline]
+ __se_sys_symlink fs/namei.c:4522 [inline]
+ __x64_sys_symlink+0x55/0x60 fs/namei.c:4522
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9081d3a333e0 of 8 bytes by task 468 on cpu 1:
+ _find_next_zero_bit+0xa0/0xe0 lib/find_bit.c:198
+ find_next_zero_bit include/linux/find.h:186 [inline]
+ find_next_zero_bit_le include/linux/find.h:485 [inline]
+ find_inode_bit+0xad/0x320 fs/ext4/ialloc.c:724
+ __ext4_new_inode+0xabc/0x2b90 fs/ext4/ialloc.c:1064
+ ext4_symlink+0x314/0x610 fs/ext4/namei.c:3393
+ vfs_symlink fs/namei.c:4477 [inline]
+ vfs_symlink+0x1d9/0x300 fs/namei.c:4461
+ do_symlinkat+0xcb/0x1c0 fs/namei.c:4503
+ __do_sys_symlink fs/namei.c:4524 [inline]
+ __se_sys_symlink fs/namei.c:4522 [inline]
+ __x64_sys_symlink+0x55/0x60 fs/namei.c:4522
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000003fffff -> 0x00000000007fffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 468 Comm: syz-executor417 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+write (marked) to 0xffff908141494280 of 4 bytes by task 3453 on cpu 1:
+ end_dir_add fs/dcache.c:2612 [inline]
+ __d_add fs/dcache.c:2796 [inline]
+ d_splice_alias+0x304/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff908141494280 of 4 bytes by task 3454 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00001a05 -> 0x00001a06
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 3454 Comm: syz-executor417 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in __ext4_new_inode / _find_next_zero_bit
+
+write to 0xffff9081d3a333e0 of 8 bytes by task 467 on cpu 0:
+ instrument_write include/linux/instrumented.h:41 [inline]
+ __instrument_read_write_bitop include/asm-generic/bitops/instrumented-non-atomic.h:82 [inline]
+ ___test_and_set_bit include/asm-generic/bitops/instrumented-non-atomic.h:99 [inline]
+ __test_and_set_bit_le include/asm-generic/bitops/le.h:56 [inline]
+ __ext4_new_inode+0xc7a/0x2b90 fs/ext4/ialloc.c:1095
+ ext4_symlink+0x314/0x610 fs/ext4/namei.c:3393
+ vfs_symlink fs/namei.c:4477 [inline]
+ vfs_symlink+0x1d9/0x300 fs/namei.c:4461
+ do_symlinkat+0xcb/0x1c0 fs/namei.c:4503
+ __do_sys_symlink fs/namei.c:4524 [inline]
+ __se_sys_symlink fs/namei.c:4522 [inline]
+ __x64_sys_symlink+0x55/0x60 fs/namei.c:4522
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9081d3a333e0 of 8 bytes by task 468 on cpu 1:
+ _find_next_zero_bit+0xa0/0xe0 lib/find_bit.c:198
+ find_next_zero_bit include/linux/find.h:186 [inline]
+ find_next_zero_bit_le include/linux/find.h:485 [inline]
+ find_inode_bit+0xad/0x320 fs/ext4/ialloc.c:724
+ __ext4_new_inode+0xabc/0x2b90 fs/ext4/ialloc.c:1064
+ ext4_symlink+0x314/0x610 fs/ext4/namei.c:3393
+ vfs_symlink fs/namei.c:4477 [inline]
+ vfs_symlink+0x1d9/0x300 fs/namei.c:4461
+ do_symlinkat+0xcb/0x1c0 fs/namei.c:4503
+ __do_sys_symlink fs/namei.c:4524 [inline]
+ __se_sys_symlink fs/namei.c:4522 [inline]
+ __x64_sys_symlink+0x55/0x60 fs/namei.c:4522
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000003fffff -> 0x00000000007fffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 468 Comm: syz-executor417 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+write (marked) to 0xffff908141494280 of 4 bytes by task 3453 on cpu 1:
+ end_dir_add fs/dcache.c:2612 [inline]
+ __d_add fs/dcache.c:2796 [inline]
+ d_splice_alias+0x304/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff908141494280 of 4 bytes by task 3454 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00001a05 -> 0x00001a06
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 3454 Comm: syz-executor417 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+

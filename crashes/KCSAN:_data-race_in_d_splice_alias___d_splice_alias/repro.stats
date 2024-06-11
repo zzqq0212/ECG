@@ -1,0 +1,401 @@
+Extracting prog: 30.570825369s
+Minimizing prog: 3m14.802467948s
+Simplifying prog options: 0s
+Extracting C: 20.461765864s
+Simplifying C: 2m24.37950597s
+
+
+135 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 64 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int-syz_open_procfs-preadv-sendto$inet-sendto$inet-mprotect
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+r2 = syz_open_procfs(0x0, 0x0)
+preadv(r2, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x0, 0x0) (async)
+sendto$inet(r0, 0x0, 0x0, 0x20000000, &(0x7f0000000080)={0x2, 0x4e20}, 0x10)
+sendto$inet(r0, &(0x7f0000000140)="7c0d111317b1ff8ec8f29f81319ec5b10d0d413ffaefd9448dbef1ffb4e3a6af87131512da528f6235fe35d3053b5cb4877c1b89bbf83f6d749d5b45679601a3abdc204cf1ad797252bb0c7b43e3e9763221cb2c8d76f824f4bea338f53aa75703f465e50e434e2193900c39ab79d37cc0ce7a", 0xffffffffffffffd0, 0x401c005, 0x0, 0xffffffffffffff36) (async)
+mprotect(&(0x7f0000000000/0x800000)=nil, 0x800000, 0x0)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+single: successfully extracted reproducer
+found reproducer with 13 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int-syz_open_procfs-preadv-sendto$inet-sendto$inet
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+r2 = syz_open_procfs(0x0, 0x0)
+preadv(r2, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x0, 0x0) (async)
+sendto$inet(r0, 0x0, 0x0, 0x20000000, &(0x7f0000000080)={0x2, 0x4e20}, 0x10)
+sendto$inet(r0, &(0x7f0000000140)="7c0d111317b1ff8ec8f29f81319ec5b10d0d413ffaefd9448dbef1ffb4e3a6af87131512da528f6235fe35d3053b5cb4877c1b89bbf83f6d749d5b45679601a3abdc204cf1ad797252bb0c7b43e3e9763221cb2c8d76f824f4bea338f53aa75703f465e50e434e2193900c39ab79d37cc0ce7a", 0xffffffffffffffd0, 0x401c005, 0x0, 0xffffffffffffff36) (async)
+
+program crashed: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_nohz_next_event
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int-syz_open_procfs-preadv-sendto$inet
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+r2 = syz_open_procfs(0x0, 0x0)
+preadv(r2, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x0, 0x0) (async)
+sendto$inet(r0, 0x0, 0x0, 0x20000000, &(0x7f0000000080)={0x2, 0x4e20}, 0x10)
+
+program crashed: KCSAN: data-race in filemap_fault / page_add_file_rmap
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int-syz_open_procfs-preadv
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+r2 = syz_open_procfs(0x0, 0x0)
+preadv(r2, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x0, 0x0) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int-syz_open_procfs
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+syz_open_procfs(0x0, 0x0)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_process_page_bufs
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink-setsockopt$sock_int
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+setsockopt$sock_int(r0, 0x1, 0x3c, &(0x7f0000000000)=0x1, 0x1039c) (async)
+
+program crashed: KCSAN: data-race in d_lru_add / lookup_fast
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv-sendmsg$netlink
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+sendmsg$netlink(r1, &(0x7f0000000480)={&(0x7f0000000400)=@kern={0x10, 0x0, 0x0, 0x40000000}, 0xc, &(0x7f0000000440)=[{&(0x7f0000000500)=ANY=[@ANYBLOB="100000007000fedbdf25"], 0x10}, {&(0x7f0000000640)={0x308, 0x16, 0x0, 0x70bd2a, 0x0, "", [@generic="9f151d3f79608a07eae972688726e95d015750d6c7244a4619832d7b4a0f2c", @generic="5afde2f935cca52b8e49307d335d7f911c3dd23b52271c57c6b280654d76dad25a4d0d1ff7fa1f1b2ff19104a53d5e1ac9918bfb7ff54f40126f97c25c92535709f994afcc918d1c9d9325e6074797427f044644e8cb171e96ab95d38f6328755c36c8bfe20294cfae1787371b32ebab33a8505b808a1ce48131ba0a6b4299fa46e57e5f9a1a15", @generic="f2b02b3a7420b4997fd96db313347242ff4bd282237a48ea8bd5e1515e7a2e9b9123d8df9a727cf3d34f393c6f94c688e73f1791a681e258c68cfc7c33f94c12cb9faac862d278f870c2cd64ffaf544e566101fecab37d4b1b709c3af4276078eba30abea9200e13fe6276daf47d18f8fbc1d44668cb8b1bc4e17af7cf1bb4731b64a48a5b108efa30774764d663b690c2917da5454bd93567eaf78c19ed99446d815d478d5f950675e48b2f959414f95695ece5ab985a61b707", @nested={0x55, 0x36, 0x0, 0x1, [@generic="f92a", @typed={0x8, 0x56, 0x0, 0x0, @uid=0xffffffffffffffff}, @generic="5776efb3c2e9b4060fa33cd018ad9a8b228cc9236214710917f837969159f2ea0115f6ecd32b7e5abb8a94132c5abfca06384437432989c1aa92ae", @typed={0xc, 0x22, 0x0, 0x0, @u64=0xfffffffffffffff4}]}, @typed={0x8, 0x24, 0x0, 0x0, @ipv4=@rand_addr=0x64010101}, @typed={0x3d, 0x33, 0x0, 0x0, @binary="5eb39744617d9d4dcab1319829decad9305607ef60ed90592219ad095b4714466e19e407b23a4e64fe066a4d10c7e2cd74b5008baa85e32070"}, @typed={0xab, 0x2, 0x0, 0x0, @binary="b64e57beb84f2a7c2dd3fc2ef63f80a0597d7f06433cd2a5574df13ecd9f1eededd8db3c2a9cbc0e531dc233ca38c9c97cb4916e60c02e3b9aa3f4b68ce199055998d7537f268288544f3a61a4b9765c5e2b1e4b7fdb6c08c5f1d6972a312a98c96dab61175ca3ce4637e011ba74f108c157020bc692abe87e9d19ad64cef298210b299a05a48fc5faad082146603c7c76f9640fdfd2b8813136cda41ee5ab5e500cd97b298a13"}, @generic="3736e3820029a2d84ded7be9e5339eef3f06a57eb34ad004e8e0aaf9f5c0e74b3e1e98a6b68efb9f3eda9e3a688d2e24ad9103f1ceea87bda448704750b9ac196dd6ad7f6fc2dcc36ad901"]}, 0x308}, {&(0x7f0000002ac0)={0x10, 0x39, 0x100, 0x70bd25, 0x25dfdbff, "", [@generic]}, 0x10}], 0x3, 0x0, 0x0, 0x4000054}, 0x0) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs-preadv
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+r1 = syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+preadv(r1, &(0x7f0000000140)=[{&(0x7f0000000040)=""/244, 0xf4}], 0x1, 0x3, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet-syz_open_procfs
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+syz_open_procfs(0x0, &(0x7f00000004c0)='net/ip6_flowlabel\x00')
+
+program crashed: KCSAN: data-race in next_uptodate_page / page_remove_rmap
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp-bind$inet
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+bind$inet(r0, &(0x7f00000001c0)={0x2, 0x4e20, @multicast2}, 0x10) (async)
+
+program crashed: KCSAN: data-race in poll_schedule_timeout.constprop.NUM / pollwake
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open-socket$inet_tcp
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+socket$inet_tcp(0x2, 0x1, 0x0)
+
+program crashed: KCSAN: data-race in e1000_clean_rx_irq
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS-perf_event_open
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0) (async)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+detailed listing:
+executing program 0:
+io_uring_register$IORING_UNREGISTER_BUFFERS(0xffffffffffffffff, 0x1, 0x0, 0x0)
+
+program crashed: KCSAN: data-race in tick_nohz_next_event / tick_sched_do_timer
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in d_splice_alias / d_splice_alias
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in d_splice_alias / d_splice_alias
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): io_uring_register$IORING_UNREGISTER_BUFFERS
+program crashed: KCSAN: data-race in d_splice_alias / d_splice_alias
+reproducing took 6m30.214582941s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+read-write (marked) to 0xffffa2e6414ac280 of 4 bytes by task 4338 on cpu 1:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ start_dir_add fs/dcache.c:2603 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x3c5/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e6414ac280 of 4 bytes by task 4337 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000020f0 -> 0x000020f2
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 4337 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffffa2e644236ea8 of 16 bytes by task 5396 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e644236eb0 of 8 bytes by task 5397 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x0000000022c2dd68 -> 0x0000000022f0a428
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5397 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+read-write (marked) to 0xffffa2e6414ac280 of 4 bytes by task 4338 on cpu 1:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ start_dir_add fs/dcache.c:2603 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x3c5/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e6414ac280 of 4 bytes by task 4337 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000020f0 -> 0x000020f2
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 4337 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffffa2e644236ea8 of 16 bytes by task 5396 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e644236eb0 of 8 bytes by task 5397 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x0000000022c2dd68 -> 0x0000000022f0a428
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5397 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+

@@ -1,0 +1,253 @@
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+ata1: lost interrupt (Status 0x58)
+rcu: INFO: rcu_sched self-detected stall on CPU
+rcu: 	2-...0: (1 ticks this GP) idle=983/1/0x4000000000000000 softirq=341125/341125 fqs=5 
+	(t=22123 jiffies g=521285 q=4)
+NMI backtrace for cpu 2
+CPU: 2 PID: 70 Comm: scsi_eh_0 Not tainted 5.15.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <IRQ>
+ dump_stack_lvl+0x4d/0x66
+ nmi_cpu_backtrace.cold+0xd0/0xd5
+ nmi_trigger_cpumask_backtrace+0x155/0x1a0
+ rcu_dump_cpu_stacks+0x1b8/0x202
+ rcu_sched_clock_irq.cold+0x1d2/0x417
+ update_process_times+0x11b/0x180
+ tick_sched_handle.isra.0+0x105/0x150
+ tick_sched_timer+0xca/0xf0
+ __hrtimer_run_queues+0x2e2/0x6a0
+ hrtimer_interrupt+0x2c9/0x6c0
+ __sysvec_apic_timer_interrupt+0xc8/0x260
+ sysvec_apic_timer_interrupt+0x65/0x90
+ </IRQ>
+ asm_sysvec_apic_timer_interrupt+0x12/0x20
+RIP: 0010:_raw_spin_unlock_irqrestore+0x37/0x60
+Code: df 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 11 c6 07 00 f7 c6 00 02 00 00 74 01 fb 48 83 c4 10 <c3> 48 89 74 24 08 48 89 3c 24 e8 3a 6e df fd 48 8b 74 24 08 48 8b
+RSP: 0018:ffff888002fafc60 EFLAGS: 00000286
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffffacb8f5e0
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: ffff8880046b9900
+RBP: ffff888004644000 R08: 0000000000000001 R09: ffffed10005f5f82
+R10: 0000000000000003 R11: ffffed10005f5f81 R12: 0000000000000246
+R13: ffff888004644010 R14: ffff888004644130 R15: ffff888004644008
+ ata_bmdma_error_handler+0x2a7/0x5d0
+ ata_scsi_port_error_handler+0x6bd/0x1490
+ ata_scsi_error+0x22e/0x3e0
+ scsi_error_handler+0x23a/0xe90
+ kthread+0x354/0x430
+ ret_from_fork+0x22/0x30
+ata1.00: exception Emask 0x0 SAct 0x0 SErr 0x0 action 0x6 frozen
+ata1.00: failed command: WRITE DMA EXT
+ata1.00: cmd 35/00:48:10:04:12/00:03:00:00:00/e0 tag 0 dma 430080 out
+         res 40/00:00:00:00:0a/00:00:00:00:00/a4 Emask 0x4 (timeout)
+ata1.00: status: { DRDY }
+ata1: soft resetting link
+ata1.00: configured for MWDMA2
+ata1: EH complete
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.0'.
+tmpfs: Unknown parameter 'Ä'
+tmpfs: Unknown parameter 'Ä'
+tmpfs: Unknown parameter 'Ä'
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+netlink: 36 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 36 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 36 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 36 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.2'.
+selinux_netlink_send: 23 callbacks suppressed
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=135156 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=135183 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=135196 comm=syz-executor.0
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+sg_write: data in/out 943/246 bytes for SCSI command 0x0-- guessing data in;
+   program syz-executor.0 not setting count and/or reply_len properly
+sg_write: data in/out 943/246 bytes for SCSI command 0x0-- guessing data in;
+   program syz-executor.0 not setting count and/or reply_len properly
+sg_write: data in/out 943/246 bytes for SCSI command 0x0-- guessing data in;
+   program syz-executor.0 not setting count and/or reply_len properly
+audit: type=1326 audit(3435533514.038:319): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=135363 comm="syz-executor.1" exe="/syz-executor.1" sig=9 arch=c000003e syscall=231 compat=0 ip=0x7f5c188f802d code=0x0
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 5 (only 32 groups)
+audit: type=1326 audit(3435533514.878:320): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=135470 comm="syz-executor.1" exe="/syz-executor.1" sig=9 arch=c000003e syscall=231 compat=0 ip=0x7f5c188f802d code=0x0
+audit: type=1326 audit(3435533515.742:321): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=135728 comm="syz-executor.1" exe="/syz-executor.1" sig=9 arch=c000003e syscall=231 compat=0 ip=0x7f5c188f802d code=0x0
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+device lo entered promiscuous mode
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=135842 comm=syz-executor.2
+device lo left promiscuous mode
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=135882 comm=syz-executor.2
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+__nla_validate_parse: 17 callbacks suppressed
+netlink: 88 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 88 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 88 bytes leftover after parsing attributes in process `syz-executor.0'.
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 20208 bytes leftover after parsing attributes in process `syz-executor.0'.
+serio: Serial port tty20
+serio: Serial port tty20
+serio: Serial port tty20
+audit: type=1326 audit(3435533524.891:322): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=137013 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f7babcf402d code=0x0
+audit: type=1326 audit(3435533524.948:323): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=137021 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f7babcf402d code=0x0
+audit: type=1326 audit(3435533525.003:324): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=137021 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f7babcf402d code=0x0
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+audit: type=1326 audit(3435533525.797:325): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=137149 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f7babcf402d code=0x0
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+tmpfs: Bad value for 'mpol'
+sd 0:0:0:0: tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK cmd_age=0s
+sd 0:0:0:0: tag#0 CDB: Spare (in), Play cd
+sd 0:0:0:0: tag#0 CDB[00]: bc dd 54 47 df af 0e 62 89 6e 94 17 e2 05 57 07
+sd 0:0:0:0: tag#0 CDB[10]: fc da 8e bc 99 78 9e dd 3b 37 96 21 03 96 02 a3
+sd 0:0:0:0: tag#0 CDB[20]: f5 2f 61 62 df 23 b8 f8 96 b6 26 f1
+sd 0:0:0:0: tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK cmd_age=0s
+sd 0:0:0:0: tag#0 CDB: Spare (in), Play cd
+sd 0:0:0:0: tag#0 CDB[00]: bc dd 54 47 df af 0e 62 89 6e 94 17 e2 05 57 07
+sd 0:0:0:0: tag#0 CDB[10]: fc da 8e bc 99 78 9e dd 3b 37 96 21 03 96 02 a3
+sd 0:0:0:0: tag#0 CDB[20]: f5 2f 61 62 df 23 b8 f8 96 b6 26 f1
+sd 0:0:0:0: tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK cmd_age=0s
+sd 0:0:0:0: tag#0 CDB: Spare (in), Play cd
+sd 0:0:0:0: tag#0 CDB[00]: bc dd 54 47 df af 0e 62 89 6e 94 17 e2 05 57 07
+sd 0:0:0:0: tag#0 CDB[10]: fc da 8e bc 99 78 9e dd 3b 37 96 21 03 96 02 a3
+sd 0:0:0:0: tag#0 CDB[20]: f5 2f 61 62 df 23 b8 f8 96 b6 26 f1
+sd 0:0:0:0: tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK cmd_age=0s
+sd 0:0:0:0: tag#0 CDB: Test Unit Ready
+sd 0:0:0:0: tag#0 CDB[00]: 00 00 00 00 00 00 00 00 ff fb ff ff e2 05 57 07
+sd 0:0:0:0: tag#0 CDB[10]: fc da 8e bc 99 78 9e dd 3b 37 96 21 03 96 02 a3
+sd 0:0:0:0: tag#0 CDB[20]: f5 2f 61 62 df 23 b8 f8 96 b6 26 f1
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.0'.
+tmpfs: Bad value for 'mode'
+tmpfs: Bad value for 'mode'
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 44 bytes leftover after parsing attributes in process `syz-executor.0'.
+tmpfs: Unknown parameter 'eefcondËxt'
+hugetlbfs: Unknown parameter 'tmpfs'
+tmpfs: Unknown parameter 'eefcondËxt'
+hugetlbfs: Unknown parameter 'tmpfs'
+tmpfs: Unknown parameter 'eefcondËxt'
+hugetlbfs: Unknown parameter 'tmpfs'
+hugetlbfs: Unknown parameter 'tmpfs'
+tmpfs: Unknown parameter 'eefcondËxt'
+device lo entered promiscuous mode
+device lo left promiscuous mode
+autofs4:pid:137816:autofs_fill_super: called with bogus options
+autofs4:pid:137819:autofs_fill_super: called with bogus options
+device lo entered promiscuous mode
+device lo left promiscuous mode
+autofs4:pid:137826:autofs_fill_super: called with bogus options
+device lo entered promiscuous mode
+device lo left promiscuous mode
+netlink: 212 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 212 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 212 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 24 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 24 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 24 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 24 bytes leftover after parsing attributes in process `syz-executor.0'.
+9pnet: Insufficient options for proto=fd
+9pnet: Insufficient options for proto=fd
+9pnet: Insufficient options for proto=fd
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_ERROR driverbyte=DRIVER_OK cmd_age=0s
+sr 1:0:0:0: [sr0] tag#0 CDB: ORWrite 8b 1c 46 f1 2e 51 dd bf f8 bf df dc
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_ERROR driverbyte=DRIVER_OK cmd_age=0s
+sr 1:0:0:0: [sr0] tag#0 CDB: ORWrite 8b 1c 46 f1 2e 51 dd bf f8 bf df dc
+autofs4:pid:138729:check_dev_ioctl_version: ioctl control interface version mismatch: kernel(1.1), user(4294967266.1), cmd(0xc0189372)
+autofs4:pid:138729:validate_dev_ioctl: invalid device control module version supplied for cmd(0xc0189372)
+autofs4:pid:138734:check_dev_ioctl_version: ioctl control interface version mismatch: kernel(1.1), user(4294967266.1), cmd(0xc0189372)
+autofs4:pid:138734:validate_dev_ioctl: invalid device control module version supplied for cmd(0xc0189372)
+autofs4:pid:138736:check_dev_ioctl_version: ioctl control interface version mismatch: kernel(1.1), user(4294967266.1), cmd(0xc0189372)
+autofs4:pid:138736:validate_dev_ioctl: invalid device control module version supplied for cmd(0xc0189372)
+autofs4:pid:138741:check_dev_ioctl_version: ioctl control interface version mismatch: kernel(1.1), user(4294967266.1), cmd(0xc0189372)
+autofs4:pid:138741:validate_dev_ioctl: invalid device control module version supplied for cmd(0xc0189372)
+autofs4:pid:138741:check_dev_ioctl_version: ioctl control interface version mismatch: kernel(1.1), user(4294967266.1), cmd(0xc0189372)
+autofs4:pid:138741:validate_dev_ioctl: invalid device control module version supplied for cmd(0xc0189372)
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_ERROR driverbyte=DRIVER_OK cmd_age=0s
+sr 1:0:0:0: [sr0] tag#0 CDB: ORWrite 8b 1c 46 f1 2e 51 dd bf f8 bf df dc
+cgroup: Unknown subsys name 'nÚM[F¶_∞c¢ı©rêd'
+cgroup: Unknown subsys name 'nÚM[F¶_∞c¢ı©rêd'
+cgroup: Unknown subsys name 'nÚM[F¶_∞c¢ı©rêd'
+audit: type=1107 audit(3435533575.780:326): pid=139425 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='7æ+õ@†íkàUÎ¯éÂÄç´∏.+&WÜ∆;ú7*„uÈßÃº„!´r¶},Û∏q‚ñ™Ûn›q˝t	≈yÂRù≤´JY+¥	8!%0bΩLÂ|†°ª-ØØ“[1÷À|°é›ÖQ∏á2ﬁy8˘ËLïÒ—’Óû#Õ_Üì›’…rs¬3≠\Mëë†"âïXIÔ¥*ÇMv˛ù˜¥.%2WÌ"
+¸ïOLƒ3∑ªqÇÄ5©'á+Õ∞Ö˝¡!;-rÜÄ™tNtYqq»ª7Œjè—Ä"'
+audit: type=1107 audit(3435533575.796:327): pid=139427 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='7æ+õ@†íkàUÎ¯éÂÄç´∏.+&WÜ∆;ú7*„uÈßÃº„!´r¶},Û∏q‚ñ™Ûn›q˝t	≈yÂRù≤´JY+¥	8!%0bΩLÂ|†°ª-ØØ“[1÷À|°é›ÖQ∏á2ﬁy8˘ËLïÒ—’Óû#Õ_Üì›’…rs¬3≠\Mëë†"âïXIÔ¥*ÇMv˛ù˜¥.%2WÌ"
+¸ïOLƒ3∑ªqÇÄ5©'á+Õ∞Ö˝¡!;-rÜÄ™tNtYqq»ª7Œjè—Ä"'
+audit: type=1107 audit(3435533575.814:328): pid=139427 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='7æ+õ@†íkàUÎ¯éÂÄç´∏.+&WÜ∆;ú7*„uÈßÃº„!´r¶},Û∏q‚ñ™Ûn›q˝t	≈yÂRù≤´JY+¥	8!%0bΩLÂ|†°ª-ØØ“[1÷À|°é›ÖQ∏á2ﬁy8˘ËLïÒ—’Óû#Õ_Üì›’…rs¬3≠\Mëë†"âïXIÔ¥*ÇMv˛ù˜¥.%2WÌ"
+¸ïOLƒ3∑ªqÇÄ5©'á+Õ∞Ö˝¡!;-rÜÄ™tNtYqq»ª7Œjè—Ä"'
+audit: type=1107 audit(3435533575.847:329): pid=139431 uid=0 auid=0 ses=4 subj=system_u:system_r:kernel_t:s0 msg='7æ+õ@†íkàUÎ¯éÂÄç´∏.+&WÜ∆;ú7*„uÈßÃº„!´r¶},Û∏q‚ñ™Ûn›q˝t	≈yÂRù≤´JY+¥	8!%0bΩLÂ|†°ª-ØØ“[1÷À|°é›ÖQ∏á2ﬁy8˘ËLïÒ—’Óû#Õ_Üì›’…rs¬3≠\Mëë†"âïXIÔ¥*ÇMv˛ù˜¥.%2WÌ"
+¸ïOLƒ3∑ªqÇÄ5©'á+Õ∞Ö˝¡!;-rÜÄ™tNtYqq»ª7Œjè—Ä"'
+__nla_validate_parse: 37 callbacks suppressed
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.2'.
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+device lo entered promiscuous mode
+device lo left promiscuous mode
+ALSA: seq fatal error: cannot create timer (-22)
+ALSA: seq fatal error: cannot create timer (-22)
+ALSA: seq fatal error: cannot create timer (-22)
+ALSA: seq fatal error: cannot create timer (-22)
+ata1.00: invalid cdb length 6
+ata1.00: invalid cdb length 6
+ata1.00: invalid cdb length 6
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 220 bytes leftover after parsing attributes in process `syz-executor.1'.
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Invalid option length (64624) for dns_resolver key
+Invalid option length (64624) for dns_resolver key
+Invalid option length (64624) for dns_resolver key
+audit: type=1326 audit(3435533582.579:330): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=140994 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f25175a102d code=0x0
+audit: type=1326 audit(3435533583.419:331): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=141061 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f25175a102d code=0x0
+audit: type=1326 audit(3435533583.494:332): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=141071 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f25175a102d code=0x0

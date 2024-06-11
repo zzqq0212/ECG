@@ -1,0 +1,224 @@
+syzkaller login: [   18.221200] ==================================================================
+[   18.221731] BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+[   18.222244] 
+[   18.222380] write to 0xffffb43700623a60 of 4 bytes by interrupt on cpu 0:
+[   18.222826]  pollwake+0xd0/0x120
+[   18.223084]  __wake_up_common+0x74/0x140
+[   18.223361]  __wake_up_common_lock+0x7e/0xd0
+[   18.223662]  sock_def_readable+0x73/0x180
+[   18.223949]  tcp_data_ready+0x80/0x1a0
+[   18.224237]  tcp_data_queue+0x129f/0x1fa0
+[   18.224529]  tcp_rcv_established+0x404/0xe90
+[   18.224836]  tcp_v4_do_rcv+0x31d/0x540
+[   18.225110]  tcp_v4_rcv+0x1c09/0x1c90
+[   18.225384]  ip_protocol_deliver_rcu+0x4c/0x5e0
+[   18.225706]  ip_local_deliver_finish+0x133/0x180
+[   18.226030]  ip_local_deliver+0xd0/0x1e0
+[   18.226314]  ip_sublist_rcv_finish+0xeb/0x100
+[   18.226638]  ip_sublist_rcv+0x269/0x390
+[   18.226915]  ip_list_rcv+0x208/0x240
+[   18.227180]  __netif_receive_skb_list_core+0x4bc/0x500
+[   18.227547]  netif_receive_skb_list_internal+0x483/0x620
+[   18.227943]  napi_gro_complete.constprop.0+0x244/0x2d0
+[   18.228339]  dev_gro_receive+0x889/0xfc0
+[   18.228617]  napi_gro_receive+0xfc/0x4a0
+[   18.228894]  e1000_clean_rx_irq+0x35c/0x980
+[   18.229190]  e1000_clean+0x4f3/0x12b0
+[   18.229460]  __napi_poll+0x66/0x390
+[   18.229722]  net_rx_action+0x694/0x7b0
+[   18.230004]  __do_softirq+0xea/0x2e3
+[   18.230265]  irq_exit_rcu+0x70/0xc0
+[   18.230527]  common_interrupt+0xa8/0xc0
+[   18.230817]  asm_common_interrupt+0x26/0x40
+[   18.231118]  preempt_count_add+0x1f/0xa0
+[   18.231398]  copy_page_from_iter_atomic+0x42/0xc40
+[   18.231736]  generic_perform_write+0x1aa/0x360
+[   18.232051]  ext4_buffered_write_iter+0xa9/0x1c0
+[   18.232378]  ext4_file_write_iter+0xcd/0xdd0
+[   18.232681]  vfs_write+0x5d0/0x700
+[   18.232935]  ksys_write+0x9e/0x160
+[   18.233188]  __x64_sys_write+0x41/0x50
+[   18.233461]  do_syscall_64+0x3e/0x90
+[   18.233729]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   18.234080] 
+[   18.234201] read to 0xffffb43700623a60 of 4 bytes by task 344 on cpu 1:
+[   18.234639]  poll_schedule_timeout.constprop.0+0x44/0xb0
+[   18.235016]  do_select+0xc9d/0xe00
+[   18.235281]  core_sys_select+0x217/0x4e0
+[   18.235575]  kern_select+0xe2/0x140
+[   18.235848]  __x64_sys_select+0x65/0x80
+[   18.236119]  do_syscall_64+0x3e/0x90
+[   18.236387]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   18.236740] 
+[   18.236860] value changed: 0x00000000 -> 0x00000001
+[   18.237179] 
+[   18.237298] Reported by Kernel Concurrency Sanitizer on:
+[   18.237642] CPU: 1 PID: 344 Comm: sshd Not tainted 6.5.0 #8
+[   18.238014] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   18.238547] ==================================================================
+[   18.274600] scp (350) used greatest stack depth: 11664 bytes left
+[   18.287147] sshd (344) used greatest stack depth: 11560 bytes left
+Warning: Permanently added '[localhost]:28562' (ED25519) to the list of known hosts.
+2023/10/30 08:55:16 fuzzer started
+2023/10/30 08:55:16 dialing manager at localhost:37497
+[   19.880186] cgroup: Unknown subsys name 'net'
+[   19.885078] cgroup: Unknown subsys name 'rlimit'
+[   19.885520] cgroup: Unknown subsys name 'memory'
+[   19.919537] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 08:55:17 syscalls: 2193
+2023/10/30 08:55:17 code coverage: enabled
+2023/10/30 08:55:17 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 08:55:17 extra coverage: enabled
+2023/10/30 08:55:17 delay kcov mmap: enabled
+2023/10/30 08:55:17 setuid sandbox: enabled
+2023/10/30 08:55:17 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 08:55:17 Android sandbox: enabled
+2023/10/30 08:55:17 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 08:55:17 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 08:55:17 net packet injection: /dev/net/tun does not exist
+2023/10/30 08:55:17 net device setup: enabled
+2023/10/30 08:55:17 concurrency sanitizer: enabled
+2023/10/30 08:55:17 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 08:55:17 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 08:55:17 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 08:55:17 hci packet injection: /dev/vhci does not exist
+2023/10/30 08:55:17 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 08:55:17 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 08:55:17 swap file: enabled
+[   19.935393] kcsan: could not find function: 'should_defer_flush'
+[   19.939503] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 08:55:17 suppressing KCSAN reports in functions: 'folio_clear_dirty_for_io' 'kauditd_thread' 'generic_fillattr' 'wq_worker_running' 'ext4_do_writepages' 'generic_write_end' '__folio_start_writeback' 'blk_mq_sched_dispatch_requests' 'folio_unlock' 'mas_wr_bnode' 'ktime_get_mono_fast_ns' 'e1000_clean' 'wq_worker_tick' 'ext4_free_inodes_count' 'd_splice_alias' 'atime_needs_update' 'xas_find_marked' '_find_next_zero_bit' 'delayacct_add_tsk' 'step_into' 'memchr_inv' 'tick_nohz_idle_stop_tick' 'audit_log_start' 'should_defer_flush' 'mas_wr_node_store' 'n_tty_lookahead_flow_ctrl' 'lru_add_fn' '_find_first_bit' 'xas_clear_mark' 'ext4_fill_raw_inode' 'tick_sched_do_timer' 'folio_mark_accessed' '__filemap_add_folio' 'kernfs_refresh_inode' 'poll_schedule_timeout' 'jbd2_journal_commit_transaction' 'do_readlinkat' 'lookup_fast' 'xa_get_order' 'fsnotify_free_mark' 'e1000_clean_rx_irq' 'tick_nohz_next_event' 'dput' 'process_one_work' 'next_uptodate_page' 'fsnotify' 'filemap_fault' 
+2023/10/30 08:55:17 fetching corpus: 50, signal 17221/19000 (executing program)
+2023/10/30 08:55:17 fetching corpus: 100, signal 22660/26066 (executing program)
+2023/10/30 08:55:17 fetching corpus: 150, signal 31621/36374 (executing program)
+2023/10/30 08:55:17 fetching corpus: 200, signal 35618/41715 (executing program)
+2023/10/30 08:55:17 fetching corpus: 250, signal 39463/46804 (executing program)
+2023/10/30 08:55:17 fetching corpus: 300, signal 44506/52917 (executing program)
+2023/10/30 08:55:17 fetching corpus: 350, signal 47102/56660 (executing program)
+2023/10/30 08:55:17 fetching corpus: 400, signal 50274/60840 (executing program)
+2023/10/30 08:55:17 fetching corpus: 450, signal 53781/65246 (executing program)
+2023/10/30 08:55:17 fetching corpus: 500, signal 56765/69128 (executing program)
+2023/10/30 08:55:17 fetching corpus: 550, signal 58467/71805 (executing program)
+2023/10/30 08:55:17 fetching corpus: 600, signal 60504/74720 (executing program)
+2023/10/30 08:55:17 fetching corpus: 650, signal 64171/78895 (executing program)
+2023/10/30 08:55:17 fetching corpus: 700, signal 66849/82211 (executing program)
+2023/10/30 08:55:17 fetching corpus: 750, signal 68398/84511 (executing program)
+2023/10/30 08:55:17 fetching corpus: 800, signal 70835/87503 (executing program)
+2023/10/30 08:55:17 fetching corpus: 850, signal 71823/89342 (executing program)
+2023/10/30 08:55:17 fetching corpus: 900, signal 73627/91674 (executing program)
+2023/10/30 08:55:17 fetching corpus: 950, signal 75081/93741 (executing program)
+2023/10/30 08:55:17 fetching corpus: 1000, signal 76451/95686 (executing program)
+2023/10/30 08:55:17 fetching corpus: 1050, signal 77877/97635 (executing program)
+2023/10/30 08:55:17 fetching corpus: 1100, signal 78847/99236 (executing program)
+2023/10/30 08:55:17 fetching corpus: 1150, signal 80447/101232 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1200, signal 81844/103093 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1250, signal 83061/104778 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1300, signal 83882/106154 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1350, signal 84874/107600 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1400, signal 86170/109264 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1450, signal 87416/110820 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1500, signal 88733/112393 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1550, signal 89872/113848 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1600, signal 90854/115229 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1650, signal 91696/116441 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1700, signal 92747/117791 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1750, signal 93721/119013 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1800, signal 94251/120014 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1850, signal 94897/121061 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1900, signal 95765/122198 (executing program)
+2023/10/30 08:55:18 fetching corpus: 1950, signal 96620/123269 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2000, signal 98008/124593 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2050, signal 98843/125644 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2100, signal 99598/126685 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2150, signal 100036/127519 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2200, signal 100682/128440 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2250, signal 101338/129354 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2300, signal 102122/130315 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2350, signal 103075/131286 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2400, signal 103530/132036 (executing program)
+2023/10/30 08:55:18 fetching corpus: 2450, signal 104089/132829 (executing program)
+
+VM DIAGNOSIS:
+08:55:16  Registers:
+info registers vcpu 0
+RAX=0000000080000000 RBX=0000000b0f83e823 RCX=0000000000000000 RDX=0000000000000001
+RSI=ffffffffa6ec1c84 RDI=00000000ffffffff RBP=0000000b0f818a0d RSP=ffffb437007534b8
+R8 =0000000000000001 R9 =00118d6037c2c120 R10=0000000000000000 R11=000000000000002c
+R12=0000000000000000 R13=000000000002fda2 R14=ffffffffa4dbe2bd R15=0000000000000082
+RIP=ffffffffa6646bf2 RFL=00000086 [--S--P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f11398ef8c0 00000000 00000000
+GS =0000 ffff8d6037c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe105bd1d000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe105bd1b000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f1134ec7078 CR3=0000000103f1a001 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 20322e322e302e30 313d726464612032
+YMM03=0000000000000000 0000000000000000 736572206873733d 6c616e696d726574
+YMM04=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000ff000000ffff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000001 RBX=0000000000000001 RCX=ffffffffa66515b4 RDX=0000000000000005
+RSI=ffffffffa6ec1c84 RDI=000000000001fd8c RBP=ffff8d5f00209100 RSP=ffffb4370008bee8
+R8 =ffffffffa84c4410 R9 =0000000000000000 R10=0000000000000005 R11=0001ffffffffffff
+R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffffa66524bf RFL=00000212 [----A--] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff8d6037d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe6c06bd0000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe6c06bce000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f2ebfb935f8 CR3=0000000102374002 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 8cdec34d38af4c0a 00000000001b3c90
+YMM01=0000000000000000 0000000000000000 80f09f19808d26a3 0000000000162930
+YMM02=0000000000000000 0000000000000000 eff9b2d0a8fce9cb 00000000001d1b18
+YMM03=0000000000000000 0000000000000000 d59e07bde36eea69 00000000001d1ac8
+YMM04=0000000000000000 0000000000000000 7e8a42789393c4b7 00000000001d1968
+YMM05=0000000000000000 0000000000000000 b3285ca56c489dff 00000000001ba6a8
+YMM06=0000000000000000 0000000000000000 2fccd54c36d8a3f3 00000000001b61c8
+YMM07=0000000000000000 0000000000000000 693bd129e125714a 00000000001b4270
+YMM08=0000000000000000 0000000000000000 b7e94d39460f64f4 00000000001df6c8
+YMM09=0000000000000000 0000000000000000 ffff00ffffff0000 0000ffffff00ffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

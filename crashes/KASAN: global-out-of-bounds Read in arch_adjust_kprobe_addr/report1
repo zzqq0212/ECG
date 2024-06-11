@@ -1,0 +1,132 @@
+==================================================================
+BUG: KASAN: global-out-of-bounds in arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+Read of size 4 at addr ffffffff9c01c340 by task syz-executor.3/50339
+
+CPU: 3 PID: 50339 Comm: syz-executor.3 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+ _kprobe_addr+0x11b/0x150 kernel/kprobes.c:1479
+ register_kprobe+0xe0/0x1630 kernel/kprobes.c:1622
+ __register_trace_kprobe kernel/trace/trace_kprobe.c:510 [inline]
+ __register_trace_kprobe+0x26a/0x2d0 kernel/trace/trace_kprobe.c:478
+ create_local_trace_kprobe+0x2db/0x490 kernel/trace/trace_kprobe.c:1821
+ perf_kprobe_init+0x119/0x200 kernel/trace/trace_event_perf.c:267
+ perf_kprobe_event_init+0xfc/0x1d0 kernel/events/core.c:10342
+ perf_try_init_event+0x130/0x570 kernel/events/core.c:11672
+ perf_init_event kernel/events/core.c:11742 [inline]
+ perf_event_alloc.part.0+0xefa/0x34d0 kernel/events/core.c:12022
+ perf_event_alloc kernel/events/core.c:12431 [inline]
+ __do_sys_perf_event_open+0x4da/0x23e0 kernel/events/core.c:12529
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fe6b7be102d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fe6b6f50028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007fe6b7d1cf80 RCX: 00007fe6b7be102d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000040
+RBP: 00007fe6b7c424a6 R08: 000000000000000a R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007fe6b7d1cf80 R15: 00007fe6b6f30000
+ </TASK>
+
+The buggy address belongs to the variable:
+ autoclose+0x0/0x16c0
+
+The buggy address belongs to the physical page:
+page:00000000486a5b20 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x8661c
+flags: 0x100000000004000(reserved|node=0|zone=1)
+page_type: 0xffffffff()
+raw: 0100000000004000 ffffea0002198708 ffffea0002198708 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffff9c01c200: 00 00 00 00 f9 f9 f9 f9 00 00 f9 f9 f9 f9 f9 f9
+ ffffffff9c01c280: 00 00 00 00 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+>ffffffff9c01c300: 01 f9 f9 f9 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+                                           ^
+ ffffffff9c01c380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffff9c01c400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+loop3: detected capacity change from 0 to 128
+EXT4-fs: dax option not supported
+loop3: detected capacity change from 0 to 128
+EXT4-fs: dax option not supported
+loop3: detected capacity change from 0 to 128
+EXT4-fs: dax option not supported
+pimreg: left allmulticast mode
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1203028822/syzkaller.AxjpWU/2715/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop3): ext4_mb_generate_buddy:1213: group 0, block bitmap and bg descriptor inconsistent: 96 vs 65376 free clusters
+Quota error (device loop3): write_blk: dquota write failed
+Quota error (device loop3): qtree_write_dquot: Error -28 occurred while creating quota
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1203028822/syzkaller.AxjpWU/2716/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs error (device loop3): ext4_mb_generate_buddy:1213: group 0, block bitmap and bg descriptor inconsistent: 96 vs 65376 free clusters
+Quota error (device loop3): write_blk: dquota write failed
+Quota error (device loop3): qtree_write_dquot: Error -28 occurred while creating quota
+@: entered promiscuous mode
+@: left promiscuous mode
+@: entered promiscuous mode
+@: left promiscuous mode
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop3): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop3): 1 truncate cleaned up
+EXT4-fs error (device loop3): __ext4_get_inode_loc:4363: comm syz-executor.3: Invalid inode table block 5 in block_group 0
+EXT4-fs error (device loop3): ext4_read_inode_bitmap:139: comm syz-executor.3: Invalid inode bitmap blk 4 in block_group 0
+loop3: detected capacity change from 0 to 512
+I/O error, dev loop3, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 0
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed bh option
+EXT4-fs (loop3): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop3): bad geometry: block count 872600763 exceeds size of device (256 blocks)
+netlink: 168 bytes leftover after parsing attributes in process `syz-executor.0'.
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+netlink: 168 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): bad geometry: first data block 4294967294 is beyond end of filesystem (256)
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+netlink: 168 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 168 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): bad geometry: first data block 4294967294 is beyond end of filesystem (256)
+loop3: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'nogrmid'
+I/O error, dev loop3, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 0
+loop3: detected capacity change from 0 to 2048
+EXT4-fs mount: 4 callbacks suppressed
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs error (device loop3): ext4_free_inode:355: comm syz-executor.3: bit already cleared for inode 13
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 2048
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs (loop3): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs error (device loop3): ext4_mb_generate_buddy:1213: group 0, block bitmap and bg descriptor inconsistent: 191 vs 220 free clusters
+EXT4-fs (loop3): 1 truncate cleaned up
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 512
+ext4: Unknown parameter './bus'
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs (loop3): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs error (device loop3): ext4_mb_generate_buddy:1213: group 0, block bitmap and bg descriptor inconsistent: 191 vs 220 free clusters
+EXT4-fs (loop3): 1 truncate cleaned up
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 136 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 136 bytes leftover after parsing attributes in process `syz-executor.2'.

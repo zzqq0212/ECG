@@ -1,0 +1,32 @@
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+==================================================================
+BUG: KCSAN: data-race in _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+
+race at unknown origin, with read to 0xffffffff9327eac0 of 8 bytes by interrupt on cpu 2:
+ _find_first_bit+0x3d/0x70 lib/find_bit.c:101
+ find_first_bit include/linux/find.h:208 [inline]
+ find_next_bit_wrap include/linux/find.h:433 [inline]
+ find_next_bit_wrap include/linux/find.h:425 [inline]
+ _nohz_idle_balance.isra.0+0x1cb/0x2f0 kernel/sched/fair.c:12095
+ __do_softirq+0xc0/0x293 kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ sysvec_call_function_single+0x94/0xa0 arch/x86/kernel/smp.c:262
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0x1e/0x30 arch/x86/kernel/process.c:742
+ default_idle_call+0x2e/0xe0 kernel/sched/idle.c:96
+ cpuidle_idle_call kernel/sched/idle.c:169 [inline]
+ do_idle+0x181/0x210 kernel/sched/idle.c:281
+ cpu_startup_entry+0x25/0x30 kernel/sched/idle.c:379
+ start_secondary+0xfc/0x100 arch/x86/kernel/smpboot.c:336
+ secondary_startup_64_no_verify+0x178/0x17b
+
+value changed: 0x0000000000000004 -> 0x000000000000000c
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

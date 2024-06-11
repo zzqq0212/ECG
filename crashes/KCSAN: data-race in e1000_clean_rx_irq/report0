@@ -1,0 +1,178 @@
+==================================================================
+BUG: KCSAN: data-race in e1000_clean_rx_irq+0x38e/0x980 drivers/net/ethernet/intel/e1000/e1000_main.c:4365
+
+race at unknown origin, with read to 0xffff9a6901040c7c of 1 bytes by interrupt on cpu 0:
+ e1000_clean_rx_irq+0x38e/0x980 drivers/net/ethernet/intel/e1000/e1000_main.c:4365
+ e1000_clean+0x4ed/0x12b0 drivers/net/ethernet/intel/e1000/e1000_main.c:3803
+ __napi_poll+0x66/0x390 net/core/dev.c:6567
+ napi_poll net/core/dev.c:6636 [inline]
+ net_rx_action+0x66e/0x780 net/core/dev.c:6795
+ __do_softirq+0xc0/0x28f kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ common_interrupt+0xa2/0xb0 arch/x86/kernel/irq.c:247
+ asm_common_interrupt+0x26/0x40 arch/x86/include/asm/idtentry.h:640
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0x1e/0x30 arch/x86/kernel/process.c:742
+ default_idle_call+0x2e/0xe0 kernel/sched/idle.c:96
+ cpuidle_idle_call kernel/sched/idle.c:169 [inline]
+ do_idle+0x181/0x210 kernel/sched/idle.c:311
+ cpu_startup_entry+0x25/0x30 kernel/sched/idle.c:409
+ rest_init+0xff/0x100 init/main.c:730
+ arch_call_rest_init+0xe/0x30 init/main.c:827
+ start_kernel+0x5f9/0x970 init/main.c:1072
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:555
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:536
+ secondary_startup_64_no_verify+0x16d/0x17b
+
+value changed: 0x00 -> 0x07
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 0 Comm: swapper/0 Not tainted 6.8.0-rc7-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1400 audit(1710042205.125:8): avc:  denied  { execmem } for  pid=289 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+loop0: detected capacity change from 0 to 1024
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 1024
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 1024
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 1024
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop2: detected capacity change from 0 to 1024
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 1024
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop3): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 1024
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+UDPLite: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+audit: type=1400 audit(1710042210.305:9): avc:  denied  { name_bind } for  pid=2195 comm="syz-executor.2" src=35 scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:port_t:s0 tclass=icmp_socket permissive=1
+audit: type=1400 audit(1710042210.306:10): avc:  denied  { node_bind } for  pid=2195 comm="syz-executor.2" src=35 scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:node_t:s0 tclass=icmp_socket permissive=1
+loop0: detected capacity change from 0 to 512
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): orphan cleanup on readonly fs
+Quota error (device loop0): do_check_range: Getting block 196613 out of range 1-5
+Quota error (device loop0): qtree_read_dquot: Can't read quota structure for id 0
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+syz-executor.0 (2386) used greatest stack depth: 11040 bytes left
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): orphan cleanup on readonly fs
+Quota error (device loop0): do_check_range: Getting block 196613 out of range 1-5
+Quota error (device loop0): qtree_read_dquot: Can't read quota structure for id 0
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop1: detected capacity change from 0 to 512
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop1): orphan cleanup on readonly fs
+Quota error (device loop1): do_check_range: Getting block 196613 out of range 1-5
+Quota error (device loop1): qtree_read_dquot: Can't read quota structure for id 0
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): orphan cleanup on readonly fs
+Quota error (device loop0): do_check_range: Getting block 196613 out of range 1-5
+Quota error (device loop0): qtree_read_dquot: Can't read quota structure for id 0
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+loop1: detected capacity change from 0 to 512
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop1): orphan cleanup on readonly fs
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop1): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): orphan cleanup on readonly fs
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop0): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop1): orphan cleanup on readonly fs
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+[EXT4 FS bs=4096, gc=1, bpg=32768, ipg=32, mo=9842c028, mo2=0002]
+EXT4-fs (loop1): re-mounted 00000000-0000-0000-0000-000000000000 r/w. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4184433200/syzkaller.lFbtou/41/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4184433200/syzkaller.lFbtou/42/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4184433200/syzkaller.lFbtou/43/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir4184433200/syzkaller.lFbtou/44/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop1): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop1): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop1): 1 truncate cleaned up
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.

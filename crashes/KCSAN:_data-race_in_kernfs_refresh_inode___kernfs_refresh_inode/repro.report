@@ -1,0 +1,205 @@
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702c8 of 16 bytes by task 4213 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_open fs/open.c:1430 [inline]
+ __se_sys_open fs/open.c:1426 [inline]
+ __x64_sys_open+0xac/0x110 fs/open.c:1426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702c8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_getattr+0x86/0xb0 fs/kernfs/inode.c:193
+ vfs_getattr_nosec+0x18d/0x200 fs/stat.c:133
+ vfs_getattr fs/stat.c:170 [inline]
+ vfs_statx+0xe6/0x270 fs/stat.c:242
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 365 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 92 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3064 callbacks suppressed
+syz-executor373[6558]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6559]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6560]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6561]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6562]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6563]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6564]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6565]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6566]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[6567]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 0 (core 0, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff9568c10702d8 of 16 bytes by task 92 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ vfs_statx+0xab/0x270 fs/stat.c:238
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9568c10702d8 of 16 bytes by task 6476 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:165 [inline]
+ kernfs_refresh_inode+0xd7/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 6476 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+show_signal_msg: 3144 callbacks suppressed
+syz-executor373[9712]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9713]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9714]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9715]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9716]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9717]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9718]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9719]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9720]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+syz-executor373[9721]: segfault at ffffffffffffffe0 ip 00007f323ef3c61d sp 00007ffdb58a6478 error 5 in syz-executor373048086[7f323ef04000+9f000] likely on CPU 1 (core 1, socket 0)
+Code: fa 49 89 d0 4d 85 c0 0f 84 40 09 00 00 48 89 f1 48 89 f8 c5 f9 ef c0 83 e1 7f 83 f9 40 0f 86 78 02 00 00 48 83 e6 e0 83 e1 1f <c5> fd 74 0e c5 fd d7 d1 48 d3 ea 49 c7 c2 21 00 00 00 49 29 ca 4d
+----------------
+Code disassembly (best guess):
+   0:	fa                   	cli
+   1:	49 89 d0             	mov    %rdx,%r8
+   4:	4d 85 c0             	test   %r8,%r8
+   7:	0f 84 40 09 00 00    	je     0x94d
+   d:	48 89 f1             	mov    %rsi,%rcx
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	c5 f9 ef c0          	vpxor  %xmm0,%xmm0,%xmm0
+  17:	83 e1 7f             	and    $0x7f,%ecx
+  1a:	83 f9 40             	cmp    $0x40,%ecx
+  1d:	0f 86 78 02 00 00    	jbe    0x29b
+  23:	48 83 e6 e0          	and    $0xffffffffffffffe0,%rsi
+  27:	83 e1 1f             	and    $0x1f,%ecx
+* 2a:	c5 fd 74 0e          	vpcmpeqb (%rsi),%ymm0,%ymm1 <-- trapping instruction
+  2e:	c5 fd d7 d1          	vpmovmskb %ymm1,%edx
+  32:	48 d3 ea             	shr    %cl,%rdx
+  35:	49 c7 c2 21 00 00 00 	mov    $0x21,%r10
+  3c:	49 29 ca             	sub    %rcx,%r10
+  3f:	4d                   	rex.WRB
