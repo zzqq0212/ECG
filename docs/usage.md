@@ -1,5 +1,21 @@
+## 1. Input payload generate
 
-## Build
+### Install LLVM Compile Chain 
+
+
+### Extract Call Graph
+
+
+### Prompt assemble
+
+
+### Call LLM 
+
+
+### Input payload 
+
+
+## 2. Tool build
 
 ### Install golang
 We use golang in ECG, so make sure golang is installed before build ECG
@@ -108,7 +124,7 @@ kill $(cat vm.pid)
 ```
 If QEMU works, the kernel boots and ssh succeeds, we can shutdown QEMU and try to run Rtkaller.
 
-## Usage
+## 3. Usage
 
 Now we can start to 
 prepare a __config.json__ file.
