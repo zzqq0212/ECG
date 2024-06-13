@@ -1,0 +1,17 @@
+rt_timer_create(name ptr[in, CPU_CHAR], timeout ptr[in, void], para ptr[in, void], time rt_tick_t, flag rt_uint8_t) timer_t_res
+
+rt_timer_init(timer_t ptr[in, timer_t_res], name ptr[in, int8], timeout ptr[in, void], para ptr[in, void], time rt_tick_t, flag rt_uint8_t)
+
+rt_tick_get()
+rt_tick_set(tick rt_tick_t)
+rt_tick_increase()
+rt_tick_from_millisecond(milli int32)
+rt_timer_start(timer_t ptr[in, timer_t_res]) timer_t_res
+rt_timer_stop(timer_t ptr[in, timer_t_res])
+rt_timer_control(timer_t ptr[in, timer_t_res], cmd int32, arg ptr[in, void])
+
+rt_timer_delete(timer_t ptr[in, timer_t_res])
+
+resource timer_t_res[intptr]
+type rt_tick_t int32
+type rt_uint8_t int8

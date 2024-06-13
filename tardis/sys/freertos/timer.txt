@@ -1,0 +1,65 @@
+resource TimerHandle_t[int64]
+type TickType_t int32
+type UBaseType_t int32
+type VoidBlob ptr[in, array[int8]]
+type TimerCallbackFunction_t intptr
+type BaseType_t intptr
+
+StaticListItem_t {
+	xDummy1		TickType_t
+	xDummy2		TickType_t
+	pvDummy3	TickType_t
+	xDummy4		TickType_t
+}
+
+StaticTimer_t {
+	pvDummy1	VoidBlob
+	xDummy2		StaticListItem_t
+	xDummy3		TickType_t
+	pvDummy5	VoidBlob
+	pvDummy6	int64
+	uxDummy7	UBaseType_t
+	ucDummy8	int8
+}
+
+xTimerCreate(pcTimerName ptr[in, string], xTimerPeriod TickType_t, uxAutoReload UBaseType_t, pvTimerID VoidBlob, cb TimerCallbackFunction_t) TimerHandle_t
+
+xTimerCreateStatic(pcTimerName ptr[in, string], xTimerPeriod TickType_t, uxAutoReload UBaseType_t, pvTimerID VoidBlob, pxCallbackFunction TimerCallbackFunction_t, pxTimerBuffer ptr[in, StaticTimer_t]) TimerHandle_t
+
+xTimerIsTimerActive(xTimer TimerHandle_t)
+
+xTimerStart(xTimer TimerHandle_t, xBlockTime TickType_t)
+
+xTimerStop(xTimer TimerHandle_t, xBlockTime TickType_t)
+
+xTimerChangePeriod(xTimer TimerHandle_t, xNewPeriod TickType_t, xBlockTime TickType_t)
+
+xTimerDelete(xTimer TimerHandle_t, xBlockTime TickType_t)
+
+xTimerReset(xTimer TimerHandle_t, xBlockTime TickType_t)
+
+xTimerStartFromISR(xTimer TimerHandle_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTimerStopFromISR(xTimer TimerHandle_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTimerChangePeriodFromISR(xTimer TimerHandle_t, xNewPeriod TickType_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTimerResetFromISR(xTimer TimerHandle_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+pvTimerGetTimerID(xTimer TimerHandle_t)
+
+vTimerSetReloadMode(xTimer TimerHandle_t, uxAutoReload UBaseType_t)
+
+vTimerSetTimerID(xTimer TimerHandle_t, pvNewID VoidBlob)
+
+xTimerGetTimerDaemonTaskHandle() TaskHandle_t
+
+xTimerPendFunctionCall(xFunctionToPend intptr, pvParameter1 VoidBlob, ulParameter2 int32, xTicksToWait TickType_t)
+
+pcTimerGetName(xTimer TimerHandle_t)
+
+xTimerGetPeriod(xTimer TimerHandle_t)
+
+xTimerGetExpiryTime(xTimer TimerHandle_t)
+
+uxTimerGetReloadMode(xTimer TimerHandle_t)

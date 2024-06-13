@@ -1,11 +1,11 @@
 import os
 import re
-from openai import OpenAI  # type: ignore # 使用 openai 而不是 OpenAI
+from openai import OpenAI  # type: ignore
 
 
 client = OpenAI(
-    api_key = 'sk-HeHttoCiVsRfcpSd3fE5228357574d618aD03e86E23d615d',
-    base_url = "https://api.132999.xyz/v1"
+    api_key = 'api_key', # please update your api_key
+    base_url = "api_url" # please update your api_url
 )
 
 def get_prompts_from_file(file_path):
@@ -22,7 +22,7 @@ def get_prompts_from_file(file_path):
                     prompt = []
             else:
                 prompt.append(line)
-        if prompt:  # Add the last prompt if file does not end with an empty line
+        if prompt: 
             prompts.append(' '.join(prompt).strip())
     return prompts
 
@@ -40,18 +40,14 @@ def call_chatgpt_api(prompt):
     return response.choices[0].message.content
 
 def format_response(response):
-    # 使用正则表达式找到所有的 ```c``` 块
     code_pattern = re.compile(r'```c\s*(.*?)\s*```', re.DOTALL)
     formatted_response = ""
     last_end = 0
     for match in code_pattern.finditer(response):
-        # 非代码块部分
         formatted_response += f"<p>{response[last_end:match.start()].strip()}</p>"
-        # 代码块部分
         code = match.group(1)
         formatted_response += f"<pre><code class=\"language-c\">{code.strip()}</code></pre>"
         last_end = match.end()
-    # 添加最后一部分
     formatted_response += f"<p>{response[last_end:].strip()}</p>"
     return formatted_response
 
@@ -81,7 +77,7 @@ def generate_output(file_path):
 
     prompts = get_prompts_from_file(file_path)
     with open(output_txt, 'w') as txt_file, open(output_html, 'w') as html_file, open(output_log, 'w') as log_file:
-        html_file.write(html_header)  # 先写入HTML头部
+        html_file.write(html_header) 
 
         for i, prompt in enumerate(prompts):
             print(f"Processing prompt {i + 1}/{len(prompts)} from file: {file_path}")
@@ -91,9 +87,9 @@ def generate_output(file_path):
             formatted_response = format_response(response)
             html_content = f"<h3>Prompt:</h3><p>{prompt}</p>"
             html_content += f"<h3>Response:</h3>{formatted_response}<hr>"
-            html_file.write(html_content)  # 将内容追加到HTML文件中
+            html_file.write(html_content) 
 
-        html_file.write(html_footer)  # 最后写入HTML尾部
+        html_file.write(html_footer)
 
     print(f"TXT file generated: {output_txt}")
     print(f"HTML file generated: {output_html}")
@@ -101,7 +97,7 @@ def generate_output(file_path):
 
 
 if __name__ == '__main__':
-    txt_files_path = '/mnt/nvme/zhangqiang/LLM-models/prompt'  # 替换为实际的文件夹路径
+    txt_files_path = 'path' # please update your file folder path
     txt_files = [os.path.join(txt_files_path, file) for file in os.listdir(txt_files_path) if file.endswith('.txt')]
     
     for txt_file in txt_files:

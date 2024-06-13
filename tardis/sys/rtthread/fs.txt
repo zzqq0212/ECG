@@ -1,0 +1,46 @@
+fd_new() fd
+fd_get(fd int32) dfs_fd_res
+fd_put(dfs_fd_res ptr[in, dfs_fd_res])
+fd_is_open(name ptr[in, int8])
+
+dfs_init()
+dfs_lock()
+dfs_unlock()
+
+#dfs_subdir(directory ptr[in, int8], filename ptr[in, int8])
+#dfs_normalize_path(directory ptr[in, int8], filename ptr[in, int8])
+#dfs_filesystem_lookup(path ptr[in, int8])
+#dfs_register(ops ptr[in, dfs_filesystem_ops_res])
+dfs_filesystem_get_mounted_path(device ptr[in, rt_device_res]) rt_device_res
+dfs_mount(device_name ptr[in, int8], path ptr[in, int8], fs_type ptr[in, int8], rwflag int32, data ptr[in, void])
+#dfs_unmount(device_name ptr[in, int8])
+dfs_mkfs(fs_name ptr[in, int8], device_name ptr[in, int8])
+
+fd_new$open() fd
+open(name ptr[in, int8], flag int32[1:6])
+read(fd fd, buf ptr[out, void], len size_t)
+write(fd fd, buf ptr[in, void], len size_t)
+rename(src ptr[in, int8], new ptr[in, int8])
+unlink(pathname ptr[in, int8])
+stat(file ptr[in, int8], buf ptr[inout, stat_res])
+fstat(fildes int32, buf ptr[inout, stat_res])
+fsync(fildes int32)
+statfs(file ptr[in, int8], statfs ptr[in, statfs_res]) statfs_res
+mkdir(path ptr[in, int8], mode mode_t)
+rmdir(path ptr[in, int8])
+opendir(path ptr[in, int8])
+readdir(d ptr[inout, DIR])
+telldir(d ptr[inout, DIR])
+seekdir(d ptr[inout, DIR], offset int32)
+rewinddir(d ptr[inout, DIR])
+closedir(d ptr[inout, DIR])
+access(path ptr[in, int8], amode int32)
+
+resource fd[int32]
+resource dfs_fd_res[intptr]
+resource stat_res[intptr]
+resource statfs_res[intptr]
+resource rt_device_res[intptr]
+resource DIR[intptr]
+type size_t int32
+type mode_t int32

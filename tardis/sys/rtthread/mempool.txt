@@ -1,0 +1,10 @@
+rt_mp_init(rt_mp ptr[in, rt_mempool_res], name ptr[in, int8], start ptr[in, void], size rt_size_t, blocksize rt_size_t) rt_mempool_res
+rt_mp_detach(rt_mp ptr[in, rt_mempool_res])
+rt_mp_create(name ptr[in, int8], start ptr[in, void], size rt_size_t, blocksize rt_size_t)
+rt_mp_delete(name ptr[in, int8])
+rt_mp_alloc(name ptr[in, int8], time rt_int32_t)
+rt_mp_free(block ptr[in, void])
+
+resource rt_mempool_res[intptr]
+type rt_size_t int32
+type rt_int32_t int32

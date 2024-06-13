@@ -1,0 +1,51 @@
+include <lib_def.h>
+
+# resource mem_tf_res[CPU_BOOLEAN]
+# resource mem_ptr_res[intptr]
+# resource mem_rem_res[CPU_SIZE_T]
+# resource mem_pool_qty_res[MEM_POOL_BLK_QTY]:q
+
+padding_align_flags = 0, 2, 4, 8, 16, 32, 64
+
+# all CPU_SIZE_T were converted to int32
+Mem_Clr(pmem ptr[out, array[int8, 40:50]], size int32[0:40])
+Mem_Set(pmem ptr[in, array[int8, 40:50]], data_val int8, size int32[0:40])
+Mem_Copy(pdest ptr[in, array[int8, 40:50]], psrc ptr[out, array[int8, 40:50]], size int32[0:40])
+Mem_Move(pdest ptr[in, array[int8, 40:50]], psrc ptr[out, array[int8, 40:50]], size int32[0:40])
+Mem_Cmp(p1_mem ptr[in, array[int8, 40:50]], p2_mem ptr[out, array[int8, 40:50]], size int32[0:40]) (ignore_return)
+# mem_tf_res
+# Mem_Init()
+Mem_SegCreate(p_name ptr[in, CPU_CHAR], p_seg ptr[out, mem_seg_res], seg_base_addr CPU_ADDR, size CPU_SIZE_T, padding_align flags[padding_align_flags], p_err ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_SegClr(p_seg ptr[in, mem_seg_res], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_SegAlloc(p_name ptr[in, CPU_CHAR], p_seg ptr[in, mem_seg_res], size CPU_SIZE_T, perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+Mem_SegAllocExt(p_name ptr[in, CPU_CHAR], p_seg ptr[in, mem_seg_res], size CPU_SIZE_T, align CPU_SIZE_T, p_bytes_reqd ptr[in, CPU_SIZE_T], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+Mem_SegAllocHW(p_name ptr[in, CPU_CHAR], p_seg ptr[in, mem_seg_res], size CPU_SIZE_T, align CPU_SIZE_T, p_bytes_reqd ptr[in, CPU_SIZE_T], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+# Mem_SegRemSizeGet(p_seg ptr[in, mem_seg_res], align CPU_SIZE_T, p_seg_info ptr[in, MEM_SEG_INFO], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+# mem_rem_res
+Mem_PoolCreate(p_pool ptr[out, mem_pool_res], p_mem_base ptr[in, void], mem_size CPU_SIZE_T, blk_nbr MEM_POOL_BLK_QTY, blk_size CPU_SIZE_T, blk_align CPU_SIZE_T, p_bytes_reqd ptr[in, CPU_SIZE_T], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_PoolClr(p_pool ptr[in, mem_pool_res], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_PoolBlkGet(p_pool ptr[in, mem_pool_res], size CPU_SIZE_T, perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+# mem_ptr_res
+Mem_PoolBlkFree(p_pool ptr[in, mem_pool_res], p_blk ptr[in, void], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_PoolBlkGetNbrAvail(p_pool ptr[in, mem_pool_res], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+# mem_pool_qty_res
+Mem_DynPoolCreate(p_name ptr[in, CPU_CHAR], p_pool ptr[out, mem_dyn_pool_res], p_seg ptr[in, mem_seg_res], blk_size CPU_SIZE_T, blk_align CPU_SIZE_T, blk_qty_init CPU_SIZE_T, blk_qty_max CPU_SIZE_T, perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_DynPoolCreateHW(p_name ptr[in, CPU_CHAR], p_pool ptr[out, mem_dyn_pool_res], p_seg ptr[in, mem_seg_res], blk_size CPU_SIZE_T, blk_align CPU_SIZE_T, blk_qty_init CPU_SIZE_T, blk_qty_max CPU_SIZE_T, perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_DynPoolBlkGet(p_pool ptr[in, mem_dyn_pool_res], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+Mem_DynPoolBlkFree(p_pool ptr[in, mem_dyn_pool_res], p_blk ptr[in, void], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]])
+Mem_DynPoolBlkNbrAvailGet(p_pool ptr[in, mem_dyn_pool_res], perr ptr[out, const[LIB_MEM_ERR_NONE, int16]]) (ignore_return)
+# mem_rem_res
+# Mem_HeapAlloc(size CPU_SIZE_T, align CPU_SIZE_T, p_bytes_reqd ptr[in, CPU_SIZE_T], p_err ptr[out, const[LIB_MEM_ERR_NONE, int16]]) mem_ptr_res
+# Mem_HeapGetSizeRem(align CPU_SIZE_T, p_err ptr[out, const[LIB_MEM_ERR_NONE, int16]]) mem_rem_res
+
+# Mem_Set$res(pmem mem_ptr_res, data_val int8, size CPU_SIZE_T)
+# Mem_Copy$res(pdest mem_ptr_res, psrc ptr[in, void], size CPU_SIZE_T)
+# Mem_Move$res(pdest mem_ptr_res, psrc ptr[in, void], size CPU_SIZE_T)
+
+type CPU_BOOLEAN int8[0:1]
+type CPU_SIZE_T int32
+type MEM_POOL_BLK_QTY int32
+
+resource mem_seg_res[intptr]
+resource mem_pool_res[intptr]
+resource mem_dyn_pool_res[intptr]

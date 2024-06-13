@@ -31,19 +31,15 @@ def call_mixtral_api(prompt):
         return f"Error: {response.status_code}"
 
 def format_response(response):
-    # 使用正则表达式找到所有的 ```language``` 块
     code_pattern = re.compile(r'```(\w+)\s*(.*?)\s*```', re.DOTALL)
     formatted_response = ""
     last_end = 0
     for match in code_pattern.finditer(response):
-        # 非代码块部分
         formatted_response += f"<p>{response[last_end:match.start()].strip()}</p>"
-        # 代码块部分
         language = match.group(1)
         code = match.group(2)
         formatted_response += f"<pre><code class=\"language-{language}\">{code.strip()}</code></pre>"
         last_end = match.end()
-    # 添加最后一部分
     formatted_response += f"<p>{response[last_end:].strip()}</p>"
     return formatted_response
 
@@ -79,7 +75,7 @@ def generate_html(file_path):
     print(f"HTML file generated: {output_html}")
 
 if __name__ == '__main__':
-    txt_files_path = '/mnt/nvme/zhangqiang/LLM-models/mixtral_prompt'  # 替换为实际的文件夹路径
+    txt_files_path = 'path'  # please update your actual file folder path
     txt_files = [os.path.join(txt_files_path, file) for file in os.listdir(txt_files_path) if file.endswith('.txt')]
     
     for txt_file in txt_files:

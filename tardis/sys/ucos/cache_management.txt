@@ -1,0 +1,4 @@
+# CPU_DCACHE_RANGE_FLUSH(addr_start ptr[in, void], len CPU_ADDR)
+# CPU_DCACHE_RANGE_INV(addr_start ptr[in, void], len CPU_ADDR)
+
+type CPU_ADDR int32

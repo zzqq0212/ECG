@@ -1,0 +1,18 @@
+[package]
+name = "feryr_debug"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1.5.5"
+rand = "0.8.5"
+serde-value = "0.7.0"
+serde = "1.0.136"
+serde_json = "1.0"
+env = "0.0.0" 
+memmap2 = "0.5.3"
+failure = "0.1.0"
+byteorder = "1.4.3"
+byterepr = "0.1.0"

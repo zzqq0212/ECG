@@ -1,0 +1,29 @@
+[package]
+name = "feryr_prog"
+version = "0.1.0"
+edition = "2021" 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+ 
+[dependencies]
+byteorder = "*"
+chrono = "0.4.19"
+likely_stable = "0.1.2"
+iota = "0.2.2"
+failure = "0.1.0"
+bytes = "1.0.0"
+shared_memory = "0.12.0"
+serde_json = "1.0"
+multimap = "0.8.3"
+log = "0.4"
+hex = "0.4"
+pest = "2.1"
+pest_derive = "2.1"
+serde = { version = "1.0", features = ["derive"] }
+ahash = "0.7"
+rand = { version = "0.8", features = ["small_rng"] }
+positioned-io = "0.2"
+memmap2 = "0.5.0"
+lazy_static = "*"
+timeout-readwrite = "0.3.1"
+vectorize = "0.2.0"
+tokio = {version = "1.13", features = ["rt", "rt-multi-thread", "time"]}

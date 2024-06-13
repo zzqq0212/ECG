@@ -1,0 +1,10 @@
+include <lib_math.h>
+
+resource rand_nbr_res[RAND_NBR]
+
+# Math_Init()
+Math_RandSetSeed(seed rand_nbr_res)
+Math_Rand() rand_nbr_res
+Math_RandSeed(seed rand_nbr_res) rand_nbr_res
+
+type RAND_NBR int32

@@ -1,0 +1,77 @@
+{
+    "rt_timer": [
+        [
+            0,
+            "rt_object"
+        ]
+    ],
+    "rt_mempool": [
+        [
+            0,
+            "rt_object"
+        ]
+    ],
+    "dfs_fd": [
+        [
+            4,
+            "dfs_filesystem"
+        ], 
+        [
+            5,
+            "dfs_file_ops"
+        ]
+    ],
+    "stat": [
+        [
+            0,
+            "rt_device"
+        ], 
+        [
+            6,
+            "rt_device"
+        ]
+    ],
+    "statfs": [
+    ],
+    "dfs_filesystem_ops": [
+        [
+            2,
+            "dfs_file_ops"
+        ],
+        [
+            3,
+            "dfs_filesystem"
+        ],
+        [
+            4,
+            "dfs_filesystem"
+        ],
+        [
+            5,
+            "rt_device_t"
+        ],
+        [
+            6,
+            "dfs_filesystem"
+        ],
+        [
+            7,
+            "dfs_filesystem"
+        ],
+        [
+            8,
+            "dfs_filesystem"
+        ],
+        [
+            9,
+            "dfs_filesystem"
+        ]
+    ],
+    "rt_device": [
+        [
+            0,
+            "rt_object"
+        ]
+    ]
+
+}

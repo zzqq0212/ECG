@@ -1,0 +1,8 @@
+k_stack_init(stack ptr[inout, k_stack], buffer ptr[inout, int32], num_entries int32) stack
+k_stack_alloc_init(stack ptr[out, k_stack], num_entries int32) stack
+k_stack_cleanup(stackk ptr[in, stack])
+k_stack_push(stackk ptr[in, stack], buffer ptr[inout, int32])
+k_stack_pop(stackk ptr[in, stack], buffer ptr[inout, int32], timeout ptr[inout, k_timeout_t])
+
+resource k_stack[intptr]
+resource stack[k_stack]

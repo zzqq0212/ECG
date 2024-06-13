@@ -1,0 +1,25 @@
+include <Source/os.h>
+
+# resource os_ver_res[int16]
+
+# BSP_OS_TickISR()
+# OSCtxSw()
+# OSIdleTaskHook()
+# # OSInit(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# # OSInitHook()
+# OSIntCtxSw()
+# # OSIntEnter()
+# # OSIntExit()
+# # OSRedzoneHitHook(p_tcb ptr[in, os_tcb_res])
+# OSSched()
+# OSSchedLock(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSSchedUnlock(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSStart(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSStartHighRdy()
+# OSStatReset(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSStatTaskCPUUsageInit(p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSStatTaskHook()
+# OSVersion(p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_ver_res
+
+resource os_tcb_res[intptr]

@@ -1,0 +1,14 @@
+include <Source/os.h>
+
+# resource os_tick_res[OS_TICK]
+
+# OSTimeDly(dly OS_TICK, opt flags[dly_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSTimeDlyHMSM(hours int16[0:999], minutes int16[0:9999], seconds int16, milli int32, opt flags[dlyhmsm_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSTimeDlyResume(p_tcb ptr[in, os_tcb_res], p_err ptr[out, const[OS_ERR_NONE, int16]])
+# OSTimeGet(p_err ptr[out, const[OS_ERR_NONE, int16]]) os_tick_res
+OSTimeSet(ticks OS_TICK, p_err ptr[out, const[OS_ERR_NONE, int16]])
+OSTimeTick()
+OSTimeTickHook()
+
+# dly_opt_flags = OS_OPT_TIME_DLY, OS_OPT_TIME_TIMEOUT, OS_OPT_TIME_PERIODIC, OS_OPT_TIME_MATCH
+# dlyhmsm_opt_flags = OS_OPT_TIME_HMSM_STRICT, OS_OPT_TIME_HMSM_NON_STRICT, OS_OPT_TIME_DLY, OS_OPT_TIME_TIMEOUT, OS_OPT_TIME_PERIODIC, OS_OPT_TIME_MATCH

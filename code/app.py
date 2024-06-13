@@ -6,15 +6,13 @@ import time
 app = Flask(__name__)
 
 def run_ollama_service():
-    # 启动 Ollama 服务
     command = ["ollama", "serve"]
     subprocess.Popen(command)
-    # 等待服务启动
     time.sleep(10)
 
 def run_mixtral(input_text):
     result = subprocess.run(
-        ['ollama', 'run', 'mixtral', input_text],
+        ['ollama', 'run', 'mixtral:8x7b', input_text],
         capture_output=True,
         text=True
     )
@@ -30,9 +28,7 @@ def mixtral_api():
     return jsonify({'input': input_text, 'output': output_text})
 
 if __name__ == '__main__':
-    # 启动 Ollama 服务
     ollama_thread = threading.Thread(target=run_ollama_service)
     ollama_thread.start()
     
-    # 启动 Flask 应用
     app.run(host='0.0.0.0', port=5000)
