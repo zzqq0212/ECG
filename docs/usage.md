@@ -1,33 +1,144 @@
-# How to use syzkaller
 
-## Running
+## Build
 
-Start the `syz-manager` process as:
+### Install golang
+We use golang in ECG, so make sure golang is installed before build ECG
+``` bash
+wget https://dl.google.com/go/go1.22.4.linux-amd64.tar.gz
+tar -xf go1.22.4.linux-amd64.tar.gz
+mv go goroot
+mkdir gopath
+export GOPATH=`pwd`/gopath
+export GOROOT=`pwd`/goroot
+export PATH=$GOPATH/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
 ```
-./bin/syz-manager -config my.cfg
+
+### Prepare Kernel
+In here we use Linux Kernel(Enable Real time Config) v6.7 as an example.
+First we need to have have a compilable Linux
+```bash
+#download linux kernel 
+git clone https://github.com/torvalds/linux
+cd linux
+export Kernel=$pwd
+git checkout -f 0dd3ee3
+
+After we have the Linux Kernel, we need to compile it.
+``` bash
+# modified configuration
+make defconfig  
+make kvmconfig
+
+vim .config
 ```
 
-The `syz-manager` process will wind up VMs and start fuzzing in them.
-The `-config` command line option gives the location of the configuration file, which is described [here](configuration.md).
-Found crashes, statistics and other information is exposed on the HTTP address specified in the manager config.
+``` vim
+# modified configuration
+CONFIG_PREEMPT=y
+CONFIG_PREEMPT_RT_BASE=y
+CONFIG_HAVE_PREEMPT_LAZY=y
+CONFIG_PREEMPT_LAZY=y
+CONFIG_PREEMPT_RT_FULL=y
+CONFIG_PREEMPT_COUNT=y
 
-## Crashes
+CONFIG_KCOV=y 
+CONFIG_DEBUG_INFO=y 
+CONFIG_KASAN=y
+CONFIG_KASAN_INLINE=y 
+CONFIG_CONFIGFS_FS=y
+CONFIG_SECURITYFS=y
+```
 
-Once syzkaller detected a kernel crash in one of the VMs, it will automatically start the process of reproducing this crash (unless you specified `"reproduce": false` in the config).
-By default it will use 4 VMs to reproduce the crash and then minimize the program that caused it.
-This may stop the fuzzing, since all of the VMs might be busy reproducing detected crashes.
+make it!
+```
+make olddefconfig
+make -j32
+```
 
-The process of reproducing one crash may take from a few minutes up to an hour depending on whether the crash is easily reproducible or non-reproducible at all.
-Since this process is not perfect, there's a way to try to manually reproduce the crash, as described [here](reproducing_crashes.md).
+Now we should have vmlinux (kernel binary) and bzImage (packed kernel image):
+```bash
+$ ls $KERNEL/vmlinux
+$KERNEL/vmlinux
+$ ls $KERNEL/arch/x86/boot/bzImage
+$KERNEL/arch/x86/boot/bzImage
+```
 
-If a reproducer is successfully found, it can be generated in one of the two forms: syzkaller program or C program.
-Syzkaller always tries to generate a more user-friendly C reproducer, but sometimes fails for various reasons (for example slightly different timings).
-In case syzkaller only generated a syzkaller program, there's [a way to execute them](reproducing_crashes.md) to reproduce and debug the crash manually.
+### Prepare Image
+ 
+```bash 
+sudo apt-get install debootstrap 
+export IMAGE=$pwd
+cd $IMAGE/
+wget https://raw.githubusercontent.com/google/syzkaller/master/tools/create-image.sh -O create-image.sh
+chmod +x create-image.sh
+./create-image.sh
+```
+now we have a image stretch.img and a public key
 
-## Hub
 
-In case you're running multiple `syz-manager` instances, there's a way to connect them together and allow to exchange programs and reproducers, see the details [here](hub.md).
+### Ready QEMU
+Install QEMU:
+``` bash
+sudo apt-get install qemu-system-x86
+```
+Make sure the kernel boots and sshd starts:
+``` bash 
+qemu-system-x86_64 \
+	-m 2G \
+	-smp 2 \
+	-kernel $KERNEL/arch/x86/boot/bzImage \
+	-append "console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
+	-drive file=$IMAGE/stretch.img,format=raw \
+	-net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
+	-net nic,model=e1000 \
+	-enable-kvm \
+	-nographic \
+	-pidfile vm.pid \
+	2>&1 | tee vm.log
+```
+see if ssh works
+``` bash 
+ssh -i $IMAGE/stretch.id_rsa -p 10021 ``-o "StrictHostKeyChecking no" 
+```
 
-## Reporting bugs
+To kill the running QEMU instance press Ctrl+A and then X or run:
+``` bash
+kill $(cat vm.pid)
+```
+If QEMU works, the kernel boots and ssh succeeds, we can shutdown QEMU and try to run Rtkaller.
 
-Check [here](linux/reporting_kernel_bugs.md) for the instructions on how to report Linux kernel bugs.
+## Usage
+
+Now we can start to 
+prepare a __config.json__ file.
+
+move to Rtkaller directory
+
+``` json 
+{
+        "target": "linux/amd64",
+        "http": "127.0.0.1:56295",
+        "workdir": "./workdir",
+        "cover": false,
+        "kernel_obj": "$(Kernel)/vmlinux",
+        "image": "$(image)/stretch.img",
+        "sshkey": "$(image)/stretch.id_rsa",
+        "syzkaller": "$pwd",
+        "procs": 2,
+        "type": "qemu",
+        "vm": {
+                "count": 2,
+                "kernel": "$(Kernel)/bzImage",
+                "cpu": 2,
+                "mem": 4096
+        }
+
+
+```
+
+Now run it
+
+``` bash
+./bin/syz-manager -config config.json
+```
