@@ -1,4 +1,4 @@
-Here we list the overall experiments results over 6 targets versions:
+### Here we list the overall experiments results over 6 targets versions:
 
 | Subject      |       openwrt5.15      |       openwrt6.1       |       RT-Linux6.7      |       RT-Linux6.8      |       RaspiOS6.7       |      RT-Linuxv6.8      |         Overall         |
 |--------------|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:-----------------------:|
@@ -12,10 +12,10 @@ Here we list the overall experiments results over 6 targets versions:
 | DRLF         |  43283.3(+9.12)%  |                        |  41099.7(+12.36)% |  40445.2(+10.93)% |  43585.6(+8.36)%  |  43754.4(+13.95)% |  42802.4(+11.05)%  |
 
 <div align="left">
-  <img src="https://github.com/zzqq0212/ECG/blob/main/ECG/experiments/covrage.png" height="500px" alt="coverage_pic" >
+  <img src="https://github.com/zzqq0212/ECG/blob/main/ECG/experiments/coverage.png" height="500px" alt="coverage_pic" >
 </div>
 
-The below table shows average bug counts of ECG and other fuzzers over 10 rounds of experiments, and the `crashes` folder contained relevant previously unknown bugs detected by ECG.
+### The below table shows average bug counts of ECG and other fuzzers over 10 rounds of experiments.
 
 | Subject      | openwrt5.15 | openwrt6.1 | RT-Linux6.7 | RT-Linux6.8 | RaspiOS6.7 | RaspiOS6.8 | Total |
 |--------------|:-----------:|:----------:|:-----------:|:-----------:|:----------:|:----------:|:-----:|
@@ -29,7 +29,7 @@ The below table shows average bug counts of ECG and other fuzzers over 10 rounds
 | DRLF         |     3.5     |     4.1    |     3.2     |     3.7     |     3.6    |     3.1    |  21.2 |
 
 
-### New previous unknown bugs reported detailed description below:
+### New previous unknown bugs reported detailed description below, the `crash` folder contained all previously unknown bugs detected by ECG.
 
 | \#                    | Modules               | Versions           | Locations                                          | Bug Types         |
 |-----------------------|-----------------------|--------------------|----------------------------------------------------|-------------------|

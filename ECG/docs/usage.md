@@ -36,31 +36,9 @@ git checkout -f 0dd3ee3
 ``` bash
 make defconfig  
 make kvmconfig
-make olddefconfig
 make LLVM=1 -j32
 ```
-<!-- ``` vim
-# vim .config
 
-CONFIG_PREEMPT=y
-CONFIG_PREEMPT_RT_BASE=y
-CONFIG_HAVE_PREEMPT_LAZY=y
-CONFIG_PREEMPT_LAZY=y
-CONFIG_PREEMPT_RT_FULL=y
-CONFIG_PREEMPT_COUNT=y
-CONFIG_KCOV=y 
-CONFIG_DEBUG_INFO=y 
-CONFIG_KASAN=y
-CONFIG_KASAN_INLINE=y 
-CONFIG_CONFIGFS_FS=y
-CONFIG_SECURITYFS=y
-```
-
-``` vim
-# vim Makefile to add the below line code after line:
-
-KBUILD_CFLAGS += -Wframe-larger-than=4096
-``` -->
 Due to size of linux kernel source code is big. For demonstrating the workflow, we just create a `linux` folder in `ECG` for replacing the real linux kernel folder `linux`. 
 
 ```bash
