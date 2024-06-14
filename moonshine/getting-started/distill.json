@@ -1,6 +1,0 @@
-{
-    "type": "implicit",
-    "stats": "distillStats",
-    "implicit_dependencies": "./implicit-dependencies/implicit_dependencies.json"
-}
-

@@ -1,0 +1,9 @@
+# {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:true Repro:false Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}
+openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000040)='memory.events\x00', 0x26e1, 0x0)
+r0 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f00000001c0)='memory.events\x00', 0x7a05, 0x1700)
+r1 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+r2 = memfd_secret(0x0)
+mmap$IORING_OFF_SQ_RING(&(0x7f0000000000/0x2000)=nil, 0x2000, 0x3000001, 0x13, r2, 0x0)
+ftruncate(r2, 0x3)
+write$binfmt_elf64(r1, &(0x7f0000000580)=ANY=[], 0x1ab0)
+write$cgroup_int(r0, &(0x7f0000000200), 0xf000)

@@ -1,0 +1,77 @@
+audit: type=1400 audit(1699131300.858:8): avc:  denied  { execmem } for  pid=363 comm="syz-executor157" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+hrtimer: interrupt took 14209 ns
+rcu: INFO: rcu_preempt self-detected stall on CPU
+rcu: 	0-....: (18618 ticks this GP) idle=527c/1/0x4000000000000000 softirq=4752/4752 fqs=5248
+rcu: 	(t=21002 jiffies g=6689 q=37 ncpus=2)
+CPU: 0 PID: 365 Comm: syz-executor157 Not tainted 6.5.0-dirty #11
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:orc_ip arch/x86/kernel/unwind_orc.c:80 [inline]
+RIP: 0010:__orc_find+0x86/0xf0 arch/x86/kernel/unwind_orc.c:102
+Code: f2 48 d1 fa 48 8d 5c 95 00 48 89 da 48 c1 ea 03 0f b6 34 0a 48 89 da 83 e2 07 83 c2 03 40 38 f2 7c 05 40 84 f6 75 4b 48 63 13 <48> 01 da 49 39 d5 73 af 4c 8d 63 fc 49 39 ec 73 b2 4d 29 f7 49 c1
+RSP: 0018:ffff8881f7209658 EFLAGS: 00000246
+RAX: ffffffffa1143332 RBX: ffffffffa0e59270 RCX: dffffc0000000000
+RDX: fffffffffc101492 RSI: 0000000000000000 RDI: ffffffffa0e59270
+RBP: ffffffffa0e59270 R08: ffffffffa1495ba2 R09: ffff8881f720974a
+R10: 00000000000055b7 R11: 0000000000030001 R12: ffffffffa0e59270
+R13: ffffffff9cf5b738 R14: ffffffffa0e59270 R15: ffffffffa0e59270
+FS:  0000555556bc23c0(0000) GS:ffff8881f7200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000008 CR3: 0000000107174001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ orc_find arch/x86/kernel/unwind_orc.c:227 [inline]
+ unwind_next_frame+0x2b9/0x2380 arch/x86/kernel/unwind_orc.c:494
+ arch_stack_walk+0x87/0xf0 arch/x86/kernel/stacktrace.c:25
+ stack_trace_save+0x90/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x22/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x25/0x30 mm/kasan/common.c:52
+ __kasan_slab_alloc+0x59/0x70 mm/kasan/common.c:328
+ kasan_slab_alloc include/linux/kasan.h:186 [inline]
+ slab_post_alloc_hook mm/slab.h:762 [inline]
+ slab_alloc_node mm/slub.c:3470 [inline]
+ kmem_cache_alloc_node+0x106/0x270 mm/slub.c:3515
+ __alloc_skb+0x229/0x2d0 net/core/skbuff.c:634
+ alloc_skb include/linux/skbuff.h:1289 [inline]
+ arp_create+0x12e/0x7c0 net/ipv4/arp.c:560
+ arp_send_dst net/ipv4/arp.c:314 [inline]
+ arp_send_dst+0xa9/0x1d0 net/ipv4/arp.c:301
+ arp_solicit+0x3d2/0x9c0 net/ipv4/arp.c:392
+ neigh_probe+0xc5/0x110 net/core/neighbour.c:1064
+ neigh_timer_handler+0x37f/0xdb0 net/core/neighbour.c:1146
+ call_timer_fn+0x33/0x220 kernel/time/timer.c:1700
+ expire_timers kernel/time/timer.c:1751 [inline]
+ __run_timers.part.0+0x596/0x8b0 kernel/time/timer.c:2022
+ __run_timers kernel/time/timer.c:2000 [inline]
+ run_timer_softirq+0xa5/0x190 kernel/time/timer.c:2035
+ __do_softirq+0x1ad/0x5bd kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0x8d/0xf0 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:__raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:152 [inline]
+RIP: 0010:_raw_spin_unlock_irqrestore+0x3c/0x80 kernel/locking/spinlock.c:194
+Code: 48 89 fa 48 c1 ea 03 0f b6 04 02 48 89 fa 83 e2 07 38 d0 7f 04 84 c0 75 38 c6 07 00 f7 c6 00 02 00 00 74 01 fb bf 01 00 00 00 <e8> af 32 46 fd 65 8b 05 70 93 89 60 85 c0 74 09 48 83 c4 10 e9 1b
+RSP: 0018:ffff88810fe77d88 EFLAGS: 00000206
+RAX: 0000000000000000 RBX: 1ffff11021fcefbd RCX: ffffffff9f79d6dc
+RDX: 0000000000000000 RSI: 0000000000000246 RDI: 0000000000000001
+RBP: 0000000000000246 R08: 0000000000000001 R09: ffffed1021fcefa8
+R10: 0000000000000003 R11: 0000000000030001 R12: ffff888104ad1100
+R13: ffff88810cac8400 R14: ffff88810f012380 R15: ffff88810fdf0498
+ perf_unpin_context kernel/events/core.c:1434 [inline]
+ __do_sys_perf_event_open+0x13b9/0x1ee0 kernel/events/core.c:12685
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3f/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7f5e7612788d
+Code: c3 e8 a7 1f 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fffe05b1268 EFLAGS: 00000286 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 0000000000010511 RCX: 00007f5e7612788d
+RDX: 00000000ffffffff RSI: 0000000000000000 RDI: 0000000020000700
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 00000000ffffffff R11: 0000000000000286 R12: 00007fffe05b127c
+R13: 431bde82d7b634db R14: 00007f5e761a44f0 R15: 0000000000000001
+ </TASK>

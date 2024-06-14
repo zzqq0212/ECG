@@ -1,0 +1,21 @@
+include <Source/os.h>
+
+# resource sem_ctr_res[OS_SEM_CTR]
+
+OSSemCreate(p_sem ptr[out, os_sem_res], p_name ptr[in, CPU_CHAR], cnt OS_SEM_CTR, p_err ptr[out, const[OS_ERR_NONE, int16]])
+OSSemDel(p_sem ptr[in, os_sem_res], opt flags[sem_del_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSSemPend(p_sem ptr[in, os_sem_res], timeout OS_TICK, opt flags[sem_pend_opt_flags], p_ts ptr[in, CPU_TS], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# sem_ctr_res
+OSSemPendAbort(p_sem ptr[in, os_sem_res], opt flags[sem_abort_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSSemPost(p_sem ptr[in, os_sem_res], opt flags[sem_post_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# sem_ctr_res
+OSSemSet(p_sem ptr[in, os_sem_res], cnt OS_SEM_CTR, p_err ptr[out, const[OS_ERR_NONE, int16]])
+
+sem_del_opt_flags = OS_OPT_DEL_NO_PEND, OS_OPT_DEL_ALWAYS
+sem_pend_opt_flags = OS_OPT_PEND_BLOCKING, OS_OPT_PEND_NON_BLOCKING
+sem_abort_opt_flags = OS_OPT_PEND_ABORT_1, OS_OPT_PEND_ABORT_ALL, OS_OPT_POST_NO_SCHED
+sem_post_opt_flags = OS_OPT_POST_1, OS_OPT_POST_ALL, OS_OPT_POST_NO_SCHED
+
+resource os_sem_res[intptr]

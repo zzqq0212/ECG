@@ -1,0 +1,100 @@
+audit: type=1400 audit(1698651312.711:8): avc:  denied  { execmem } for  pid=392 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+==================================================================
+BUG: KCSAN: data-race in filemap_fault / page_add_file_rmap
+
+read-write (marked) to 0xffffe661c68a7e40 of 8 bytes by task 445 on cpu 0:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ test_and_set_bit_lock include/asm-generic/bitops/instrumented-lock.h:57 [inline]
+ folio_trylock include/linux/pagemap.h:922 [inline]
+ lock_folio_maybe_drop_mmap mm/filemap.c:3108 [inline]
+ filemap_fault+0x153/0xec0 mm/filemap.c:3318
+ __do_fault+0x79/0x1b0 mm/memory.c:4198
+ do_read_fault mm/memory.c:4547 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x12ba/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+read to 0xffffe661c68a7e40 of 8 bytes by task 446 on cpu 1:
+ __lruvec_stat_mod_folio include/linux/vmstat.h:615 [inline]
+ page_add_file_rmap+0x17a/0x210 mm/rmap.c:1357
+ do_set_pte+0x1fc/0x450 mm/memory.c:4342
+ filemap_map_pages+0x434/0x840 mm/filemap.c:3550
+ do_fault_around mm/memory.c:4510 [inline]
+ do_read_fault mm/memory.c:4542 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x184a/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+value changed: 0x02fffc0000020037 -> 0x02fffc00000200b7
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 446 Comm: modprobe Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+hrtimer: interrupt took 30120 ns
+syz-executor.1 uses obsolete (PF_INET,SOCK_PACKET)
+==================================================================
+BUG: KCSAN: data-race in tick_sched_do_timer / tick_sched_do_timer
+
+write to 0xffffffff8e4a1650 of 4 bytes by interrupt on cpu 0:
+ tick_sched_do_timer+0x12a/0x150 kernel/time/tick-sched.c:204
+ tick_sched_timer+0x3e/0xd0 kernel/time/tick-sched.c:1485
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x28b/0x530 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x1f0/0x420 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0xb3/0x210 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0xf/0x20 arch/x86/kernel/process.c:730
+ default_idle_call+0x2a/0xd0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1d7/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ rest_init+0xfd/0x100 init/main.c:726
+ arch_call_rest_init+0xe/0x30 init/main.c:823
+ start_kernel+0x5f9/0x960 init/main.c:1068
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x179/0x17b
+
+read to 0xffffffff8e4a1650 of 4 bytes by interrupt on cpu 1:
+ tick_sched_do_timer+0x26/0x150 kernel/time/tick-sched.c:200
+ tick_sched_timer+0x3e/0xd0 kernel/time/tick-sched.c:1485
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x28b/0x530 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x1f0/0x420 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0xb3/0x210 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0xf/0x20 arch/x86/kernel/process.c:730
+ default_idle_call+0x2a/0xd0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1d7/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ start_secondary+0xf4/0x100 arch/x86/kernel/smpboot.c:326
+ secondary_startup_64_no_verify+0x179/0x17b
+
+value changed: 0xffffffff -> 0x00000000
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 0 Comm: swapper/1 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

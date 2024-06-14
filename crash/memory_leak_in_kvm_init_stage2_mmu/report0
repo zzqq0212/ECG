@@ -1,0 +1,35 @@
+ioctl$KVM_IOEVENTFD(r1, 0x4040ae79, &(0x7f0000000140)={0x2, &(0x7f0000000040), 0x4, r4})
+ioctl$KVM_RUN(r3, 0xae80, 0x0) (async)
+mmap(&(0x7f0000ff8000/0x2000)=nil, 0x2000, 0x0, 0x11, r3, 0x0)
+BUG: memory leak
+unreferenced object 0xffff1a0ba77e3d00 (size 128):
+  comm "syz-executor.2", pid 12083, jiffies 4295508812 (age 38.580s)
+  hex dump (first 32 bytes):
+    28 00 00 00 01 00 00 00 00 80 bf 4c 0c 1a ff ff  (..........L....
+    80 d9 1f 7c 06 b4 ff ff c8 29 5b a7 0b 1a ff ff  ...|.....)[.....
+  backtrace:
+    [<0000000084afdd9e>] kmemleak_alloc_recursive data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/kmemleak.h:42 [inline]
+    [<0000000084afdd9e>] slab_post_alloc_hook data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/slab.h:740 [inline]
+    [<0000000084afdd9e>] slab_alloc_node data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/slub.c:3398 [inline]
+    [<0000000084afdd9e>] __kmem_cache_alloc_node+0x1f4/0x320 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/slub.c:3437
+    [<0000000018c614db>] kmalloc_trace+0x44/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/slab_common.c:1045
+    [<00000000f94b36bb>] kmalloc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/slab.h:553 [inline]
+    [<00000000f94b36bb>] kzalloc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/slab.h:689 [inline]
+    [<00000000f94b36bb>] kvm_init_stage2_mmu+0x88/0x450 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:712
+    [<00000000ec67ed4f>] kvm_arch_init_vm+0x6c/0x2d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/arm.c:145
+    [<000000007e469ee3>] kvm_create_vm data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:1219 [inline]
+    [<000000007e469ee3>] kvm_dev_ioctl_create_vm data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:5009 [inline]
+    [<000000007e469ee3>] kvm_dev_ioctl+0x790/0x158c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:5051
+    [<00000000d8e80e19>] vfs_ioctl data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/fs/ioctl.c:51 [inline]
+    [<00000000d8e80e19>] __do_sys_ioctl data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/fs/ioctl.c:870 [inline]
+    [<00000000d8e80e19>] __se_sys_ioctl data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/fs/ioctl.c:856 [inline]
+    [<00000000d8e80e19>] __arm64_sys_ioctl+0x17c/0x204 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/fs/ioctl.c:856
+    [<000000004100ed8e>] __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+    [<000000004100ed8e>] invoke_syscall+0x84/0x2d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+    [<00000000e4b72280>] el0_svc_common.constprop.0+0xe8/0x2e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+    [<00000000027cfa6a>] do_el0_svc+0x64/0x1fc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+    [<0000000023255023>] el0_svc+0x2c/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+    [<00000000b3079bf4>] el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+    [<00000000dcd91468>] el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+
+BUG: leak checking failed

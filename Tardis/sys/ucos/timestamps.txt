@@ -1,0 +1,14 @@
+# these were disabled in the default config
+
+# CPU_TS32_to_uSec(ts_cnts int32) int64
+# CPU_TS64_to_uSec(ts_cnts int64) int64
+# CPU_TS_Get32() int32
+# CPU_TS_Get64() int64
+# CPU_TS_Update()
+# CPU_TS_TmrFreqGet(p_err ptr[out, const[OS_ERR_NONE, int16]]) CPU_TS_TMR_FREQ
+# CPU_TS_TmrFreqSet(freq_hz CPU_TS_TMR_FREQ)
+# CPU_TS_TmrInit()
+# CPU_TS_TmrRd() CPU_TS_TMR
+
+# type CPU_TS_TMR_FREQ    int32
+# type CPU_TS_TMR         int32

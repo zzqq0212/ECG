@@ -1,0 +1,16 @@
+include <Source/dhcp-c.h>
+
+# DHCPc_Init() (ignore_return)
+# DHCPc_ERR
+DHCPc_Start(if_nbr NET_IF_NBR, preq_param_tbl ptr[in, DHCPc_OPT_CODE], req_param_tbl_qty CPU_INT08U, perr ptr[out, const[DHCPc_ERR_NONE, int16]])
+DHCPc_Stop(if_nbr NET_IF_NBR, perr ptr[out, const[DHCPc_ERR_NONE, int16]])
+DHCPc_ChkStatus(if_nbr NET_IF_NBR, perr_last ptr[out, const[DHCPc_ERR_NONE, int16]]) (ignore_return)
+# DHCPc_STATUS
+DHCPc_GetOptVal(if_nbr NET_IF_NBR, opt_code DHCPc_OPT_CODE, pval_buf ptr[in, CPU_INT08U], pval_buf_len ptr[in, CPU_INT16U], perr ptr[out, const[DHCPc_ERR_NONE, int16]])
+# DHCPc_TmrTaskHandler()
+# DHCPc_TaskHandler()
+
+type NET_IF_NBR int8
+type DHCPc_OPT_CODE int8
+# type CPU_INT08U int8
+type CPU_INT16U int16

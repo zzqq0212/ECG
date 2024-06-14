@@ -1,0 +1,143 @@
+==================================================================
+BUG: KASAN: global-out-of-bounds in arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+Read of size 4 at addr ffffffff9b04b600 by task syz-executor.2/35532
+
+CPU: 0 PID: 35532 Comm: syz-executor.2 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+ _kprobe_addr+0x11b/0x150 kernel/kprobes.c:1479
+ register_kprobe+0xe0/0x1630 kernel/kprobes.c:1622
+ __register_trace_kprobe kernel/trace/trace_kprobe.c:510 [inline]
+ __register_trace_kprobe+0x26a/0x2d0 kernel/trace/trace_kprobe.c:478
+ create_local_trace_kprobe+0x2db/0x490 kernel/trace/trace_kprobe.c:1821
+ perf_kprobe_init+0x119/0x200 kernel/trace/trace_event_perf.c:267
+ perf_kprobe_event_init+0xfc/0x1d0 kernel/events/core.c:10342
+ perf_try_init_event+0x130/0x570 kernel/events/core.c:11672
+ perf_init_event kernel/events/core.c:11742 [inline]
+ perf_event_alloc.part.0+0xefa/0x34d0 kernel/events/core.c:12022
+ perf_event_alloc kernel/events/core.c:12431 [inline]
+ __do_sys_perf_event_open+0x4da/0x23e0 kernel/events/core.c:12529
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fd68091802d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fd67fc87028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007fd680a53f80 RCX: 00007fd68091802d
+RDX: 0000000000000000 RSI: ffffffffffffffff RDI: 0000000020000000
+RBP: 00007fd6809794a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000002 R14: 00007fd680a53f80 R15: 00007fd67fc67000
+ </TASK>
+
+The buggy address belongs to the variable:
+ acpi_gbl_auto_serialize_methods+0x0/0x33c0
+
+The buggy address belongs to the physical page:
+page:000000001c591f5d refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x6bc4b
+flags: 0x100000000004000(reserved|node=0|zone=1)
+page_type: 0xffffffff()
+raw: 0100000000004000 ffffea0001af12c8 ffffea0001af12c8 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffff9b04b500: 01 f9 f9 f9 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+ ffffffff9b04b580: 01 f9 f9 f9 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+>ffffffff9b04b600: 01 f9 f9 f9 f9 f9 f9 f9 00 00 00 00 00 00 00 00
+                   ^
+ ffffffff9b04b680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffff9b04b700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+capability: warning: `syz-executor.2' uses deprecated v2 capabilities in a way that may be insecure
+@: renamed from lo (while UP)
+random: crng reseeded on system resumption
+audit: type=1326 audit(8000609175.708:96): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=35918 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+random: crng reseeded on system resumption
+random: crng reseeded on system resumption
+syz-executor.4 calls setitimer() with new_value NULL pointer. Misfeature support will be removed
+audit: type=1326 audit(8000609176.712:97): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36069 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+audit: type=1326 audit(8000609176.814:98): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36078 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+selinux_netlink_send: 34 callbacks suppressed
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36208 comm=syz-executor.4
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65535 sclass=netlink_route_socket pid=36215 comm=syz-executor.4
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.4'.
+netlink: 148 bytes leftover after parsing attributes in process `syz-executor.1'.
+audit: type=1326 audit(8000609178.675:99): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36306 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f9b3829902d code=0x0
+netlink: 148 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 148 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 148 bytes leftover after parsing attributes in process `syz-executor.1'.
+audit: type=1326 audit(8000609178.803:100): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36340 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f9b3829902d code=0x0
+audit: type=1326 audit(8000609178.943:101): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36369 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f9b3829902d code=0x0
+pimreg: entered allmulticast mode
+audit: type=1326 audit(8000609179.714:102): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36507 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f91101c702d code=0x0
+loop0: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop0): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): ext4_update_dynamic_rev:1150: updating to rev 1 because of new feature flag, running e2fsck is recommended
+Quota error (device loop0): free_dqentry: Quota structure has offset to other block (1) than it should (5)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop0): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+Quota error (device loop0): free_dqentry: Quota structure has offset to other block (1) than it should (5)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop0): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): ext4_update_dynamic_rev:1150: updating to rev 1 because of new feature flag, running e2fsck is recommended
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+Quota error (device loop0): free_dqentry: Quota structure has offset to other block (1) than it should (5)
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+netlink: 'syz-executor.3': attribute type 4 has an invalid length.
+kauditd_printk_skb: 1 callbacks suppressed
+audit: type=1326 audit(8000609180.711:104): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36594 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f91101c702d code=0x0
+loop1: detected capacity change from 0 to 2048
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+blktrace: Concurrent blktraces are not allowed on sg0
+blktrace: Concurrent blktraces are not allowed on sg0
+blktrace: Concurrent blktraces are not allowed on sg0
+blktrace: Concurrent blktraces are not allowed on sg0
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 2048
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36814 comm=syz-executor.4
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36814 comm=syz-executor.4
+random: crng reseeded on system resumption
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36831 comm=syz-executor.4
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36832 comm=syz-executor.4
+loop1: detected capacity change from 0 to 2048
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36844 comm=syz-executor.4
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36845 comm=syz-executor.4
+audit: type=1326 audit(8000609182.565:105): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36835 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+random: crng reseeded on system resumption
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=36856 comm=syz-executor.4
+audit: type=1326 audit(8000609182.667:106): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36860 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+random: crng reseeded on system resumption
+audit: type=1326 audit(8000609182.781:107): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36879 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+audit: type=1326 audit(8000609182.847:108): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=36879 comm="syz-executor.0" exe="/syz-executor.0" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f443528702d code=0x0
+random: crng reseeded on system resumption

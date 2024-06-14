@@ -1,0 +1,6 @@
+fd_new$res() fd1
+fd_get$res(fd1 fd1) dfs_fd_res1
+fd_put$res(dfs_fd_res dfs_fd_res1)
+
+resource fd1[int32]
+resource dfs_fd_res1[intptr]

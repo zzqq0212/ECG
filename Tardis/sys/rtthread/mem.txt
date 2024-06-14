@@ -1,0 +1,10 @@
+
+rt_malloc(data_len int32[0:256]) (ignore_return)
+rt_realloc(pmem ptr[in, array[int8, 0:256]], size int32[0:128])
+rt_memset(pmem ptr[in, array[int8, 0:256]], data_val const[0], size int32[0:256])
+rt_free(pmem ptr[in, array[int8, 0:256]])
+
+#resource msg_ptr[intptr]
+rt_memcpy(pdest ptr[in, array[int8, 0:128]], psrc ptr[out, array[int8, 0:128]], size int32[0:128])
+rt_memmove(pdest ptr[in, array[int8, 0:128]], psrc ptr[out, array[int8, 0:128]], size int32[0:128])
+rt_memcmp(p1_mem ptr[in, array[int8, 0:128]], p2_mem ptr[out, array[int8, 0:128]], size int32[0:128]) (ignore_return)

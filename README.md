@@ -2,14 +2,8 @@
 
 `ECG` is a tool that augments embedded operating system fuzzing via LLM-based corpus generation.
 
-Main Features are:
-* Specification Construction by leveraging LLM 
-* Runtime Input Payload Generation 
-
 ### Documentation
 
-- [How to use ECG for fuzzing](docs/usage.md)
+- [How to use ECG for kernel fuzzing](ECG/docs/usage.md)
 
-- [Experiments results](experiments/result.md)
-
-- [Reported bugs](docs/bug.md)
+- [Experiments results](ECG/experiments/result.md)

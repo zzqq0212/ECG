@@ -1,0 +1,289 @@
+Extracting prog: 54.686369471s
+Minimizing prog: 3m6.280306221s
+Simplifying prog options: 0s
+Extracting C: 12.860113969s
+Simplifying C: 1m55.575666663s
+
+
+1179 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 1129 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_procfs-socket$inet6-socket$inet6_tcp-setsockopt$inet6_tcp_int-sendfile-dup2-perf_event_open-perf_event_open-syz_open_dev$tty1-setsockopt$inet6_tcp_TCP_REPAIR-syz_open_procfs-sendfile-ioctl$BTRFS_IOC_INO_LOOKUP_USER-ioctl$BTRFS_IOC_INO_LOOKUP_USER-ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF-ioctl$BTRFS_IOC_TREE_SEARCH
+detailed listing:
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, &(0x7f00000000c0)='net/raw6\x00')
+socket$inet6(0xa, 0x3, 0x6)
+socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(0xffffffffffffffff, 0x6, 0x2, 0x0, 0x0)
+sendfile(0xffffffffffffffff, 0xffffffffffffffff, 0x0, 0xf6c2)
+r0 = dup2(0xffffffffffffffff, 0xffffffffffffffff)
+r1 = perf_event_open(&(0x7f0000000380)={0x2, 0x70, 0x6a, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x803}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r2 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+setsockopt$inet6_tcp_TCP_REPAIR(0xffffffffffffffff, 0x6, 0x13, 0x0, 0x0)
+r3 = syz_open_procfs(0x0, &(0x7f0000000080)='mountinfo\x00')
+sendfile(r2, r3, 0x0, 0x800000080004105)
+ioctl$BTRFS_IOC_INO_LOOKUP_USER(r3, 0xd000943e, &(0x7f0000000980)={0x0, <r4=>0x0, "6e2282c81e62ad31da18d5d1bf8e759a8ed09bf9aa74590b825bd2f0320e9c75a4e2197b5fb11ea23948e7dffe004b5234437afdfa7f8303d9b568fd84a4d25d145e41419ba5a12a574ae168d19ec12fe7748fce37fed412441c28513e15213265dcb38cf936ccc3e61887f9e7a7bc16d9bfb24ff299ab699135469e6677127fd1b76b54dae2dada2acef9b57e36e63c653a84c3b5ad9b1c1977f3173d140b86598f5da58a7988121d6efc93ff53ed1a2fb2d99e7790c704489a46619b818dc255a8fa62d6f37850cc65342fcbde910310a5eb4f75dcfe6bb77345373e82e5e23d29db1e1e36a2033107c2c1d65b4835e7ca79fdd9d8e18aed05ee40789cb8f3", "10201d73c6ee3bbfbdd046122f0016f77723a5f94b43518b312347ad7b1df96506f58398c20da81035149ddd71263768576edb7331ae7ee39f3a1e850248708703e6085ab5370faca99e394d2532ca3b0a5a12f706a1c1d11bc8d932af60f5a46bdd1c5154b5f280a5d271915df5aad17d8a72e2e8db0ed101167d4bde56e3c8d9358b108860942de90d41385fdeb56277fa08af4903e22a44a388c568d9af113ae7dee9531494db638d4b25461a03e4f53b703664e85f49da957ff853c777fda9bdedb9fb9702eb81ef7f5907fbda2f9a817a6619593dedf1b5e8eea0b76a9c26b70ffec001c78fa5f31a61f1023bb4957dbbc71d8d96050c01e4075bb5e01c55420009dbc25104b9303509ac1125bb3d0816ad1f72bbb62417ddd3d5984529397086d3024493535c85bb17ec3630ece5b9626465a0a81d7c790f8b4471a6c16ba92b90cdde47372a65adaf0f0f7da76a8506bfb9c5044d5f2b4be8bb47b4935a6c0843d21e769290a93d73c080fcef4edf3727d4af87e2b2b46ee6353f0e25302ea9141c30c3edd00162cf7f22d1e0c358b88ee93ec991b18ee09f4dbd1ff6fe1c9c320794e44afce265b8addc687e4938bcf12d6f3ce61978af7d8a23cd90de2c08341d7d6f5830825195d21379c7f04268574a30dea151f901ff2bbf662e097d5b5590e753f36c289b2553da3c2e51d3532b1738f5decdbafea1ba815fe03f0f06cde48b892a045feefe360e8e7e94e60a05527509b39f3bbef85e540c88923180667985a6eb8202a9e0e47b84949f156ff18a758aca91de6a9e5415124e0a1c5c65956d636af3d8c244720feaa39a438bb57dd3cc88afc71ea0b7d9a18ec888f8cdaef484c11da53e7be8d23f2cb6ff65538724a9a7b6d757b991bae502e4d178f9357cbfbdf75091df0d6da765930ba2dac39a136328ee876418efa9d5c6cbb36ec5f9eb7230ebdb05d217f92a511014a2d4c8650012d5151519a280d35b658911a61fefe2b88b090c7334f44b1a500ef00f2b4f716faece30ecb5db53fc7c52f1b8de5ec8af933161dee021dd28122ca55872129797f4ed03fe03ec761630bca640ab14586b19df44bbbe65551cb0456bb644d464c0845841c6ae0b373b81a0059c55618aa21f94c5f33884a7090c979ac0b67398a06af149984f17ab4cae1430f3520530bdab405ba08fcaa8ccc6e37af32c726f6bd7df1efa522c40e69a4d6678cfd786b9e5d0cab2dd95df97de35183f69aba9d9fb7913132dfb789c3cd368981a77062d72ee43efc1a6cabc4735dd9add993c3706dbd650b32f130fbf9b70b80bd23ec9d59e97749697135acd8b6d33ca464b9e7bd3974d86aa53965954e6c14b5bf6a95049d5951591cfb3928d5dc12e02a29627713f4c8159247ac3652b21d3191f73d17d4d52be969facb50a3c2f817010568f337f1efdd620f9c44533393dbd0e7afcad9ae0678135aed321ea167d912ed11b966968894e448124e463e8269c05e711192b554075fc7aa4d9ea367bf7b283a41fbf8459678d256561288213aadfc03c8f4524d47d687ea0da2b68e830d2eabc4cfadc007009b7d294c8057c5677cf59d6162c88d1c127f1a09fdb828277c177dd2e1fbf6527101845af9de6552dab82dc5d8e98c29b8e0c2d5edd23e508e498104359020fb1e619adcb4bfd478c15fa4b4ee63b57c9579a75194385938205e776557016245f9c529a3962b78b63f0dcf7bc698cb36152fcaddb0a6af311cd0109da907a1776a02b8cc2da81ebfaf228077fadf4e7ed301c9d28c53536410dfb36963dfb935d6a6023d0351af4a1fb32950596172728300d6719fb9f3dd0e48f12c63d613bdc9b38e4c809065f4ab9db270a9e5cd469949015f48e38970cb3b54206e030937278cc9591c89443a646b505fd9fa6378f9f510aba9a94ab41d4ae408d48114a94983b471ad67c409cebca0108b942568db9fd3d4a0ddae116fb289b9cc438c00c43c7f63df53d0c2497553dd167a3676f34a7b20565107ff6989dcc74aca6430f49a23c20b0e253a2b424f4b1d323aadc77ca93a0f7be6cb364f41845a0137c3e64a401ede81b0b4c67d5b2293206f5bb3ed16bdaa30e60645f6af00aea6505509d266445f581702084bc44f99b3645d4bed50926a074bd2200cdff5733dc07f7accc8c56339873ff17ab93aa2cd40fed2af6cd569a7b65931dcec9e38c416bbe8184f428645795e7202d64a7dbce30ee6f2896a5f60ca8f6712b1a738cf8814f2cf9bb36c7a7570bdd310295c477cf40288308c51339a49936793423fb76c73154e58444f758a3253e814820f4ca46f967ba255d9768aa12b7823469910886d8b29e602670aadfc9281553f0dc3a353bb11cb22cb8ecef90c8b614c22bce318cd596cf35190fef3f3227e2f1492a0fc2af23cda409e0b53e5f001fd0b1432d62ae0c93981d4e353c0d3a0b45ce72d4a32f0444dd6f6a93cdc44504d2e8982d06d3838008c1f93c0ce73bc87fa2ac00935ccb844268da8a55b894ff9dfbabe82ced6ba15423e800d31c4c1be6938aa55f9221e5d0dcc71a78e78d0104c15133ab40c530300e25df5670148b33703fa2bebb2e60fe93576963e92a07f522f345d019fbea7026e1069a1f78aac86773e5b16bca22816bfde9650714c8409157d43aa04b533de008da9fcccb7ecb3b229ef73fbcfe80e4352987b4504786822fa7e1314b822f64f7b364edde8cd2c666711b68c792ef5f08b6927e6b1b342170adae0747ae7bc0fb923645cdb3b469625ed1dddf506acac450c3ed73b52b0294bea7fef73ea4214a7ca1086008d91308d1e760ec56a072fe653165a9d7d07e8f7f176b26413a1a7c8f2a2202166b75500862ad8689e61940efd4a9b4b07425e6bb4a3698ec3425bc7d3e7aac46d2c1a68760f7800c9912909b65c83592bcf90fc90a04930fcdebe714814d99b6340ab60d717daba0d33e6f8a3ec1601f7599758f40e41f7455800477ed1f2d23a32b67c704a623218be4e40407681fd0dda56f6b927df8215519defd00109abff414a045fe316ea2edb9469bf86e96ae0a0ca7e11f7c33e562d87a1d49b519f72355b21e160ac7f0783c0cee248f085118ca47b59e1424fe5996b61494c48100e0abf1b0d531100dc1b46595c8af7af1ae2a3093b3b6622448c36de98f453694a9f5498d25622454d50dcc5c33233cca9ae19ae08385c113c64a52c78d47b899b40bb3ca30341d52f9260a0d58e037c4423aa7dcdef87dbba2f6087f22fb8ca5fa9f34a86b6e043df514dafadc3f9a7df816ee09366c8a1929e748cda99fd37a612fceb3f90e49717f387eb4d9c6526b9fcd38bce1f5feb461cd7b7c727989e0c1229a09eb0b6862dd300a5930821ecb1e4e1394b46f48774573e5b72154840564684bcefdb463c9fd1d3457e48e119e8046484c85c4619fb113989d0b0cf9ca1f4aaf659c4edc3278b941dd0673bc0e19169a833811f537175a42a60d9d39d0b98cb0f8216837a56957801b1ba88cc192377f2c5121854dedc98f0461942e452dd1c828d370b4e3087eecf59edf8dbc16d99c2bbf71e453b9ccc0304911b00f900053b5494b18b072cf00e446f963edbb25b861d278e29813f4b940532693eb2ea59978babe48e8856647cc6d95b1b8a78e5edca662aca85e40917b023d47749100e7d56923c22b8c274c7a325277a4f9f0aee61e1f50838bfcc8a8d7dbddbee1f0d59a6a677ee5cda1bc4f26262afe06a8dee43f84f89d8799ae49d4ddc8f18cc4d6738b357be189d50f4a7f57e641ff733155d291c330b4e431b5a47d4445a83754bac9316435de219ed65e6c2b6f6394d9f049bcc232b27c312efc34965f3a81de9f295b33801cfb5f4a0f2c6e177528f7427619898dbf4854802cb56781d6337c7e5dbfc3720734658773f7433952d4b2e8a5065517bb829b36aab7d6b011c8f7b33586625d8fc5bae5bf5263c9d9d7b5f1ca6d49714729e394a9c8fa4399add58d93e285a44c788a81f0cd1842165e394d2e1ce291abf350d612a42a5badf01c843fcab781b62b9cc49f3f07e1562be06a5b2b378976deefdac1ebec2bafacbbde1a3b7249a9950920890ea01ff888ccb392e82320dbd621df4bb3cb249d3a50495343c1eeb261938b886e5bc0077acd0ce0164ea4c9d1a3b9ea53d24870cd272b631b02436933990a7cf7e9e412e1f435afc8e5c502599e1050e74ced91fe9ec5fcb21e9f63bdd662b01bffb5ae4e15930e72d279f401b2819e9332d37fc0f7f5f7d9e287aaf49f380e3d54e7c71e7f0243be5f75869fd170946dc16283023a4f378238cdd0fc60a2aa67c6f0c7ac4c30c52abe79b8d26cc883f9221d5589d0d65a0113b3c9c744fe3d358a8c7b19d927ae1830726edc7deb161e134513df870cbde300eb0f97e9efb59f6140344a1cdbf5231e704e775be6d6504e97e1a9e02ab573dba95877c336d324d8a750670e8d57fdd4853e62d65c471cfacec492008671dbd0a98723a28f75fc6b73b2fc17f7acffec202e43dd95c8d0e2ecc1ee503730a242dacc154cd50b61f7cb391eb3454ab39f8e3f31dc71e55ab5cad4e87b5e9d2dadb267bea8c4367ae652956fe3de49f44fa5391106aa40780c8c7984c2a1c88a535c4f044c32d885d43146b115ca87ba0a976bdbaa44b65383fd1e1bd84933a7f33d9724762fdcbfdd25f75cf2830bfab4eb4a022b5cd640c70071a54b768bf9abdb74171c7bf5f21098454dcc46f0e48ed3fc1e4870b4a4b760bff79736e7728b37a6d363f1e35957651ac6c82c1212fabb6eabce93a68c4f72092cfd51625781ae36095c1b383a19286f979bab97ffe523d23c0c6cfece67715426f5a170dca220fdc8e4c62a5f5f102dfddf2fa3546d7c9dd8fab4339f571963cf8056c16380a34cca087dd5d0b13818a259ab62672bb8b9bcf00dc0f78da677f4fdce81bcfd48244952657f857aad52a19c0e47c14e8988899ef478019f848de5b936220be20207cc9c8f199b3913074791a2b8172f1c2ef2bd3685aacd45ff6edc79e68afe73cb05e6273b9f3896de12518811186df6963535c71729ad6e239521ee362a9a18a92065db77d6f6754e87385ae85d72a0dc2798bb0f27c58f593c43c320d36b39c79c5757ae088b7f7e3efadaf546e811d77844f75ea5bbdb685415ffae4bdfcbb8ce4d78fb6d7c161f555cc27c20d03981a2d1e0145b576fb23f6df6acaab2aeeb173a49a2885ae28b2d4ea3b9a04f10fd7bb4fae43da572efb4099c12a4407c1486c7af5494df8c6380aa767ae0d4cf1aa7b1dfcd236793e2f9cc0f1e3e10842f7cf2c432999fde0e868254cc55423babfaa599827a543f4053280eea186ad6ac2b1814f0e3745180a4dd65350e2c1045e562655ffb88fa01577ec144"})
+ioctl$BTRFS_IOC_INO_LOOKUP_USER(r1, 0xd000943e, &(0x7f0000001980)={<r5=>0x0, r4, "becad4b53efa6b42fe7b42de07736be286cfd329b0cba554836370fa102801e53bbac1a429597140e4590c416f06ca7e2b6ad71471e00daa3105aa9b57872d82e9837f364da821b73bcbb3375ad821fa63372acde32b24b9c26dedbc6bcbe8bb28fb45519e1ec7d224f49dbd7e865dda3b7eafcd3388efed59e919da2264351644d8f5e4606c98533ca2bf39b7e01caf0c5fae28e21a6e3ca307e9b961d10dcdfc8e0ad877c2ea1ae64cd72b7da4630e0362e3c03be8f192990bf3050327f3316e7640048fc1cff8e18a813d1f82cc63579408afa6df4bb348fcd82101fb9fc9b6b278db4e6237351134a09c5a03e12870b3abb8238789c02523edfb618134e4", "87f70df651fc9fbdae1b68b8b00447535e5333726de1820828973d9577c588d7a0c63fe4408d976ab78bb3e1181458e8b4625fde1b0e29597a1de9ed557c9e36dcfa981cade2c8e3bcecdf9946efdf19b56c14c04a64aaef4859490f4b947be04a33bfa2fbaf38bc75f4c6b4462ec8d86cea592def97b44eda0042a7304674454b248b37f779d86758d5fd597cfe56af6e2858cb3e0f170a144eb78e678ed8187d755a15dbb8ba273e15244e2d9e350fadaa57d7467156fe179873510ec1b24dfbfb858a7aed7c962153a7e193807e73bbb989a50c9d547a3547bc9570a3d4a98f765634e093d56058cc77767f9d85cc208c2d2f5b9da516996869221f39f5e327abe7b9225f0332737db64d8a266679372d909070a63bdf10d62953d11bdbf37e76672456e23302ad05fc72a4a3d5cebc022b9edfc88898c2364cf7dc0b118a637c2bf75b91148d0c2d4516726dba44de53c61a0d17ef473d2edb955711c49458b0d757bec6a788f6bcc52c951b68a59015d813265e1f32cd9ef6abef00f06c01c55b9a1248a3f5bde1cbc1d29b1e89b62b323569fc2373bfe0038043ff7d8dfd164a0f0609c24f65ed70b1f19fb9a6fca89a13d849a676920afddf7629e387adcb7129fc3a0f137d9df64e8c8c707f8184ea72e4630757b98589bd256c7663d32851dde2af5d8d3115636ba2d051fc8ba9e592d7e77c8ec12ad945720ea85d43e2774716a774d0943dcc7826811db61f109d7a532e5308359a70e7bc00676b08f8fd8971fa2779fe93a28daa66238a9a5ec21b6c52bb5403a9a4c628571bb11c1e3a61af146924f3c517746890b7caadea05ec1c7e7e0fef8e62294140aa423beb491816acd49e62a6e78b9a9f6422e78b22453840cfcf1f33523cf11ef2086cd0f918a1bdc8d7be807f0ec047e9a4cf61a377a83ba21e13a6ce203e71d1fb844e48df1831e0df609e79496f221933f912d69474b0f90ba9aefcbb466d7f03d9bb4b95c211051b6b59be430e3e024f7207f960c1b088e914c045279501d1bba30cbbe1ebbccb5f2db7df05bb7c1be48c2cf38fedfaba71dce8a4cbfa7ae8cf72e6bfc04b920ebba4e57907e3a81e55079bbabdb96ca68b69088fda39d8cf18b1a49b1767d0c5745cdc7b04673b732224929e0926c5745cc0bb2813307f0fb201f192a2ae41b314207b1f2463ad233c3e4a4e95fe542a028d5de737ad5d73df7595a4284c20b1f18da5dbed50a8b9e26fcc7bbabf528be5758cf9b8a67693e2984faf79276b437dd51ca6f7e0c7ecaf0a986fd9e129568a0d0a785c1ad1d24c21fb58ff08bdc9ae4b58bd408ef9b5b04e4b6956f708781d0d3b34d15b34b672e3d169945b1b39efc86eda92d7ae131019b1ce72f3e244d2b96104ae44feab0315cda20ba965a646cae08117c3b38a88e7d54224de0e308a3f30372305390918fad63cf999b0491f5f4c9a956ab320e4770df9980af208a1c6a2c5ef30c72fcb2178c5b6f7c88023295f561c67aa58509d9c177f7b6e287efae599a170dd9e474b767081b98453a6722426cae3827c9b5ce68369892bcf753ffac091320c0b671fb591643d7325be4059d50db9ca1493ef130ff8579f29e68cfe8d97edb714c2db6c55edb5e6cb8a781819a31ec9012d405a6a1ccbe2bf47267ae2ce4efc7808cd44f91fed4a4e4950257fe0ecd19c803727e7757e87cdb83cae82ff80393bf19b98647f03cca6dbc3f4c6cf70bf579efd0616a1d52aeb58231aabccb0c9b67fe113ca702fbcb902523970c5f62da27b64b9454a474b83baed9901bf8995ae0fd730b55a55beee9029b97aa7451e6c032bd16bb0aa92bbf3ce5b08e003eab7f9a0c2a2bcaa0f0d73fa84e6d42e3317a1d31bd9866680b294e36e87ec1d3966fc5d587e033c46ce5536daeb541e8cc22a733e065d7b74f62f8f16ef2044cc51ee811ba7cffc98e7745bb801a43950621203d9724bd1e3fe8ec6cf330fe688e3c5388a2a77c91c1486c30803f5d261da395479767cb329438b45a02b49232e7c021ed2fd195e7ff7e0c2459e467c7238b6531cdaf873184cdba7385c2c3e60b01215dc4f33952f795b5e189bd2a83a1baabe175223d18fb11c67bcad6d4503a2f0eead7f3e0d18a7c075c9128b939c78c11750ecab998646c60dca968a96c879c376bdb84e0810f9cf12abd98fb83f45fd5a4086ac63cedbfccc5d8ad5dcfc9050d49465c6cbe3828461a9eddf8e16fbd0aa6f35969eeee2c7d5ff322ad2da362c6f752682eb0dc77d7564864b9fa8c14ed29f7c5c116cd00e866efdf08e28a5bd01af379f0dc593557b29ac5ad465b1c8fb7bb4b1c10439ad1620a8326b691c838bc88f6a14520727ee1deb9bba3ed980624f09a5e6f29b0f6b5caa73d371a825afc5fb2f0106d0b6af6c6b0ecb9fcad8e9a23c86452ef436da83d7d15287da576ce581186b99d78d347d4615f752f4a02525d4a7d3bf150559ebb0898abcfcf6161405070a9c192a348160cc374630e24a59c94b21cd60ce3b579860870ca54606116fdaf5e8d097eb8cab825c3248b0ea5e3236d5d6c8367d95aa5ac8f331e195bec089790aa99ff1922cfa95339b8e56eb353bf1b73ca59e0d759da84595dce374df645257f1350145c4285774559be5b5c06dcd6fc7b41676240fe04eb7987e87fad21b00fdf9c70115430ffa2bd08e6c60e232c9b862b0830ab0458b5e518b9e375ec1cf783431fcf5d665830bef9e644ff6eac6e7ea96750a09d4203b36d9e05245ecb448d2e957b1c8ff959c1c63b62276a4f73560cd9f8dafdb1d8e4bf49171381e2ca24feedb271121b49add30de3053fb6a279e5c688c2c9ddb182c2a4f9d9ec3e745d90e5de083ea64f651708d91b9314e285fca5fca83fbb3494fb5487227ca18ad2213d99d15d3bfc3f862e109e3f242c377cf48b9eae30d445e8c3a91c8654f31264e19675395e39eeff9e8e291192a26105c9f0072fd3723893bd52a43549878b16fb198083a2106ad2cd02079eb981efe0097cf5bf1d138cb599e03c97dc73eda60f005dd4e264b12d905345ea0f7fdc95752d6f13f9f4a0064f4332cc6b44d1a0b9d6298c6405b09c0c034d64da4964d336426c7b09cb07b65c5e73a03b1435c4f1cc1a9b1956f0dd6563d64b2bcc2ce40e7483ff0a5529dcc9b56303c384cb18979fa61148ce589c7a942323d58d9b870960e937b3e3826a6bf4844a5029215bb4803476b775b7a7b34f583905ff6b136b8d0b3f4938aa5166bbc92bf0204d7cc366e9623c58c32f1f1ceb755be4e88a6ebaaf09dad162fdee4f9757cc9d0f8f4155db03cd7ad6a8361e165887b548b11fea2f21091dab504feefed2e32545a91bc6b37b92e196ee205214c10b466b30908122015df680cbe9caa1661bb2f0a8aab1a2c8e3a8223298cd4d99f45fdbc6f0b4bced17f07e1d1998fad684a96ee5c844c6c25da2ea1ec9a2f24e3035aec27803b0bde5c1c3f7e9f25862e3ed99893f78d7e3c053796302532b5aaca6659d2732ca1f8692eed94d1285865afb68ad0562a573a1c75e00a2c7e88f9f49afc35932a3fed73de7128fe070401b68c0bb4656d7316862dd78af5b5330a8ced288bc551d868a6ad355bcd7ae238d831e008e781d04990afee5c39e16189f562d17759e649b4b11181c3632aede4f80e3d64cdfdcca4378b470e0e37f4dfa3672c608142fb8c5503d8ba20ffa54dcd5463e8f2828d5706e24a4295b8213b56921fb95c4066eb027ecfb6552deb65bdd77a8da71de5dfd8d8caedc87f9d592533ff534395fe39d3980e5dbb553a28d16c4cd5d75ee0b26f6f00c9b42ba8d88e5bf28e5cf64aa34864697617dd83bc5bb5c99dc089752ce40a490f9e19111f4c3cda3063537e4f75d1913433eeb07ce8a5c649d8507ac7447c08f3c92fc94f62790ddca64769f7851cd9d43d59453d470fa59a972cf080497c9e325cd554a89803c070da2d1d0fc701939c7130b9e54ee93c454c6f036dd7b4848b98322c9ffba772c7502771759b2d7c8ab2691e99d5a7eb4b72bbfad6993ad82a06966746beb07ed47260780adc5d31065653dcf771b9237564c9ad72e8cf7f0cb0a49005447e8a1bb9a67620e1abf9b5ff277723402e5e5527f3632b773470c0840d83aab4467d663897ba93f608b6afe73dfc66291d2814b1f4d2d6e73d1c703f20ddb57d5d7e4b78c96e718c2473ffb9a159db2de9ecaff993af79bdb6476f9763ed38230fbed1afe09e5594f1c9e5bab57acc4f57c7854b8fe1b8d198fa1d090d8df67aa414d195a622facf264da182769814e651d59129136d442526097304613c4897333726d6a30a4d9d88fb3e58e30393823197b7fd586923475d31b8cf26da844ca7bbb071ee686c9cc44956b3f097dc558577c8f1a8628eea7c38a9083a631333d2dc7f75b2a86eb40b63d7320b981dd2c964e441e577fe38b3e826bc8a5e69e49944e9c63c3154201d2b4d8792dc69372487729c8aef07d0d007329760b06d8512a6b83b71a7143df9f8d3eb72f17bb9f1aa4b63043bf21f3d16c5e6db1c9fce567eaa56ac8027dabff73c70e56eaa0ae04671cd06207454d76708b7dbdcb06d4ca349f0607eb2f88c6c9c9c83c8ab0f9e9c65ef95c0772e5fdf9165570e9f004eaa0b1b49c9b450e0f6b67243355f62c67aeb3075599169d0f001cd2a4f276fd8df318874b6b5a98f9d2051881e98fe61d0f7af4cd0ef58e6989a58690350d05c61fa0b7ba8def4d89265a77fa3c22912f19401ebb6ace8a5b812857d40f95563621e105b9fe7abc45175024d77aa22d96d74ac6632f1eb533ec0ac86b4312193393f115ef53f00cb505a57766fac5221de9159c9aa0809a5a8c37fb331d711a9ecd89a0e008a354c5aba9bb5f98615715e18733647414f1523fe6a53b8b02b37c51cabdb0f184f50446d18c3d38e58f2cbe373041f69f759cca7e100eab22995fcff17432602204d8c66302ffe1cdfcca2ca3d548cf6e6684df1a9202e7cf18d04d4fca928b680e50ec6cf61be37bd28635b00ee1fb0f26c5136d74ff8b2bce111f3b49ee7e5b6ddcfa9a226067c105c88d9c438ee746bf0ff35843fc042a7bc3280d84ea265e121cc534fd23652a798e2ac89ec337a77eff69b7234761d673de4863a23e685d236473a891e91264b2af58c327da0c50eb43855d73f960ede5aff4318b7b4cf7ae69296a4af1a3662b84a37987b823c9c32841f8131fabb530dd24f7fc13647cd52fb5cb41790865d8871de80fd9deb066df563f4ffc92c59f1f1d4ca1ba5fc4db3ec550a02718b798f1c060223da47cc387701f7762cb8279ddc921fa4593f8622a75339bd6921d6b008998a064af6d2288024c6e19d842f8585de3ce569c9efdf3c39649b9be76e9cd867d8389c47f496ab"})
+ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF(0xffffffffffffffff, 0xd000943d, &(0x7f000004b6c0)={0x400, [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {0x0, r5}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {r4}], 0x6})
+ioctl$BTRFS_IOC_TREE_SEARCH(r0, 0xd0009411, &(0x7f0000000100)={{0x0, 0xffff, 0x7ff, 0xfab, 0x6, 0xfffffffffffffffd, 0x1ff, 0xffffff00, 0x0, 0x10000, 0x5, 0x0, 0x3, 0x9, 0x80000000}})
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-fcntl$setsig-fcntl$setlease-open-open-fcntl$setlease
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+r1 = open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+fcntl$setsig(r1, 0xa, 0x11)
+fcntl$setlease(r1, 0x400, 0x1)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+fcntl$setlease(r1, 0x400, 0x0)
+
+program crashed: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_nohz_idle_stop_tick
+single: successfully extracted reproducer
+found reproducer with 9 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-fcntl$setsig-fcntl$setlease-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+r1 = open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+fcntl$setsig(r1, 0xa, 0x11)
+fcntl$setlease(r1, 0x400, 0x1)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-fcntl$setsig-fcntl$setlease-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+r1 = open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+fcntl$setsig(r1, 0xa, 0x11)
+fcntl$setlease(r1, 0x400, 0x1)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-fcntl$setsig-fcntl$setlease-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+r1 = open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+fcntl$setsig(r1, 0xa, 0x11)
+fcntl$setlease(r1, 0x400, 0x1)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-fcntl$setsig-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+r1 = open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+fcntl$setsig(r1, 0xa, 0x11)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+open(&(0x7f00009e1000)='./file0\x00', 0x102440, 0x0)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-sched_setattr-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+r0 = getpid()
+sched_setattr(r0, &(0x7f0000000040)={0x38, 0x0, 0x0, 0x0, 0x9}, 0x0)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-getpid-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+getpid()
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): prlimit64-open-open
+detailed listing:
+executing program 0:
+prlimit64(0x0, 0xe, &(0x7f0000000280)={0x9, 0x8d}, 0x0)
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+detailed listing:
+executing program 0:
+open(&(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+detailed listing:
+executing program 0:
+open(0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+detailed listing:
+executing program 0:
+open(0x0, 0x0, 0x0)
+open(0x0, 0x42203, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program crashed: KCSAN: data-race in e1000_clean_rx_irq
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program crashed: KCSAN: data-race in poll_schedule_timeout.constprop.NUM / pollwake
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program crashed: KCSAN: data-race in generic_write_end / mpage_submit_folio
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open
+program did not crash
+reproducing took 6m9.402477043s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+
+write to 0xffff98ff842a05f8 of 8 bytes by task 337 on cpu 0:
+ i_size_write include/linux/fs.h:901 [inline]
+ generic_write_end+0x9d/0x200 fs/buffer.c:2304
+ ext4_da_write_end+0xfb/0x600 fs/ext4/inode.c:2988
+ generic_perform_write+0x205/0x360 mm/filemap.c:3934
+ ext4_buffered_write_iter+0xa9/0x1c0 fs/ext4/file.c:299
+ ext4_file_write_iter+0xcd/0xdd0 fs/ext4/file.c:722
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x9e/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff98ff842a05f8 of 8 bytes by task 10 on cpu 1:
+ i_size_read include/linux/fs.h:879 [inline]
+ mpage_submit_folio+0x58/0x130 fs/ext4/inode.c:1860
+ mpage_map_and_submit_buffers+0x31c/0x5a0 fs/ext4/inode.c:2111
+ mpage_map_and_submit_extent fs/ext4/inode.c:2251 [inline]
+ ext4_do_writepages+0xcd5/0x1830 fs/ext4/inode.c:2677
+ ext4_writepages+0x19c/0x320 fs/ext4/inode.c:2766
+ do_writepages+0xb5/0x2e0 mm/page-writeback.c:2553
+ __writeback_single_inode+0x72/0x650 fs/fs-writeback.c:1603
+ writeback_sb_inodes+0x463/0x930 fs/fs-writeback.c:1894
+ __writeback_inodes_wb+0x72/0x160 fs/fs-writeback.c:1965
+ wb_writeback+0x211/0x4e0 fs/fs-writeback.c:2072
+ wb_check_background_flush fs/fs-writeback.c:2142 [inline]
+ wb_do_writeback fs/fs-writeback.c:2230 [inline]
+ wb_workfn+0x5df/0x8e0 fs/fs-writeback.c:2257
+ process_one_work+0x545/0x9c0 kernel/workqueue.c:2600
+ worker_thread+0x33d/0x8d0 kernel/workqueue.c:2751
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+value changed: 0x00000000013f3000 -> 0x00000000013f4000
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 10 Comm: kworker/u4:0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-8:0)
+==================================================================
+scp (337) used greatest stack depth: 10592 bytes left
+audit: type=1400 audit(1698662108.958:8): avc:  denied  { execmem } for  pid=360 comm="syz-executor117" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+
+write to 0xffff98ff842a05f8 of 8 bytes by task 337 on cpu 0:
+ i_size_write include/linux/fs.h:901 [inline]
+ generic_write_end+0x9d/0x200 fs/buffer.c:2304
+ ext4_da_write_end+0xfb/0x600 fs/ext4/inode.c:2988
+ generic_perform_write+0x205/0x360 mm/filemap.c:3934
+ ext4_buffered_write_iter+0xa9/0x1c0 fs/ext4/file.c:299
+ ext4_file_write_iter+0xcd/0xdd0 fs/ext4/file.c:722
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x9e/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff98ff842a05f8 of 8 bytes by task 10 on cpu 1:
+ i_size_read include/linux/fs.h:879 [inline]
+ mpage_submit_folio+0x58/0x130 fs/ext4/inode.c:1860
+ mpage_map_and_submit_buffers+0x31c/0x5a0 fs/ext4/inode.c:2111
+ mpage_map_and_submit_extent fs/ext4/inode.c:2251 [inline]
+ ext4_do_writepages+0xcd5/0x1830 fs/ext4/inode.c:2677
+ ext4_writepages+0x19c/0x320 fs/ext4/inode.c:2766
+ do_writepages+0xb5/0x2e0 mm/page-writeback.c:2553
+ __writeback_single_inode+0x72/0x650 fs/fs-writeback.c:1603
+ writeback_sb_inodes+0x463/0x930 fs/fs-writeback.c:1894
+ __writeback_inodes_wb+0x72/0x160 fs/fs-writeback.c:1965
+ wb_writeback+0x211/0x4e0 fs/fs-writeback.c:2072
+ wb_check_background_flush fs/fs-writeback.c:2142 [inline]
+ wb_do_writeback fs/fs-writeback.c:2230 [inline]
+ wb_workfn+0x5df/0x8e0 fs/fs-writeback.c:2257
+ process_one_work+0x545/0x9c0 kernel/workqueue.c:2600
+ worker_thread+0x33d/0x8d0 kernel/workqueue.c:2751
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+value changed: 0x00000000013f3000 -> 0x00000000013f4000
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 10 Comm: kworker/u4:0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-8:0)
+==================================================================
+scp (337) used greatest stack depth: 10592 bytes left
+audit: type=1400 audit(1698662108.958:8): avc:  denied  { execmem } for  pid=360 comm="syz-executor117" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+

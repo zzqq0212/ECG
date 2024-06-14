@@ -1,3 +1,0 @@
-[submodule "third-party/qemu"]
-	path = feryr_external/third-party/qemu
-	url = https://git.qemu.org/git/qemu.git 

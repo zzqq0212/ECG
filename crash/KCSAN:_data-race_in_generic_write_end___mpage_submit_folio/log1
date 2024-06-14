@@ -1,0 +1,686 @@
+syzkaller login: [   17.755989] ==================================================================
+[   17.756961] BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+[   17.757561] 
+[   17.757717] write to 0xffff8b7fc3e5e9f8 of 8 bytes by task 348 on cpu 0:
+[   17.758388]  generic_write_end+0x9d/0x200
+[   17.758761]  ext4_da_write_end+0xfb/0x600
+[   17.759289]  generic_perform_write+0x205/0x360
+[   17.759692]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.760116]  ext4_file_write_iter+0xcd/0xdd0
+[   17.760501]  vfs_write+0x5d0/0x700
+[   17.760818]  ksys_write+0x9e/0x160
+[   17.761229]  __x64_sys_write+0x41/0x50
+[   17.761734]  do_syscall_64+0x3e/0x90
+[   17.762093]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.762579] 
+[   17.762731] read to 0xffff8b7fc3e5e9f8 of 8 bytes by task 10 on cpu 1:
+[   17.763432]  mpage_submit_folio+0x58/0x130
+[   17.763796]  mpage_map_and_submit_buffers+0x31c/0x5a0
+[   17.764249]  ext4_do_writepages+0xcd5/0x1830
+[   17.764637]  ext4_writepages+0x19c/0x320
+[   17.765047]  do_writepages+0xb5/0x2e0
+[   17.765557]  __writeback_single_inode+0x72/0x650
+[   17.766055]  writeback_sb_inodes+0x463/0x930
+[   17.766442]  __writeback_inodes_wb+0x72/0x160
+[   17.766909]  wb_writeback+0x211/0x4e0
+[   17.767234]  wb_workfn+0x5df/0x8e0
+[   17.767468]  process_one_work+0x545/0x9c0
+[   17.767829]  worker_thread+0x33d/0x8d0
+[   17.768073]  kthread+0x1b1/0x200
+[   17.768318]  ret_from_fork+0x2f/0x50
+[   17.768584]  ret_from_fork_asm+0x1b/0x30
+[   17.768842] 
+[   17.768952] value changed: 0x000000000136c000 -> 0x000000000136d000
+[   17.769312] 
+[   17.769421] Reported by Kernel Concurrency Sanitizer on:
+[   17.769787] CPU: 1 PID: 10 Comm: kworker/u4:0 Not tainted 6.5.0 #8
+[   17.770396] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.770896] Workqueue: writeback wb_workfn (flush-8:0)
+[   17.771253] ==================================================================
+[   17.945853] scp (348) used greatest stack depth: 11504 bytes left
+Warning: Permanently added '[localhost]:52358' (ED25519) to the list of known hosts.
+2023/10/30 07:42:25 fuzzer started
+2023/10/30 07:42:25 dialing manager at localhost:37497
+[   19.370459] cgroup: Unknown subsys name 'net'
+[   19.376387] cgroup: Unknown subsys name 'rlimit'
+[   19.377022] cgroup: Unknown subsys name 'memory'
+[   19.417552] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 07:42:25 syscalls: 2193
+2023/10/30 07:42:25 code coverage: enabled
+2023/10/30 07:42:25 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 07:42:25 extra coverage: enabled
+2023/10/30 07:42:25 delay kcov mmap: enabled
+2023/10/30 07:42:25 setuid sandbox: enabled
+2023/10/30 07:42:25 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 07:42:25 Android sandbox: enabled
+2023/10/30 07:42:25 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 07:42:25 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 07:42:25 net packet injection: /dev/net/tun does not exist
+2023/10/30 07:42:25 net device setup: enabled
+2023/10/30 07:42:25 concurrency sanitizer: enabled
+2023/10/30 07:42:25 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 07:42:25 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 07:42:25 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 07:42:25 hci packet injection: /dev/vhci does not exist
+2023/10/30 07:42:25 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 07:42:25 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 07:42:25 swap file: enabled
+[   19.429153] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 07:42:25 suppressing KCSAN reports in functions: '_find_first_bit' 'audit_log_start' 'ext4_fill_raw_inode' 'tick_sched_do_timer' 'folio_mark_accessed' 'kernfs_refresh_inode' 'xas_clear_mark' 'jbd2_journal_commit_transaction' 'e1000_clean_rx_irq' 'poll_schedule_timeout' 'dput' 'process_one_work' 'filemap_fault' 'tick_nohz_next_event' 'kauditd_thread' 'generic_fillattr' 'generic_write_end' 'folio_clear_dirty_for_io' 'ktime_get_mono_fast_ns' '__folio_start_writeback' 'wq_worker_tick' 'ext4_free_inodes_count' 'atime_needs_update' 'e1000_clean' '_find_next_zero_bit' 'tick_nohz_idle_stop_tick' 'xas_find_marked' 
+2023/10/30 07:42:25 fetching corpus: 0, signal 0/2000 (executing program)
+2023/10/30 07:42:25 fetching corpus: 50, signal 14328/17851 (executing program)
+2023/10/30 07:42:25 fetching corpus: 100, signal 28311/32898 (executing program)
+2023/10/30 07:42:25 fetching corpus: 149, signal 35149/40811 (executing program)
+2023/10/30 07:42:25 fetching corpus: 199, signal 38605/45420 (executing program)
+2023/10/30 07:42:25 fetching corpus: 249, signal 44539/52123 (executing program)
+2023/10/30 07:42:26 fetching corpus: 299, signal 48482/56895 (executing program)
+2023/10/30 07:42:26 fetching corpus: 348, signal 50303/59694 (executing program)
+2023/10/30 07:42:26 fetching corpus: 398, signal 55214/65059 (executing program)
+2023/10/30 07:42:26 fetching corpus: 448, signal 57690/68254 (executing program)
+2023/10/30 07:42:26 fetching corpus: 498, signal 61244/72204 (executing program)
+2023/10/30 07:42:26 fetching corpus: 548, signal 63384/74917 (executing program)
+2023/10/30 07:42:26 fetching corpus: 598, signal 65209/77316 (executing program)
+2023/10/30 07:42:26 fetching corpus: 648, signal 68532/80805 (executing program)
+2023/10/30 07:42:26 fetching corpus: 697, signal 71041/83546 (executing program)
+2023/10/30 07:42:26 fetching corpus: 747, signal 72587/85549 (executing program)
+2023/10/30 07:42:26 fetching corpus: 797, signal 74745/87876 (executing program)
+2023/10/30 07:42:26 fetching corpus: 847, signal 75897/89420 (executing program)
+2023/10/30 07:42:26 fetching corpus: 897, signal 77192/91071 (executing program)
+2023/10/30 07:42:26 fetching corpus: 947, signal 78443/92681 (executing program)
+2023/10/30 07:42:26 fetching corpus: 997, signal 79959/94391 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1047, signal 81276/95967 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1097, signal 82039/97099 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1147, signal 83464/98649 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1197, signal 84994/100178 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1247, signal 86146/101392 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1297, signal 87000/102459 (executing program)
+2023/10/30 07:42:26 fetching corpus: 1347, signal 88174/103695 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1397, signal 89246/104797 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1447, signal 90586/106016 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1497, signal 91525/107002 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1547, signal 93314/108343 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1597, signal 94032/109144 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1646, signal 94886/109982 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1696, signal 95791/110822 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1746, signal 96501/111522 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1796, signal 97249/112220 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1846, signal 98068/112902 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1896, signal 98690/113492 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1946, signal 99173/114053 (executing program)
+2023/10/30 07:42:27 fetching corpus: 1996, signal 100011/114722 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2046, signal 100775/115329 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2096, signal 101320/115807 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2145, signal 101980/116323 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2195, signal 102553/116795 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2245, signal 103070/117242 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2295, signal 103730/117686 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2345, signal 104719/118178 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2395, signal 105677/118622 (executing program)
+2023/10/30 07:42:27 fetching corpus: 2445, signal 106377/119047 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2495, signal 106977/119434 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2544, signal 107669/119785 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2594, signal 108172/120073 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2644, signal 108607/120397 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2694, signal 109029/120676 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2744, signal 109558/120963 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2794, signal 110241/121231 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2844, signal 110873/121440 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2894, signal 111411/121658 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2944, signal 111749/121826 (executing program)
+2023/10/30 07:42:28 fetching corpus: 2994, signal 112040/121959 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3044, signal 112542/121959 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3094, signal 113134/121959 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3144, signal 113704/121959 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3194, signal 114004/121969 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3244, signal 114410/121969 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3293, signal 114766/121978 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3342, signal 115119/121978 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3392, signal 115581/121983 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3442, signal 116167/122013 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3492, signal 116480/122015 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3542, signal 116856/122015 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3592, signal 117273/122029 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3642, signal 117617/122032 (executing program)
+2023/10/30 07:42:28 fetching corpus: 3692, signal 117964/122041 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3742, signal 118257/122041 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3792, signal 118654/122046 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3842, signal 118982/122048 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3892, signal 119523/122048 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3942, signal 120186/122052 (executing program)
+2023/10/30 07:42:29 fetching corpus: 3992, signal 120598/122060 (executing program)
+2023/10/30 07:42:29 fetching corpus: 4016, signal 120763/122082 (executing program)
+2023/10/30 07:42:29 fetching corpus: 4017, signal 120764/122086 (executing program)
+2023/10/30 07:42:29 fetching corpus: 4017, signal 120764/122086 (executing program)
+2023/10/30 07:42:30 starting 2 fuzzer processes
+[   24.197005] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=365 'syz-fuzzer'
+07:42:30 executing program 1:
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1496d}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$loop(&(0x7f00000001c0), 0x0, 0x103382)
+r1 = memfd_create(&(0x7f0000000240)='.^\xc5', 0x0)
+waitid(0x0, 0x0, &(0x7f00000002c0), 0x0, 0x0)
+pwritev(r1, &(0x7f0000000540)=[{&(0x7f0000000000)='B', 0x1}], 0x1, 0x81805, 0x0)
+ioctl$LOOP_CHANGE_FD(r0, 0x4c00, r1)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x2)
+sendfile(r0, r0, 0x0, 0x24002da8)
+ioctl$LOOP_SET_STATUS(r0, 0x4c02, &(0x7f00000000c0)={0x0, {}, 0x0, {}, 0x5, 0x0, 0x8, 0x0, "5b6e292720ad1c122716751da9bf189513d61d4796c07a6a60c48e0a829f91b97739809d64e869ae16798a44aad614fac6a21d3dcf2b3e871587f53cd809f98e", "f8b699c929b92ee722240b5b4c44a41eb88c87cff1866be0bec480ebc5c2189e", [0x0, 0x2d]})
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, 0x0)
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, &(0x7f0000000600)={0x0, {}, 0x0, {}, 0x0, 0x2, 0xe, 0x0, "641f738624679713ddee573f4b3e937f520d11dea6b6892979b70eb1f3e79c3856d788e3188ac0e792a061aee7ef6fc3a31cebc504d6d790e331ce9bb00f50a1", "18a4fa05cd8e41a6cd843acc762cf3fd6b38a179b93e896f6f2c0405ffb2b018", [0x8, 0x101]})
+
+07:42:30 executing program 0:
+msgrcv(0x0, 0x0, 0x0, 0x0, 0x6800)
+
+[   24.220049] audit: type=1400 audit(1698651750.546:8): avc:  denied  { execmem } for  pid=393 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+07:42:32 executing program 0:
+io_setup(0x5, &(0x7f0000000000)=<r0=>0x0)
+io_submit(r0, 0x1, &(0x7f0000001080)=[&(0x7f0000001040)={0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0}])
+
+[   26.536915] loop0: detected capacity change from 0 to 1036
+[   26.543535] hrtimer: interrupt took 17780 ns
+07:42:32 executing program 0:
+io_setup(0x5, &(0x7f0000000000)=<r0=>0x0)
+io_submit(r0, 0x1, &(0x7f0000001080)=[&(0x7f0000001040)={0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0}])
+
+07:42:32 executing program 1:
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1496d}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$loop(&(0x7f00000001c0), 0x0, 0x103382)
+r1 = memfd_create(&(0x7f0000000240)='.^\xc5', 0x0)
+waitid(0x0, 0x0, &(0x7f00000002c0), 0x0, 0x0)
+pwritev(r1, &(0x7f0000000540)=[{&(0x7f0000000000)='B', 0x1}], 0x1, 0x81805, 0x0)
+ioctl$LOOP_CHANGE_FD(r0, 0x4c00, r1)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x2)
+sendfile(r0, r0, 0x0, 0x24002da8)
+ioctl$LOOP_SET_STATUS(r0, 0x4c02, &(0x7f00000000c0)={0x0, {}, 0x0, {}, 0x5, 0x0, 0x8, 0x0, "5b6e292720ad1c122716751da9bf189513d61d4796c07a6a60c48e0a829f91b97739809d64e869ae16798a44aad614fac6a21d3dcf2b3e871587f53cd809f98e", "f8b699c929b92ee722240b5b4c44a41eb88c87cff1866be0bec480ebc5c2189e", [0x0, 0x2d]})
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, 0x0)
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, &(0x7f0000000600)={0x0, {}, 0x0, {}, 0x0, 0x2, 0xe, 0x0, "641f738624679713ddee573f4b3e937f520d11dea6b6892979b70eb1f3e79c3856d788e3188ac0e792a061aee7ef6fc3a31cebc504d6d790e331ce9bb00f50a1", "18a4fa05cd8e41a6cd843acc762cf3fd6b38a179b93e896f6f2c0405ffb2b018", [0x8, 0x101]})
+
+07:42:32 executing program 0:
+io_setup(0x5, &(0x7f0000000000)=<r0=>0x0)
+io_submit(r0, 0x1, &(0x7f0000001080)=[&(0x7f0000001040)={0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0}])
+
+07:42:33 executing program 0:
+io_setup(0x5, &(0x7f0000000000)=<r0=>0x0)
+io_submit(r0, 0x1, &(0x7f0000001080)=[&(0x7f0000001040)={0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0}])
+
+07:42:33 executing program 0:
+r0 = socket$inet6_udplite(0xa, 0x2, 0x88)
+sendmmsg$inet6(r0, &(0x7f0000003f80)=[{{&(0x7f0000000400)={0xa, 0x4e23, 0x0, @mcast2}, 0x1c, &(0x7f0000002600)=[{&(0x7f0000000440)="48e44682748122c7b419decd3310007dd8650bf7e14ca23ffff0d906529df0d5fe6ac025b576f916d559962d9eab4499ce6abd0810ded6a12a2e4b10ef8ee6171df5fb442e4e25127e121a333c35dd2a96bf16", 0x53}, {&(0x7f00000004c0)="ec45a6d9ea7309761f7a0da0b1d441db6222688a7a2180305893f7c85ad40d8a36fc56ca67bc230490ef95038633d7d1e57e517efa577a8d2c22a152b5f66cc95f1594c239ae7743", 0x48}, {&(0x7f0000000540)="ff771f5c93dbe65a9bf45a3862776415f6e2b5c6460d6e3e1825b57c4448c3477ac586f9ce81b1b53fdb0c6345aced52d069fa74b8b82b92027b96dd63cadbcf2911bedc71f8d373f7fdcf59f7ccc3344b9f32c8aa9633814e2b7c4ba930f2a16b", 0x61}, {&(0x7f00000005c0)="6a3608c4c713179d205defff7f2ebe67a7512d7d1ec8eb04732ba1fbc8552fcd30bf930cbced202de1a48b8271d841d5f2084dd5c71f3fd4", 0x38}, {&(0x7f0000000600)="8cd11f24a0cdc5fd9405a02b4e5c41daa6061bb9045d70b55425fa41e412c1ad9a69243bd1e4c1d37b2e41db1b065314736f525ff9df796822131fcc05772d8b7af6c8a6454861bd4b479e9bccf5db1e1ae9629f6995c7e886022df074108fa98e736b38c9d31adbb4b64d4f7c033e4e03529306deaa356b4924bc49a65f2eac6d4fe24a9ec8ac4c5666bc89327c63a492cdb9a90f335d0bab08b22a6db1ae7498bbfc1c2f5e2e4bd56b24bf3569bf7ebfab5bd5f766bfe2b69e9dff8c374c9e0a11f51c83ce523c1747b9b521f770d97c8ad185fc5ae372a520854a45249354c6c0ebf84a746a96868aaf4c74bc16d425186c4cc7afaf7d5a4bb2072d51aea6c9752c4be8e55d086cd02c2845cf679f3251dc88c6f4d44ec2dbe41a9ff9af8abeec89903a272525cf33f32e52e48f9a13a66106877423c0c3543494790cdb527f349408d5f2f64ec13940bd774a10fcf538fed8851ce98bec97578e2ab30df813162e90ed8fa745faa1356925523b2569a487c681b518c1b59f2956c69c7d4ceeb427d4e240cc9df6c3463d7afff32675c823f0d4d4c50216be22df8dc36cf9a71901917bf4b2af8aa5602cb899d34fc64db168e68f73c20e0f1a9c02f8de217e", 0x1c1}], 0x5, &(0x7f0000002680)=[@dstopts_2292={{0x2c8, 0x29, 0x4, {0x0, 0x56, '\x00', [@calipso={0x7, 0x20, {0x0, 0x6, 0x0, 0x0, [0x0, 0x0, 0x0]}}, @padn={0x1, 0x3, [0x0, 0x0, 0x0]}, @generic={0xda, 0x52, "cda8e4a97052b46fbe3f717df59dc96fbf19926c3d064f206962f71c44b76ce35fb9c2dc2789bbb22e5cf80ffeea302784786cf55104cb93dc6817308632125c96592521f91d3546261c8cb570e886b44a7f"}, @generic={0x0, 0xa9, "eb11b02e3cb201970263d1dfe555aecef2c9ad615480e983e9f0aaad40ca01cbcf37460bfde19a978981cbfc8b017aa909fd37ed66a0407fe8add75c25030cf7e3a2a3f49548a6e5b5e7b7bbe54c2d3bd0a6026fe221e1bada169ae760872be549dcac19f18ea069f90afd181f0caebe37469a810fec19dcd3b6047c00fb47a2009cc705fd68a45162a192cad0a1ab62e2149c7d3af69212314daa3cb98c3db905d48151f6e59644ed"}, @jumbo, @generic={0x0, 0x55, "ab788a37efe1701a7e3986e40c1bb01a7dd3a620561e222aac8a9ad21f6692cfb47c77ce31bddd04b56618a915546650bbedbd445590204659c261ff88706035864a0c0452bbb42bdfa7dd0eddd9c36b50f448d466"}, @generic={0x0, 0xbe, "a3a3df6b064faa7ec7a2b38ac766f08952752f1b6d32b5013816b7e8ec8ff631c66156862e981ea2d56669f36b050d9b3c23503a3b42f6d16ba5583cff3855cabf037ba7f8ffc126c6222dd31e8c730384c0c153ee53b5b3a10aac0adfc741f86406a79a91343ae6af7d1966c9a0d765ef5a9522d933b486d9ed223597c402e2377dd7bb990f1811ecac4dc3f8f574af3ad83a5c7b30e80b641e161065218514fd89cba98fa16e2d29ec0ed99a01e2e28787df96e7ac0cd4ba11d5102d21"}, @padn={0x1, 0x7, [0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]}, @enc_lim, @generic={0x0, 0x5f, "a20946b6a32581f3d8c99cdaa18775071b876755c5e44558b72c036e228d835f128268eb677d793db6f0630b7d905368638f3c39d1d26a3a247058def4e4df9f3842cf6ad5d42a127e63e604a3e99bd1c00e8d0d1508e518a1217c35b2f3d2"}]}}}], 0x2c8}}], 0x1, 0x0)
+
+[   26.740979] UDPLite6: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+07:42:33 executing program 1:
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1496d}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$loop(&(0x7f00000001c0), 0x0, 0x103382)
+r1 = memfd_create(&(0x7f0000000240)='.^\xc5', 0x0)
+waitid(0x0, 0x0, &(0x7f00000002c0), 0x0, 0x0)
+pwritev(r1, &(0x7f0000000540)=[{&(0x7f0000000000)='B', 0x1}], 0x1, 0x81805, 0x0)
+ioctl$LOOP_CHANGE_FD(r0, 0x4c00, r1)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x2)
+sendfile(r0, r0, 0x0, 0x24002da8)
+ioctl$LOOP_SET_STATUS(r0, 0x4c02, &(0x7f00000000c0)={0x0, {}, 0x0, {}, 0x5, 0x0, 0x8, 0x0, "5b6e292720ad1c122716751da9bf189513d61d4796c07a6a60c48e0a829f91b97739809d64e869ae16798a44aad614fac6a21d3dcf2b3e871587f53cd809f98e", "f8b699c929b92ee722240b5b4c44a41eb88c87cff1866be0bec480ebc5c2189e", [0x0, 0x2d]})
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, 0x0)
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, &(0x7f0000000600)={0x0, {}, 0x0, {}, 0x0, 0x2, 0xe, 0x0, "641f738624679713ddee573f4b3e937f520d11dea6b6892979b70eb1f3e79c3856d788e3188ac0e792a061aee7ef6fc3a31cebc504d6d790e331ce9bb00f50a1", "18a4fa05cd8e41a6cd843acc762cf3fd6b38a179b93e896f6f2c0405ffb2b018", [0x8, 0x101]})
+
+07:42:33 executing program 0:
+openat$procfs(0xffffffffffffff9c, &(0x7f00000001c0)='/proc/stat\x00', 0x0, 0x0)
+preadv(0xffffffffffffffff, &(0x7f0000002500)=[{&(0x7f0000000200)=""/242, 0xf2}], 0x1, 0x0, 0x0)
+pipe(0x0)
+r0 = socket$inet_udp(0x2, 0x2, 0x0)
+bind$inet(r0, &(0x7f0000000240)={0x2, 0x0, @local}, 0x10)
+connect$inet(r0, 0x0, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = syz_open_procfs(0x0, &(0x7f00000000c0)='fd/3\x00')
+preadv(r1, &(0x7f00000017c0), 0x1a1, 0x0, 0x0)
+
+07:42:33 executing program 0:
+r0 = perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+mkdirat$cgroup_root(0xffffffffffffff9c, &(0x7f0000000080)='./cgroup/syz1\x00', 0x1ff)
+r1 = syz_open_dev$loop(&(0x7f00000001c0), 0x75f, 0x107382)
+r2 = memfd_create(&(0x7f0000000240)='.^\xc5', 0x0)
+ioctl$PERF_EVENT_IOC_PERIOD(0xffffffffffffffff, 0x40082404, 0x0)
+r3 = perf_event_open(&(0x7f00000004c0)={0x3, 0x70, 0x7, 0x0, 0x9, 0xf6, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1000, 0x7f, 0x79, 0x9, 0x2, 0xffffffff, 0x7}, 0xffffffffffffffff, 0xe, r0, 0x1)
+pwritev(r2, &(0x7f0000000540)=[{&(0x7f0000000000)='B', 0x1}], 0x1, 0x81805, 0x0)
+openat$cgroup_ro(0xffffffffffffffff, &(0x7f0000000040)='devices.list\x00', 0x0, 0x0)
+rt_sigtimedwait(&(0x7f0000000200), 0x0, &(0x7f0000000400), 0x8)
+ioctl$LOOP_CHANGE_FD(r1, 0x4c00, r2)
+openat$cgroup_root(0xffffff9c, &(0x7f0000000280)='./cgroup/syz1\x00', 0x200002, 0x0)
+sendfile(r1, r1, 0x0, 0x24002da8)
+perf_event_open(&(0x7f00000002c0)={0x4, 0x70, 0x7, 0x3f, 0x8, 0x0, 0x0, 0x39a, 0x7801, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x1, 0x1, 0x1, 0x0, 0x1, 0x1, 0x0, 0x1, 0x2, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0xa0, 0x1, 0x0, 0x6000, 0x2, 0x5, 0x4, 0x8000, 0x8, 0x7f}, 0xffffffffffffffff, 0x2, r3, 0x2)
+ioctl$LOOP_SET_STATUS(r1, 0x4c02, &(0x7f00000000c0)={0x0, {}, 0x0, {}, 0x0, 0x0, 0x0, 0x0, "5b6e292720ad1c122716751da9bf189513d61d4796c07a6a60c48e0a829f91b97739809d64e869ae16798a44aad614a21d3dcf2b3e871587f53cd809f98e00", "f8b699c929b92ee722240b5b4c44a41eb88c87cff1866be0bec480ebc5c2189e", [0x0, 0x2d]})
+ioctl$LOOP_SET_STATUS(r1, 0x4c02, &(0x7f0000000780)={0x0, {}, 0x0, {}, 0x8001, 0x9, 0x0, 0x0, "0c7f70a167f6cc188cb61c00e740c14c32a9ab322fb8b57bba37c4d876ef58517c2cdde4c2a04a84ecfa7964b4f2f052f4a01d6fb697e016813b74913884da38", "941acb4e4d0917915e0930ccead6e91780ed6d9677f41336de09d52644d882c5", [0xffff8001, 0x64]})
+dup3(0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+ioctl$LOOP_CLR_FD(r1, 0x4c01)
+ioctl$TIOCL_UNBLANKSCREEN(r1, 0x541c, &(0x7f0000000180))
+
+[   26.794547] loop0: detected capacity change from 0 to 1036
+[   26.819122] loop7: detected capacity change from 0 to 1036
+[   26.846788] loop7: detected capacity change from 1036 to 972
+[   26.858878] I/O error, dev loop7, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+07:42:33 executing program 0:
+mmap(&(0x7f0000000000/0xfbe000)=nil, 0xfbe000, 0x0, 0x31, 0xffffffffffffffff, 0x0)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00000, 0x4, 0x0, 0x0, 0x0)
+get_mempolicy(0x0, 0x0, 0x0, &(0x7f000058d000/0x2000)=nil, 0x3)
+
+07:42:33 executing program 1:
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1496d}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$loop(&(0x7f00000001c0), 0x0, 0x103382)
+r1 = memfd_create(&(0x7f0000000240)='.^\xc5', 0x0)
+waitid(0x0, 0x0, &(0x7f00000002c0), 0x0, 0x0)
+pwritev(r1, &(0x7f0000000540)=[{&(0x7f0000000000)='B', 0x1}], 0x1, 0x81805, 0x0)
+ioctl$LOOP_CHANGE_FD(r0, 0x4c00, r1)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x2)
+sendfile(r0, r0, 0x0, 0x24002da8)
+ioctl$LOOP_SET_STATUS(r0, 0x4c02, &(0x7f00000000c0)={0x0, {}, 0x0, {}, 0x5, 0x0, 0x8, 0x0, "5b6e292720ad1c122716751da9bf189513d61d4796c07a6a60c48e0a829f91b97739809d64e869ae16798a44aad614fac6a21d3dcf2b3e871587f53cd809f98e", "f8b699c929b92ee722240b5b4c44a41eb88c87cff1866be0bec480ebc5c2189e", [0x0, 0x2d]})
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, 0x0)
+ioctl$LOOP_SET_STATUS(0xffffffffffffffff, 0x4c02, &(0x7f0000000600)={0x0, {}, 0x0, {}, 0x0, 0x2, 0xe, 0x0, "641f738624679713ddee573f4b3e937f520d11dea6b6892979b70eb1f3e79c3856d788e3188ac0e792a061aee7ef6fc3a31cebc504d6d790e331ce9bb00f50a1", "18a4fa05cd8e41a6cd843acc762cf3fd6b38a179b93e896f6f2c0405ffb2b018", [0x8, 0x101]})
+
+07:42:33 executing program 0:
+mmap(&(0x7f0000000000/0xfbe000)=nil, 0xfbe000, 0x0, 0x31, 0xffffffffffffffff, 0x0)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00000, 0x4, 0x0, 0x0, 0x0)
+get_mempolicy(0x0, 0x0, 0x0, &(0x7f000058d000/0x2000)=nil, 0x3)
+
+[   26.937716] loop0: detected capacity change from 0 to 1036
+07:42:33 executing program 0:
+mmap(&(0x7f0000000000/0xfbe000)=nil, 0xfbe000, 0x0, 0x31, 0xffffffffffffffff, 0x0)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00000, 0x4, 0x0, 0x0, 0x0)
+get_mempolicy(0x0, 0x0, 0x0, &(0x7f000058d000/0x2000)=nil, 0x3)
+
+07:42:33 executing program 0:
+mmap(&(0x7f0000000000/0xfbe000)=nil, 0xfbe000, 0x0, 0x31, 0xffffffffffffffff, 0x0)
+mbind(&(0x7f0000012000/0xc00000)=nil, 0xc00000, 0x4, 0x0, 0x0, 0x0)
+get_mempolicy(0x0, 0x0, 0x0, &(0x7f000058d000/0x2000)=nil, 0x3)
+
+07:42:33 executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_buf(r0, 0x6, 0x1f, &(0x7f00000000c0)='A', 0x1)
+
+07:42:33 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000180), 0xffffffffffffffff)
+sendmsg$NL80211_CMD_PROBE_MESH_LINK(r0, &(0x7f00000001c0)={0x0, 0x0, &(0x7f00000002c0)={&(0x7f00000014c0)={0x28, r1, 0x1, 0x0, 0x0, {{}, {@val={0x14, 0x6}, @val={0xc}}}}, 0x28}}, 0x0)
+
+[   27.085197] netlink: 'syz-executor.1': attribute type 11 has an invalid length.
+07:42:33 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000180), 0xffffffffffffffff)
+sendmsg$NL80211_CMD_PROBE_MESH_LINK(r0, &(0x7f00000001c0)={0x0, 0x0, &(0x7f00000002c0)={&(0x7f00000014c0)={0x28, r1, 0x1, 0x0, 0x0, {{}, {@val={0x14, 0x6}, @val={0xc}}}}, 0x28}}, 0x0)
+
+07:42:33 executing program 0:
+r0 = perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c46, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xfffffff7ffffffff, 0xffffffffffffffff, 0x2)
+r1 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+r2 = syz_genetlink_get_family_id$nl802154(&(0x7f0000003f00), 0xffffffffffffffff)
+sendmsg$NL802154_CMD_GET_SEC_DEV(r1, &(0x7f00000002c0)={0x0, 0x0, &(0x7f0000000240)={&(0x7f0000000180)={0x20, r2, 0x311, 0x0, 0x0, {}, [@NL802154_ATTR_WPAN_DEV={0xc, 0x6, 0x100000001}]}, 0x20}}, 0x0)
+r3 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+sendmsg$NL802154_CMD_NEW_SEC_LEVEL(0xffffffffffffffff, 0x0, 0x0)
+setsockopt$inet6_IPV6_DSTOPTS(0xffffffffffffffff, 0x29, 0x3b, 0x0, 0x8)
+sendmsg$inet6(0xffffffffffffffff, &(0x7f0000000100)={&(0x7f0000000040)={0xa, 0x4e25, 0x0, @local}, 0x1c, 0x0, 0x0, 0x0, 0x60}, 0x24000010)
+ioctl$FICLONERANGE(r0, 0x4020940d, &(0x7f0000000180)={{}, 0x0, 0x0, 0x4c})
+sendmsg$NLBL_MGMT_C_LISTDEF(r3, &(0x7f0000000280)={&(0x7f0000000080)={0x10, 0x0, 0x0, 0x80000}, 0xc, &(0x7f00000000c0)={&(0x7f00000001c0)={0x4c, 0x0, 0x800, 0x70bd2b, 0x25dfdbfe, {}, [@NLBL_MGMT_A_FAMILY={0x6}, @NLBL_MGMT_A_PROTOCOL={0x8, 0x2, 0x7}, @NLBL_MGMT_A_PROTOCOL={0x8, 0x2, 0x7}, @NLBL_MGMT_A_DOMAIN={0x9, 0x1, 'ext4\x00'}, @NLBL_MGMT_A_IPV6MASK={0x14, 0x6, @local}]}, 0x4c}}, 0x0)
+sendmsg$DEVLINK_CMD_PORT_GET(0xffffffffffffffff, &(0x7f0000000480)={&(0x7f0000000340), 0xc, &(0x7f0000000440)={&(0x7f0000000380)={0x60, 0x0, 0x100, 0x70bd2c, 0x25dfdbfb, {}, [{{@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0x8, 0x3, 0x2}}}, {{@pci={{0x8}, {0x11}}, {0x8, 0x3, 0x1}}}]}, 0x60}, 0x1, 0x0, 0x0, 0x14}, 0x40)
+sendmsg$NLBL_UNLABEL_C_STATICLIST(0xffffffffffffffff, 0x0, 0x4800)
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000040)='./file0\x00', 0x83600, 0xfffffffffffffffc, 0x0, 0x0, 0x0)
+sendmsg$NLBL_MGMT_C_ADD(r3, &(0x7f0000000600)={&(0x7f00000004c0)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f00000005c0)={0x0}}, 0x0)
+
+[   27.097865] netlink: 'syz-executor.1': attribute type 11 has an invalid length.
+07:42:33 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000180), 0xffffffffffffffff)
+sendmsg$NL80211_CMD_PROBE_MESH_LINK(r0, &(0x7f00000001c0)={0x0, 0x0, &(0x7f00000002c0)={&(0x7f00000014c0)={0x28, r1, 0x1, 0x0, 0x0, {{}, {@val={0x14, 0x6}, @val={0xc}}}}, 0x28}}, 0x0)
+
+[   27.115614] netlink: 'syz-executor.1': attribute type 11 has an invalid length.
+07:42:33 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000180), 0xffffffffffffffff)
+sendmsg$NL80211_CMD_PROBE_MESH_LINK(r0, &(0x7f00000001c0)={0x0, 0x0, &(0x7f00000002c0)={&(0x7f00000014c0)={0x28, r1, 0x1, 0x0, 0x0, {{}, {@val={0x14, 0x6}, @val={0xc}}}}, 0x28}}, 0x0)
+
+[   27.139646] netlink: 'syz-executor.1': attribute type 11 has an invalid length.
+[   27.143361] Zero length message leads to an empty skb
+07:42:33 executing program 0:
+r0 = open(&(0x7f00000001c0)='./bus\x00', 0x1031fe, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCADDTUNNEL(0xffffffffffffffff, 0x89f1, 0x0)
+r1 = getpgid(0x0)
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0x0, 0x0, 0x0, 0x1}, r1, 0xffffffefffffffff, 0xffffffffffffffff, 0x0)
+r2 = open(&(0x7f0000002000)='./bus\x00', 0x141042, 0x0)
+ftruncate(r2, 0x2007fff)
+sendfile(r0, r0, 0x0, 0x8080fffffffe)
+r3 = open(&(0x7f0000000300)='./bus\x00', 0x0, 0x0)
+r4 = socket$inet6_tcp(0xa, 0x1, 0x0)
+bind$inet6(r4, &(0x7f0000000040)={0xa, 0x4e22}, 0x1c)
+listen(r4, 0x0)
+r5 = socket$inet6_tcp(0xa, 0x1, 0x0)
+sendto$inet6(r5, 0x0, 0x0, 0x20000004, &(0x7f0000000280)={0xa, 0x100000004e22, 0x0, @loopback}, 0x1c)
+setsockopt$inet6_tcp_TCP_ULP(r5, 0x6, 0x1f, &(0x7f0000000080), 0x152)
+setsockopt$inet6_tcp_TLS_TX(r5, 0x11a, 0x1, &(0x7f0000000100)=@gcm_128={{0x303}, '\x00', '\x00', "20040100"}, 0x28)
+sendfile(r5, r3, 0x0, 0x800100020001)
+creat(&(0x7f0000000100)='./bus\x00', 0x0)
+
+07:42:33 executing program 1:
+r0 = openat$snapshot(0xffffffffffffff9c, &(0x7f00000000c0), 0x0, 0x0)
+ioctl$SNAPSHOT_ALLOC_SWAP_PAGE(r0, 0x80083314, 0x0)
+
+07:42:33 executing program 1:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r1 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000080), 0x0, 0x0)
+fstat(r1, &(0x7f0000000000)={0x0, 0x0, 0x0, 0x0, <r2=>0x0})
+setuid(r2)
+ioctl$KDGKBENT(r0, 0x4b46, &(0x7f00000000c0))
+
+07:42:33 executing program 1:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r1 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000080), 0x0, 0x0)
+fstat(r1, &(0x7f0000000000)={0x0, 0x0, 0x0, 0x0, <r2=>0x0})
+setuid(r2)
+ioctl$KDGKBENT(r0, 0x4b46, &(0x7f00000000c0))
+
+[   27.247816] TCP: request_sock_TCPv6: Possible SYN flooding on port [::]:20002. Sending cookies.
+07:42:33 executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+connect$inet6(r0, &(0x7f0000000000)={0xa, 0x4001, 0x0, @dev={0xfe, 0x80, '\x00', 0x1c}, 0xd}, 0x1c)
+r1 = openat$full(0xffffffffffffff9c, &(0x7f0000000040), 0x234300, 0x0)
+setsockopt$inet6_tcp_int(r1, 0x6, 0x0, &(0x7f00000000c0), 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000080)='htcp\x00', 0x5)
+perf_event_open(&(0x7f00000012c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8d51}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+sendto$inet6(r0, &(0x7f0000000200)='\n', 0xfffffdef, 0x4d87a, 0x0, 0x1f4)
+
+07:42:33 executing program 1:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r1 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000080), 0x0, 0x0)
+fstat(r1, &(0x7f0000000000)={0x0, 0x0, 0x0, 0x0, <r2=>0x0})
+setuid(r2)
+ioctl$KDGKBENT(r0, 0x4b46, &(0x7f00000000c0))
+
+07:42:33 executing program 1:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r1 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000080), 0x0, 0x0)
+fstat(r1, &(0x7f0000000000)={0x0, 0x0, 0x0, 0x0, <r2=>0x0})
+setuid(r2)
+ioctl$KDGKBENT(r0, 0x4b46, &(0x7f00000000c0))
+
+07:42:33 executing program 0:
+sched_setattr(0x0, 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x10100, 0x0)
+sendmsg$NL80211_CMD_SET_POWER_SAVE(0xffffffffffffffff, 0x0, 0x0)
+perf_event_open(&(0x7f0000000200)={0x2, 0x70, 0x42, 0x8001}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50c, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100000}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x1612c2, 0x0)
+r2 = openat$procfs(0xffffffffffffff9c, &(0x7f0000000000)='/proc/key-users\x00', 0x0, 0x0)
+sendfile(r1, r2, 0x0, 0x4000000000010046)
+finit_module(r0, &(0x7f0000000040)='(\x82$\x00', 0x1)
+ioctl$sock_inet6_SIOCSIFADDR(0xffffffffffffffff, 0x8916, &(0x7f0000000040)={@dev={0xfe, 0x80, '\x00', 0x38}, 0x69})
+openat$cgroup_ro(0xffffffffffffffff, &(0x7f00000000c0)='devices.list\x00', 0x0, 0x0)
+r3 = socket$inet6(0xa, 0x2, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+bind$inet6(r3, &(0x7f0000000000)={0xa, 0x14e24}, 0x1c)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 0:
+sched_setattr(0x0, 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x10100, 0x0)
+sendmsg$NL80211_CMD_SET_POWER_SAVE(0xffffffffffffffff, 0x0, 0x0)
+perf_event_open(&(0x7f0000000200)={0x2, 0x70, 0x42, 0x8001}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50c, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100000}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x1612c2, 0x0)
+r2 = openat$procfs(0xffffffffffffff9c, &(0x7f0000000000)='/proc/key-users\x00', 0x0, 0x0)
+sendfile(r1, r2, 0x0, 0x4000000000010046)
+finit_module(r0, &(0x7f0000000040)='(\x82$\x00', 0x1)
+ioctl$sock_inet6_SIOCSIFADDR(0xffffffffffffffff, 0x8916, &(0x7f0000000040)={@dev={0xfe, 0x80, '\x00', 0x38}, 0x69})
+openat$cgroup_ro(0xffffffffffffffff, &(0x7f00000000c0)='devices.list\x00', 0x0, 0x0)
+r3 = socket$inet6(0xa, 0x2, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+bind$inet6(r3, &(0x7f0000000000)={0xa, 0x14e24}, 0x1c)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 0:
+sched_setattr(0x0, 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x10100, 0x0)
+sendmsg$NL80211_CMD_SET_POWER_SAVE(0xffffffffffffffff, 0x0, 0x0)
+perf_event_open(&(0x7f0000000200)={0x2, 0x70, 0x42, 0x8001}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50c, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100000}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x1612c2, 0x0)
+r2 = openat$procfs(0xffffffffffffff9c, &(0x7f0000000000)='/proc/key-users\x00', 0x0, 0x0)
+sendfile(r1, r2, 0x0, 0x4000000000010046)
+finit_module(r0, &(0x7f0000000040)='(\x82$\x00', 0x1)
+ioctl$sock_inet6_SIOCSIFADDR(0xffffffffffffffff, 0x8916, &(0x7f0000000040)={@dev={0xfe, 0x80, '\x00', 0x38}, 0x69})
+openat$cgroup_ro(0xffffffffffffffff, &(0x7f00000000c0)='devices.list\x00', 0x0, 0x0)
+r3 = socket$inet6(0xa, 0x2, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+bind$inet6(r3, &(0x7f0000000000)={0xa, 0x14e24}, 0x1c)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 0:
+sched_setattr(0x0, 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x10100, 0x0)
+sendmsg$NL80211_CMD_SET_POWER_SAVE(0xffffffffffffffff, 0x0, 0x0)
+perf_event_open(&(0x7f0000000200)={0x2, 0x70, 0x42, 0x8001}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50c, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100000}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x1612c2, 0x0)
+r2 = openat$procfs(0xffffffffffffff9c, &(0x7f0000000000)='/proc/key-users\x00', 0x0, 0x0)
+sendfile(r1, r2, 0x0, 0x4000000000010046)
+finit_module(r0, &(0x7f0000000040)='(\x82$\x00', 0x1)
+ioctl$sock_inet6_SIOCSIFADDR(0xffffffffffffffff, 0x8916, &(0x7f0000000040)={@dev={0xfe, 0x80, '\x00', 0x38}, 0x69})
+openat$cgroup_ro(0xffffffffffffffff, &(0x7f00000000c0)='devices.list\x00', 0x0, 0x0)
+r3 = socket$inet6(0xa, 0x2, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+bind$inet6(r3, &(0x7f0000000000)={0xa, 0x14e24}, 0x1c)
+
+07:42:33 executing program 1:
+lsetxattr$system_posix_acl(&(0x7f0000000400)='.\x00', &(0x7f0000000440)='system.posix_acl_default\x00', &(0x7f00000000c0)={{}, {}, [{0x2, 0x0, 0xee01}, {0x2, 0x0, 0xee00}, {0x2, 0x0, 0xee00}, {}], {}, [{}, {}, {}]}, 0x5c, 0x0)
+mkdir(&(0x7f00000003c0)='./bus\x00', 0x0)
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+
+07:42:33 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x0, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = openat$sndseq(0xffffffffffffff9c, &(0x7f0000000080), 0xca641)
+perf_event_open(&(0x7f0000000280)={0x5, 0x70}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_CREATE_QUEUE(r0, 0xc08c5332, &(0x7f00000004c0)={0x0, 0x0, 0x0, 'queue0\x00'})
+write$sndseq(r0, &(0x7f00000000c0)=[{0x0, 0x0, 0x0, 0x0, @time, {}, {}, @raw8={"a35704000000b6215dd33459"}}], 0xffffff01)
+ioctl$SNDRV_SEQ_IOCTL_REMOVE_EVENTS(r0, 0x4040534e, &(0x7f0000000180)={0x1a2, @time})
+
+07:42:34 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x0, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = openat$sndseq(0xffffffffffffff9c, &(0x7f0000000080), 0xca641)
+perf_event_open(&(0x7f0000000280)={0x5, 0x70}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_CREATE_QUEUE(r0, 0xc08c5332, &(0x7f00000004c0)={0x0, 0x0, 0x0, 'queue0\x00'})
+write$sndseq(r0, &(0x7f00000000c0)=[{0x0, 0x0, 0x0, 0x0, @time, {}, {}, @raw8={"a35704000000b6215dd33459"}}], 0xffffff01)
+ioctl$SNDRV_SEQ_IOCTL_REMOVE_EVENTS(r0, 0x4040534e, &(0x7f0000000180)={0x1a2, @time})
+
+07:42:34 executing program 0:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000040)='./file0\x00', 0x0, 0xfffffffffffffffc, 0x0, 0x0, &(0x7f0000000080))
+
+07:42:34 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x0, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = openat$sndseq(0xffffffffffffff9c, &(0x7f0000000080), 0xca641)
+perf_event_open(&(0x7f0000000280)={0x5, 0x70}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_CREATE_QUEUE(r0, 0xc08c5332, &(0x7f00000004c0)={0x0, 0x0, 0x0, 'queue0\x00'})
+write$sndseq(r0, &(0x7f00000000c0)=[{0x0, 0x0, 0x0, 0x0, @time, {}, {}, @raw8={"a35704000000b6215dd33459"}}], 0xffffff01)
+ioctl$SNDRV_SEQ_IOCTL_REMOVE_EVENTS(r0, 0x4040534e, &(0x7f0000000180)={0x1a2, @time})
+
+07:42:34 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$fou(&(0x7f0000000040), 0xffffffffffffffff)
+sendmsg$FOU_CMD_ADD(r0, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000100)={&(0x7f0000000080)={0x38, r1, 0x1, 0x0, 0x0, {}, [@FOU_ATTR_PEER_V6={0x14, 0x9, @loopback}, @FOU_ATTR_AF={0x5, 0x2, 0xa}, @FOU_ATTR_PEER_PORT={0x6, 0xa, 0x4e20}]}, 0x38}}, 0x0)
+
+07:42:34 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x0, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = openat$sndseq(0xffffffffffffff9c, &(0x7f0000000080), 0xca641)
+perf_event_open(&(0x7f0000000280)={0x5, 0x70}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_CREATE_QUEUE(r0, 0xc08c5332, &(0x7f00000004c0)={0x0, 0x0, 0x0, 'queue0\x00'})
+write$sndseq(r0, &(0x7f00000000c0)=[{0x0, 0x0, 0x0, 0x0, @time, {}, {}, @raw8={"a35704000000b6215dd33459"}}], 0xffffff01)
+ioctl$SNDRV_SEQ_IOCTL_REMOVE_EVENTS(r0, 0x4040534e, &(0x7f0000000180)={0x1a2, @time})
+
+07:42:34 executing program 0:
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f00000000c0), 0x0, 0x0)
+ioctl$TIOCSETD(r0, 0x5423, &(0x7f0000000040)=0xf)
+ioctl$KDADDIO(r0, 0x400455c8, 0x1)
+ioctl$TIOCVHANGUP(r0, 0x5437, 0x0)
+
+07:42:34 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c40}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+timer_create(0x0, &(0x7f0000066000)={0x0, 0x12, 0x0, @thr={0x0, 0x0}}, &(0x7f00009b1ffc))
+timer_settime(0x0, 0x0, &(0x7f0000000040)={{0x0, 0x989680}, {0x0, 0x9}}, 0x0)
+timer_create(0x0, &(0x7f00000000c0)={0x0, 0x13}, &(0x7f0000000240)=<r0=>0x0)
+timer_settime(r0, 0x0, &(0x7f0000000180)={{0x0, 0x989680}, {0x0, 0x1c9c380}}, 0x0)
+pipe(&(0x7f0000000300)={0xffffffffffffffff, <r1=>0xffffffffffffffff})
+pipe(&(0x7f0000000600)={<r2=>0xffffffffffffffff})
+tee(r2, r1, 0x3, 0x0)
+
+07:42:34 executing program 0:
+mount(0x0, &(0x7f0000000140)='./file0\x00', 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x103}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+unshare(0x20600)
+r0 = openat$loop_ctrl(0xffffffffffffff9c, &(0x7f0000000100), 0x0, 0x0)
+unshare(0x0)
+ioctl$LOOP_CTL_REMOVE(r0, 0x4c81, 0x0)
+unshare(0xe020800)
+setreuid(0x0, 0x0)
+r1 = socket(0x0, 0x2, 0x0)
+getsockopt$sock_cred(r1, 0x1, 0x11, 0x0, &(0x7f0000cab000))
+setresuid(0x0, 0x0, 0x0)
+chdir(0x0)
+syz_mount_image$tmpfs(0x0, 0x0, 0x0, 0x0, 0x0, 0x0, &(0x7f0000000980)=ANY=[@ANYRESDEC=0x0, @ANYRESDEC])
+recvmmsg(r1, &(0x7f0000003280)=[{{&(0x7f0000000000)=@l2tp={0x2, 0x0, @remote}, 0x80, &(0x7f0000000080)=[{&(0x7f0000000180)=""/214, 0xd6}], 0x1, &(0x7f0000000280)=""/237, 0xed}, 0x5}, {{0x0, 0x0, &(0x7f0000000500)=[{&(0x7f00000009c0)=""/4096, 0x1000}, {&(0x7f00000000c0)=""/49, 0x31}, {&(0x7f0000000480)=""/118, 0x76}], 0x3, &(0x7f0000000540)=""/226, 0xe2}, 0x2f}, {{0x0, 0x0, &(0x7f0000002b80)}, 0x947}, {{&(0x7f0000002c80)=@pptp={0x18, 0x2, {0x0, @multicast1}}, 0x80, &(0x7f0000002f80)=[{&(0x7f0000002e00)=""/226, 0xe2}, {&(0x7f0000002f00)=""/76, 0x4c}], 0x2, &(0x7f0000002fc0)=""/91, 0x5b}}, {{&(0x7f0000003040)=@hci, 0x80, &(0x7f00000031c0)=[{0x0}], 0x1}}], 0x5, 0x2063, &(0x7f0000003400))
+
+07:42:34 executing program 0:
+mount(0x0, &(0x7f0000000140)='./file0\x00', 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x103}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+unshare(0x20600)
+r0 = openat$loop_ctrl(0xffffffffffffff9c, &(0x7f0000000100), 0x0, 0x0)
+unshare(0x0)
+ioctl$LOOP_CTL_REMOVE(r0, 0x4c81, 0x0)
+unshare(0xe020800)
+setreuid(0x0, 0x0)
+r1 = socket(0x0, 0x2, 0x0)
+getsockopt$sock_cred(r1, 0x1, 0x11, 0x0, &(0x7f0000cab000))
+setresuid(0x0, 0x0, 0x0)
+chdir(0x0)
+syz_mount_image$tmpfs(0x0, 0x0, 0x0, 0x0, 0x0, 0x0, &(0x7f0000000980)=ANY=[@ANYRESDEC=0x0, @ANYRESDEC])
+recvmmsg(r1, &(0x7f0000003280)=[{{&(0x7f0000000000)=@l2tp={0x2, 0x0, @remote}, 0x80, &(0x7f0000000080)=[{&(0x7f0000000180)=""/214, 0xd6}], 0x1, &(0x7f0000000280)=""/237, 0xed}, 0x5}, {{0x0, 0x0, &(0x7f0000000500)=[{&(0x7f00000009c0)=""/4096, 0x1000}, {&(0x7f00000000c0)=""/49, 0x31}, {&(0x7f0000000480)=""/118, 0x76}], 0x3, &(0x7f0000000540)=""/226, 0xe2}, 0x2f}, {{0x0, 0x0, &(0x7f0000002b80)}, 0x947}, {{&(0x7f0000002c80)=@pptp={0x18, 0x2, {0x0, @multicast1}}, 0x80, &(0x7f0000002f80)=[{&(0x7f0000002e00)=""/226, 0xe2}, {&(0x7f0000002f00)=""/76, 0x4c}], 0x2, &(0x7f0000002fc0)=""/91, 0x5b}}, {{&(0x7f0000003040)=@hci, 0x80, &(0x7f00000031c0)=[{0x0}], 0x1}}], 0x5, 0x2063, &(0x7f0000003400))
+
+07:42:34 executing program 0:
+mount(0x0, &(0x7f0000000140)='./file0\x00', 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x103}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+unshare(0x20600)
+r0 = openat$loop_ctrl(0xffffffffffffff9c, &(0x7f0000000100), 0x0, 0x0)
+unshare(0x0)
+ioctl$LOOP_CTL_REMOVE(r0, 0x4c81, 0x0)
+unshare(0xe020800)
+setreuid(0x0, 0x0)
+r1 = socket(0x0, 0x2, 0x0)
+getsockopt$sock_cred(r1, 0x1, 0x11, 0x0, &(0x7f0000cab000))
+setresuid(0x0, 0x0, 0x0)
+chdir(0x0)
+syz_mount_image$tmpfs(0x0, 0x0, 0x0, 0x0, 0x0, 0x0, &(0x7f0000000980)=ANY=[@ANYRESDEC=0x0, @ANYRESDEC])
+recvmmsg(r1, &(0x7f0000003280)=[{{&(0x7f0000000000)=@l2tp={0x2, 0x0, @remote}, 0x80, &(0x7f0000000080)=[{&(0x7f0000000180)=""/214, 0xd6}], 0x1, &(0x7f0000000280)=""/237, 0xed}, 0x5}, {{0x0, 0x0, &(0x7f0000000500)=[{&(0x7f00000009c0)=""/4096, 0x1000}, {&(0x7f00000000c0)=""/49, 0x31}, {&(0x7f0000000480)=""/118, 0x76}], 0x3, &(0x7f0000000540)=""/226, 0xe2}, 0x2f}, {{0x0, 0x0, &(0x7f0000002b80)}, 0x947}, {{&(0x7f0000002c80)=@pptp={0x18, 0x2, {0x0, @multicast1}}, 0x80, &(0x7f0000002f80)=[{&(0x7f0000002e00)=""/226, 0xe2}, {&(0x7f0000002f00)=""/76, 0x4c}], 0x2, &(0x7f0000002fc0)=""/91, 0x5b}}, {{&(0x7f0000003040)=@hci, 0x80, &(0x7f00000031c0)=[{0x0}], 0x1}}], 0x5, 0x2063, &(0x7f0000003400))
+
+
+VM DIAGNOSIS:
+07:42:25  Registers:
+info registers vcpu 0
+RAX=ffff8b7fc2e49be8 RBX=ffff8b7fc1a29a40 RCX=ffffffffb2daa078 RDX=ffff8b7fc2e49100
+RSI=00018b7fc552ab00 RDI=ffff8b7fc552ab00 RBP=00007f4bb9560000 RSP=ffff8d0a0062ba68
+R8 =ffffffffb62c4428 R9 =0000000000000000 R10=0000000000000004 R11=0001ffffffffffff
+R12=0000000000000000 R13=00007f4bb9561000 R14=00007f4bb955b000 R15=ffff8b7fc552ab00
+RIP=ffffffffb2daa07b RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f4bbed968c0 00000000 00000000
+GS =0000 ffff8b80f7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe230f4dc000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe230f4da000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f4bb975a170 CR3=0000000102f18002 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM03=0000000000000000 0000000000000000 223d657865202274 6f6f72223d746363
+YMM04=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000ffff000000ff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000002000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=ffff8b7fc21d8ae8 RBX=ffff8b7fc219c168 RCX=00018b7fc219c168 RDX=0000000000000633
+RSI=00018b7fc461205a RDI=ffff8b7fc461205a RBP=000000000000003a RSP=ffff8d0a00867c20
+R8 =ffffffffb62c4368 R9 =0000000000000000 R10=0001ffffffffffff R11=ffffffffb2ea3b41
+R12=ffff8b7fc461205a R13=ffff8b7fc4612000 R14=ffff8b7fc219c180 R15=ffff8b7fc2b9741c
+RIP=ffffffffb2ea3b45 RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f3dd586a8c0 00000000 00000000
+GS =0000 ffff8b80f7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe5e59279000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe5e59277000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fff45624b18 CR3=00000001003e6003 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00009fc0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000ff0000 ff00000000000000
+YMM01=0000000000000000 0000000000000000 2525252525252525 2525252525252525
+YMM02=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 0000000000ff0000 ff00000000000000
+YMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 80f09f19808d26a3 0000000000162930
+YMM08=0000000000000000 0000000000000000 6cc2cdac08fb6013 00000000001db9a8
+YMM09=0000000000000000 0000000000000000 ffff00ffffff0000 0000ffffff00ffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

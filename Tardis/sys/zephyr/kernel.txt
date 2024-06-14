@@ -1,0 +1,14 @@
+k_heap_init(k_heap ptr[inout, k_heap], mem ptr[inout, void], bytes size_t)
+k_heap_aligned_alloc(k_heap ptr[out, heap], align size_t, bytes size_t, timeout ptr[inout, k_timeout_t]) heap
+k_heap_alloc(k_heap ptr[out, heap], align size_t, timeout ptr[inout, k_timeout_t]) heap
+k_heap_free(k_heap ptr[in, heap], mem ptr[inout, void])
+k_aligned_alloc(align size_t, size size_t)
+k_malloc(size size_t) pprt
+k_calloc(nmemb size_t, size size_t) pprt
+k_free(pp pprt)
+
+resource pprt[intptr]
+resource k_heap[intptr]
+resource k_timeout_t[intptr]
+resource heap[k_heap]
+type size_t int32

@@ -1,0 +1,16 @@
+include <Source/os.h>
+
+OSMutexCreate(p_mutex ptr[out, os_mutex_res], p_name ptr[in, CPU_CHAR], p_err ptr[out, const[OS_ERR_NONE, int16]])
+OSMutexDel(p_mutex ptr[in, os_mutex_res], opt flags[mutex_del_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSMutexPend(p_mutex ptr[in, os_mutex_res], timeout OS_TICK, opt flags[mutex_pend_opt_flags], p_ts ptr[in, CPU_TS], p_err ptr[out, const[OS_ERR_NONE, int16]])
+OSMutexPendAbort(p_mutex ptr[in, os_mutex_res], opt flags[mutex_abort_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSMutexPost(p_mutex ptr[in, os_mutex_res], opt flags[mutex_post_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]])
+
+mutex_del_opt_flags = OS_OPT_DEL_NO_PEND, OS_OPT_DEL_ALWAYS
+mutex_pend_opt_flags = OS_OPT_PEND_BLOCKING, OS_OPT_PEND_NON_BLOCKING
+mutex_abort_opt_flags = OS_OPT_PEND_ABORT_1, OS_OPT_PEND_ABORT_ALL, OS_OPT_POST_NO_SCHED
+mutex_post_opt_flags = OS_OPT_POST_NONE, OS_OPT_POST_NO_SCHED
+
+resource os_mutex_res[intptr]

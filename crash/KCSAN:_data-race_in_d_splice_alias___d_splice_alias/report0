@@ -1,0 +1,112 @@
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+write (marked) to 0xffff8dc681536280 of 4 bytes by task 8945 on cpu 1:
+ end_dir_add fs/dcache.c:2612 [inline]
+ __d_add fs/dcache.c:2796 [inline]
+ d_splice_alias+0x304/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff8dc681536280 of 4 bytes by task 8943 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00001f99 -> 0x00001f9a
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 8943 Comm: syz-executor.0 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1326 audit(1698651914.390:19039): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19040): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=317 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19041): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19042): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19043): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19044): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19045): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19046): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19047): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651914.390:19048): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=8943 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+EXT4-fs error (device sda): mb_free_blocks:1915: group 6, block 208928:freeing already freed block (bit 12320); block bitmap corrupt.
+kauditd_printk_skb: 774 callbacks suppressed
+audit: type=1326 audit(1698651919.636:19823): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19824): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=317 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19825): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19826): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19827): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19828): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19829): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19830): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19831): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+audit: type=1326 audit(1698651919.636:19832): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=9011 comm="syz-executor.0" exe="/syz-executor.0" sig=0 arch=c000003e syscall=202 compat=0 ip=0x7f9ab8ee2d2d code=0x7fc00000
+netlink: 24 bytes leftover after parsing attributes in process `syz-executor.1'.
+platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+==================================================================
+BUG: KCSAN: data-race in audit_log_start.part.0 / skb_dequeue
+
+write (marked) to 0xffffffffa6ac0740 of 4 bytes by task 24 on cpu 0:
+ __skb_unlink include/linux/skbuff.h:2358 [inline]
+ __skb_dequeue include/linux/skbuff.h:2378 [inline]
+ skb_dequeue+0x68/0xf0 net/core/skbuff.c:3632
+ kauditd_send_queue+0x65/0x210 kernel/audit.c:748
+ kauditd_thread+0x39e/0x410 kernel/audit.c:880
+ kthread+0x1b1/0x200 kernel/kthread.c:389
+ ret_from_fork+0x2f/0x50 arch/x86/kernel/process.c:145
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:304
+
+read to 0xffffffffa6ac0740 of 4 bytes by task 9141 on cpu 1:
+ skb_queue_len include/linux/skbuff.h:2138 [inline]
+ audit_log_start.part.0+0x3ea/0x640 kernel/audit.c:1870
+ audit_log_start+0x55/0x80 kernel/audit.c:1854
+ audit_seccomp+0x4b/0x120 kernel/auditsc.c:3001
+ seccomp_log kernel/seccomp.c:994 [inline]
+ __seccomp_filter+0x5bc/0xa30 kernel/seccomp.c:1312
+ __secure_computing+0xf4/0x1b0 kernel/seccomp.c:1342
+ syscall_trace_enter.constprop.0+0xd5/0x2c0 kernel/entry/common.c:72
+ __syscall_enter_from_user_work kernel/entry/common.c:94 [inline]
+ syscall_enter_from_user_mode+0x25/0x30 kernel/entry/common.c:112
+ do_syscall_64+0x1b/0x90 arch/x86/entry/common.c:76
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000001 -> 0x00000000
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 9141 Comm:  *:* ˜ÿ­@ÃSï~ÕŠ Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

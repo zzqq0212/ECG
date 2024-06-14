@@ -1,0 +1,87 @@
+ata1: lost interrupt (Status 0x58)
+ata1: found unknown device (class 0)
+BUG: Bad rss-counter state mm:00000000d2d6d558 type:MM_FILEPAGES val:2271
+BUG: Bad rss-counter state mm:00000000d2d6d558 type:MM_ANONPAGES val:114
+BUG: Bad rss-counter state mm:00000000d2d6d558 type:MM_SHMEMPAGES val:16
+BUG: non-zero pgtables_bytes on freeing mm: 32768
+general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+CPU: 0 PID: 67702 Comm: kworker/u10:0 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: events_unbound call_usermodehelper_exec_work
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RSP: 0018:ffff88810605f9d0 EFLAGS: 00010056
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff9228aa3e
+RDX: 0000000000000000 RSI: 0000000000000003 RDI: ffff888104b188c8
+RBP: 0000000000000093 R08: 0000000000004010 R09: ffffed1020c0bf35
+R10: 0000000000000001 R11: ffff88811ae38a20 R12: ffff888104b188c4
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000004010
+FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fd3e3fda6f4 CR3: 00000000a98aa004 CR4: 0000000000770ef0
+DR0: 0000000020000000 DR1: 0000000020000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __wake_up_common_lock kernel/sched/wait.c:106 [inline]
+ __wake_up kernel/sched/wait.c:127 [inline]
+ __wake_up_pollfree+0x30/0x80 kernel/sched/wait.c:211
+ wake_up_pollfree include/linux/wait.h:270 [inline]
+ signalfd_cleanup+0x40/0x60 fs/signalfd.c:38
+ __cleanup_sighand kernel/fork.c:1827 [inline]
+ __cleanup_sighand+0x76/0xb0 kernel/fork.c:1824
+ __exit_signal kernel/exit.c:213 [inline]
+ release_task+0x9db/0x10f0 kernel/exit.c:259
+ wait_task_zombie kernel/exit.c:1182 [inline]
+ wait_consider_task+0x1548/0x35f0 kernel/exit.c:1409
+ do_wait_pid kernel/exit.c:1548 [inline]
+ __do_wait+0x732/0x870 kernel/exit.c:1583
+ do_wait+0x145/0x3e0 kernel/exit.c:1624
+ kernel_wait+0xa0/0x160 kernel/exit.c:1800
+ call_usermodehelper_exec_sync kernel/umh.c:137 [inline]
+ call_usermodehelper_exec_work+0xf9/0x180 kernel/umh.c:164
+ process_one_work+0x5d6/0xe80 kernel/workqueue.c:2633
+ process_scheduled_works kernel/workqueue.c:2706 [inline]
+ worker_thread+0xa04/0x12d0 kernel/workqueue.c:2787
+ kthread+0x284/0x350 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:243
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__wake_up_common+0x6f/0x1d0 kernel/sched/wait.c:85
+Code: 00 00 48 8b 5b 08 4c 8d 6b e8 48 3b 1c 24 0f 84 07 01 00 00 e8 f2 ba 1d 00 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 <80> 3c 02 00 0f 85 2d 01 00 00 48 bd 00 00 00 00 00 fc ff df 48 8b
+RSP: 0018:ffff88810605f9d0 EFLAGS: 00010056
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: ffffffff9228aa3e
+RDX: 0000000000000000 RSI: 0000000000000003 RDI: ffff888104b188c8
+RBP: 0000000000000093 R08: 0000000000004010 R09: ffffed1020c0bf35
+R10: 0000000000000001 R11: ffff88811ae38a20 R12: ffff888104b188c4
+R13: ffffffffffffffe8 R14: 0000000000000000 R15: 0000000000004010
+FS:  0000000000000000(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fd3e3fda6f4 CR3: 00000000a98aa004 CR4: 0000000000770ef0
+DR0: 0000000020000000 DR1: 0000000020000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+note: kworker/u10:0[67702] exited with irqs disabled
+note: kworker/u10:0[67702] exited with preempt_count 2
+----------------
+Code disassembly (best guess):
+   0:	00 00                	add    %al,(%rax)
+   2:	48 8b 5b 08          	mov    0x8(%rbx),%rbx
+   6:	4c 8d 6b e8          	lea    -0x18(%rbx),%r13
+   a:	48 3b 1c 24          	cmp    (%rsp),%rbx
+   e:	0f 84 07 01 00 00    	je     0x11b
+  14:	e8 f2 ba 1d 00       	call   0x1dbb0b
+  19:	48 89 da             	mov    %rbx,%rdx
+  1c:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  23:	fc ff df
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	0f 85 2d 01 00 00    	jne    0x161
+  34:	48 bd 00 00 00 00 00 	movabs $0xdffffc0000000000,%rbp
+  3b:	fc ff df
+  3e:	48                   	rex.W
+  3f:	8b                   	.byte 0x8b

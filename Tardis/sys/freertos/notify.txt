@@ -1,0 +1,39 @@
+type uint32_t int32
+type ptr_u32 ptr[in, uint32_t]
+type eNotifyAction int32
+
+xTaskNotifyGive(xTaskToNotify TaskHandle_t)
+
+xTaskNotifyGiveIndexed(xTaskToNotify TaskHandle_t, uxIndexToNotify UBaseType_t)
+
+vTaskNotifyGiveFromISR(xTaskToNotify TaskHandle_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+vTaskNotifyGiveIndexedFromISR(xTaskHandle TaskHandle_t, uxIndexToNotify UBaseType_t, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+ulTaskNotifyTake(xClearCountOnExit BaseType_t, xTicksToWait TickType_t)
+
+ulTaskNotifyTakeIndexed(uxIndexToWaitOn UBaseType_t, xClearCountOnExit BaseType_t, xTicksToWait TickType_t)
+
+xTaskNotify(xTaskToNotify TaskHandle_t, ulValue uint32_t, eAction eNotifyAction)
+
+xTaskNotifyIndexed(xTaskToNotify TaskHandle_t, uxIndexToNotify UBaseType_t, ulValue uint32_t, eAction eNotifyAction)
+
+xTaskNotifyAndQuery(xTaskToNotify TaskHandle_t, ulValue uint32_t, eAction eNotifyAction, pulPreviousNotifyValue ptr[in, uint32_t])
+
+xTaskNotifyAndQueryIndexed(xTaskToNotify TaskHandle_t, uxIndexToNotify UBaseType_t, ulValue uint32_t, eAction eNotifyAction, pulPreviousNotifyValue ptr[in, uint32_t])
+
+xTaskNotifyAndQueryFromISR(xTaskToNotify TaskHandle_t, ulValue uint32_t, eAction eNotifyAction, pulPreviousNotifyValue ptr_u32, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTaskNotifyAndQueryIndexedFromISR(xTaskToNotify TaskHandle_t, uxIndexToNotify UBaseType_t, ulValue uint32_t, eAction eNotifyAction, pulPreviousNotifyValue ptr_u32, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTaskNotifyFromISR(xTaskToNotify TaskHandle_t, ulValue uint32_t, eAction eNotifyAction, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTaskNotifyIndexedFromISR(xTaskToNotify TaskHandle_t, uxIndexToNotify UBaseType_t, ulValue uint32_t, eAction eNotifyAction, pxHigherPriorityTaskWoken ptr[in, BaseType_t])
+
+xTaskNotifyWait(ulBitsToClearOnEntry uint32_t, ulBitsToClearOnExit uint32_t, pulNotificationValue ptr_u32, xTicksToWait TickType_t)
+
+xTaskNotifyWaitIndexed(uxIndexToWaitOn UBaseType_t, ulBitsToClearOnEntry uint32_t, ulBitsToClearOnExit uint32_t, pulNotificationValue ptr_u32, xTicksToWait TickType_t)
+
+xTaskNotifyStateClear(xTask TaskHandle_t)
+
+xTaskNotifyStateClearIndexed(xTask TaskHandle_t, uxIndexToClear UBaseType_t)

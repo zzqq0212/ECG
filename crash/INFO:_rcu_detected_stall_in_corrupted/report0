@@ -1,0 +1,41 @@
+rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+rcu: 	1-...0: (0 ticks this GP) idle=84e4/1/0x4000000000000000 softirq=698253/698254 fqs=4779
+rcu: 	(detected by 3, t=21002 jiffies, g=1119041, q=13818 ncpus=8)
+Sending NMI from CPU 3 to CPUs 1:
+NMI backtrace for cpu 1
+CPU: 1 PID: 510326 Comm: syz-executor.1 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:vga_put+0x42/0x100 drivers/pci/vgaarb.c:547
+Code: 85 e4 0f 84 aa 00 00 00 e8 8b 59 38 ff 48 c7 c7 00 31 71 b9 48 bb 00 00 00 00 00 fc ff df e8 75 c0 d0 01 48 8b 2d fe a1 f9 02 <49> 89 c6 48 81 fd 00 ba 1f b8 75 25 eb 59 e8 5b 59 38 ff 48 89 e8
+RSP: 0018:ffff888117917e28 EFLAGS: 00000082
+RAX: 0000000000000093 RBX: dffffc0000000000 RCX: ffffffffb6f6d916
+RDX: ffff8881138ea200 RSI: 0000000000000004 RDI: ffff888117917dc8
+RBP: ffff888100fd5000 R08: 0000000000000001 R09: ffffed1022f22fb9
+R10: 0000000000000003 R11: 0000000000000000 R12: ffff888100ee8000
+R13: 0000000000000001 R14: ffff888116747818 R15: dffffc0000000000
+FS:  0000555556ccd480(0000) GS:ffff8881f7080000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f7b9128aa4f CR3: 0000000114c00003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <TASK>
+ vga_arb_release+0x19a/0x2e0 drivers/pci/vgaarb.c:1455
+ __fput+0x235/0xb20 fs/file_table.c:394
+ __fput_sync+0x35/0x40 fs/file_table.c:475
+ __do_sys_close fs/open.c:1587 [inline]
+ __se_sys_close fs/open.c:1572 [inline]
+ __x64_sys_close+0x87/0xf0 fs/open.c:1572
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x46/0xf0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f7b91217f0b
+Code: 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 41 c3 48 83 ec 18 89 7c 24 0c e8 f3 fb 02 00 8b 7c 24 0c 41 89 c0 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 35 44 89 c7 89 44 24 0c e8 41 fc 02 00 8b 44
+RSP: 002b:00007fffbef11d10 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: ffffffffffffffda RBX: 0000000000000004 RCX: 00007f7b91217f0b
+RDX: 0000000000000000 RSI: ffffffffffffffff RDI: 0000000000000003
+RBP: 0000000000000000 R08: 0000000000000000 R09: 00007f7b90d89bd8
+R10: 00007fffbef11e10 R11: 0000000000000293 R12: 00007f7b90d89000
+R13: 00007fffbef11e10 R14: 00007f7b90d89c80 R15: 00007f7b90d89c78
+ </TASK>

@@ -1,6 +1,0 @@
-TITLE: go runtime error
-
-fatal error: runtimer: bad p
-
-runtime stack:
-fatal: bad g in signal handler

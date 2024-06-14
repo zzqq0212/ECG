@@ -1,0 +1,145 @@
+BUG: unable to handle page fault for address: ffff88810caef000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0003) - permissions violation
+PGD 12f201067 P4D 12f201067 PUD 100181063 PMD 10caf2063 PTE 800000010caef121
+Oops: 0003 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 1 PID: 277729 Comm: syz-executor.0 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+RSP: 0018:ffff888102b8f828 EFLAGS: 00010216
+RAX: ffff88810c8cf03c RBX: ffff88810c8cf000 RCX: ffffffffffde0000
+RDX: ffffffffffffffc4 RSI: ffff88810caef00c RDI: ffff88810caef000
+RBP: ffff88810c8cf002 R08: 0000000000000000 R09: fffff94000806f9e
+R10: 000000001ff7fdfc R11: ffff888100466aa0 R12: ffff88807798e000
+R13: 0000000000000004 R14: ffff88810c8cf040 R15: dffffc0000000000
+FS:  00007fd262dd3640(0000) GS:ffff888115100000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff88810caef000 CR3: 000000010361c003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_ext_rm_leaf fs/ext4/extents.c:2712 [inline]
+ ext4_ext_remove_space+0x1e62/0x3ba0 fs/ext4/extents.c:2934
+ ext4_punch_hole+0xce0/0xfa0 fs/ext4/inode.c:3994
+ ext4_fallocate+0xd02/0x3760 fs/ext4/extents.c:4741
+ vfs_fallocate+0x4a1/0xd00 fs/open.c:328
+ ioctl_preallocate+0x192/0x210 fs/ioctl.c:291
+ file_ioctl fs/ioctl.c:334 [inline]
+ do_vfs_ioctl+0x1262/0x15b0 fs/ioctl.c:850
+ __do_sys_ioctl fs/ioctl.c:869 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0x110/0x210 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fd263a8502d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fd262dd3028 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007fd263bc1050 RCX: 00007fd263a8502d
+RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+RBP: 00007fd263ae64a6 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007fd263bc1050 R15: 00007fd262db3000
+ </TASK>
+Modules linked in:
+CR2: ffff88810caef000
+---[ end trace 0000000000000000 ]---
+BUG: unable to handle page fault for address: 00000001ffff8881
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+#PF: supervisor instruction fetch in kernel mode
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+#PF: error_code(0x0010) - not-present page
+RSP: 0018:ffff888102b8f828 EFLAGS: 00010216
+RAX: ffff88810c8cf03c RBX: ffff88810c8cf000 RCX: ffffffffffde0000
+RDX: ffffffffffffffc4 RSI: ffff88810caef00c RDI: ffff88810caef000
+RBP: ffff88810c8cf002 R08: 0000000000000000 R09: fffff94000806f9e
+R10: 000000001ff7fdfc R11: ffff888100466aa0 R12: ffff88807798e000
+R13: 0000000000000004 R14: ffff88810c8cf040 R15: dffffc0000000000
+FS:  00007fd262dd3640(0000) GS:ffff888115100000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff88810caef000 CR3: 000000010361c003 CR4: 0000000000770ef0
+PKRU: 55555554
+note: syz-executor.0[277729] exited with irqs disabled
+PGD 2a5d2067 P4D 2a5d2067 PUD 0 
+Oops: 0010 [#2] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 118008 Comm: syz-executor.0 Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:0x1ffff8881
+Code: Unable to access opcode bytes at 0x1ffff8857.
+RSP: 0018:ffff888115409e58 EFLAGS: 00010046
+RAX: 0000000000010000 RBX: 00000001ffff8881 RCX: ffffffff9617e11b
+RDX: ffff8881082a0000 RSI: 0000000000000000 RDI: ffff88810ca7e400
+RBP: ffff88811542b5d0 R08: 0000000000000001 R09: ffffed1022a813bf
+R10: 0000000000000000 R11: ffff888115409ff8 R12: ffff88810ca7e400
+R13: ffff88811542b540 R14: ffff88811542b5c0 R15: dffffc0000000000
+FS:  00007fe1ca210640(0000) GS:ffff888115400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000001ffff8881 CR3: 000000010d0e0005 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ </IRQ>
+ <TASK>
+ </TASK>
+Modules linked in:
+CR2: 00000001ffff8881
+---[ end trace 0000000000000000 ]---
+general protection fault, maybe for address 0xffff88810d02c400: 0000 [#3] PREEMPT SMP KASAN NOPTI
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+CPU: 1 PID: 103867 Comm: syz-executor.2 Tainted: G      D            6.8.0 #1
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RSP: 0018:ffff888102b8f828 EFLAGS: 00010216
+RIP: 0010:srso_alias_safe_ret+0x5/0x7 arch/x86/lib/retpoline.S:173
+
+RAX: ffff88810c8cf03c RBX: ffff88810c8cf000 RCX: ffffffffffde0000
+Code: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 48 8d 64 24 08 <c3> cc e8 f4 ff ff ff 0f 0b cc cc cc cc cc cc cc cc cc cc cc cc cc
+RDX: ffffffffffffffc4 RSI: ffff88810caef00c RDI: ffff88810caef000
+RSP: 0018:ffff88810ca874c8 EFLAGS: 00010082
+RBP: ffff88810c8cf002 R08: 0000000000000000 R09: fffff94000806f9e
+
+RAX: ffff88810d02c400 RBX: 98f64444ffff8881 RCX: ffffffff95e70a3b
+R10: 000000001ff7fdfc R11: ffff888100466aa0 R12: ffff88807798e000
+RDX: ffff88804d941100 RSI: 0000000000000018 RDI: 0000000000000003
+R13: 0000000000000004 R14: ffff88810c8cf040 R15: dffffc0000000000
+RBP: 0ca87530ffffffff R08: 0000000000000001 R09: ffffed1009b28220
+FS:  00007fe1ca210640(0000) GS:ffff888115400000(0000) knlGS:0000000000000000
+R10: 0000000000000018 R11: 0000000000000000 R12: 0ca875f000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+R13: 00000000ffff8881 R14: 0d02c400ffff8881 R15: 15137d40ffff8880
+CR2: 00000001ffff8881 CR3: 000000010d0e0005 CR4: 0000000000770ef0
+FS:  00007f570ea83640(0000) GS:ffff888115100000(0000) knlGS:0000000000000000
+PKRU: 55555554
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+----------------
+Code disassembly (best guess):
+   0:	90                   	nop
+   1:	90                   	nop
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	90                   	nop
+   5:	90                   	nop
+   6:	90                   	nop
+   7:	90                   	nop
+   8:	90                   	nop
+   9:	90                   	nop
+   a:	90                   	nop
+   b:	90                   	nop
+   c:	f3 0f 1e fa          	endbr64
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	48 39 fe             	cmp    %rdi,%rsi
+  16:	7d 0f                	jge    0x27
+  18:	49 89 f0             	mov    %rsi,%r8
+  1b:	49 01 d0             	add    %rdx,%r8
+  1e:	49 39 f8             	cmp    %rdi,%r8
+  21:	0f 8f b5 00 00 00    	jg     0xdc
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 d6 84 1a 00       	jmp    0x1a8507
+  31:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00
+  3b:	48                   	rex.W
+  3c:	81                   	.byte 0x81
+  3d:	fa                   	cli
+  3e:	a8 02                	test   $0x2,%al

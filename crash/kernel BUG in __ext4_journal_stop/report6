@@ -1,0 +1,359 @@
+EXT4-fs error (device loop1): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+------------[ cut here ]------------
+kernel BUG at fs/ext4/ext4_jbd2.c:53!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 0 PID: 19460 Comm: syz-executor.1 Not tainted 6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888102e3f418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000012 RCX: ffffffff962e6c39
+RDX: ffff888117b6c400 RSI: 0000000000000329 RDI: ffffffff98b24e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10200d0b9b
+R10: ffff888100685cdb R11: ffff888128597138 R12: ffffea00051dcc40
+R13: ffffffff98b24e20 R14: 0000000000000329 R15: ffff888106cc8b68
+FS:  00007fc522c60640(0000) GS:ffff8881f7000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2207a55988 CR3: 000000010b47c002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_write_inline_data_end+0x39a/0x9d0 fs/ext4/inline.c:809
+ ext4_da_write_end+0x4b2/0xd10 fs/ext4/inode.c:3027
+ generic_perform_write+0x2f8/0x550 mm/filemap.c:3938
+ ext4_buffered_write_iter+0xfe/0x360 fs/ext4/file.c:299
+ ext4_file_write_iter+0x32f/0x1210 fs/ext4/file.c:698
+ call_write_iter include/linux/fs.h:2020 [inline]
+ do_iter_readv_writev+0x1d3/0x360 fs/read_write.c:735
+ do_iter_write+0x15e/0x710 fs/read_write.c:860
+ vfs_iter_write+0x7a/0xb0 fs/read_write.c:901
+ iter_file_splice_write+0x642/0xb50 fs/splice.c:736
+ do_splice_from fs/splice.c:933 [inline]
+ direct_splice_actor+0x119/0x180 fs/splice.c:1142
+ splice_direct_to_actor+0x2f4/0x8c0 fs/splice.c:1088
+ do_splice_direct+0x182/0x250 fs/splice.c:1194
+ do_sendfile+0x9d6/0xf50 fs/read_write.c:1254
+ __do_sys_sendfile64 fs/read_write.c:1322 [inline]
+ __se_sys_sendfile64 fs/read_write.c:1308 [inline]
+ __x64_sys_sendfile64+0x196/0x1e0 fs/read_write.c:1308
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x46/0xf0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7fc52391202d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fc522c60028 EFLAGS: 00000246 ORIG_RAX: 0000000000000028
+RAX: ffffffffffffffda RBX: 00007fc523a4e050 RCX: 00007fc52391202d
+RDX: 0000000000000000 RSI: 0000000000000005 RDI: 0000000000000004
+RBP: 00007fc5239734a6 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000080000041 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007fc523a4e050 R15: 00007fc522c40000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888102e3f418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000012 RCX: ffffffff962e6c39
+RDX: ffff888117b6c400 RSI: 0000000000000329 RDI: ffffffff98b24e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10200d0b9b
+R10: ffff888100685cdb R11: ffff888128597138 R12: ffffea00051dcc40
+R13: ffffffff98b24e20 R14: 0000000000000329 R15: ffff888106cc8b68
+FS:  00007fc522c60640(0000) GS:ffff8881f7000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2207a55988 CR3: 000000010b47c002 CR4: 0000000000770ef0
+PKRU: 55555554
+__nla_validate_parse: 69 callbacks suppressed
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 72 bytes leftover after parsing attributes in process `syz-executor.3'.
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop7): revision level too high, forcing read-only mode
+EXT4-fs (loop7): orphan cleanup on readonly fs
+EXT4-fs warning (device loop7): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): Cannot turn on quotas: error -22
+EXT4-fs error (device loop7): ext4_validate_block_bitmap:440: comm syz-executor.7: bg 0: block 40: padding at end of block bitmap is not set
+EXT4-fs error (device loop7) in ext4_mb_clear_bb:6517: Corrupt filesystem
+EXT4-fs (loop7): 1 truncate cleaned up
+EXT4-fs error (device loop7): ext4_encrypted_get_link:46: inode #16: comm syz-executor.7: bad symlink.
+EXT4-fs error (device loop7): ext4_encrypted_get_link:46: inode #16: comm syz-executor.7: bad symlink.
+loop4: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop7): revision level too high, forcing read-only mode
+EXT4-fs (loop7): orphan cleanup on readonly fs
+EXT4-fs warning (device loop7): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): Cannot turn on quotas: error -22
+EXT4-fs error (device loop7): ext4_validate_block_bitmap:440: comm syz-executor.7: bg 0: block 40: padding at end of block bitmap is not set
+EXT4-fs error (device loop7) in ext4_mb_clear_bb:6517: Corrupt filesystem
+EXT4-fs (loop7): 1 truncate cleaned up
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): orphan cleanup on readonly fs
+EXT4-fs error (device loop3): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.3: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop3): ext4_orphan_get:1397: comm syz-executor.3: couldn't read orphan inode 15 (err -117)
+loop4: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop7): revision level too high, forcing read-only mode
+EXT4-fs (loop3): orphan cleanup on readonly fs
+EXT4-fs error (device loop3): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.3: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop3): ext4_orphan_get:1397: comm syz-executor.3: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop7): orphan cleanup on readonly fs
+EXT4-fs warning (device loop7): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): Cannot turn on quotas: error -22
+EXT4-fs error (device loop7): ext4_validate_block_bitmap:440: comm syz-executor.7: bg 0: block 40: padding at end of block bitmap is not set
+EXT4-fs error (device loop7) in ext4_mb_clear_bb:6517: Corrupt filesystem
+EXT4-fs (loop7): 1 truncate cleaned up
+EXT4-fs error (device loop7): ext4_encrypted_get_link:46: inode #16: comm syz-executor.7: bad symlink.
+EXT4-fs error (device loop7): ext4_encrypted_get_link:46: inode #16: comm syz-executor.7: bad symlink.
+loop0: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): orphan cleanup on readonly fs
+loop4: detected capacity change from 0 to 2048
+EXT4-fs error (device loop3): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.3: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop3): ext4_orphan_get:1397: comm syz-executor.3: couldn't read orphan inode 15 (err -117)
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): orphan cleanup on readonly fs
+EXT4-fs error (device loop3): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.3: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop3): ext4_orphan_get:1397: comm syz-executor.3: couldn't read orphan inode 15 (err -117)
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+EXT4-fs: quotafile must be on filesystem root
+loop3: detected capacity change from 0 to 512
+EXT4-fs: quotafile must be on filesystem root
+loop3: detected capacity change from 0 to 512
+EXT4-fs: quotafile must be on filesystem root
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+EXT4-fs error (device loop0): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+EXT4-fs (loop0): Total free blocks count 0
+EXT4-fs (loop0): Free/Dirty block details
+EXT4-fs (loop0): free_blocks=2415919104
+EXT4-fs (loop0): dirty_blocks=16
+EXT4-fs (loop0): Block reservation details
+EXT4-fs (loop0): i_reserved_data_blocks=1
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 2 with error 28
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter '#'
+loop4: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter '#'
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+ext3: Unknown parameter 'M∑J!êßiÅû†ú)π:G’fuÿAcè#'
+loop3: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+ext4: Unknown parameter '#'
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+loop4: detected capacity change from 0 to 2048
+EXT4-fs (loop3): 1 orphan inode deleted
+loop3: detected capacity change from 0 to 512
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+loop4: detected capacity change from 0 to 2048
+EXT4-fs (loop3): 1 orphan inode deleted
+EXT4-fs error (device loop0): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 1 with error 28
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+EXT4-fs (loop0): Total free blocks count 0
+EXT4-fs (loop0): Free/Dirty block details
+EXT4-fs (loop0): free_blocks=2415919104
+EXT4-fs (loop0): dirty_blocks=16
+EXT4-fs (loop0): Block reservation details
+EXT4-fs (loop0): i_reserved_data_blocks=1
+EXT4-fs (loop0): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 2 with error 28
+EXT4-fs (loop0): This should not happen!! Data will be lost
+
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 2048
+EXT4-fs: Quota format mount options ignored when QUOTA feature is enabled
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop3): 1 orphan inode deleted
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): feature flags set on rev 0 fs, running e2fsck is recommended
+EXT4-fs (loop3): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop3): warning: checktime reached, running e2fsck is recommended
+EXT4-fs (loop3): 1 truncate cleaned up
+EXT4-fs error (device loop3): ext4_validate_block_bitmap:431: comm syz-executor.3: bg 0: block 46: invalid block bitmap
+tmpfs: Bad value for 'size'
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+EXT4-fs (sda): re-mounted f8d58df4-2613-4b9e-890f-9689b8d92a59 r/w. Quota mode: none.
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1293917577/syzkaller.M3ne1A/435/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1293917577/syzkaller.M3ne1A/436/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop4: detected capacity change from 0 to 2048
+loop3: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller-testdir1293917577/syzkaller.M3ne1A/437/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+validate_nla: 118 callbacks suppressed
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+loop4: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs (loop0): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop0): 1 truncate cleaned up
+loop4: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+loop0: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed i_version option
+EXT4-fs (loop0): encrypted files will use data=ordered instead of data journaling mode
+loop4: detected capacity change from 0 to 2048
+EXT4-fs (loop0): 1 truncate cleaned up
+loop4: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 2048
+------------[ cut here ]------------
+kernel BUG at fs/ext4/inode.c:2569!
+invalid opcode: 0000 [#2] PREEMPT SMP KASAN NOPTI
+CPU: 3 PID: 11 Comm: kworker/u16:0 Tainted: G      D            6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:1)
+RIP: 0010:ext4_do_writepages+0x1d04/0x2a30 fs/ext4/inode.c:2569
+Code: 00 fc ff df 48 c1 ea 03 44 89 64 24 68 80 3c 02 00 0f 84 9c f4 ff ff 4c 89 ff e8 c7 af d5 ff e9 8f f4 ff ff e8 4d ba a9 ff 90 <0f> 0b 4c 89 94 24 80 00 00 00 44 89 eb e8 3a ba a9 ff 48 8b 8c 24
+RSP: 0018:ffff888100327518 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff8881411c8000 RCX: ffffffff9634e0a3
+RDX: ffff888100303300 RSI: 0000000000000008 RDI: ffff888106cc8a40
+RBP: ffff888106cc8a40 R08: 0000000000000000 R09: ffffed1020d99148
+R10: ffff888106cc8a47 R11: 0000000000000001 R12: 0000000000000001
+R13: ffff888100327718 R14: ffff888106cc8b18 R15: ffff888100327a20
+FS:  0000000000000000(0000) GS:ffff8881f7180000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fc522c80f88 CR3: 0000000115592002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_writepages+0x280/0x570 fs/ext4/inode.c:2774
+ do_writepages+0x181/0x5d0 mm/page-writeback.c:2553
+ __writeback_single_inode+0xa9/0x8e0 fs/fs-writeback.c:1625
+ writeback_sb_inodes+0x4a9/0xc50 fs/fs-writeback.c:1916
+ __writeback_inodes_wb+0xbc/0x230 fs/fs-writeback.c:1987
+ wb_writeback+0x330/0x740 fs/fs-writeback.c:2094
+ wb_check_start_all fs/fs-writeback.c:2220 [inline]
+ wb_do_writeback fs/fs-writeback.c:2246 [inline]
+ wb_workfn+0x6fc/0xb90 fs/fs-writeback.c:2279
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:ext4_put_nojournal fs/ext4/ext4_jbd2.c:53 [inline]
+RIP: 0010:__ext4_journal_stop+0x18a/0x1c0 fs/ext4/ext4_jbd2.c:123
+Code: e8 db 2e b0 ff 48 89 ef e8 63 27 17 00 85 db 0f 44 d8 41 89 dc e9 6c ff ff ff e8 01 24 dc ff e9 cf fe ff ff e8 b7 2e b0 ff 90 <0f> 0b 4c 89 e7 e8 1c 24 dc ff e9 05 ff ff ff 48 89 ef e8 0f 24 dc
+RSP: 0018:ffff888102e3f418 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000012 RCX: ffffffff962e6c39
+RDX: ffff888117b6c400 RSI: 0000000000000329 RDI: ffffffff98b24e20
+RBP: 0000000000000000 R08: 0000000000000001 R09: ffffed10200d0b9b
+R10: ffff888100685cdb R11: ffff888128597138 R12: ffffea00051dcc40
+R13: ffffffff98b24e20 R14: 0000000000000329 R15: ffff888106cc8b68
+FS:  0000000000000000(0000) GS:ffff8881f7180000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fc522c80f88 CR3: 0000000115592002 CR4: 0000000000770ef0
+PKRU: 55555554
+------------[ cut here ]------------
+WARNING: CPU: 3 PID: 11 at kernel/exit.c:818 do_exit+0x1842/0x23d0 kernel/exit.c:818
+Modules linked in:
+CPU: 3 PID: 11 Comm: kworker/u16:0 Tainted: G      D            6.7.0-rt6 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:1)
+RIP: 0010:do_exit+0x1842/0x23d0 kernel/exit.c:818
+Code: c1 e0 2a 48 c1 ea 03 80 3c 02 00 0f 85 37 0a 00 00 48 8b bb 70 05 00 00 31 f6 e8 49 9d ff ff e9 3c f7 ff ff e8 af 96 2b 00 90 <0f> 0b 90 e9 a8 e9 ff ff e8 a1 96 2b 00 4c 89 e6 bf 05 06 00 00 e8
+RSP: 0018:ffff888100327e50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff888100303300 RCX: ffffffff95b30441
+RDX: ffff888100303300 RSI: 0000000000000004 RDI: ffff888100303b58
+RBP: ffff88810028b200 R08: 0000000000000001 R09: ffffed1020064fbf
+R10: 0000000000000003 R11: 3030303030302043 R12: 000000000000000b
+R13: ffff888100303a70 R14: ffff888100285780 R15: ffff888100303300
+FS:  0000000000000000(0000) GS:ffff8881f7180000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fc522c80f88 CR3: 0000000115592002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ make_task_dead+0x11b/0x340 kernel/exit.c:980
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1472
+RIP: 0000:0x0
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+RSP: 0000:0000000000000000 EFLAGS: 00000000 ORIG_RAX: 0000000000000000
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+ </TASK>
+---[ end trace 0000000000000000 ]---
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 truncate cleaned up
+loop5: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'dioreaˇˇˇ'
+loop5: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'dioreaˇˇˇ'
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+EXT4-fs (loop0): 1 truncate cleaned up
+loop5: detected capacity change from 0 to 2048
+ext4: Unknown parameter 'dioreaˇˇˇ'
+loop3: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): 1 truncate cleaned up
+EXT4-fs error (device loop6): ext4_mb_generate_buddy:1214: group 0, block bitmap and bg descriptor inconsistent: 25 vs 150994969 free clusters
+EXT4-fs (loop6): Delayed block allocation failed for inode 18 at logical offset 0 with max blocks 44 with error 28
+EXT4-fs (loop6): This should not happen!! Data will be lost
+
+EXT4-fs (loop6): Total free blocks count 0
+EXT4-fs (loop6): Free/Dirty block details
+EXT4-fs (loop6): free_blocks=2415919104
+EXT4-fs (loop6): dirty_blocks=48
+EXT4-fs (loop6): Block reservation details
+EXT4-fs (loop6): i_reserved_data_blocks=3
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+loop6: detected capacity change from 0 to 2048
+ext4: Unknown parameter './bus'
+loop4: detected capacity change from 0 to 2048
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+loop4: detected capacity change from 0 to 2048
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop5): 1 orphan inode deleted
+ext4 filesystem being mounted at /syzkaller-testdir1566606812/syzkaller.oW13Mz/571/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+netlink: 'syz-executor.2': attribute type 6 has an invalid length.
+loop3: detected capacity change from 0 to 512

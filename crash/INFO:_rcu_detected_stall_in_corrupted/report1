@@ -1,0 +1,65 @@
+rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+rcu: 	5-....: (15 ticks this GP) idle=ef7c/1/0x4000000000000000 softirq=338821/338821 fqs=4196
+rcu: 	(detected by 3, t=21006 jiffies, g=582613, q=57473 ncpus=8)
+Sending NMI from CPU 3 to CPUs 5:
+NMI backtrace for cpu 5
+CPU: 5 PID: 39 Comm: migration/5 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Stopper: active_load_balance_cpu_stop+0x0/0x820 kernel/sched/sched.h:1411 <- load_balance+0x1e1b/0x25b0
+RIP: 0010:native_read_msr_safe arch/x86/include/asm/msr.h:131 [inline]
+RIP: 0010:__rdmsr_safe_on_cpu+0x3d/0x140 arch/x86/lib/msr-smp.c:158
+Code: ff 48 89 da 48 b8 00 00 00 00 00 fc ff df 48 c1 ea 03 0f b6 04 02 84 c0 74 08 3c 03 0f 8e f1 00 00 00 44 8b 23 44 89 e1 0f 32 <45> 31 ed 49 89 d6 48 89 c5 0f 1f 44 00 00 e8 30 3b 40 ff 49 c1 e6
+RSP: 0018:ffff8881f7289cb0 EFLAGS: 00000046
+RAX: 0000000000000000 RBX: ffff888100e2fc00 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000046 RDI: ffff888100e2fc00
+RBP: ffff888100e2fbc0 R08: 0000000000000001 R09: ffffed103ee51360
+R10: ffff8881f7289b07 R11: 0000000000000000 R12: 0000000000000000
+R13: dffffc0000000000 R14: ffff888135377bc0 R15: ffff888100e2fbc8
+FS:  0000000000000000(0000) GS:ffff8881f7280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ff811178fc8 CR3: 00000001e76a4001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <IRQ>
+ csd_do_func kernel/smp.c:133 [inline]
+ __flush_smp_call_function_queue+0x2de/0xa00 kernel/smp.c:542
+ __sysvec_call_function_single+0x25/0x1d0 arch/x86/kernel/smp.c:267
+ sysvec_call_function_single+0x4b/0xa0 arch/x86/kernel/smp.c:262
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+RIP: 0010:__raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
+RIP: 0010:_raw_spin_unlock_irq+0x3b/0x60 kernel/locking/spinlock.c:202
+Code: 00 00 00 fc ff df 48 89 da 48 c1 ea 03 0f b6 04 02 48 89 da 83 e2 07 38 d0 7f 04 84 c0 75 23 c6 03 00 fb 65 ff 0d 2d 8f cc 49 <74> 06 5b e9 4d 91 67 fd e8 48 91 67 fd e8 63 90 09 fd 5b e9 3d 91
+RSP: 0018:ffff8881f7289e00 EFLAGS: 00000202
+RAX: 0000000000000000 RBX: ffff8881f72a9fc0 RCX: ffffffffb636dfed
+RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff8881f72a9fc0
+RBP: 0000000100160000 R08: 0000000000000001 R09: ffffed103ee513b7
+R10: 0000000000000003 R11: ffff8881f7289ff8 R12: 000000010012d803
+R13: ffffffffb37882b0 R14: ffffffffb790b918 R15: ffff8881f72a9fc0
+ __run_timers.part.0+0x32e/0x8b0 kernel/time/timer.c:2024
+ __run_timers kernel/time/timer.c:2000 [inline]
+ run_timer_softirq+0xd4/0x110 kernel/time/timer.c:2037
+ __do_softirq+0x18a/0x575 kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0x7e/0xb0 kernel/softirq.c:644
+ sysvec_call_function_single+0x91/0xa0 arch/x86/kernel/smp.c:262
+ </IRQ>
+ <TASK>
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+RIP: 0010:active_load_balance_cpu_stop+0x1a6/0x820 kernel/sched/fair.c:11518
+Code: 3c 03 0f 8e b7 05 00 00 c7 85 e0 09 00 00 00 00 00 00 48 89 ef e8 ca 30 fe ff e8 f5 ce 1f 00 fb 48 b8 00 00 00 00 00 fc ff df <48> 03 04 24 48 c7 00 00 00 00 00 48 c7 40 10 00 00 00 00 48 8b 84
+RSP: 0018:ffff888100887d00 EFLAGS: 00000293
+RAX: dffffc0000000000 RBX: ffff888100953000 RCX: ffffffffb37ea27b
+RDX: ffff88810085b300 RSI: 0000000000000008 RDI: ffff8881f73b7780
+RBP: ffff8881f72b7780 R08: 0000000000000000 R09: ffffed1020071220
+R10: ffff888100389107 R11: 0000000000000000 R12: ffff8881f73b7780
+R13: ffff888151cf2200 R14: dffffc0000000000 R15: ffff8881f72b8160
+ cpu_stopper_thread+0x1c5/0x3d0 kernel/stop_machine.c:511
+ smpboot_thread_fn+0x333/0x790 kernel/smpboot.c:164
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+pimreg (unregistering): left allmulticast mode

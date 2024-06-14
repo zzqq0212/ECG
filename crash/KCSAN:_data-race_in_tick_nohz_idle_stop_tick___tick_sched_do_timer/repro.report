@@ -1,0 +1,44 @@
+scp (330) used greatest stack depth: 11664 bytes left
+==================================================================
+BUG: KCSAN: data-race in tick_nohz_idle_stop_tick / tick_sched_do_timer
+
+write to 0xffffffffad8a1650 of 4 bytes by task 0 on cpu 0:
+ tick_nohz_stop_tick kernel/time/tick-sched.c:903 [inline]
+ tick_nohz_idle_stop_tick+0x426/0x550 kernel/time/tick-sched.c:1130
+ cpuidle_idle_call kernel/sched/idle.c:168 [inline]
+ do_idle+0x1d2/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ rest_init+0xfd/0x100 init/main.c:726
+ arch_call_rest_init+0xe/0x30 init/main.c:823
+ start_kernel+0x5f9/0x960 init/main.c:1068
+ x86_64_start_reservations+0x18/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0xc6/0xe0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x179/0x17b
+
+read to 0xffffffffad8a1650 of 4 bytes by interrupt on cpu 1:
+ tick_sched_do_timer+0x26/0x150 kernel/time/tick-sched.c:200
+ tick_sched_timer+0x3e/0xd0 kernel/time/tick-sched.c:1485
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x28b/0x530 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x1f0/0x420 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0xb3/0x210 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+ native_safe_halt arch/x86/include/asm/irqflags.h:48 [inline]
+ arch_safe_halt arch/x86/include/asm/irqflags.h:86 [inline]
+ default_idle+0xf/0x20 arch/x86/kernel/process.c:730
+ default_idle_call+0x2a/0xd0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1d7/0x220 kernel/sched/idle.c:282
+ cpu_startup_entry+0x18/0x20 kernel/sched/idle.c:379
+ start_secondary+0xf4/0x100 arch/x86/kernel/smpboot.c:326
+ secondary_startup_64_no_verify+0x179/0x17b
+
+value changed: 0x00000000 -> 0xffffffff
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 0 Comm: swapper/1 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+audit: type=1400 audit(1698662630.139:8): avc:  denied  { execmem } for  pid=354 comm="syz-executor363" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1

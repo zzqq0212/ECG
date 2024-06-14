@@ -1,0 +1,11 @@
+k_pipe_init(pipee ptr[out, pipe], buffer ptr[inout, void], size size_t) pipe
+k_pipe_cleanup(pieee ptr[in, pipe])
+k_pipe_alloc_init(pieee ptr[in, pipe], size size_t)
+k_pipe_put(pieee ptr[in, pipe], data ptr[inout, void], bytes_to_write size_t, bytes_written ptr[inout, size_t], min_xfer size_t, timeout k_timeout_t)
+k_pipe_get(pieee ptr[in, pipe], data ptr[inout, void], bytes_to_write size_t, bytes_written ptr[inout, size_t], min_xfer size_t, timeout k_timeout_t)
+k_pipe_read_avail(pieee ptr[in, pipe])
+k_pipe_write_avail(pieee ptr[in, pipe])
+k_pipe_flush(pieee ptr[in, pipe])
+k_pipe_buffer_flush(pieee ptr[in, pipe])
+resource k_pipe[intptr]
+resource pipe[k_pipe]

@@ -1,0 +1,433 @@
+syzkaller login: [   17.734285] ==================================================================
+[   17.734883] BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+[   17.735367] 
+[   17.735492] write to 0xffff9ea3839f20f8 of 8 bytes by task 336 on cpu 0:
+[   17.736053]  generic_write_end+0x9d/0x200
+[   17.736357]  ext4_da_write_end+0xfb/0x600
+[   17.736748]  generic_perform_write+0x205/0x360
+[   17.737174]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.737750]  ext4_file_write_iter+0xcd/0xdd0
+[   17.738071]  vfs_write+0x5d0/0x700
+[   17.738331]  ksys_write+0x9e/0x160
+[   17.738618]  __x64_sys_write+0x41/0x50
+[   17.739003]  do_syscall_64+0x3e/0x90
+[   17.739289]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.739673] 
+[   17.739800] read to 0xffff9ea3839f20f8 of 8 bytes by task 31 on cpu 1:
+[   17.740246]  mpage_submit_folio+0x58/0x130
+[   17.740543]  mpage_map_and_submit_buffers+0x31c/0x5a0
+[   17.741150]  ext4_do_writepages+0xcd5/0x1830
+[   17.741502]  ext4_writepages+0x19c/0x320
+[   17.741832]  do_writepages+0xb5/0x2e0
+[   17.742270]  __writeback_single_inode+0x72/0x650
+[   17.742889]  writeback_sb_inodes+0x463/0x930
+[   17.743246]  __writeback_inodes_wb+0x72/0x160
+[   17.743680]  wb_writeback+0x211/0x4e0
+[   17.744197]  wb_workfn+0x5df/0x8e0
+[   17.744486]  process_one_work+0x545/0x9c0
+[   17.745054]  worker_thread+0x33d/0x8d0
+[   17.745352]  kthread+0x1b1/0x200
+[   17.745635]  ret_from_fork+0x2f/0x50
+[   17.746009]  ret_from_fork_asm+0x1b/0x30
+[   17.746342] 
+[   17.746483] value changed: 0x0000000001649000 -> 0x000000000164a000
+[   17.747527] 
+[   17.747699] Reported by Kernel Concurrency Sanitizer on:
+[   17.748127] CPU: 1 PID: 31 Comm: kworker/u4:2 Not tainted 6.5.0 #8
+[   17.748635] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.749532] Workqueue: writeback wb_workfn (flush-8:0)
+[   17.749970] ==================================================================
+[   17.854483] scp (336) used greatest stack depth: 11664 bytes left
+Warning: Permanently added '[localhost]:11425' (ED25519) to the list of known hosts.
+2023/10/30 07:50:34 fuzzer started
+2023/10/30 07:50:34 dialing manager at localhost:37497
+[   19.207422] cgroup: Unknown subsys name 'net'
+[   19.212121] cgroup: Unknown subsys name 'rlimit'
+[   19.212570] cgroup: Unknown subsys name 'memory'
+[   19.245995] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 07:50:34 syscalls: 2193
+2023/10/30 07:50:34 code coverage: enabled
+2023/10/30 07:50:34 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 07:50:34 extra coverage: enabled
+2023/10/30 07:50:34 delay kcov mmap: enabled
+2023/10/30 07:50:34 setuid sandbox: enabled
+2023/10/30 07:50:34 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 07:50:34 Android sandbox: enabled
+2023/10/30 07:50:34 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 07:50:34 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 07:50:34 net packet injection: /dev/net/tun does not exist
+2023/10/30 07:50:34 net device setup: enabled
+2023/10/30 07:50:34 concurrency sanitizer: enabled
+2023/10/30 07:50:34 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 07:50:34 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 07:50:34 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 07:50:34 hci packet injection: /dev/vhci does not exist
+2023/10/30 07:50:34 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 07:50:34 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 07:50:34 swap file: enabled
+[   19.255346] kcsan: could not find function: 'should_defer_flush'
+[   19.258889] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 07:50:34 suppressing KCSAN reports in functions: '_find_first_bit' 'audit_log_start' 'should_defer_flush' 'mas_wr_node_store' 'n_tty_lookahead_flow_ctrl' 'kernfs_refresh_inode' 'xas_clear_mark' 'ext4_fill_raw_inode' 'tick_sched_do_timer' 'folio_mark_accessed' 'e1000_clean_rx_irq' 'poll_schedule_timeout' 'jbd2_journal_commit_transaction' 'do_readlinkat' 'lookup_fast' 'filemap_fault' 'tick_nohz_next_event' 'dput' 'process_one_work' 'generic_write_end' 'folio_clear_dirty_for_io' 'kauditd_thread' 'generic_fillattr' 'wq_worker_running' 'ktime_get_mono_fast_ns' '__folio_start_writeback' 'blk_mq_sched_dispatch_requests' 'atime_needs_update' 'e1000_clean' 'wq_worker_tick' 'ext4_free_inodes_count' 'd_splice_alias' 'tick_nohz_idle_stop_tick' 'xas_find_marked' '_find_next_zero_bit' 'delayacct_add_tsk' 'step_into' 
+2023/10/30 07:50:34 fetching corpus: 0, signal 0/2000 (executing program)
+2023/10/30 07:50:34 fetching corpus: 50, signal 21319/24711 (executing program)
+2023/10/30 07:50:34 fetching corpus: 100, signal 28793/33562 (executing program)
+2023/10/30 07:50:34 fetching corpus: 150, signal 35472/41474 (executing program)
+2023/10/30 07:50:34 fetching corpus: 200, signal 38301/45625 (executing program)
+2023/10/30 07:50:34 fetching corpus: 250, signal 42324/50789 (executing program)
+2023/10/30 07:50:34 fetching corpus: 300, signal 45928/55476 (executing program)
+2023/10/30 07:50:34 fetching corpus: 350, signal 49944/60344 (executing program)
+2023/10/30 07:50:34 fetching corpus: 400, signal 54077/65294 (executing program)
+2023/10/30 07:50:34 fetching corpus: 450, signal 56015/68147 (executing program)
+2023/10/30 07:50:34 fetching corpus: 500, signal 59009/71867 (executing program)
+2023/10/30 07:50:34 fetching corpus: 550, signal 61293/74918 (executing program)
+2023/10/30 07:50:34 fetching corpus: 600, signal 64279/78472 (executing program)
+2023/10/30 07:50:34 fetching corpus: 650, signal 66362/81241 (executing program)
+2023/10/30 07:50:34 fetching corpus: 700, signal 68577/83962 (executing program)
+2023/10/30 07:50:34 fetching corpus: 750, signal 70582/86508 (executing program)
+2023/10/30 07:50:34 fetching corpus: 800, signal 71782/88397 (executing program)
+2023/10/30 07:50:34 fetching corpus: 850, signal 73217/90392 (executing program)
+2023/10/30 07:50:35 fetching corpus: 900, signal 74341/92189 (executing program)
+2023/10/30 07:50:35 fetching corpus: 950, signal 76122/94405 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1000, signal 77533/96309 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1050, signal 78714/97991 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1100, signal 80615/100128 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1150, signal 81646/101655 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1200, signal 82682/103163 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1250, signal 83621/104578 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1300, signal 85107/106361 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1350, signal 85943/107692 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1400, signal 87019/109092 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1450, signal 88010/110426 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1500, signal 88941/111667 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1550, signal 89850/112909 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1600, signal 90728/114107 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1650, signal 91826/115334 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1700, signal 92541/116416 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1750, signal 93314/117500 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1800, signal 93868/118438 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1850, signal 94899/119624 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1900, signal 95730/120614 (executing program)
+2023/10/30 07:50:35 fetching corpus: 1950, signal 96533/121625 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2000, signal 97171/122507 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2050, signal 98229/123548 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2100, signal 98718/124315 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2150, signal 99381/125168 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2200, signal 100323/126106 (executing program)
+2023/10/30 07:50:35 fetching corpus: 2250, signal 101183/126969 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2300, signal 102087/127849 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2350, signal 102748/128634 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2399, signal 103255/129327 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2449, signal 104139/130163 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2498, signal 104680/130813 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2547, signal 105481/131479 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2597, signal 106154/132120 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2647, signal 106800/132773 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2697, signal 107293/133379 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2747, signal 107761/133942 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2797, signal 108279/134574 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2847, signal 108734/135155 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2897, signal 109062/135636 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2947, signal 109551/136159 (executing program)
+2023/10/30 07:50:36 fetching corpus: 2997, signal 110113/136714 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3047, signal 110496/137181 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3097, signal 111134/137653 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3147, signal 111688/138130 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3197, signal 112311/138581 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3247, signal 112655/139006 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3297, signal 113091/139457 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3347, signal 113614/139852 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3397, signal 114078/140213 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3447, signal 114614/140596 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3497, signal 115005/140648 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3547, signal 115434/140650 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3597, signal 115954/140650 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3647, signal 116351/140650 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3697, signal 116713/140650 (executing program)
+2023/10/30 07:50:36 fetching corpus: 3747, signal 117038/140650 (executing program)
+2023/10/30 07:50:37 fetching corpus: 3797, signal 117440/140652 (executing program)
+2023/10/30 07:50:37 fetching corpus: 3847, signal 118074/140652 (executing program)
+2023/10/30 07:50:37 fetching corpus: 3897, signal 118754/140655 (executing program)
+2023/10/30 07:50:37 fetching corpus: 3947, signal 118980/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 3997, signal 119425/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4047, signal 119731/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4097, signal 120124/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4147, signal 120429/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4197, signal 120774/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4247, signal 121049/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4297, signal 121354/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4347, signal 121680/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4397, signal 122021/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4447, signal 122272/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4497, signal 122537/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4547, signal 122905/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4597, signal 123176/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4647, signal 123487/140658 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4697, signal 123799/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4747, signal 124340/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4797, signal 124738/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4847, signal 124975/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4897, signal 125271/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4947, signal 125756/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 4997, signal 126182/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 5047, signal 126518/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 5097, signal 126756/140659 (executing program)
+2023/10/30 07:50:37 fetching corpus: 5147, signal 127028/140668 (executing program)
+2023/10/30 07:50:37 fetching corpus: 5196, signal 127347/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5246, signal 128157/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5296, signal 128401/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5346, signal 128621/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5396, signal 128968/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5446, signal 129356/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5496, signal 129663/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5546, signal 129865/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5596, signal 130137/140668 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5646, signal 130434/140671 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5696, signal 130643/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5746, signal 130944/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5796, signal 131191/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5846, signal 131357/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5896, signal 131597/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5946, signal 131836/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 5996, signal 132072/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6046, signal 132355/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6096, signal 132665/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6146, signal 132868/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6196, signal 133192/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6246, signal 133407/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6296, signal 133666/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6346, signal 133945/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6396, signal 134127/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6446, signal 134263/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6496, signal 134560/140673 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6545, signal 134729/140674 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6595, signal 134871/140674 (executing program)
+2023/10/30 07:50:38 fetching corpus: 6645, signal 135046/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6695, signal 135219/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6745, signal 135401/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6795, signal 135620/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6845, signal 135781/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6895, signal 136106/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6945, signal 136707/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 6995, signal 136889/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7045, signal 137053/140674 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7095, signal 137252/140675 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7145, signal 137454/140675 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7195, signal 137618/140675 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7245, signal 137846/140677 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7295, signal 138063/140677 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7340, signal 138185/140677 (executing program)
+2023/10/30 07:50:39 fetching corpus: 7340, signal 138185/140677 (executing program)
+2023/10/30 07:50:40 starting 2 fuzzer processes
+[   25.642764] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=353 'syz-fuzzer'
+07:50:40 executing program 0:
+r0 = socket(0x10, 0x3, 0x0)
+setsockopt$netlink_NETLINK_TX_RING(r0, 0x10e, 0xc, &(0x7f0000000500)={0x64ad}, 0xb)
+write(r0, &(0x7f0000000080)="240000001a005f0014f9f407000904000200200000030000000000000800050000000000", 0x24)
+
+07:50:40 executing program 1:
+r0 = socket$inet6_udplite(0xa, 0x2, 0x88)
+getsockopt$IP6T_SO_GET_REVISION_MATCH(r0, 0x29, 0x44, &(0x7f0000000400)={'icmp6\x00'}, &(0x7f0000000440)=0x1e)
+
+[   25.665248] audit: type=1400 audit(1698652240.725:8): avc:  denied  { execmem } for  pid=382 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+[   27.943387] UDPLite6: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+07:50:43 executing program 1:
+perf_event_open(&(0x7f0000000180)={0x2, 0x70, 0xfffffffffffffffd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$inet_udplite(0x2, 0x2, 0x88)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, &(0x7f0000000140)={0x84, @rand_addr, 0x0, 0x0, 'none\x00'}, 0x2c)
+r1 = socket$inet_udp(0x2, 0x2, 0x0)
+setsockopt$IP_VS_SO_SET_FLUSH(r1, 0x0, 0x485, 0x0, 0x0)
+
+07:50:43 executing program 0:
+r0 = socket$inet_icmp_raw(0x2, 0x3, 0x1)
+setsockopt$EBT_SO_SET_ENTRIES(r0, 0x0, 0x80, &(0x7f0000000280)=@filter={'filter\x00', 0x44, 0x0, 0x90, [0x0, 0x0, 0x20000080], 0x0, 0x0, &(0x7f0000000080)=[{0x0, '\x00', 0x0, 0xffffffffffffffff}, {0x0, '\x00', 0x0, 0xfffffffffffffffe}, {0x0, '\x00', 0x0, 0xfffffffffffffffc}]}, 0x108)
+
+[   27.968035] UDPLite: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+07:50:43 executing program 0:
+openat$procfs(0xffffffffffffff9c, &(0x7f00000001c0)='/proc/stat\x00', 0x0, 0x0)
+preadv(0xffffffffffffffff, &(0x7f0000002500)=[{&(0x7f0000000200)=""/242, 0xf2}], 0x1, 0x0, 0x0)
+pipe(0x0)
+r0 = socket$inet_udp(0x2, 0x2, 0x0)
+bind$inet(r0, &(0x7f0000000240)={0x2, 0x0, @local}, 0x10)
+connect$inet(r0, 0x0, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = syz_open_procfs(0x0, &(0x7f00000000c0)='fd/3\x00')
+preadv(r1, &(0x7f00000017c0), 0x1a1, 0x0, 0x0)
+
+07:50:43 executing program 1:
+process_vm_writev(0x0, &(0x7f0000000000), 0x0, &(0x7f0000121000), 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, 0xffffffffffffffff, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000240)='clear_refs\x00')
+writev(r0, &(0x7f0000000140)=[{&(0x7f0000000080)='4', 0x1}], 0x1)
+
+07:50:43 executing program 0:
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = creat(&(0x7f0000000100)='./bus\x00', 0x0)
+r1 = creat(&(0x7f00000001c0)='./bus\x00', 0x0)
+r2 = creat(&(0x7f0000000000)='./bus\x00', 0x0)
+socket$inet6_udplite(0xa, 0x2, 0x88)
+sendmsg$inet(0xffffffffffffffff, 0x0, 0x0)
+r3 = socket$inet_udplite(0x2, 0x2, 0x88)
+getsockopt$sock_cred(r3, 0x1, 0x11, &(0x7f0000caaffb)={0x0, <r4=>0x0}, 0x0)
+setuid(r4)
+mount$9p_fd(0x0, &(0x7f0000000080)='./bus\x00', &(0x7f00000000c0), 0x910a1, 0x0)
+ioctl$FS_IOC_SETFLAGS(r2, 0x40086602, &(0x7f0000000040))
+write$binfmt_elf64(r1, &(0x7f00000002c0)=ANY=[], 0x1a0)
+lseek(r0, 0x0, 0x3)
+pipe(0x0)
+
+[   28.016158] hrtimer: interrupt took 18560 ns
+07:50:43 executing program 1:
+process_vm_writev(0x0, &(0x7f0000000000), 0x0, &(0x7f0000121000), 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, 0xffffffffffffffff, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000240)='clear_refs\x00')
+writev(r0, &(0x7f0000000140)=[{&(0x7f0000000080)='4', 0x1}], 0x1)
+
+07:50:43 executing program 0:
+mknod(&(0x7f0000000040)='./file0\x00', 0x1040, 0x0)
+r0 = getpgid(0x0)
+ioctl$EVIOCGKEY(0xffffffffffffffff, 0x80404518, &(0x7f00000002c0)=""/196)
+perf_event_open(&(0x7f0000000700)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50a, 0x0, 0x0, 0x0, 0x1}, r0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+timer_create(0x0, &(0x7f0000000280)={0x0, 0x12, 0x0, @thr={0x0, 0x0}}, &(0x7f00009b1ffc))
+creat(&(0x7f0000000240)='./file0\x00', 0x0)
+acct(&(0x7f00000000c0)='./file0\x00')
+prlimit64(0x0, 0xe, 0x0, &(0x7f0000000640))
+timer_settime(0x0, 0x0, &(0x7f0000000000)={{0x0, 0x989680}, {0x0, 0x989680}}, 0x0)
+openat$vcsu(0xffffff9c, &(0x7f0000000080), 0xc0800, 0x0)
+acct(&(0x7f0000000100)='./file0\x00')
+timer_create(0x0, &(0x7f0000000000)={0x0, 0x14}, &(0x7f0000000040)=<r1=>0x0)
+timer_settime(r1, 0x0, &(0x7f0000000180)={{0x0, 0x989680}, {0x0, 0x1c9c380}}, 0x0)
+execveat(0xffffffffffffffff, &(0x7f00000001c0)='./file0\x00', &(0x7f0000000400)=[&(0x7f0000000440)='/dev/vcsu\x00'], 0x0, 0x100)
+unlink(&(0x7f0000000140)='./file0\x00')
+
+07:50:43 executing program 1:
+process_vm_writev(0x0, &(0x7f0000000000), 0x0, &(0x7f0000121000), 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, 0xffffffffffffffff, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000240)='clear_refs\x00')
+writev(r0, &(0x7f0000000140)=[{&(0x7f0000000080)='4', 0x1}], 0x1)
+
+07:50:43 executing program 1:
+process_vm_writev(0x0, &(0x7f0000000000), 0x0, &(0x7f0000121000), 0x0, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, 0xffffffffffffffff, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000240)='clear_refs\x00')
+writev(r0, &(0x7f0000000140)=[{&(0x7f0000000080)='4', 0x1}], 0x1)
+
+07:50:43 executing program 1:
+pipe(0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7f}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = socket$inet(0x2, 0x1, 0x0)
+setsockopt$inet_mreqn(r0, 0x0, 0x27, &(0x7f0000000300)={@multicast1, @local}, 0xc)
+setsockopt$inet_msfilter(r0, 0x0, 0x29, &(0x7f0000000180)={@multicast1, @local, 0x1, 0x1, [@local]}, 0x14)
+r1 = socket$inet_udp(0x2, 0x2, 0x0)
+bind$inet(r1, &(0x7f00000001c0)={0x2, 0x0, @local}, 0x16)
+connect$inet(r1, &(0x7f0000000480)={0x2, 0x0, @multicast1}, 0x10)
+sendmmsg(r1, &(0x7f0000007fc0), 0x800001d, 0x0)
+
+07:50:43 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000200), 0xffffffffffffffff)
+ioctl$sock_SIOCGIFINDEX_80211(r0, 0x8933, &(0x7f0000000700)={'wlan0\x00', <r2=>0x0})
+sendmsg$NL80211_CMD_SET_INTERFACE(r0, &(0x7f0000000340)={0x0, 0x0, &(0x7f0000000300)={&(0x7f0000000480)={0x28, r1, 0x5, 0x0, 0x0, {{}, {@val={0x8, 0x3, r2}, @void}}, [@mon_options=[@NL80211_ATTR_MNTR_FLAGS={0x4}], @NL80211_ATTR_IFTYPE={0x8, 0x5, 0x6}]}, 0x28}}, 0x0)
+
+07:50:43 executing program 0:
+sendmsg(0xffffffffffffffff, &(0x7f0000000000)={0x0, 0xf0ffff, &(0x7f0000000040)=[{&(0x7f00000001c0)="5500000018007f0505931d10a4a280930a060001fe8000081400000039000900350050001d00000019000540029b84136ef75afb83de441100ae20ca3ab8220000060cec4fab91d471cd341300000000dd941e7931", 0x55}], 0x1}, 0x0)
+socketpair$nbd(0x1, 0x1, 0x0, &(0x7f0000001300)={0xffffffffffffffff, <r0=>0xffffffffffffffff})
+getsockname(r0, &(0x7f0000000000)=@pppol2tpv3in6={0x18, 0x1, {0x0, <r1=>0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0, {0xa, 0x0, 0x0, @initdev}}}, &(0x7f0000001340)=0x80)
+r2 = epoll_create1(0x0)
+epoll_ctl$EPOLL_CTL_ADD(r2, 0x1, r1, &(0x7f00000000c0))
+
+07:50:43 executing program 0:
+openat$tcp_mem(0xffffff9c, &(0x7f0000000080)='/proc/sys/net/ipv4/tcp_wmem\x00', 0x1, 0x0)
+recvmmsg(0xffffffffffffffff, &(0x7f0000003140)=[{{&(0x7f0000001400), 0x80, 0x0}}], 0x1, 0x0, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000040)='fd/3\x00')
+preadv(r0, &(0x7f00000017c0), 0x333, 0x0, 0x0)
+
+
+VM DIAGNOSIS:
+07:50:33  Registers:
+info registers vcpu 0
+RAX=ffff9ea384297a80 RBX=ffff9ea384297a78 RCX=ffffffff90f68ef0 RDX=0000000000000004
+RSI=0000000000000008 RDI=ffff9ea384297a80 RBP=0000000000000000 RSP=ffffb4c48061be68
+R8 =ffffffff946c4390 R9 =0000000000000000 R10=0000000000000005 R11=0000000000000000
+R12=0000000000000001 R13=ffff9ea3821e8000 R14=ffff9ea384297a78 R15=0000000000000255
+RIP=ffffffff910f5081 RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0000 0000000000000000 00000000 00000000
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f0e788ba8c0 00000000 00000000
+GS =0000 ffff9ea4b7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe7cd53e8000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe7cd53e6000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f0e74094038 CR3=00000001029e8003 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM03=0000000000000000 0000000000000000 223d657865202274 6f6f72223d746363
+YMM04=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000ff00ff0000ff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000001 RBX=0000000000000001 RCX=ffffffff928515b4 RDX=0000000000000005
+RSI=ffffffff930c1c84 RDI=00000000001e3974 RBP=ffff9ea380209100 RSP=ffffb4c48008bee8
+R8 =ffffffff946c4410 R9 =0000000000000000 R10=0000000000000005 R11=0001ffffffffffff
+R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff928524bf RFL=00000202 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff9ea4b7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe1b4ef06000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe1b4ef04000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fc72bdcb010 CR3=00000001003f0004 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0a746f6f72207265 737520726f662064
+YMM01=0000000000000000 0000000000000000 335b646873732072 656c6c616b7a7973
+YMM02=0000000000000000 0000000000000000 65736f6c63206e6f 6973736573203a29
+YMM03=0000000000000000 0000000000000000 6e6f69737365733a 646873732878696e
+YMM04=0000000000000000 0000000000000000 755f6d6170203a5d 3733335b64687373
+YMM05=0000000000000000 0000000000000000 335b646873732072 656c6c616b7a7973
+YMM06=0000000000000000 0000000000000000 6620747865746e6f 6320797469727563
+YMM07=0000000000000000 0000000000000000 302b6e65706f5f70 6c69665f6f642020
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM09=0000000000000000 0000000000000000 0000ffffffffffff ffffffffffffff00
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

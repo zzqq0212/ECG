@@ -1,0 +1,847 @@
+syzkaller login: [   17.661071] sshd (321) used greatest stack depth: 11664 bytes left
+Warning: Permanently added '[localhost]:3900' (ED25519) to the list of known hosts.
+2023/10/30 07:50:00 fuzzer started
+2023/10/30 07:50:00 dialing manager at localhost:37497
+[   19.043570] cgroup: Unknown subsys name 'net'
+[   19.049989] cgroup: Unknown subsys name 'rlimit'
+[   19.050456] cgroup: Unknown subsys name 'memory'
+[   19.084361] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 07:50:00 syscalls: 2193
+2023/10/30 07:50:00 code coverage: enabled
+2023/10/30 07:50:00 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 07:50:00 extra coverage: enabled
+2023/10/30 07:50:00 delay kcov mmap: enabled
+2023/10/30 07:50:00 setuid sandbox: enabled
+2023/10/30 07:50:00 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 07:50:00 Android sandbox: enabled
+2023/10/30 07:50:00 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 07:50:00 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 07:50:00 net packet injection: /dev/net/tun does not exist
+2023/10/30 07:50:00 net device setup: enabled
+2023/10/30 07:50:00 concurrency sanitizer: enabled
+2023/10/30 07:50:00 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 07:50:00 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 07:50:00 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 07:50:00 hci packet injection: /dev/vhci does not exist
+2023/10/30 07:50:00 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 07:50:00 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 07:50:00 swap file: enabled
+[   19.099241] kcsan: could not find function: 'should_defer_flush'
+[   19.104004] kcsan: could not find function: 'poll_schedule_timeout'
+2023/10/30 07:50:00 suppressing KCSAN reports in functions: 'dput' 'process_one_work' 'filemap_fault' 'tick_nohz_next_event' 'kauditd_thread' 'generic_fillattr' 'wq_worker_running' 'generic_write_end' 'folio_clear_dirty_for_io' 'ktime_get_mono_fast_ns' '__folio_start_writeback' 'wq_worker_tick' 'ext4_free_inodes_count' 'd_splice_alias' 'atime_needs_update' 'e1000_clean' '_find_next_zero_bit' 'delayacct_add_tsk' 'step_into' 'tick_nohz_idle_stop_tick' 'xas_find_marked' 'should_defer_flush' 'mas_wr_node_store' 'n_tty_lookahead_flow_ctrl' '_find_first_bit' 'audit_log_start' 'ext4_fill_raw_inode' 'tick_sched_do_timer' 'folio_mark_accessed' 'kernfs_refresh_inode' 'xas_clear_mark' 'jbd2_journal_commit_transaction' 'do_readlinkat' 'e1000_clean_rx_irq' 'poll_schedule_timeout' 
+2023/10/30 07:50:00 fetching corpus: 0, signal 0/2000 (executing program)
+2023/10/30 07:50:00 fetching corpus: 50, signal 17355/20863 (executing program)
+2023/10/30 07:50:00 fetching corpus: 100, signal 26478/31330 (executing program)
+2023/10/30 07:50:00 fetching corpus: 150, signal 30967/37183 (executing program)
+2023/10/30 07:50:00 fetching corpus: 200, signal 38213/45465 (executing program)
+2023/10/30 07:50:00 fetching corpus: 250, signal 41173/49612 (executing program)
+2023/10/30 07:50:00 fetching corpus: 300, signal 45063/54555 (executing program)
+2023/10/30 07:50:00 fetching corpus: 350, signal 47831/58383 (executing program)
+2023/10/30 07:50:00 fetching corpus: 400, signal 51569/62991 (executing program)
+2023/10/30 07:50:00 fetching corpus: 450, signal 54862/67050 (executing program)
+2023/10/30 07:50:00 fetching corpus: 500, signal 56785/69864 (executing program)
+2023/10/30 07:50:00 fetching corpus: 550, signal 59451/73285 (executing program)
+2023/10/30 07:50:00 fetching corpus: 600, signal 61758/76302 (executing program)
+2023/10/30 07:50:00 fetching corpus: 650, signal 64777/79820 (executing program)
+2023/10/30 07:50:00 fetching corpus: 700, signal 66364/82135 (executing program)
+2023/10/30 07:50:00 fetching corpus: 750, signal 68301/84692 (executing program)
+2023/10/30 07:50:01 fetching corpus: 800, signal 70263/87238 (executing program)
+2023/10/30 07:50:01 fetching corpus: 850, signal 71788/89352 (executing program)
+2023/10/30 07:50:01 fetching corpus: 900, signal 73346/91435 (executing program)
+2023/10/30 07:50:01 fetching corpus: 950, signal 74674/93351 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1000, signal 76846/95849 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1050, signal 78532/97938 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1100, signal 79716/99594 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1150, signal 80548/100994 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1200, signal 81734/102560 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1250, signal 82850/104116 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1300, signal 83820/105524 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1350, signal 85278/107219 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1400, signal 86448/108701 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1450, signal 87430/110038 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1500, signal 88749/111516 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1550, signal 89667/112783 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1600, signal 91214/114335 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1650, signal 92129/115517 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1700, signal 93076/116682 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1750, signal 94229/117889 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1800, signal 95098/118951 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1850, signal 95712/119855 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1900, signal 96667/120924 (executing program)
+2023/10/30 07:50:01 fetching corpus: 1950, signal 97878/122067 (executing program)
+2023/10/30 07:50:01 fetching corpus: 2000, signal 98882/123123 (executing program)
+2023/10/30 07:50:01 fetching corpus: 2050, signal 100420/124299 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2100, signal 101054/125156 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2150, signal 101853/126026 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2200, signal 102588/126823 (executing program)
+[   20.762836] ==================================================================
+[   20.763471] BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+[   20.764080] 
+[   20.764200] write to 0xffffa6790062ba60 of 4 bytes by interrupt on cpu 0:
+[   20.764778]  pollwake+0xd0/0x120
+[   20.765450]  __wake_up_common+0x74/0x140
+[   20.766426]  __wake_up_common_lock+0x7e/0xd0
+[   20.767252]  sock_def_readable+0x73/0x180
+[   20.767574]  tcp_data_ready+0x80/0x1a0
+[   20.767893]  tcp_data_queue+0x129f/0x1fa0
+[   20.768235]  tcp_rcv_established+0x404/0xe90
+[   20.768602]  tcp_v4_do_rcv+0x31d/0x540
+[   20.768890]  tcp_v4_rcv+0x1c09/0x1c90
+[   20.769174]  ip_protocol_deliver_rcu+0x4c/0x5e0
+[   20.769503]  ip_local_deliver_finish+0x133/0x180
+[   20.769832]  ip_local_deliver+0xd0/0x1e0
+[   20.770122]  ip_sublist_rcv_finish+0xeb/0x100
+[   20.770438]  ip_sublist_rcv+0x269/0x390
+[   20.770743]  ip_list_rcv+0x208/0x240
+[   20.771011]  __netif_receive_skb_list_core+0x4bc/0x500
+[   20.771383]  netif_receive_skb_list_internal+0x483/0x620
+[   20.771763]  napi_gro_receive+0x44d/0x4a0
+[   20.772048]  e1000_clean_rx_irq+0x35c/0x980
+[   20.772344]  e1000_clean+0x4f3/0x12b0
+[   20.772614]  __napi_poll+0x66/0x390
+[   20.772879]  net_rx_action+0x694/0x7b0
+[   20.773161]  __do_softirq+0xea/0x2e3
+[   20.773437]  run_ksoftirqd+0x29/0x30
+[   20.773694]  smpboot_thread_fn+0x2e1/0x410
+[   20.773988]  kthread+0x1b1/0x200
+[   20.774237]  ret_from_fork+0x2f/0x50
+[   20.774496]  ret_from_fork_asm+0x1b/0x30
+[   20.774793] 
+[   20.774917] read to 0xffffa6790062ba60 of 4 bytes by task 335 on cpu 1:
+[   20.775350]  poll_schedule_timeout.constprop.0+0x44/0xb0
+[   20.775731]  do_select+0xc9d/0xe00
+[   20.775996]  core_sys_select+0x217/0x4e0
+[   20.776302]  kern_select+0xe2/0x140
+[   20.776592]  __x64_sys_select+0x65/0x80
+[   20.776878]  do_syscall_64+0x3e/0x90
+[   20.777152]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   20.777511] 
+[   20.777633] value changed: 0x00000000 -> 0x00000001
+[   20.777959] 
+[   20.778080] Reported by Kernel Concurrency Sanitizer on:
+[   20.778424] CPU: 1 PID: 335 Comm: sshd Not tainted 6.5.0 #8
+[   20.778826] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   20.779348] ==================================================================
+2023/10/30 07:50:02 fetching corpus: 2250, signal 103380/127623 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2300, signal 103897/128324 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2349, signal 104504/129041 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2399, signal 105068/129749 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2448, signal 105496/130372 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2498, signal 106211/131066 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2548, signal 106803/131713 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2598, signal 107401/132336 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2648, signal 107908/132917 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2698, signal 108408/133449 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2748, signal 109042/134047 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2798, signal 109602/134615 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2848, signal 110111/135111 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2898, signal 110575/135610 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2948, signal 111020/136122 (executing program)
+2023/10/30 07:50:02 fetching corpus: 2998, signal 111443/136574 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3048, signal 111839/137017 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3098, signal 112583/137537 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3148, signal 112935/137940 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3198, signal 113277/138358 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3248, signal 114070/138724 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3298, signal 114672/139090 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3348, signal 114942/139487 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3398, signal 115267/139877 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3447, signal 115648/140203 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3497, signal 116077/140203 (executing program)
+2023/10/30 07:50:02 fetching corpus: 3547, signal 116485/140207 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3597, signal 116853/140207 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3647, signal 117185/140207 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3697, signal 118023/140210 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3747, signal 118448/140212 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3797, signal 118803/140212 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3847, signal 119110/140212 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3897, signal 119453/140212 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3947, signal 119725/140212 (executing program)
+2023/10/30 07:50:03 fetching corpus: 3997, signal 120095/140218 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4047, signal 120437/140221 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4097, signal 120714/140221 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4147, signal 121047/140224 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4197, signal 121352/140225 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4247, signal 121669/140226 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4297, signal 121946/140226 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4347, signal 122247/140231 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4397, signal 122524/140239 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4447, signal 122904/140248 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4497, signal 123272/140248 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4547, signal 123585/140248 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4597, signal 123987/140249 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4647, signal 124259/140251 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4697, signal 124553/140251 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4747, signal 124922/140251 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4797, signal 125273/140251 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4847, signal 125615/140251 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4897, signal 125833/140252 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4947, signal 126120/140252 (executing program)
+2023/10/30 07:50:03 fetching corpus: 4997, signal 126396/140252 (executing program)
+2023/10/30 07:50:03 fetching corpus: 5047, signal 126695/140252 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5097, signal 127148/140252 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5147, signal 127452/140252 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5197, signal 127676/140252 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5247, signal 127855/140252 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5297, signal 128222/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5347, signal 128420/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5397, signal 128831/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5447, signal 129066/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5496, signal 129261/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5546, signal 129501/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5596, signal 129776/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5646, signal 130027/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5696, signal 130282/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5746, signal 130611/140253 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5795, signal 130844/140260 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5845, signal 131078/140267 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5894, signal 131323/140270 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5944, signal 131586/140270 (executing program)
+2023/10/30 07:50:04 fetching corpus: 5994, signal 131827/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6044, signal 132015/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6094, signal 132247/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6143, signal 132526/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6193, signal 132741/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6243, signal 133035/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6293, signal 133270/140294 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6342, signal 133588/140326 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6391, signal 133792/140326 (executing program)
+2023/10/30 07:50:04 fetching corpus: 6441, signal 134032/140326 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6491, signal 134200/140326 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6541, signal 134598/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6591, signal 134779/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6641, signal 135070/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6691, signal 135287/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6741, signal 135684/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6791, signal 135846/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6841, signal 136043/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6891, signal 136208/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6941, signal 136408/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 6991, signal 136575/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7041, signal 136732/140344 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7091, signal 136975/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7140, signal 137196/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7190, signal 137441/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7240, signal 137679/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7290, signal 137903/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7305, signal 137935/140350 (executing program)
+2023/10/30 07:50:05 fetching corpus: 7305, signal 137935/140350 (executing program)
+2023/10/30 07:50:06 starting 2 fuzzer processes
+[   25.470436] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=349 'syz-fuzzer'
+07:50:06 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000300), 0xffffffffffffffff)
+r2 = socket$nl_generic(0x10, 0x3, 0x10)
+ioctl$sock_SIOCGIFINDEX_80211(r2, 0x8933, &(0x7f00000005c0)={'wlan1\x00', <r3=>0x0})
+sendmsg$NL80211_CMD_REGISTER_FRAME(r0, &(0x7f00000007c0)={0x0, 0x0, &(0x7f0000000780)={&(0x7f0000000600)={0x28, r1, 0x401, 0x0, 0x0, {{}, {@val={0x8, 0x3, r3}, @void}}, [@NL80211_ATTR_FRAME_MATCH={0x4}, @NL80211_ATTR_FRAME_TYPE={0x6, 0x65, 0x6}]}, 0x28}}, 0x0)
+
+07:50:06 executing program 1:
+mknodat(0xffffffffffffff9c, &(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+utimensat(0xffffffffffffff9c, &(0x7f0000000040)='./file0\x00', &(0x7f0000000080)={{}, {0x0, 0xffffffffffffffff}}, 0x0)
+
+[   25.494724] audit: type=1400 audit(1698652206.865:8): avc:  denied  { execmem } for  pid=374 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+07:50:09 executing program 1:
+mkdir(&(0x7f0000000080)='./file0\x00', 0x0)
+mount(&(0x7f00000000c0)=ANY=[@ANYBLOB="2f2f71a8d6627895378f2f"], &(0x7f0000000040)='./file0\x00', &(0x7f0000000180)='cifs\x00', 0x0, &(0x7f00000001c0)='\x02\xf0\x97\xdd\xa4\xbf\x80\xfb,o\xdf\xdb)@\xa3\xf2\xba/\xc9\x84}\xb8vF\xd4\xd2\xbd\x00\x8e\x8d\xc8m\'\xc3\xcd\xa3k\xf8\x00c\xb9\x14%\xfdj\x91w\x93\xc2\x85\x84\xe6\x1f\x94\x05I\xb3\xee\xee\x00\x00\x00\x00\x00\x00\x00\x00\x00\xd0\xd3?\x91\xf0l\b\x0e\x81\xacT E\xd1\bd\x16\xd7\xc8r\x0e\xf0\xbf\xf0Ao2W\xc8\xea\x87aT\xcegf\xc0\xd7\xb0\x8a=o\x00?\xaa\'\xe1\'?\x1a\xcb\x91.eE\x81\x88\x95=\xd8\x81\x9d\xc9\xc2\x8dg\xaf\xa1\xce\xc7\x00\xee\xe2\x8d\xf3\x9a\x89\f\xda\xc7]u\x95\xe6\xe0\xed.\xc2{\x90@\xaeQ 2\x19\x83\xaaK\xec\\iR\x8e\xf3\xa2&P\x13\xd9p\x1c*\xcd\xd5\x8c\x8a\xac\x8b\x93\xc8On[/')
+
+07:50:09 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$ethtool(&(0x7f00000003c0), 0xffffffffffffffff)
+sendmsg$ETHTOOL_MSG_WOL_SET(r0, &(0x7f0000000480)={0x0, 0x0, &(0x7f0000000440)={&(0x7f0000000280)={0x18, r1, 0x1, 0x0, 0x0, {}, [@ETHTOOL_A_WOL_SOPASS={0x4}]}, 0x18}}, 0x0)
+
+07:50:09 executing program 0:
+r0 = socket$nl_sock_diag(0x10, 0x3, 0x4)
+sendmsg$SOCK_DESTROY(r0, &(0x7f0000001740)={0x0, 0x0, &(0x7f0000001700)={&(0x7f0000000340)={0x4c, 0x15, 0x1, 0x0, 0x0, {0x2}, [@INET_DIAG_REQ_BYTECODE={0x37, 0x1, "1d7a86ab26373af85eaa104e1d1ef41ab56f4673d50fe569b3146325db462251e5a7703fb654bd7a0d395a192ba639a21c3bd7"}]}, 0x4c}}, 0x0)
+
+07:50:09 executing program 1:
+r0 = creat(&(0x7f0000000140)='./bus\x00', 0x0)
+fcntl$setstatus(r0, 0x4, 0x46802)
+io_setup(0x1, &(0x7f0000000180)=<r1=>0x0)
+r2 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+ftruncate(r2, 0x208200)
+statx(r2, &(0x7f0000000280)='./bus\x00', 0x4000, 0x400, &(0x7f00000002c0))
+r3 = creat(&(0x7f0000000100)='./bus\x00', 0x0)
+r4 = open(&(0x7f0000000780)='./bus\x00', 0x14507e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r4, 0x0)
+fallocate(r3, 0x0, 0x0, 0x1000f4)
+ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF(0xffffffffffffffff, 0xd000943d, 0x0)
+fcntl$F_SET_RW_HINT(0xffffffffffffffff, 0x40c, &(0x7f0000000040)=0x4)
+r5 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1ff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+fsetxattr$trusted_overlay_redirect(r0, &(0x7f0000000080), &(0x7f00000001c0)='./bus/file0\x00', 0xc, 0x0)
+ioctl$BTRFS_IOC_GET_SUBVOL_INFO(0xffffffffffffffff, 0x81f8943c, 0x0)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+io_submit(r1, 0x45, &(0x7f0000000540)=[&(0x7f00000000c0)={0x0, 0x400000000000, 0x0, 0x1, 0x0, r0, &(0x7f0000000000), 0x377140be6b5ef4c7}])
+creat(&(0x7f0000000000)='./bus\x00', 0xa0)
+lseek(r3, 0x1, 0x3)
+splice(r5, &(0x7f0000000200), r3, &(0x7f0000000240)=0x8, 0x3, 0x8)
+
+07:50:09 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$ipvs(&(0x7f00000000c0), 0xffffffffffffffff)
+sendmsg$IPVS_CMD_NEW_DAEMON(r0, &(0x7f00000003c0)={0x0, 0x0, &(0x7f0000000380)={&(0x7f0000000100)={0x4c, r1, 0xa31, 0x0, 0x0, {}, [@IPVS_CMD_ATTR_DAEMON={0x38, 0x3, 0x0, 0x1, [@IPVS_DAEMON_ATTR_SYNC_ID={0x8}, @IPVS_DAEMON_ATTR_MCAST_TTL={0x5, 0x8, 0x3}, @IPVS_DAEMON_ATTR_SYNC_MAXLEN={0x6, 0x4, 0x80}, @IPVS_DAEMON_ATTR_MCAST_IFN={0x14, 0x2, 'ip6gretap0\x00'}, @IPVS_DAEMON_ATTR_STATE={0x8, 0x1, 0x2}]}]}, 0x4c}}, 0x0)
+
+[   27.851711] hrtimer: interrupt took 30770 ns
+07:50:09 executing program 0:
+mlock(&(0x7f0000ffb000/0x4000)=nil, 0x4000)
+madvise(&(0x7f0000c00000/0x400000)=nil, 0x400000, 0x0)
+
+07:50:09 executing program 0:
+mkdirat(0xffffffffffffff9c, &(0x7f0000000040)='./file0\x00', 0x0)
+mount(0x0, &(0x7f0000000000)='./file0\x00', &(0x7f0000000440)='proc\x00', 0x0, 0x0)
+syz_mount_image$tmpfs(&(0x7f0000000080), &(0x7f00000000c0)='./file0\x00', 0x0, 0x0, 0x0, 0x20000a7, &(0x7f0000000600))
+
+07:50:09 executing program 1:
+r0 = creat(&(0x7f0000000140)='./bus\x00', 0x0)
+fcntl$setstatus(r0, 0x4, 0x46802)
+io_setup(0x1, &(0x7f0000000180)=<r1=>0x0)
+r2 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+ftruncate(r2, 0x208200)
+statx(r2, &(0x7f0000000280)='./bus\x00', 0x4000, 0x400, &(0x7f00000002c0))
+r3 = creat(&(0x7f0000000100)='./bus\x00', 0x0)
+r4 = open(&(0x7f0000000780)='./bus\x00', 0x14507e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r4, 0x0)
+fallocate(r3, 0x0, 0x0, 0x1000f4)
+ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF(0xffffffffffffffff, 0xd000943d, 0x0)
+fcntl$F_SET_RW_HINT(0xffffffffffffffff, 0x40c, &(0x7f0000000040)=0x4)
+r5 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1ff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+fsetxattr$trusted_overlay_redirect(r0, &(0x7f0000000080), &(0x7f00000001c0)='./bus/file0\x00', 0xc, 0x0)
+ioctl$BTRFS_IOC_GET_SUBVOL_INFO(0xffffffffffffffff, 0x81f8943c, 0x0)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+io_submit(r1, 0x45, &(0x7f0000000540)=[&(0x7f00000000c0)={0x0, 0x400000000000, 0x0, 0x1, 0x0, r0, &(0x7f0000000000), 0x377140be6b5ef4c7}])
+creat(&(0x7f0000000000)='./bus\x00', 0xa0)
+lseek(r3, 0x1, 0x3)
+splice(r5, &(0x7f0000000200), r3, &(0x7f0000000240)=0x8, 0x3, 0x8)
+
+07:50:09 executing program 0:
+r0 = socket$nl_netfilter(0x10, 0x3, 0xc)
+mkdir(&(0x7f0000000000)='./file0\x00', 0x0)
+mount$9p_fd(0x0, 0x0, 0x0, 0x0, &(0x7f0000000940))
+sendmmsg(0xffffffffffffffff, &(0x7f0000000680)=[{{0x0, 0x0, 0x0, 0x0, &(0x7f00000006c0)=ANY=[], 0x98}}], 0x1, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = socket$nl_generic(0x10, 0x3, 0x10)
+r2 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000200), 0xffffffffffffffff)
+ioctl$sock_SIOCGIFINDEX_80211(r0, 0x8933, &(0x7f00000002c0)={'wlan0\x00', <r3=>0x0})
+sendmsg$NL80211_CMD_SET_INTERFACE(r1, &(0x7f0000000340)={0x0, 0x0, &(0x7f0000000300)={&(0x7f0000000380)={0x1c, r2, 0x5, 0x0, 0x0, {{0x8}, {@val={0x8, 0x3, r3}, @void}}}, 0x1c}}, 0x0)
+pivot_root(&(0x7f0000000340)='./file0\x00', &(0x7f0000000040)='./file0\x00')
+preadv(0xffffffffffffffff, &(0x7f0000000280), 0x1, 0x0, 0x0)
+socket$nl_generic(0x10, 0x3, 0x10)
+ioctl$sock_SIOCGIFINDEX_80211(0xffffffffffffffff, 0x8933, &(0x7f0000000000)={'wlan0\x00'})
+sendmsg$NL80211_CMD_START_AP(0xffffffffffffffff, &(0x7f0000000280)={0x0, 0x0, &(0x7f00000001c0)={&(0x7f0000000180)={0x38, 0x0, 0x400, 0x0, 0x0, {{}, {@val={0x8, 0x3, r3}, @val={0xc, 0x99, {0x7ff, 0x5a}}}}, [@NL80211_ATTR_DTIM_PERIOD={0x8}, @NL80211_ATTR_EXTERNAL_AUTH_SUPPORT={0x4}, @NL80211_ATTR_EXTERNAL_AUTH_SUPPORT={0x4}]}, 0x38}}, 0x0)
+
+07:50:09 executing program 1:
+r0 = creat(&(0x7f0000000140)='./bus\x00', 0x0)
+fcntl$setstatus(r0, 0x4, 0x46802)
+io_setup(0x1, &(0x7f0000000180)=<r1=>0x0)
+r2 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+ftruncate(r2, 0x208200)
+statx(r2, &(0x7f0000000280)='./bus\x00', 0x4000, 0x400, &(0x7f00000002c0))
+r3 = creat(&(0x7f0000000100)='./bus\x00', 0x0)
+r4 = open(&(0x7f0000000780)='./bus\x00', 0x14507e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r4, 0x0)
+fallocate(r3, 0x0, 0x0, 0x1000f4)
+ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF(0xffffffffffffffff, 0xd000943d, 0x0)
+fcntl$F_SET_RW_HINT(0xffffffffffffffff, 0x40c, &(0x7f0000000040)=0x4)
+r5 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1ff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+fsetxattr$trusted_overlay_redirect(r0, &(0x7f0000000080), &(0x7f00000001c0)='./bus/file0\x00', 0xc, 0x0)
+ioctl$BTRFS_IOC_GET_SUBVOL_INFO(0xffffffffffffffff, 0x81f8943c, 0x0)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+io_submit(r1, 0x45, &(0x7f0000000540)=[&(0x7f00000000c0)={0x0, 0x400000000000, 0x0, 0x1, 0x0, r0, &(0x7f0000000000), 0x377140be6b5ef4c7}])
+creat(&(0x7f0000000000)='./bus\x00', 0xa0)
+lseek(r3, 0x1, 0x3)
+splice(r5, &(0x7f0000000200), r3, &(0x7f0000000240)=0x8, 0x3, 0x8)
+
+07:50:09 executing program 0:
+pipe(&(0x7f0000000100)={<r0=>0xffffffffffffffff, <r1=>0xffffffffffffffff})
+r2 = syz_open_dev$sg(&(0x7f0000000040), 0x0, 0x0)
+r3 = dup(r2)
+ioctl$SG_SCSI_RESET(r3, 0x2286, 0x816d000)
+vmsplice(r1, &(0x7f00000000c0)=[{&(0x7f0000000180)="77690addcfbe1fbb66ec", 0xff3b}], 0x1, 0x1)
+close(r1)
+r4 = socket(0x10, 0x3, 0x0)
+setsockopt$netlink_NETLINK_TX_RING(r4, 0x10e, 0xc, &(0x7f0000000040)={0x7ff}, 0x17f)
+write(0xffffffffffffffff, &(0x7f0000000180)="1c0000004a005f0214f9f424000904000a", 0xfffffffffffffc70)
+splice(r0, 0x0, r1, 0x0, 0xfffd, 0x0)
+
+07:50:09 executing program 0:
+openat$procfs(0xffffffffffffff9c, &(0x7f0000000000)='/proc/meminfo\x00', 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, &(0x7f0000003140)=[{{&(0x7f0000000180), 0x80, 0x0}}], 0x1, 0x0, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000100)='fd/3\x00')
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+preadv(r0, &(0x7f00000017c0), 0x3da, 0x0, 0x0)
+
+07:50:09 executing program 1:
+r0 = creat(&(0x7f0000000140)='./bus\x00', 0x0)
+fcntl$setstatus(r0, 0x4, 0x46802)
+io_setup(0x1, &(0x7f0000000180)=<r1=>0x0)
+r2 = creat(&(0x7f0000000300)='./bus\x00', 0x0)
+ftruncate(r2, 0x208200)
+statx(r2, &(0x7f0000000280)='./bus\x00', 0x4000, 0x400, &(0x7f00000002c0))
+r3 = creat(&(0x7f0000000100)='./bus\x00', 0x0)
+r4 = open(&(0x7f0000000780)='./bus\x00', 0x14507e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r4, 0x0)
+fallocate(r3, 0x0, 0x0, 0x1000f4)
+ioctl$BTRFS_IOC_GET_SUBVOL_ROOTREF(0xffffffffffffffff, 0xd000943d, 0x0)
+fcntl$F_SET_RW_HINT(0xffffffffffffffff, 0x40c, &(0x7f0000000040)=0x4)
+r5 = perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1ff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+fsetxattr$trusted_overlay_redirect(r0, &(0x7f0000000080), &(0x7f00000001c0)='./bus/file0\x00', 0xc, 0x0)
+ioctl$BTRFS_IOC_GET_SUBVOL_INFO(0xffffffffffffffff, 0x81f8943c, 0x0)
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+io_submit(r1, 0x45, &(0x7f0000000540)=[&(0x7f00000000c0)={0x0, 0x400000000000, 0x0, 0x1, 0x0, r0, &(0x7f0000000000), 0x377140be6b5ef4c7}])
+creat(&(0x7f0000000000)='./bus\x00', 0xa0)
+lseek(r3, 0x1, 0x3)
+splice(r5, &(0x7f0000000200), r3, &(0x7f0000000240)=0x8, 0x3, 0x8)
+
+07:50:09 executing program 0:
+r0 = socket$nl_netfilter(0x10, 0x3, 0xc)
+sendmsg$IPSET_CMD_CREATE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000000)={&(0x7f0000000280)={0x5c, 0x2, 0x6, 0x5, 0x0, 0x0, {}, [@IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_FAMILY={0x5, 0x5, 0xa}, @IPSET_ATTR_PROTOCOL={0x5, 0x1, 0x6}, @IPSET_ATTR_TYPENAME={0x15, 0x3, 'hash:ip,port,net\x00'}, @IPSET_ATTR_DATA={0xc, 0x7, 0x0, 0x1, [@IPSET_ATTR_TIMEOUT={0x8, 0x11}]}, @IPSET_ATTR_REVISION={0x5}]}, 0x5c}}, 0x0)
+
+07:50:09 executing program 0:
+syz_io_uring_setup(0x6d43, &(0x7f00000019c0), &(0x7f0000ffe000), &(0x7f0000ffa000))
+syz_io_uring_setup(0x52b5, &(0x7f0000001b00), &(0x7f0000ff2000), &(0x7f0000ff2000))
+
+07:50:09 executing program 1:
+syz_mount_image$tmpfs(0x0, &(0x7f0000000080)='./file0\x00', 0x0, 0x0, 0x0, 0x0, &(0x7f0000000280)=ANY=[@ANYBLOB="6e725f696e6f6465733d1c"])
+mount(0x0, &(0x7f0000000000)='./file0\x00', &(0x7f0000000040)='hugetlbfs\x00', 0x0, &(0x7f0000000280))
+
+[   28.048272] hugetlbfs: Bad value '' for mount option 'nr_inodes'
+[   28.048272] 
+07:50:09 executing program 0:
+r0 = socket$inet6(0xa, 0x800000000000002, 0x0)
+connect$inet6(r0, &(0x7f0000000000)={0xa, 0x0, 0x0, @mcast1, 0x2}, 0x1c)
+setsockopt$sock_linger(r0, 0x1, 0x3c, &(0x7f0000000180)={0x200000000000001}, 0x8)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43, 0x300}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = socket$inet_udplite(0x2, 0x2, 0x88)
+getsockopt$sock_cred(r1, 0x1, 0x11, &(0x7f0000000240)={0x0, <r2=>0x0}, &(0x7f0000000280)=0x5)
+close(0xffffffffffffffff)
+ioctl$sock_inet_udp_SIOCINQ(0xffffffffffffffff, 0x541b, &(0x7f00000000c0))
+ioctl$sock_inet_SIOCSARP(0xffffffffffffffff, 0x8953, &(0x7f0000000000)={{0x2, 0x0, @empty}, {0x0, @multicast}, 0x28, {0x2, 0x0, @empty}})
+setuid(r2)
+sendmmsg(r0, &(0x7f0000004d80)=[{{0x0, 0x200e402, &(0x7f0000001500)=[{&(0x7f0000000040)="d3622fe131479ceef6fb607a9585dc0b411519fd3b65066522d73df58b9257b566c6fc626776defc3a2e249c9120cab00220bc31d41e44f96f67971b8ed8a3dc9eb4123a903d58da02dd1eca653150422bc91e9585fb38", 0x57}, {&(0x7f00000011c0)="7cc3be44ec866303c11f9ec49c2fe80d4ccef580f3bf717b5e129f1dc7766fdf864b7bc35924f34bb5fd1dd89172a4b0db90eea51bdfec78bb53e8d41773cba7f1305a8a40b7368445a71ef7870273f1544930baf73a8bfa6ece09d54376b821b65fdf1e0704f1f3c5a823fa67f635159af010053f5b909f8e944c43d6fb1c4fca639b470d3e6ad140d0838958ecf0fc98a780205474fdeb93a97d27b4f3314a9585129aaec893d7fe36d87fd746841ac5c60b31e1732a1a3ca0afcc4068cdde63b142700c563c1ab59dc0b7200723bf21c694583ed8fed1b2bc5c204df3812c223ce0de2f40b69e7f4e8ba1c3ebc31de2f4190e3f1ceb", 0xf7}, {&(0x7f00000012c0), 0x80fe}, {&(0x7f0000000280)="0c22fcc306e8a4d628dc3f33cd1758b784d34ef62ecd943b96c5573b05e34886b55503a08eeac42aafc204e9fec654b4b0853f4c32d8d6f8968a96b81710a9ed49ae96ea22eb07accdc99ed31fb48b921b4c9af7278829eb32247169da3593e5e73371e82e3558cd87b9c876b91e091e933496ae3a6b5a00a79f50110980c83af2fd44e0f08908f806be4146080def894a3ac87c3d214e32b0e031c8873b6ed3cdb9c160ee236576cb5a749ee356d4f5df961b35ec3667bcfa641e2c812a5eefbd78546783b6bd280dc4ec1cd015bee7d07f0993d6", 0xd5}, {&(0x7f0000001440)="7b18908bcd34b2f4eef2193c5f89bb79551b5d7000ccc31628374b04e7f0b8bbfe45", 0x22}], 0x5, 0x0, 0x0, 0xffffffe0}}], 0x400000000000132, 0x4000000)
+
+07:50:09 executing program 1:
+r0 = socket$nl_xfrm(0x10, 0x3, 0x6)
+sendmsg$nl_xfrm(r0, &(0x7f0000000180)={0x0, 0x0, &(0x7f0000000140)={&(0x7f00000001c0)=@newsa={0x104, 0x10, 0x1, 0x0, 0x0, {{@in6=@private1, @in6=@local, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffffffffffff}, {@in6=@initdev={0xfe, 0x88, '\x00', 0x0, 0x0}, 0x4d6, 0x2b}, @in6=@private2, {}, {}, {}, 0x0, 0x0, 0xa}, [@coaddr={0x14, 0xe, @in6=@private2}]}, 0x104}}, 0x0)
+
+[   28.076141] UDPLite: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+07:50:09 executing program 0:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = syz_io_uring_setup(0x85, &(0x7f0000000080), &(0x7f0000ffc000), &(0x7f00006d4000))
+syz_memcpy_off$IO_URING_METADATA_GENERIC(0x0, 0x40, &(0x7f0000000140)=0x307e, 0x0, 0x4)
+io_uring_enter(r0, 0x0, 0x3f14, 0x1, 0x0, 0x0)
+io_uring_enter(r0, 0x2039, 0x0, 0x0, 0x0, 0x0)
+io_uring_enter(r0, 0x72d, 0x0, 0x0, 0x0, 0x0)
+
+07:50:09 executing program 1:
+r0 = socket$inet6(0xa, 0x3, 0x3a)
+setsockopt$inet6_int(r0, 0x29, 0xc8, &(0x7f00000007c0), 0x4)
+setsockopt$inet6_int(r0, 0x29, 0xd1, &(0x7f0000000000), 0x4)
+
+07:50:09 executing program 1:
+socket$nl_generic(0x10, 0x3, 0x10)
+clock_getres(0x0, 0x0)
+sendmsg$NL80211_CMD_NEW_STATION(0xffffffffffffffff, 0x0, 0x4040)
+clock_gettime(0x0, 0x0)
+syz_io_uring_setup(0x0, &(0x7f0000004f40)={0x0, 0x0, 0x0, 0x3}, &(0x7f0000fff000), &(0x7f0000ffb000))
+request_key(&(0x7f0000005980)='dns_resolver\x00', &(0x7f00000059c0)={'syz', 0x1}, &(0x7f0000005a00)='\\@-\'^&\\\'\x00', 0xffffffffffffffff)
+
+07:50:09 executing program 1:
+r0 = socket$nl_xfrm(0x10, 0x3, 0x6)
+bind$netlink(r0, &(0x7f0000000000)={0x10, 0x0, 0x0, 0x10000000000041}, 0xc)
+r1 = socket$inet6(0xa, 0x80803, 0x87)
+setsockopt$inet6_IPV6_XFRM_POLICY(r1, 0x29, 0x23, &(0x7f0000000200)={{{@in=@loopback, @in6=@private2, 0x0, 0x0, 0x0, 0x0, 0xa}, {}, {}, 0x0, 0x0, 0x1}, {{@in=@empty, 0x0, 0x2b}, 0x0, @in6=@private1, 0x0, 0x0, 0x0, 0x5}}, 0xe8)
+connect$inet6(r1, &(0x7f00000000c0), 0x1c)
+
+07:50:10 executing program 0:
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f0000000080), 0x0, 0x0)
+ioctl$TIOCSETD(r0, 0x5423, &(0x7f00000002c0)=0x11)
+ioctl$TIOCSETD(r0, 0x5423, &(0x7f0000000000))
+
+07:50:10 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+sendto$inet(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0, 0x0)
+ioctl$sock_FIOSETOWN(0xffffffffffffffff, 0x8901, 0x0)
+recvfrom(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0, 0x0)
+ioctl$PERF_EVENT_IOC_ENABLE(0xffffffffffffffff, 0x8912, 0x0)
+r0 = socket$inet6(0xa, 0x3, 0xff)
+connect$inet6(r0, &(0x7f0000000140)={0xa, 0x0, 0x0, @loopback}, 0x1c)
+setsockopt$inet6_IPV6_RTHDRDSTOPTS(r0, 0x29, 0x37, 0x0, 0x8)
+sendmmsg(r0, &(0x7f0000000480), 0x2e9, 0xffd8)
+
+07:50:10 executing program 0:
+r0 = syz_init_net_socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl802154(&(0x7f0000000040), 0xffffffffffffffff)
+sendmsg$NL802154_CMD_SET_CHANNEL(r0, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000100)={&(0x7f0000000080)={0x2c, r1, 0x1, 0x0, 0x0, {}, [@NL802154_ATTR_PAGE={0x5}, @NL802154_ATTR_WPAN_PHY={0x8}, @NL802154_ATTR_CHANNEL={0x5}]}, 0x2c}}, 0x0)
+
+07:50:10 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(&(0x7f00000002c0), &(0x7f0000000100)='./bus\x00', 0x0, 0x0, 0x0, 0x0, &(0x7f0000000000)=ANY=[@ANYBLOB='huge=always'])
+chdir(&(0x7f0000000380)='./bus\x00')
+r0 = creat(&(0x7f0000000400)='./bus\x00', 0x0)
+ftruncate(r0, 0x208200)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x10103e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r1, 0x0)
+truncate(&(0x7f0000000040)='./bus\x00', 0x2201)
+getresuid(&(0x7f00000003c0), 0x0, 0x0)
+
+07:50:10 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000200), 0xffffffffffffffff)
+r2 = socket$netlink(0x10, 0x3, 0x0)
+ioctl$sock_SIOCGIFINDEX_80211(r2, 0x8933, &(0x7f0000000080)={'wlan0\x00', <r3=>0x0})
+sendmsg$NL80211_CMD_TRIGGER_SCAN(r0, &(0x7f0000000340)={0x0, 0x0, &(0x7f0000000300)={&(0x7f0000000500)=ANY=[@ANYBLOB="84000000", @ANYRES16=r1, @ANYBLOB="05002bbd7000000000002100000008000300", @ANYRES32=r3, @ANYBLOB="0400ec0008009e00110a000034002d8023"], 0x84}}, 0x0)
+
+[   29.033817] netlink: 40 bytes leftover after parsing attributes in process `syz-executor.0'.
+07:50:10 executing program 0:
+move_pages(0x0, 0x1, &(0x7f00000000c0)=[&(0x7f0000ffb000/0x4000)=nil], &(0x7f0000000100), 0xfffffffffffffffd, 0x0)
+
+07:50:10 executing program 0:
+mkdir(&(0x7f00000003c0)='\x13\x13w\xc5\xfc5\xd4\x14T\xd5\xd4\x1d)\xad\x1a`)Y\x81F\xe6\xbe\x16nA\xad\r\xbd@T\x03<\x9f3\xbb\xda\x82$\xa2\xf3\xd7r\xe7cnH\xb3<\xbfp\x83r\xe8\xf1\xb9\x93>\xc5\x12wC\xbe\"\x06 \x9e\xf0-\xf9\xcb\xf2\xf6\xe8\x80\xd38/\x00', 0x0)
+mount(0x0, &(0x7f00000001c0)='./bus\x00', 0x0, 0x0, 0x0)
+symlink(&(0x7f0000000140)='\x13\x13w\xc5\xfc5\xd4\x14T\xd5\xd4\x1d)\xad\x1a`)Y\x81F\xe6\xbe\x16nA\xad\r\xbd@T\x03<\x9f3\xbb\xda\x82$\xa2\xf3\xd7r\xe7cnH\xb3<\xbfp\x83r\xe8\xf1\xb9\x93>\xc5\x12wC\xbe\"\x06 \x9e\xf0-\xf9\xcb\xf2\xf6\xe8\x80\xd38//../file0\x00', &(0x7f00000002c0)='./file0\x00')
+link(&(0x7f0000000440)='\x13\x13w\xc5\xfc5\xd4\x14T\xd5\xd4\x1d)\xad\x1a`)Y\x81F\xe6\xbe\x16nA\xad\r\xbd@T\x03<\x9f3\xbb\xda\x82$\xa2\xf3\xd7r\xe7cnH\xb3<\xbfp\x83r\xe8\xf1\xb9\x93>\xc5\x12wC\xbe\"\x06 \x9e\xf0-\xf9\xcb\xf2\xf6\xe8\x80\xd38//../file0\x00', &(0x7f0000000040)='./bus\x00')
+
+07:50:10 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(&(0x7f00000002c0), &(0x7f0000000100)='./bus\x00', 0x0, 0x0, 0x0, 0x0, &(0x7f0000000000)=ANY=[@ANYBLOB='huge=always'])
+chdir(&(0x7f0000000380)='./bus\x00')
+r0 = creat(&(0x7f0000000400)='./bus\x00', 0x0)
+ftruncate(r0, 0x208200)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x10103e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r1, 0x0)
+truncate(&(0x7f0000000040)='./bus\x00', 0x2201)
+getresuid(&(0x7f00000003c0), 0x0, 0x0)
+
+07:50:10 executing program 0:
+openat2(0xffffffffffffff9c, 0x0, 0x0, 0x18)
+
+07:50:10 executing program 0:
+perf_event_open(&(0x7f00000001c0)={0x2, 0x70, 0xd7}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+socketpair(0x1, 0x1, 0x0, &(0x7f0000000740)={0xffffffffffffffff, <r0=>0xffffffffffffffff})
+ioctl$PERF_EVENT_IOC_SET_FILTER(r0, 0x5421, &(0x7f0000000080)='ip6tnl0\x00')
+
+07:50:10 executing program 0:
+r0 = socket$inet6(0xa, 0x6, 0x0)
+connect$inet6(r0, &(0x7f0000000000)={0xa, 0x0, 0x0, @loopback}, 0x1c)
+
+[   29.178835] audit: type=1400 audit(1698652210.549:9): avc:  denied  { create } for  pid=1393 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=dccp_socket permissive=1
+07:50:10 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(&(0x7f00000002c0), &(0x7f0000000100)='./bus\x00', 0x0, 0x0, 0x0, 0x0, &(0x7f0000000000)=ANY=[@ANYBLOB='huge=always'])
+chdir(&(0x7f0000000380)='./bus\x00')
+r0 = creat(&(0x7f0000000400)='./bus\x00', 0x0)
+ftruncate(r0, 0x208200)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x10103e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r1, 0x0)
+truncate(&(0x7f0000000040)='./bus\x00', 0x2201)
+getresuid(&(0x7f00000003c0), 0x0, 0x0)
+
+07:50:10 executing program 0:
+mkdir(&(0x7f0000000240)='./file0\x00', 0x0)
+mount(0x0, &(0x7f0000000000)='./file0\x00', &(0x7f0000000140)='ramfs\x00', 0x4040, 0x0)
+creat(&(0x7f0000002500)='./file0/bus\x00', 0xcebb6074bb566d03)
+r0 = open$dir(&(0x7f00000002c0)='./file0/bus\x00', 0x0, 0x0)
+fcntl$lock(r0, 0x26, &(0x7f0000000040))
+mmap(&(0x7f0000ffd000/0x2000)=nil, 0x2000, 0x0, 0x51, r0, 0x0)
+
+[   29.229800] =======================================================
+[   29.229800] WARNING: The mand mount option has been deprecated and
+[   29.229800]          and is ignored by this kernel. Remove the mand
+[   29.229800]          option from the mount to silence this warning.
+[   29.229800] =======================================================
+07:50:10 executing program 0:
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0x0, &(0x7f0000000040)={0x1, &(0x7f0000000000)=[{0x6, 0x0, 0x0, 0x7fffffff}]})
+lchown(0x0, 0x0, 0x0)
+
+07:50:10 executing program 0:
+openat$procfs(0xffffffffffffff9c, &(0x7f0000000040)='/proc/keys\x00', 0x0, 0x0)
+recvmmsg(0xffffffffffffffff, &(0x7f0000003140)=[{{&(0x7f0000000200), 0x80, 0x0}}], 0x1, 0x40, 0x0)
+add_key$keyring(&(0x7f00000000c0), &(0x7f0000000100)={'syz', 0x0}, 0x0, 0x0, 0xfffffffffffffffd)
+keyctl$chown(0x4, 0x0, 0x0, 0x0)
+r0 = syz_open_procfs(0x0, &(0x7f0000000100)='fd/3\x00')
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+preadv(r0, &(0x7f00000017c0), 0x3da, 0x0, 0x0)
+
+07:50:10 executing program 1:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+syz_mount_image$tmpfs(&(0x7f00000002c0), &(0x7f0000000100)='./bus\x00', 0x0, 0x0, 0x0, 0x0, &(0x7f0000000000)=ANY=[@ANYBLOB='huge=always'])
+chdir(&(0x7f0000000380)='./bus\x00')
+r0 = creat(&(0x7f0000000400)='./bus\x00', 0x0)
+ftruncate(r0, 0x208200)
+r1 = open(&(0x7f0000000200)='./bus\x00', 0x10103e, 0x0)
+mmap(&(0x7f0000000000/0x600000)=nil, 0x600000, 0x7ffffe, 0x4002011, r1, 0x0)
+truncate(&(0x7f0000000040)='./bus\x00', 0x2201)
+getresuid(&(0x7f00000003c0), 0x0, 0x0)
+
+07:50:10 executing program 0:
+socket(0x23, 0x0, 0x1)
+
+07:50:10 executing program 0:
+r0 = syz_mount_image$msdos(&(0x7f0000000040), &(0x7f00000003c0)='./file1\x00', 0xffffffff, 0x0, 0x0, 0x0, &(0x7f0000000280)=ANY=[])
+r1 = openat$cgroup_ro(0xffffffffffffff9c, &(0x7f0000000080)='cpu.stat\x00', 0x275a, 0x0)
+write$binfmt_script(r1, &(0x7f0000000280)=ANY=[@ANYBLOB="905b312329302e88d452"], 0xfea7)
+mmap(&(0x7f0000000000/0x1000)=nil, 0x1000, 0x1, 0x10012, r1, 0x0)
+mkdirat(r0, &(0x7f0000000000)='./file1\x00', 0x0)
+
+07:50:10 executing program 0:
+r0 = socket$nl_xfrm(0x10, 0x3, 0x6)
+bind$netlink(r0, &(0x7f0000000080)={0x10, 0x0, 0x0, 0x1}, 0xc)
+sendmsg$NL80211_CMD_UPDATE_CONNECT_PARAMS(0xffffffffffffffff, &(0x7f0000000340)={0x0, 0x0, &(0x7f0000000300)={&(0x7f0000001500)=ANY=[@ANYBLOB="c0140000", @ANYRES16=0x0, @ANYBLOB="00311a"], 0x14c0}}, 0x0)
+r1 = socket$inet6(0xa, 0x3, 0x7)
+connect$inet6(r1, &(0x7f00000000c0)={0xa, 0x0, 0x0, @loopback}, 0x1c)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1}, 0x0, 0xffff7fffffffffff, 0xffffffffffffffff, 0x0)
+setsockopt$inet6_IPV6_XFRM_POLICY(r1, 0x29, 0x23, &(0x7f0000000100)={{{@in6=@private1, @in=@private, 0x0, 0x0, 0x0, 0x0, 0xa}, {}, {}, 0x0, 0x0, 0x1}, {{@in, 0x0, 0x3c}, 0x0, @in=@multicast2, 0x0, 0x0, 0x0, 0x81}}, 0xe8)
+sendmmsg(r1, &(0x7f0000000480), 0x2e9, 0x0)
+
+07:50:10 executing program 0:
+perf_event_open(&(0x7f0000000080)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x317d, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x934e5dd52f85d8bf, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+close(0xffffffffffffffff)
+r0 = perf_event_open(&(0x7f000025c000)={0x400000001, 0x70, 0x2005, 0x0, 0x0, 0x0, 0x0, 0x1, 0x280ba, 0xd}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, 0xffffffffffffffff, 0x0)
+ioctl$PERF_EVENT_IOC_SET_OUTPUT(r0, 0x2405, 0xffffffffffffffff)
+r1 = perf_event_open(&(0x7f000001d000)={0x1, 0x70}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+pipe2(&(0x7f0000000140), 0x4000)
+openat$vcsa(0xffffffffffffff9c, &(0x7f0000000000), 0x400000, 0x0)
+mmap(&(0x7f0000ffc000/0x3000)=nil, 0x3000, 0x0, 0x11, r1, 0x0)
+r2 = socket$inet(0x2, 0x4000000000000001, 0x0)
+bind$inet(r2, &(0x7f0000000040)={0x2, 0x4e23, @multicast1}, 0x10)
+sendto$inet(r2, 0x0, 0x10b, 0x200007fe, &(0x7f0000000100)={0x2, 0x10004e23, @dev={0xac, 0x14, 0x14, 0xa}}, 0x10)
+sendto$inet(r2, &(0x7f0000d7cfcb), 0xffffffffffffffef, 0x0, 0x0, 0x53)
+
+07:50:10 executing program 1:
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$nl_generic(0x10, 0x3, 0x10)
+ioctl$ifreq_SIOCGIFINDEX_batadv_mesh(r1, 0x8933, &(0x7f0000000f00)={'batadv0\x00', <r2=>0x0})
+sendto$packet(r0, &(0x7f0000000340)="f9f029b8a7bd0e79d497a75e86dd", 0xe, 0x0, &(0x7f0000000440)={0x11, 0x0, r2, 0x1, 0x0, 0x6, @local}, 0x14)
+
+07:50:10 executing program 1:
+r0 = shmget$private(0x0, 0x400000, 0x0, &(0x7f0000c00000/0x400000)=nil)
+shmat(r0, &(0x7f0000e92000/0xe000)=nil, 0x4000)
+madvise(&(0x7f0000e9e000/0x2000)=nil, 0x2000, 0x8)
+
+07:50:10 executing program 1:
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0xffffc90000000000, 0x0, &(0x7f00000002c0)={0x0, 0x0})
+
+07:50:10 executing program 0:
+r0 = socket$inet6_udp(0xa, 0x2, 0x0)
+setsockopt$inet6_buf(r0, 0x29, 0x0, &(0x7f0000002740)="369bd35c", 0x4)
+
+07:50:10 executing program 1:
+mkdir(&(0x7f0000000400)='./file0\x00', 0x0)
+lsetxattr$system_posix_acl(0x0, &(0x7f0000000540)='system.posix_acl_access\x00', 0x0, 0x2c, 0x0)
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f0000000180), 0x2f606557d6081b8a, 0x0)
+ioctl$TCSETS(r0, 0x40045431, &(0x7f0000000240)={0x0, 0x0, 0x0, 0x0, 0x0, "8000"})
+write$binfmt_aout(r0, &(0x7f00000002c0)=ANY=[@ANYRES64], 0xfe8d)
+r1 = syz_open_pts(r0, 0x0)
+ioctl$TCSETSF(r1, 0x5412, &(0x7f0000000100)={0x10017})
+
+07:50:10 executing program 0:
+r0 = socket$nl_xfrm(0x10, 0x3, 0x6)
+sendmsg$nl_xfrm(r0, &(0x7f0000000180)={0x0, 0x0, &(0x7f00000001c0)={&(0x7f0000000200)=@newsa={0x138, 0x10, 0x713, 0x0, 0x0, {{@in6=@initdev={0xfe, 0x88, '\x00', 0x0, 0x0}, @in6=@loopback}, {@in6=@ipv4={'\x00', '\xff\xff', @broadcast}, 0x0, 0x32}, @in6=@dev, {}, {}, {}, 0x0, 0x0, 0x2}, [@algo_crypt={0x48, 0x2, {{'ecb(cipher_null)\x00'}, 0x2}}]}, 0x138}, 0x1, 0x1400000000000000}, 0x0)
+
+07:50:10 executing program 0:
+perf_event_open(&(0x7f0000000040)={0x0, 0x70}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2000}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+setsockopt$inet_tcp_int(r0, 0x6, 0x210000000013, &(0x7f0000000040)=0x100000001, 0x4)
+bind$inet(r0, &(0x7f0000000080)={0x2, 0x4e21, @local}, 0x10)
+connect$inet(r0, &(0x7f0000000180)={0x2, 0x4e21, @local}, 0x10)
+setsockopt$inet_tcp_TCP_REPAIR_OPTIONS(r0, 0x6, 0x16, &(0x7f0000000000)=[@mss, @mss, @window={0x3, 0x7}, @mss={0x2, 0x919f}, @timestamp, @window={0x3, 0xfff}], 0x2000019f)
+mmap(&(0x7f0000000000/0x800000)=nil, 0x800000, 0x1800003, 0x12, 0xffffffffffffffff, 0x0)
+setsockopt$inet_tcp_TCP_REPAIR(r0, 0x6, 0x13, &(0x7f0000000200), 0x88)
+sendto$inet(r0, &(0x7f0000000640)="e046385738d0b6e2f17050c3002a9fe3e2f4bbc226e39bf35204d275a8fadde37aab3905bbacaf04d57fb246d660ea69d755b5fa4e9dcdda9919e7cfdd2fd6f2ffd8ca8b450d8b0646e2d9363d42c096c630e57a2bfd2c36cec695821437e9d3554f3eb5c048236b4b4adb7e302a1588fa2daa0101000000000000f38fe3b4bded81207efe8fd987bd3b2cc76b79deb96df13c5456630d4cfb858f6dbcdd4f199a5164ba2fde0014d7f98d9251bbc07bca2b6710308dddc540dfb44b0f9a5f27d73e1c33d091ce5c7f8e57291112231b051a2af634f381203b6b98cb0c0a1291bd094e861061a5a7cd4777d447690e4ce2c07c13e8be18014070681395d0b0c385e39ce7d422637255c6d13229f280b57064ba62d52e7bfe695f75de4854fdef56f93ca9d237175aa0197b0e6850bd4158666d28006da6a35362b29ed6895507ab4064c7fcece12dfb9411b1274080915c0d3a124ae1b77be2d7c8c9c86c4d7a7589d7fc9c922ac84b411d0c219816f586b6fc7d2452ff4c5eb64f913598968cfae6f30fb0dc0ee08865739ed8aef27a1d973860531ae8a8c5dd6263e690a5be08e6732a2d526a6455ab9a9fcd36140462021416cc8d43c5b09215d8e4c221ea58fc6974edb8e258c738811f523b25c3d94c91b7d080b5466cbe699b2123cac02430e01d4b57c0dc794268f9b172694745678fcc68c569d01e821113d76b090ac0740cd35f82bfc027bfd500904bc62e260dc9d60d1545396141cff61bf720d5aff18c58278cc2778eae68f3ead53a4adae3b68c5344c3a982939d84661a042622fc9414ee873a78548299340d8fdef879802c636400"/611, 0xffffffffffffff67, 0x40007bd, 0x0, 0xffffffffffffff4f)
+
+07:50:10 executing program 1:
+mkdir(&(0x7f0000000400)='./file0\x00', 0x0)
+lsetxattr$system_posix_acl(0x0, &(0x7f0000000540)='system.posix_acl_access\x00', 0x0, 0x2c, 0x0)
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f0000000180), 0x2f606557d6081b8a, 0x0)
+ioctl$TCSETS(r0, 0x40045431, &(0x7f0000000240)={0x0, 0x0, 0x0, 0x0, 0x0, "8000"})
+write$binfmt_aout(r0, &(0x7f00000002c0)=ANY=[@ANYRES64], 0xfe8d)
+r1 = syz_open_pts(r0, 0x0)
+ioctl$TCSETSF(r1, 0x5412, &(0x7f0000000100)={0x10017})
+
+07:50:11 executing program 1:
+mkdir(&(0x7f0000000400)='./file0\x00', 0x0)
+lsetxattr$system_posix_acl(0x0, &(0x7f0000000540)='system.posix_acl_access\x00', 0x0, 0x2c, 0x0)
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f0000000180), 0x2f606557d6081b8a, 0x0)
+ioctl$TCSETS(r0, 0x40045431, &(0x7f0000000240)={0x0, 0x0, 0x0, 0x0, 0x0, "8000"})
+write$binfmt_aout(r0, &(0x7f00000002c0)=ANY=[@ANYRES64], 0xfe8d)
+r1 = syz_open_pts(r0, 0x0)
+ioctl$TCSETSF(r1, 0x5412, &(0x7f0000000100)={0x10017})
+
+07:50:11 executing program 1:
+mkdir(&(0x7f0000000400)='./file0\x00', 0x0)
+lsetxattr$system_posix_acl(0x0, &(0x7f0000000540)='system.posix_acl_access\x00', 0x0, 0x2c, 0x0)
+r0 = openat$ptmx(0xffffffffffffff9c, &(0x7f0000000180), 0x2f606557d6081b8a, 0x0)
+ioctl$TCSETS(r0, 0x40045431, &(0x7f0000000240)={0x0, 0x0, 0x0, 0x0, 0x0, "8000"})
+write$binfmt_aout(r0, &(0x7f00000002c0)=ANY=[@ANYRES64], 0xfe8d)
+r1 = syz_open_pts(r0, 0x0)
+ioctl$TCSETSF(r1, 0x5412, &(0x7f0000000100)={0x10017})
+
+07:50:11 executing program 0:
+perf_event_open(&(0x7f000001d000)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x41c1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = dup(r0)
+setsockopt$packet_int(r1, 0x107, 0x10000000000f, &(0x7f0000006ffc)=0x400000000008, 0x26d)
+fcntl$getown(0xffffffffffffffff, 0x9)
+perf_event_open$cgroup(0x0, 0xffffffffffffffff, 0xd, 0xffffffffffffffff, 0xd)
+ioctl$sock_SIOCGIFINDEX(r0, 0x8933, &(0x7f0000000180)={'geneve0\x00', <r2=>0x0})
+bind$packet(r0, &(0x7f0000000640)={0x11, 0x0, r2, 0x1, 0x0, 0x6, @link_local}, 0x14)
+sendto$inet6(r0, &(0x7f0000000300)="050300c806023e0001d841a0c52cf7c25975e697b02f08006b2b2ff0dac8897c6b11876d886b143a301817ccd51cc5471d130a6632a8816107d08f24286a57c3fe257c3314a3974bb654697f", 0xfdfa, 0xa76eb84436, 0x0, 0x40ed)
+
+07:50:11 executing program 1:
+timer_create(0x0, 0x0, &(0x7f0000000040))
+timer_create(0x2, &(0x7f0000000100)={0x0, 0x0, 0x1, @thr={0x0, 0x0}}, &(0x7f0000000140))
+
+07:50:11 executing program 1:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000240), 0xffffffffffffffff)
+r2 = socket$nl_generic(0x10, 0x3, 0x10)
+ioctl$sock_SIOCGIFINDEX_80211(r2, 0x8933, &(0x7f0000000140)={'wlan1\x00', <r3=>0x0})
+sendmsg$NL80211_CMD_TDLS_OPER(r0, &(0x7f0000000300)={0x0, 0x0, &(0x7f00000002c0)={&(0x7f0000000280)={0x30, r1, 0x1, 0x0, 0x0, {{}, {@val={0x8, 0x3, r3}, @void}}, [@NL80211_ATTR_TDLS_OPERATION={0x5}, @NL80211_ATTR_MAC={0xa, 0x6, @broadcast}]}, 0x30}}, 0x0)
+
+07:50:11 executing program 0:
+r0 = socket$nl_generic(0x10, 0x3, 0x10)
+r1 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000040), 0xffffffffffffffff)
+ioctl$sock_SIOCGIFINDEX_80211(r0, 0x8933, &(0x7f0000000000)={'wlan1\x00', <r2=>0x0})
+r3 = dup2(r0, r0)
+sendmsg$NL80211_CMD_SET_TID_CONFIG(r3, &(0x7f0000000200)={0x0, 0x0, &(0x7f00000001c0)={&(0x7f0000000140)={0x30, r1, 0x1, 0x0, 0x0, {{}, {@val={0x8, 0x3, r2}, @void}}, [@NL80211_ATTR_TID_CONFIG={0x14, 0x11d, 0x0, 0x1, [{0x2, 0x0, 0x0, 0x1, [@NL80211_TID_CONFIG_ATTR_TIDS={0x6}, @NL80211_TID_CONFIG_ATTR_OVERRIDE={0x4}]}]}]}, 0x30}}, 0x0)
+
+07:50:11 executing program 1:
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000100)='./file0\x00', 0x80000, 0xfffffffffffffffe, 0x0, 0x0, &(0x7f0000012a00))
+
+07:50:11 executing program 1:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+ioctl$TCSETSF2(r0, 0x4b52, &(0x7f0000000000)={0x0, 0x7, 0x0, 0x0, 0x0, "39b5f35ae53040b761436a14088cb2895264f9"})
+
+07:50:11 executing program 0:
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = perf_event_open(&(0x7f000025c000)={0x2, 0x70, 0x15, 0x0, 0x0, 0x0, 0x0, 0x1, 0x82422, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, 0x0, 0xff7fffffffffffff, 0xffffffffffffffff, 0x0)
+r1 = perf_event_open(&(0x7f000001d000)={0x1, 0x70}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffc000/0x3000)=nil, 0x3000, 0x0, 0x11, r1, 0x0)
+ioctl$PERF_EVENT_IOC_SET_OUTPUT(r0, 0x2405, r1)
+syz_read_part_table(0x0, 0xfffffffffffffffd)
+socket$inet_udplite(0x2, 0x2, 0x88)
+
+07:50:11 executing program 1:
+add_key$keyring(0x0, &(0x7f0000000240)={'syz', 0x1}, 0x0, 0x0, 0x0)
+keyctl$link(0x8, 0x0, 0x0)
+add_key$user(&(0x7f0000000040), 0x0, &(0x7f00000002c0), 0x0, 0xfffffffffffffffe)
+add_key$keyring(0x0, &(0x7f00000000c0)={'syz', 0x0}, 0x0, 0x0, 0xffffffffffffffff)
+keyctl$revoke(0x3, 0x0)
+keyctl$link(0x8, 0x0, 0x0)
+pipe(&(0x7f0000000080)={<r0=>0xffffffffffffffff, <r1=>0xffffffffffffffff})
+r2 = socket$nl_netfilter(0x10, 0x3, 0xc)
+sendmsg$IPCTNL_MSG_CT_NEW(0xffffffffffffffff, &(0x7f0000000300)={0x0, 0x0, &(0x7f00000000c0)={&(0x7f0000000000)=ANY=[@ANYBLOB="8000000000010b04000000000000000002000000240001801400018008000100ac141400080002007f0020010c00028005000100000000001c001080080003400000000008000140150000000800024000000000240002801400018008000100ac9414bb08000200000000000c0002800500010000000000080007"], 0x80}}, 0x4001)
+write$binfmt_misc(r1, &(0x7f0000000000)=ANY=[], 0xfffffecc)
+perf_event_open(&(0x7f00000003c0)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1ff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+splice(r0, 0x0, r2, 0x0, 0x4ffe6, 0x0)
+
+07:50:11 executing program 0:
+openat$procfs(0xffffffffffffff9c, &(0x7f0000000080)='/proc/bus/input/handlers\x00', 0x0, 0x0)
+perf_event_open(&(0x7f0000000100)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3c43}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x2, 0x300)
+setsockopt$packet_int(r0, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+ioctl$sock_SIOCGIFINDEX(r1, 0x8933, &(0x7f0000000180)={'syz_tun\x00', <r2=>0x0})
+r3 = socket$packet(0x11, 0x2, 0x300)
+setsockopt$packet_fanout(r3, 0x107, 0x12, &(0x7f0000000000)={0x0, 0x5}, 0x4)
+bind$packet(r0, &(0x7f0000000100)={0x11, 0x0, r2, 0x1, 0x0, 0x6, @random="897b428e75eb"}, 0x14)
+sendto$inet6(r0, &(0x7f0000000080)="03042a015c0060004003002cfff57b016d2763bd56373780398d537500e50602591f031ee616d5c0184374a7ffe4ec55e0654786a70100935ba514d40808efa000801601842fd08d49a47eff71bc4131fe4c1f99bf00a900000008d1843e770afd6e9ef5837dbd0000000053", 0x3287, 0x4000002, 0x0, 0x2ff)
+recvmmsg(0xffffffffffffffff, &(0x7f0000003140)=[{{&(0x7f0000001400), 0x80, 0x0}}], 0x1, 0x0, 0x0)
+r4 = getpgid(0x0)
+perf_event_open(&(0x7f0000000040)={0x1, 0x70, 0x0, 0x0, 0x0, 0x0, 0x0, 0x50d}, r4, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+
+07:50:11 executing program 0:
+r0 = socket(0x15, 0x5, 0x0)
+getsockopt(r0, 0x200000000114, 0x2711, 0x0, &(0x7f0000000000)=0x2a)
+
+07:50:11 executing program 0:
+unshare(0x8000400)
+r0 = mq_open(&(0x7f0000000080)='m$\x00\xdc\xb7\xb8\xd0>,\xb0\x13\x8b3z>K\x84\x05\x00\x00\x00\x9c\x81\xed\xc2\x00', 0x6e93ebbbcc0884ee, 0x0, 0x0)
+mq_timedreceive(r0, 0x0, 0x0, 0x0, 0x0)
+
+
+VM DIAGNOSIS:
+07:50:02  Registers:
+info registers vcpu 0
+RAX=ffffa679005c0000 RBX=ffff9349c035a000 RCX=00019349c035ad80 RDX=00000000ffffffff
+RSI=0001ffffffffffff RDI=ffff9349c035ad80 RBP=0000000000000000 RSP=ffffa67900003ef8
+R8 =ffffffff8fec43a8 R9 =0000000000000000 R10=ffffffff8d6af999 R11=0001ffffffffffff
+R12=ffff9349c035ad80 R13=ffff9349c035b168 R14=000000000000000a R15=ffff9349c0112c00
+RIP=ffffffff8d6af9ab RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff934af7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe3f3b292000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe3f3b290000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fe6fffb9f88 CR3=0000000105190001 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001fa1
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM01=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM02=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM03=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM04=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM05=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM06=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM07=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM08=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM09=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM10=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM11=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM12=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM13=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM14=0000000000000000 0000000000000000 0606060606060606 0606060606060606
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000030 RBX=00000000000003f8 RCX=0001ffff8fef7d28 RDX=00000000000003f8
+RSI=0001ffffffffffff RDI=ffffffff8fef7d28 RBP=ffffffff8fef7d20 RSP=ffffa6790062b230
+R8 =ffffffff8fec4490 R9 =0000000000000000 R10=ffffffff8d0e95d3 R11=0001ffff8fef7de1
+R12=0000000000000030 R13=ffffffff8d0e95a0 R14=0000000000000005 R15=ffffffff8fef7d40
+RIP=ffffffff8d0e95dd RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007fd9117698c0 00000000 00000000
+GS =0000 ffff934af7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe37ddb5d000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe37ddb5b000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=000000c001f22000 CR3=000000010526e006 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 b1daa0c9227df938 e88cfe2e20e9f856
+YMM02=0000000000000000 0000000000000000 cb9c26ac6d2aa4b1 2263e3acb67ef378
+YMM03=0000000000000000 0000000000000000 877e977840a8cae1 17b62b847eb7774d
+YMM04=0000000000000000 0000000000000000 04beddc446668c64 a16eeb42cd0bb1da
+YMM05=0000000000000000 0000000000000000 b1daa0c9227df938 e88cfe2e20e9f856
+YMM06=0000000000000000 0000000000000000 cc76609f1966f6b5 84e9d2f34419a0eb
+YMM07=0000000000000000 0000000000000000 ebdf700a215fa4cb 4237e6c0f3a533fe
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM09=0000000000000000 0000000000000000 814bf34300000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 3c6ef372a54ff53a 1f83d9ab5be0cd19
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

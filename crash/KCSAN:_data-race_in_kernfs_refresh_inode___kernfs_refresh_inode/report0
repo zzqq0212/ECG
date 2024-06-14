@@ -1,0 +1,62 @@
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffffa07081487a88 of 16 bytes by task 1844 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ vfs_statx+0xab/0x270 fs/stat.c:238
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffffa07081487a88 of 16 bytes by task 89 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:164 [inline]
+ kernfs_refresh_inode+0xb2/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ vfs_statx+0xab/0x270 fs/stat.c:238
+ vfs_fstatat+0x6f/0x90 fs/stat.c:276
+ vfs_lstat include/linux/fs.h:2913 [inline]
+ __do_sys_newlstat+0x3d/0x90 fs/stat.c:432
+ __se_sys_newlstat fs/stat.c:426 [inline]
+ __x64_sys_newlstat+0x30/0x40 fs/stat.c:426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 89 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+netlink: 'syz-executor.1': attribute type 27 has an invalid length.
+audit: type=1400 audit(1698651297.478:9): avc:  denied  { create } for  pid=2403 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=dccp_socket permissive=1
+process 'syz-executor.0' launched './file0' with NULL argv: empty string added
+blktrace: Concurrent blktraces are not allowed on loop7
+blktrace: Concurrent blktraces are not allowed on loop7

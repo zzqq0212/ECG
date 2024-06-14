@@ -1,0 +1,16 @@
+{
+   "fuzzer_path": "./",
+   "target_os": "ucos",
+   "arch": "arm", 
+   "qmp_path": "/home/pwn/qemu/scripts/qmp",
+   "workdir": "/home/pwn/workdir/tardis/ucos3",
+   "kernel_obj": "/home/pwn/System/rtos_kernel/ucos3/OS.elf",
+   "machine_type": "mcimx6ul-evk",
+   "cpu_num": 1, 
+   "mem_size": 128,
+   "port": 8899,
+   "unique_id": "",
+   "corpus_path": "",
+   "func_addr": "800ed344"
+}
+

@@ -1,0 +1,165 @@
+rcu: INFO: rcu_preempt self-detected stall on CPU
+rcu: 	0-....: (18708 ticks this GP) idle=2414/1/0x4000000000000000 softirq=33327/33336 fqs=5225
+rcu: 	(t=21000 jiffies g=58025 q=591 ncpus=2)
+CPU: 0 PID: 7117 Comm: syz-executor.0 Not tainted 6.5.0-dirty #11
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:unwind_next_frame+0xbb/0x2380 arch/x86/kernel/unwind_orc.c:482
+Code: c1 ea 03 80 3c 02 00 0f 85 36 19 00 00 49 8b 45 48 bf 01 00 00 00 48 89 44 24 10 e8 4f 36 0e 00 48 b8 00 00 00 00 00 fc ff df <4d> 8d 65 60 4c 89 e2 48 c1 ea 03 80 3c 02 00 0f 85 12 19 00 00 4d
+RSP: 0018:ffff8881f72096c8 EFLAGS: 00000246
+RAX: dffffc0000000000 RBX: 0000000000000001 RCX: ffffffff83520b91
+RDX: ffff888134740000 RSI: 0000000000000100 RDI: 0000000000000001
+RBP: ffff8881f7209790 R08: ffffffff87b10c60 R09: ffff8881f720977a
+R10: 00000000000036c5 R11: 0000000000030001 R12: ffff8881f7209800
+R13: ffff8881f7209738 R14: ffff888134740000 R15: ffff88810017fa00
+FS:  00007f5dbf242640(0000) GS:ffff8881f7200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f5dbf241f88 CR3: 000000010372e005 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ arch_stack_walk+0x87/0xf0 arch/x86/kernel/stacktrace.c:25
+ stack_trace_save+0x90/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x22/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x25/0x30 mm/kasan/common.c:52
+ __kasan_slab_alloc+0x59/0x70 mm/kasan/common.c:328
+ kasan_slab_alloc include/linux/kasan.h:186 [inline]
+ slab_post_alloc_hook mm/slab.h:762 [inline]
+ kmem_cache_alloc_bulk+0x1e3/0x340 mm/slub.c:4048
+ napi_skb_cache_get+0xe5/0x150 net/core/skbuff.c:330
+ __napi_build_skb net/core/skbuff.c:509 [inline]
+ __napi_alloc_skb+0x34e/0x6d0 net/core/skbuff.c:822
+ napi_alloc_skb include/linux/skbuff.h:3269 [inline]
+ e1000_alloc_rx_skb drivers/net/ethernet/intel/e1000/e1000_main.c:4112 [inline]
+ e1000_copybreak drivers/net/ethernet/intel/e1000/e1000_main.c:4328 [inline]
+ e1000_clean_rx_irq+0x698/0xfa0 drivers/net/ethernet/intel/e1000/e1000_main.c:4380
+ e1000_clean+0x865/0x2330 drivers/net/ethernet/intel/e1000/e1000_main.c:3803
+ __napi_poll+0xaa/0x580 net/core/dev.c:6460
+ napi_poll net/core/dev.c:6527 [inline]
+ net_rx_action+0x879/0xc00 net/core/dev.c:6660
+ __do_softirq+0x1ad/0x5bd kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0x8d/0xf0 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0x92/0xc0 arch/x86/kernel/apic/apic.c:1109
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:unwind_next_frame+0x4ef/0x2380 arch/x86/kernel/unwind_orc.c:517
+Code: 05 0f 85 e0 01 00 00 48 b8 00 00 00 00 00 fc ff df 48 8b 14 24 48 c1 ea 03 80 3c 02 00 0f 85 5f 1e 00 00 48 89 c8 4d 8b 7d 48 <48> ba 00 00 00 00 00 fc ff df 48 c1 e8 03 0f b6 34 10 48 8d 41 01
+RSP: 0018:ffff88810e057798 EFLAGS: 00000246
+RAX: ffffffff87b8bb8a RBX: 0000000000000001 RCX: ffffffff87b8bb8a
+RDX: 1ffff11021c0af0a RSI: 0000000000000001 RDI: ffffffff87889800
+RBP: ffff88810e057860 R08: ffffffff87b8bb8e R09: ffff88810e057808
+R10: 000000000000843a R11: 0000000000030001 R12: ffff88810e057868
+R13: ffff88810e057808 R14: 0000000000000005 R15: ffff88810e057cf0
+ arch_stack_walk+0x87/0xf0 arch/x86/kernel/stacktrace.c:25
+ stack_trace_save+0x90/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x22/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x25/0x30 mm/kasan/common.c:52
+ __kasan_slab_alloc+0x59/0x70 mm/kasan/common.c:328
+ kasan_slab_alloc include/linux/kasan.h:186 [inline]
+ slab_post_alloc_hook mm/slab.h:762 [inline]
+ slab_alloc_node mm/slub.c:3470 [inline]
+ slab_alloc mm/slub.c:3478 [inline]
+ __kmem_cache_alloc_lru mm/slub.c:3485 [inline]
+ kmem_cache_alloc_lru+0xf0/0x240 mm/slub.c:3501
+ __d_alloc+0x31/0x8e0 fs/dcache.c:1769
+ d_alloc_pseudo+0x1d/0x70 fs/dcache.c:1899
+ alloc_file_pseudo+0xc8/0x240 fs/file_table.c:329
+ __anon_inode_getfile+0x10d/0x360 fs/anon_inodes.c:109
+ __do_sys_perf_event_open+0x124a/0x1ee0 kernel/events/core.c:12624
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3f/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7f5dbfed1d2d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f5dbf242028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007f5dc000ef80 RCX: 00007f5dbfed1d2d
+RDX: ff7fffffffffffff RSI: 0000000000000000 RDI: 0000000020000700
+RBP: 00007f5dbff334a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000006 R14: 00007f5dc000ef80 R15: 00007f5dbf222000
+ </TASK>
+new mount options do not match the existing superblock, will be ignored
+netlink: 1288 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 1288 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop1: detected capacity change from 0 to 256
+FAT-fs (loop1): Invalid FSINFO signature: 0x41615252, 0x61417200 (sector = 1)
+loop1: detected capacity change from 0 to 256
+FAT-fs (loop1): Invalid FSINFO signature: 0x41615252, 0x61417200 (sector = 1)
+loop1: detected capacity change from 0 to 256
+FAT-fs (loop1): Invalid FSINFO signature: 0x41615252, 0x61417200 (sector = 1)
+loop0: detected capacity change from 0 to 256
+loop0: detected capacity change from 0 to 256
+loop0: detected capacity change from 0 to 256
+loop0: detected capacity change from 0 to 256
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 519
+tmpfs: Unknown parameter '˝¨·eƒN_ÕÔò[[uDçÜ€7Ë\pGGN.r©Û¥¡Òäîb˛?ƒµMÊÓóú–∂—|Ô∏XBöa< ‹ÛÄÖ[àqc◊¶ƒ…5˜
+^Õ'¶≥H“L∏&Á¿›ï'
+loop0: detected capacity change from 0 to 519
+tmpfs: Unknown parameter '˝¨·eƒN_ÕÔò[[uDçÜ€7Ë\pGGN.r©Û¥¡Òäîb˛?ƒµMÊÓóú–∂—|Ô∏XBöa< ‹ÛÄÖ[àqc◊¶ƒ…5˜
+^Õ'¶≥H“L∏&Á¿›ï'
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop7: detected capacity change from 0 to 1036
+loop0: detected capacity change from 0 to 2048
+EXT4-fs: Mount option(s) incompatible with ext2
+loop7: detected capacity change from 0 to 1036
+loop0: detected capacity change from 0 to 2048
+EXT4-fs: Mount option(s) incompatible with ext2
+loop0: detected capacity change from 0 to 2048
+EXT4-fs: Mount option(s) incompatible with ext2
+loop0: detected capacity change from 0 to 2048
+EXT4-fs: Mount option(s) incompatible with ext2
+loop7: detected capacity change from 0 to 1036
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+EXT4-fs warning (device sda): ext4_resize_begin:83: There are errors in the filesystem, so online resizing is not allowed
+loop1: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'init_itab'
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop1: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'init_itab'
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop7: detected capacity change from 0 to 1036
+loop1: detected capacity change from 0 to 1024
+ext4: Unknown parameter 'init_itab'
+loop7: detected capacity change from 1036 to 917
+loop7: detected capacity change from 917 to 1030
+loop7: detected capacity change from 0 to 1036
+loop7: detected capacity change from 1036 to 917
+loop7: detected capacity change from 917 to 1030
+loop7: detected capacity change from 0 to 1036
+loop7: detected capacity change from 1036 to 917
+loop7: detected capacity change from 917 to 1030
+I/O error, dev loop7, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop7: detected capacity change from 0 to 1036
+new mount options do not match the existing superblock, will be ignored
+new mount options do not match the existing superblock, will be ignored
+loop7: detected capacity change from 0 to 1036
+new mount options do not match the existing superblock, will be ignored
+loop1: detected capacity change from 0 to 4096
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 4096
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop1: detected capacity change from 0 to 4096
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+kauditd_printk_skb: 79 callbacks suppressed
+audit: type=1326 audit(1698827000.505:159): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=7758 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fef331ddd2d code=0x0
+audit: type=1326 audit(1698827001.348:160): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=7774 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fef331ddd2d code=0x0
+audit: type=1326 audit(1698827001.368:161): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=7780 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fef331ddd2d code=0x0
+loop7: detected capacity change from 0 to 1036
+loop7: detected capacity change from 1036 to 1030
+I/O error, dev loop7, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+audit: type=1326 audit(1698827001.474:162): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=7780 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fef331ddd2d code=0x0

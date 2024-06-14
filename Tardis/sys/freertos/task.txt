@@ -1,0 +1,67 @@
+resource TaskHandle_t[intptr]
+type eTaskState int32
+type StackType_t int64
+type TaskHookFunction_t intptr
+type configSTACK_DEPTH_TYPE int16
+type TaskStatus_t xTASK_STATUS
+
+xTASK_STATUS {
+#   The handle of the task to which the rest of the information in the structure relates.
+	xHandle			TaskHandle_t
+#  A pointer to the task's name.  This value will be invalid if the task was deleted since the structure was populated! */ /*lint !e971 Unqualified char types are allowed for strings and single characters only.
+	pcTaskName		VoidBlob
+	xTaskNumber		UBaseType_t
+	eCurrentState		eTaskState
+	uxCurrentPriority	UBaseType_t
+	uxBasePriority		UBaseType_t
+	ulRunTimeCounter	UBaseType_t
+	pxStackBase		ptr[in, StackType_t]
+	usStackHighWaterMark	configSTACK_DEPTH_TYPE
+}
+
+TimeOut_t {
+	xOverflowCount	BaseType_t
+	xTimeOnEntering	TickType_t
+}
+
+uxTaskGetSystemState(pxTaskStatusArray ptr[in, TaskStatus_t], uxArraySize UBaseType_t, pulTotalRunTime VoidBlob)
+
+vTaskGetInfo(xTask TaskHandle_t, pxTaskStatus ptr[in, TaskStatus_t], xGetFreeStackSpace BaseType_t, eState eTaskState)
+
+xTaskGetApplicationTaskTag(xTask TaskHandle_t)
+
+xTaskGetApplicationTaskTagFromISR(xTask TaskHandle_t)
+
+xTaskGetCurrentTaskHandle() TaskHandle_t
+
+xTaskGetHandle(pcNameToQuery ptr[in, string]) TaskHandle_t
+
+xTaskGetTickCount()
+
+xTaskGetTickCountFromISR()
+
+xTaskGetSchedulerState()
+
+uxTaskGetNumberOfTasks()
+
+vTaskList(pcWriteBuffer ptr[in, string])
+
+vTaskStartTrace(pcBuffer ptr[in, string], ulBufferSize intptr)
+
+ulTaskEndTrace()
+
+vTaskGetRunTimeStats(pcWriteBuffer ptr[out, string])
+
+xTaskGetIdleRunTimeCounter()
+
+vTaskSetApplicationTaskTag(xTask TaskHandle_t, pxTagValue TaskHookFunction_t)
+
+xTaskCallApplicationTaskHook(xTask TaskHandle_t, pvParameter VoidBlob)
+
+vTaskSetThreadLocalStoragePointer(xTaskToSet TaskHandle_t, xIndex BaseType_t, pvValue VoidBlob)
+
+pvTaskGetThreadLocalStoragePointer(xTaskToQuery TaskHandle_t, xIndex BaseType_t)
+
+vTaskSetTimeOutState(pxTimeOut ptr[out, TimeOut_t])
+
+xTaskCheckForTimeOut(pxTimeOut ptr[out, TimeOut_t], pxTicksToWait ptr[out, TickType_t])

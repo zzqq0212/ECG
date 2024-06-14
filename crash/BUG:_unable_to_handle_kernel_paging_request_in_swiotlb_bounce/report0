@@ -1,0 +1,100 @@
+BUG: unable to handle page fault for address: ffff8881849ab200
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 2fa01067 P4D 2fa01067 PUD 1463ed063 PMD 1856c7063 PTE 800ffffe7b654060
+Oops: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 6 PID: 97 Comm: kworker/6:1H Not tainted 6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: kblockd blk_mq_run_work_fn
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff8881049bf510 EFLAGS: 00010093
+RAX: ffff8880bf064800 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881849ab200 RDI: ffff8880bf064800
+RBP: ffff888100fe00b8 R08: 0000000000000000 R09: fffffbfff3422b00
+R10: ffffffff9a115807 R11: 00000000004960a0 R12: ffff8881849ab200
+R13: 0000000000000e00 R14: ffff8880bf064800 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff8881f7300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881849ab200 CR3: 000000012f1e8002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ swiotlb_bounce+0x2ed/0x510 kernel/dma/swiotlb.c:899
+ swiotlb_tbl_map_single+0xc2b/0xf90 kernel/dma/swiotlb.c:1343
+ swiotlb_map+0xde/0x6e0 kernel/dma/swiotlb.c:1480
+ dma_direct_map_page kernel/dma/direct.h:103 [inline]
+ dma_direct_map_sg+0x3d8/0x840 kernel/dma/direct.c:492
+ __dma_map_sg_attrs+0xbb/0x1d0 kernel/dma/mapping.c:199
+ dma_map_sg_attrs+0x34/0x50 kernel/dma/mapping.c:236
+ ata_sg_setup drivers/ata/libata-core.c:4741 [inline]
+ ata_qc_issue+0x5e9/0xb30 drivers/ata/libata-core.c:5043
+ ata_scsi_translate drivers/ata/libata-scsi.c:1717 [inline]
+ __ata_scsi_queuecmd+0x890/0x1150 drivers/ata/libata-scsi.c:4153
+ ata_scsi_queuecmd+0x132/0x200 drivers/ata/libata-scsi.c:4198
+ scsi_dispatch_cmd drivers/scsi/scsi_lib.c:1518 [inline]
+ scsi_queue_rq+0xb73/0x2bd0 drivers/scsi/scsi_lib.c:1760
+ blk_mq_dispatch_rq_list+0x3b6/0x1b50 block/blk-mq.c:2070
+ __blk_mq_do_dispatch_sched block/blk-mq-sched.c:170 [inline]
+ blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
+ __blk_mq_sched_dispatch_requests+0xbf4/0x13c0 block/blk-mq-sched.c:309
+ blk_mq_sched_dispatch_requests+0xbb/0x110 block/blk-mq-sched.c:331
+ blk_mq_run_work_fn+0x131/0x190 block/blk-mq.c:2455
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2633
+ process_scheduled_works kernel/workqueue.c:2706 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2787
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:243
+ </TASK>
+Modules linked in:
+CR2: ffff8881849ab200
+---[ end trace 0000000000000000 ]---
+RIP: 0010:memcpy+0xc/0x20 arch/x86/lib/memcpy_64.S:38
+Code: e9 f4 fd ff ff 66 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 48 89 f8 48 89 d1 <f3> a4 e9 58 55 32 00 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90
+RSP: 0018:ffff8881049bf510 EFLAGS: 00010093
+RAX: ffff8880bf064800 RBX: 0000000000000e00 RCX: 0000000000000e00
+RDX: 0000000000000e00 RSI: ffff8881849ab200 RDI: ffff8880bf064800
+RBP: ffff888100fe00b8 R08: 0000000000000000 R09: fffffbfff3422b00
+R10: ffffffff9a115807 R11: 00000000004960a0 R12: ffff8881849ab200
+R13: 0000000000000e00 R14: ffff8880bf064800 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff8881f7300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff8881849ab200 CR3: 000000012f1e8002 CR4: 0000000000770ef0
+PKRU: 55555554
+note: kworker/6:1H[97] exited with irqs disabled
+note: kworker/6:1H[97] exited with preempt_count 1
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=260 sclass=netlink_route_socket pid=377943 comm=syz-executor.0
+loop1: detected capacity change from 0 to 2048
+----------------
+Code disassembly (best guess):
+   0:	e9 f4 fd ff ff       	jmp    0xfffffdf9
+   5:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+   c:	00 00
+   e:	90                   	nop
+   f:	90                   	nop
+  10:	90                   	nop
+  11:	90                   	nop
+  12:	90                   	nop
+  13:	90                   	nop
+  14:	90                   	nop
+  15:	90                   	nop
+  16:	90                   	nop
+  17:	90                   	nop
+  18:	90                   	nop
+  19:	90                   	nop
+  1a:	90                   	nop
+  1b:	90                   	nop
+  1c:	90                   	nop
+  1d:	90                   	nop
+  1e:	f3 0f 1e fa          	endbr64
+  22:	66 90                	xchg   %ax,%ax
+  24:	48 89 f8             	mov    %rdi,%rax
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 58 55 32 00       	jmp    0x325589
+  31:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00 00
+  3c:	66 90                	xchg   %ax,%ax
+  3e:	90                   	nop
+  3f:	90                   	nop

@@ -1,0 +1,569 @@
+loop1: detected capacity change from 0 to 8
+squashfs: Unknown parameter 'euid'
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 25132 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 0 PID: 25132 Comm: syz-executor.5 Not tainted 6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000bd2b350
+x29: ffff80000bd2b350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff6c32444705a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff6c326773fa80 x21: ffff6c3244470000
+x20: ffff80000bd2b410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc61d2db24000
+x8 : ffff6c32425c1980 x7 : 00000000eb22ec0c x6 : 000000000003a248
+x5 : ffffc61d2c5b7000 x4 : ffffc61d2a672ec8 x3 : ffffc61d2a600000
+x2 : ffff80002a815000 x1 : ffff800008072ec8 x0 : 0000000000000f9b
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1256
+hardirqs last  enabled at (1255): [<ffffc61d2bbf0538>] __exit_to_kernel_mode data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:84 [inline]
+hardirqs last  enabled at (1255): [<ffffc61d2bbf0538>] exit_to_kernel_mode+0x38/0x140 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:94
+hardirqs last disabled at (1256): [<ffffc61d2bbefd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1224): [<ffffc61d2a6178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1224): [<ffffc61d2a6178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1222): [<ffffc61d2a617834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+loop1: detected capacity change from 0 to 8
+squashfs: Unknown parameter 'euid'
+loop1: detected capacity change from 0 to 8
+squashfs: Unknown parameter 'euid'
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 25169 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 1 PID: 25169 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000cebb350
+x29: ffff80000cebb350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff6c32444725a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff6c3263085e80 x21: ffff6c3244472000
+x20: ffff80000cebb410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc61d2db24000
+x8 : ffff6c32634d1980 x7 : 00000000eb22ec0c x6 : 000000000003a248
+x5 : ffffc61d2c5b7000 x4 : ffffc61d2a672ec8 x3 : ffffc61d2a600000
+x2 : ffff80002a815000 x1 : ffff800008072ec8 x0 : 00000000000007dd
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1392
+hardirqs last  enabled at (1391): [<ffffc61d2bc01ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1391): [<ffffc61d2bc01ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1392): [<ffffc61d2bbefd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1376): [<ffffc61d2a6178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1376): [<ffffc61d2a6178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1374): [<ffffc61d2a617834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 25223 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 1 PID: 25223 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000cfe3350
+x29: ffff80000cfe3350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff6c32622225a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff6c325bf44780 x21: ffff6c3262222000
+x20: ffff80000cfe3410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc61d2db24000
+x8 : ffff6c32630e6600 x7 : 00000000eb22ec0c x6 : 000000000003a248
+x5 : ffffc61d2c5b7000 x4 : ffffc61d2a672ec8 x3 : ffffc61d2a600000
+x2 : ffff80002a815000 x1 : ffff800008072ec8 x0 : 000000000000084f
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1116
+hardirqs last  enabled at (1115): [<ffffc61d2bc01ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1115): [<ffffc61d2bc01ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1116): [<ffffc61d2bbefd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1100): [<ffffc61d2a6178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1100): [<ffffc61d2a6178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1098): [<ffffc61d2a617834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+------------[ cut here ]------------
+WARNING: CPU: 2 PID: 25267 at arch/arm64/kvm/mmu.c:1592 kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+Modules linked in:
+CPU: 2 PID: 25267 Comm: syz-executor.5 Tainted: G        W          6.1.61 #3
+Hardware name: linux,dummy-virt (DT)
+pstate: 20000005 (nzCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+lr : kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+sp : ffff80000d01b350
+x29: ffff80000d01b350 x28: 0000000000000030 x27: ffffffffffffffe0
+x26: 0000000000000fff x25: ffff6c324dd285a0 x24: 0000000000000000
+x23: 0000000000000000 x22: ffff6c32677faf00 x21: ffff6c324dd28000
+x20: ffff80000d01b410 x19: 0000000000002000 x18: 0000000000000000
+x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc61d2db24000
+x8 : ffff6c32630e6600 x7 : 00000000eb22ec0c x6 : 000000000003a248
+x5 : ffffc61d2c5b7000 x4 : ffffc61d2a672ec8 x3 : ffffc61d2a600000
+x2 : ffff80002a815000 x1 : ffff800008072ec8 x0 : 00000000000008c1
+Call trace:
+ kvm_age_gfn+0x64/0xdc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/mmu.c:1592
+ __kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:635 [inline]
+ kvm_handle_hva_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:672 [inline]
+ kvm_mmu_notifier_clear_flush_young+0x11c/0x300 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kvm/../../../virt/kvm/kvm_main.c:870
+ __mmu_notifier_clear_flush_young+0xa0/0x110 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/mmu_notifier.c:377
+ mmu_notifier_clear_flush_young data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/mmu_notifier.h:423 [inline]
+ folio_referenced_one+0x334/0x3e4 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:846
+ rmap_walk_anon+0x1e0/0x3cc data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2451
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2527 [inline]
+ rmap_walk data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:2522 [inline]
+ folio_referenced+0x1b4/0x270 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/rmap.c:933
+ folio_check_references data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1456 [inline]
+ shrink_folio_list+0x720/0x108c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:1789
+ reclaim_folio_list+0x94/0x194 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2688
+ reclaim_pages+0x128/0x1c0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/vmscan.c:2724
+ madvise_cold_or_pageout_pte_range+0x5d8/0xc90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:403
+ walk_pmd_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:128 [inline]
+ walk_pud_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:205 [inline]
+ walk_p4d_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:240 [inline]
+ walk_pgd_range+0x4c0/0x734 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:277
+ __walk_page_range+0x1c8/0x1d0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:379
+ walk_page_range+0x1cc/0x240 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/pagewalk.c:477
+ madvise_pageout_page_range data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:552 [inline]
+ madvise_pageout+0x120/0x2f0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:589
+ madvise_vma_behavior data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1021 [inline]
+ madvise_walk_vmas data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1250 [inline]
+ do_madvise+0x698/0x1310 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1429
+ __do_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1442 [inline]
+ __se_sys_madvise data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440 [inline]
+ __arm64_sys_madvise+0x2c/0x40 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/mm/madvise.c:1440
+ __invoke_syscall data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall+0x5c/0x164 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:52
+ el0_svc_common.constprop.0+0x6c/0x15c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x4c/0x100 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/syscall.c:206
+ el0_svc+0x48/0xc0 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:637
+ el0t_64_sync_handler+0xf4/0x120 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:655
+ el0t_64_sync+0x18c/0x190 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry.S:585
+irq event stamp: 1148
+hardirqs last  enabled at (1147): [<ffffc61d2bc01ed8>] __raw_spin_unlock_irq data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/./include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (1147): [<ffffc61d2bc01ed8>] _raw_spin_unlock_irq+0x38/0x70 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/kernel/locking/spinlock.c:202
+hardirqs last disabled at (1148): [<ffffc61d2bbefd14>] el1_dbg+0x24/0x90 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/entry-common.c:405
+softirqs last  enabled at (1138): [<ffffc61d2a6178cc>] __put_cpu_fpsimd_context data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:260 [inline]
+softirqs last  enabled at (1138): [<ffffc61d2a6178cc>] put_cpu_fpsimd_context+0x2c/0x74 data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:272
+softirqs last disabled at (1136): [<ffffc61d2a617834>] get_cpu_fpsimd_context+0x0/0x6c data/embfuzz/emblinux/linux-4a61839152cc3e9e00ac059d73a28d148d622b30/arch/arm64/kernel/fpsimd.c:261
+---[ end trace 0000000000000000 ]---
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+audit: type=1326 audit(2000000055.076:10140): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+unable to read xattr id index table
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop7: detected capacity change from 0 to 512
+audit: type=1326 audit(2000000055.592:10141): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop5: detected capacity change from 0 to 2048
+audit: type=1326 audit(2000000056.088:10142): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+audit: type=1326 audit(2000000056.636:10143): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+audit: type=1326 audit(2000000057.184:10144): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+audit: type=1326 audit(2000000057.728:10145): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+audit: type=1326 audit(2000000058.264:10146): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+audit: type=1326 audit(2000000058.784:10147): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25341 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x0
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop5: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+TCP: request_sock_TCP: Possible SYN flooding on port 20002. Dropping request.  Check SNMP counters.
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+TCP: request_sock_TCP: Possible SYN flooding on port 20002. Dropping request.  Check SNMP counters.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop5: detected capacity change from 0 to 2048
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 8
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+TCP: request_sock_TCP: Possible SYN flooding on port 20002. Dropping request.  Check SNMP counters.
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+loop4: detected capacity change from 0 to 128
+squashfs: SQUASHFS error: Xattrs in filesystem, these will be ignored
+unable to read xattr id index table
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): ext4_check_descriptors: Checksum for group 0 failed (5675!=39978)
+ext4: Unknown parameter 'Œ‘?ëî&ëVı ÌÜ°Î'
+EXT4-fs error (device loop4): __ext4_fill_super:5399: inode #2: comm syz-executor.4: iget: checksum invalid
+EXT4-fs (loop4): get root inode failed
+EXT4-fs (loop4): mount failed
+TCP: request_sock_TCP: Possible SYN flooding on port 20002. Dropping request.  Check SNMP counters.
+loop1: detected capacity change from 0 to 8
+loop4: detected capacity change from 0 to 128
+loop3: detected capacity change from 0 to 512
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+EXT4-fs (loop4): ext4_check_descriptors: Checksum for group 0 failed (5675!=39978)
+EXT4-fs error (device loop4): __ext4_fill_super:5399: inode #2: comm syz-executor.4: iget: checksum invalid
+EXT4-fs (loop4): get root inode failed
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'Œ‘?ëî&ëVı ÌÜ°Î'
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'Œ‘?ëî&ëVı ÌÜ°Î'
+loop1: detected capacity change from 0 to 8
+loop3: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 128
+EXT4-fs (loop3): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+EXT4-fs (loop4): ext4_check_descriptors: Checksum for group 0 failed (5675!=39978)
+loop1: detected capacity change from 0 to 8
+EXT4-fs error (device loop4): __ext4_fill_super:5399: inode #2: comm syz-executor.4: iget: checksum invalid
+EXT4-fs (loop4): get root inode failed
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): The kernel was not built with CONFIG_QUOTA and CONFIG_QFMT_V2
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop7: detected capacity change from 0 to 1036
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+loop1: detected capacity change from 0 to 8
+audit: type=1326 audit(2000000073.240:10148): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25585 comm="syz-executor.6" exe="/syz-executor.6" sig=0 arch=c00000b7 syscall=113 compat=0 ip=0x43b3d4 code=0x7fc00000
+audit: type=1326 audit(2000000073.244:10149): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25585 comm="syz-executor.6" exe="/syz-executor.6" sig=0 arch=c00000b7 syscall=64 compat=0 ip=0x41533c code=0x7fc00000
+audit: type=1326 audit(2000000073.244:10150): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25585 comm="syz-executor.6" exe="/syz-executor.6" sig=0 arch=c00000b7 syscall=64 compat=0 ip=0x41533c code=0x7fc00000
+audit: type=1326 audit(2000000073.244:10151): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=25585 comm="syz-executor.6" exe="/syz-executor.6" sig=0 arch=c00000b7 syscall=94 compat=0 ip=0x439be4 code=0x7fc00000
+loop4: detected capacity change from 0 to 128
+EXT4-fs (loop4): ext4_check_descriptors: Checksum for group 0 failed (5675!=39978)
+EXT4-fs error (device loop4): __ext4_fill_super:5399: inode #2: comm syz-executor.4: iget: checksum invalid
+EXT4-fs (loop4): get root inode failed
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 8
+squashfs: Unknown parameter 'óô}÷õÄ÷:[Âc˚†]Å@EQπnåP∏àÑe_;W±∫y®≈ó‘IXJ®∑µ◊"à¿;˚ÆÒPÃ>î…ÔÓ|Ü¨A-hºKÓjÅœËré'Û/Í–`Ç∆GtM~Â:Ä'

@@ -1,0 +1,77 @@
+include <lib_str.h>
+
+resource str_ptr_res[intptr]
+# resource str_len_res[CPU_SIZE_T]
+# resource str_cmp_res[CPU_INT16S]
+# resource str_fmt_res[int32]
+
+Str_Len(pstr ptr[in, CPU_CHAR]) (ignore_return)
+# str_len_res
+Str_Len_N(pstr ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+# str_len_res
+Str_Copy(pstr_dest ptr[out, CPU_CHAR], pstr_src ptr[in, CPU_CHAR]) str_ptr_res
+Str_Copy_N(pstr_dest ptr[out, CPU_CHAR], pstr_src ptr[in, CPU_CHAR], len_max CPU_SIZE_T) str_ptr_res
+Str_Cat(pstr_dest ptr[in, CPU_CHAR], pstr_cat ptr[in, CPU_CHAR]) str_ptr_res
+Str_Cat_N(pstr_dest ptr[in, CPU_CHAR], pstr_cat ptr[in, CPU_CHAR], len_max CPU_SIZE_T) str_ptr_res
+Str_Cmp(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR]) (ignore_return)
+# str_cmp_res
+Str_Cmp_N(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR]) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase_N(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_Char(pstr ptr[in, CPU_CHAR], srch_char CPU_CHAR) str_ptr_res
+Str_Char_N(pstr ptr[in, CPU_CHAR], len_max CPU_SIZE_T, srch_char CPU_CHAR) str_ptr_res
+Str_Char_Last(pstr ptr[in, CPU_CHAR], srch_char CPU_CHAR) str_ptr_res
+Str_Char_Last_N(pstr ptr[in, CPU_CHAR], len_max CPU_SIZE_T, srch_char CPU_CHAR) str_ptr_res
+Str_Char_Replace(pstr ptr[in, CPU_CHAR], char_srch CPU_CHAR, char_replace CPU_CHAR) str_ptr_res
+Str_Char_Replace_N(pstr ptr[in, CPU_CHAR], char_srch CPU_CHAR, char_replace CPU_CHAR, len_max CPU_SIZE_T) str_ptr_res
+Str_Str(pstr ptr[in, CPU_CHAR], pstr_srch ptr[in, CPU_CHAR]) str_ptr_res
+Str_Str_N(pstr ptr[in, CPU_CHAR], pstr_srch ptr[in, CPU_CHAR], len_max CPU_SIZE_T) str_ptr_res
+Str_FmtNbr_Int32U(nbr CPU_INT32U, nbr_dig CPU_INT08U, nbr_base CPU_INT08U, lead_char CPU_CHAR, lower_case CPU_BOOLEAN, nul CPU_BOOLEAN, pstr ptr[in, CPU_CHAR]) str_ptr_res
+Str_FmtNbr_Int32S(nbr CPU_INT32S, nbr_dig CPU_INT08U, nbr_base CPU_INT08U, lead_char CPU_CHAR, lower_case CPU_BOOLEAN, nul CPU_BOOLEAN, pstr ptr[in, CPU_CHAR]) str_ptr_res
+# Str_FmtNbr_32(nbr CPU_FP32, nbr_dig CPU_INT08U, nbr_dp CPU_INT08U, lead_char CPU_CHAR, nul CPU_BOOLEAN, pstr ptr[in, CPU_CHAR]) str_ptr_res
+Str_ParseNbr_Int32U(pstr ptr[in, CPU_CHAR], pstr_next ptr[in, ptr[in, CPU_CHAR]], nbr_base CPU_INT08U) (ignore_return)
+# str_fmt_res
+Str_ParseNbr_Int32S(pstr ptr[in, CPU_CHAR], pstr_next ptr[in, ptr[in, CPU_CHAR]], nbr_base CPU_INT08U) (ignore_return)
+# str_fmt_res
+
+Str_Copy$res(pstr_dest ptr[out, CPU_CHAR], pstr_src str_ptr_res) str_ptr_res
+Str_Copy_N$res(pstr_dest ptr[out, CPU_CHAR], pstr_src str_ptr_res, len_max CPU_SIZE_T) str_ptr_res
+Str_Cat$res(pstr_dest ptr[in, CPU_CHAR], pstr_cat str_ptr_res) str_ptr_res
+Str_Cat_N$res(pstr_dest ptr[in, CPU_CHAR], pstr_cat str_ptr_res, len_max CPU_SIZE_T) str_ptr_res
+Str_Cmp$res(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res) (ignore_return)
+# str_cmp_res
+Str_Cmp_N$res(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res, len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase$res(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase_N$res(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res, len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_Char$res(pstr str_ptr_res, srch_char CPU_CHAR) str_ptr_res
+# res$Str_Char_N(pstr str_ptr_res, len_max CPU_SIZE_T, srch_char CPU_CHAR) str_ptr_res
+# res$Str_Char_Last(pstr str_ptr_res, srch_char CPU_CHAR) str_ptr_res
+# res$Str_Char_Last_N(pstr str_ptr_res, len_max CPU_SIZE_T, srch_char CPU_CHAR) str_ptr_res
+# res$Str_Char_Replace(pstr str_ptr_res, char_srch CPU_CHAR, char_replace CPU_CHAR) str_ptr_res
+# res$Str_Char_Replace_N(pstr str_ptr_res, char_srch CPU_CHAR, char_replace CPU_CHAR, len_max CPU_SIZE_T) str_ptr_res
+Str_Str$res(pstr ptr[in, CPU_CHAR], pstr_srch str_ptr_res) str_ptr_res
+Str_Str_N$res(pstr ptr[in, CPU_CHAR], pstr_srch str_ptr_res, len_max CPU_SIZE_T) str_ptr_res
+
+Str_Cat$res1(pstr_dest str_ptr_res, pstr_cat ptr[in, CPU_CHAR]) str_ptr_res
+Str_Cat_N$res1(pstr_dest str_ptr_res, pstr_cat ptr[in, CPU_CHAR], len_max CPU_SIZE_T) str_ptr_res
+Str_Cmp$res1(p1_str str_ptr_res, p2_str ptr[in, CPU_CHAR]) (ignore_return)
+# str_cmp_res
+Str_Cmp_N$res1(p1_str str_ptr_res, p2_str ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase$res1(p1_str str_ptr_res, p2_str ptr[in, CPU_CHAR]) (ignore_return)
+# str_cmp_res
+Str_CmpIgnoreCase_N$res1(p1_str str_ptr_res, p2_str ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+# str_cmp_res
+Str_Str$res1(pstr str_ptr_res, pstr_srch ptr[in, CPU_CHAR]) str_ptr_res
+Str_Str_N$res1(pstr str_ptr_res, pstr_srch ptr[in, CPU_CHAR], len_max CPU_SIZE_T) str_ptr_res
+
+type CPU_INT08U int8
+# type CPU_INT16S int16
+type CPU_INT32S int32
+type CPU_INT32U int32

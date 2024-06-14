@@ -1,0 +1,50 @@
+==================================================================
+BUG: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+
+write to 0xffff95a9010a7cd8 of 16 bytes by task 1417 on cpu 0:
+ set_inode_attr fs/kernfs/inode.c:163 [inline]
+ kernfs_refresh_inode+0x8d/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_open fs/open.c:1430 [inline]
+ __se_sys_open fs/open.c:1426 [inline]
+ __x64_sys_open+0xac/0x110 fs/open.c:1426
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff95a9010a7cd8 of 16 bytes by task 94 on cpu 1:
+ set_inode_attr fs/kernfs/inode.c:163 [inline]
+ kernfs_refresh_inode+0x8d/0x160 fs/kernfs/inode.c:178
+ kernfs_iop_permission+0x79/0xc0 fs/kernfs/inode.c:289
+ do_inode_permission fs/namei.c:461 [inline]
+ inode_permission fs/namei.c:528 [inline]
+ inode_permission+0x1b1/0x2d0 fs/namei.c:503
+ may_lookup fs/namei.c:1720 [inline]
+ link_path_walk.part.0.constprop.0+0x46b/0x660 fs/namei.c:2267
+ link_path_walk fs/namei.c:2452 [inline]
+ path_lookupat+0x64/0x3d0 fs/namei.c:2478
+ filename_lookup+0x186/0x360 fs/namei.c:2508
+ user_path_at_empty+0x46/0x70 fs/namei.c:2907
+ do_readlinkat+0x75/0x1d0 fs/stat.c:477
+ __do_sys_readlinkat fs/stat.c:504 [inline]
+ __se_sys_readlinkat fs/stat.c:501 [inline]
+ __x64_sys_readlinkat+0x52/0x60 fs/stat.c:501
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 94 Comm: systemd-udevd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+hrtimer: interrupt took 29980 ns

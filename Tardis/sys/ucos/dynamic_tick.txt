@@ -1,0 +1,7 @@
+# resource os_tick_res[OS_TICK]
+
+# OS_DynTickGet() os_tick_res
+# OS_DynTickSet(ticks os_tick_res) os_tick_res
+# OSTimeDynTick(ticks os_tick_res)
+
+type OS_TICK int32[1:9]

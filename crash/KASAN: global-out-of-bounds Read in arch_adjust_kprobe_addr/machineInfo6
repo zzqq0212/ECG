@@ -1,0 +1,90 @@
+QEMU emulator version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.17)
+qemu-system-x86_64 ["-m" "4096" "-smp" "5" "-chardev" "socket,id=SOCKSYZ,server=on,wait=off,host=localhost,port=9693" "-mon" "chardev=SOCKSYZ,mode=control" "-display" "none" "-serial" "stdio" "-no-reboot" "-name" "VM-1" "-device" "virtio-rng-pci" "-enable-kvm" "-cpu" "host,migratable=off" "-device" "e1000,netdev=net0" "-netdev" "user,id=net0,restrict=on,hostfwd=tcp:127.0.0.1:24946-:22,hostfwd=tcp::51166-:6060" "-hda" "/root/zhangqiang/images/bullseye.img" "-snapshot" "-kernel" "/root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.8/arch/x86/boot/bzImage" "-append" "root=/dev/sda console=ttyS0 "]
+
+[CPU Info]
+processor           : 0, 1, 2, 3, 4
+vendor_id           : AuthenticAMD
+cpu family          : 25
+model               : 1
+model name          : AMD EPYC 7763 64-Core Processor
+stepping            : 1
+microcode           : 0xa0011d1
+cpu MHz             : 2449.998
+cache size          : 512 KB
+physical id         : 0
+siblings            : 5
+core id             : 0, 1, 2, 3, 4
+cpu cores           : 5
+apicid              : 0, 1, 2, 3, 4
+initial apicid      : 0, 1, 2, 3, 4
+fpu                 : yes
+fpu_exception       : yes
+cpuid level         : 16
+wp                  : yes
+flags               : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean pausefilter pfthreshold v_vmsave_vmload vgif umip pku ospke vaes vpclmulqdq rdpid fsrm arch_capabilities
+bugs                : sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass srso
+bogomips            : 4899.99
+TLB size            : 1024 4K pages
+clflush size        : 64
+cache_alignment     : 64
+address sizes       : 48 bits physical, 48 bits virtual
+power management    : 
+
+--------------------------------------------------------------------------------
+
+[KVM]
+/sys/module/kvm:
+	eager_page_split: Y
+	enable_pmu: Y
+	enable_vmware_backdoor: N
+	flush_on_reuse: N
+	force_emulation_prefix: 0
+	halt_poll_ns: 200000
+	halt_poll_ns_grow: 2
+	halt_poll_ns_grow_start: 10000
+	halt_poll_ns_shrink: 0
+	ignore_msrs: N
+	kvmclock_periodic_sync: Y
+	lapic_timer_advance_ns: -1
+	min_timer_period_us: 200
+	mitigate_smt_rsb: N
+	mmio_caching: Y
+	nx_huge_pages: N
+	nx_huge_pages_recovery_period_ms: 0
+	nx_huge_pages_recovery_ratio: 60
+	pi_inject_timer: -1
+	report_ignored_msrs: Y
+	tdp_mmu: Y
+	tsc_tolerance_ppm: 250
+	vector_hashing: Y
+
+/sys/module/kvm_intel:
+	allow_smaller_maxphyaddr: N
+	dump_invalid_vmcs: N
+	emulate_invalid_guest_state: Y
+	enable_apicv: Y
+	enable_ipiv: Y
+	enable_shadow_vmcs: Y
+	ept: Y
+	eptad: Y
+	error_on_inconsistent_vmcs_config: Y
+	fasteoi: Y
+	flexpriority: Y
+	nested: Y
+	nested_early_check: N
+	ple_gap: 128
+	ple_window: 4096
+	ple_window_grow: 2
+	ple_window_max: 4294967295
+	ple_window_shrink: 0
+	pml: Y
+	preemption_timer: Y
+	pt_mode: 0
+	unrestricted_guest: Y
+	vmentry_l1d_flush: auto
+	vnmi: Y
+	vpid: Y
+
+
+--------------------------------------------------------------------------------
+

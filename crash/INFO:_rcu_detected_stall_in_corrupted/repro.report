@@ -1,0 +1,234 @@
+rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+systemd[1]: systemd-udevd.service: State 'stop-watchdog' timed out. Killing.
+rcu: 	0-...0: (15 ticks this GP) idle=d5f4/1/0x4000000000000000 softirq=1110/1110 fqs=60374
+rcu: 	2-...0: (27 ticks this GP) idle=7044/1/0x4000000000000000 softirq=1132/1133 fqs=60374
+rcu: 	3-...0: (0 ticks this GP) idle=fa3c/1/0x4000000000000000 softirq=1343/1343 fqs=60374
+rcu: 	Tasks blocked on level-0 rcu_node (CPUs 0-7): P132/1:b..l
+rcu: 	(detected by 7, t=373248 jiffies, g=2501, q=62 ncpus=8)
+Sending NMI from CPU 7 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 PID: 66 Comm: kworker/0:1H Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: kblockd blk_mq_requeue_work
+RIP: 0010:ioread8+0x2e/0x90 lib/iomap.c:81
+Code: 41 54 49 89 fc e8 72 12 4c ff 49 81 fc ff ff 03 00 77 53 e8 64 12 4c ff 49 81 fc 00 00 01 00 76 1c e8 56 12 4c ff 44 89 e2 ec <44> 0f b6 e0 e8 49 12 4c ff 44 89 e0 41 5c e9 da e1 fd 01 e8 3a 12
+RSP: 0018:ffff88810158f6b0 EFLAGS: 00000093
+RAX: 00000000000000c0 RBX: 0000000000000000 RCX: ffffffffaa925f1a
+RDX: 00000000000103f6 RSI: 00000000000101f7 RDI: 00000000000103f6
+RBP: 00000000000103f6 R08: 0000000000000000 R09: 0000000000005fb5
+R10: ffff888101a05003 R11: 0000000000000000 R12: 00000000000103f6
+R13: ffffed102090b001 R14: dffffc0000000000 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff8881f1600000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055df131e6168 CR3: 00000001009e6003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <TASK>
+ ata_sff_altstatus drivers/ata/libata-sff.c:93 [inline]
+ ata_sff_sync drivers/ata/libata-sff.c:142 [inline]
+ ata_sff_pause drivers/ata/libata-sff.c:159 [inline]
+ ata_sff_exec_command+0x121/0x160 drivers/ata/libata-sff.c:434
+ ata_sff_qc_issue+0x347/0x7c0 drivers/ata/libata-sff.c:1301
+ ata_bmdma_qc_issue+0x644/0xc50 drivers/ata/libata-sff.c:2654
+ ata_qc_issue+0x4d1/0xb30 drivers/ata/libata-core.c:5054
+ ata_scsi_translate drivers/ata/libata-scsi.c:1717 [inline]
+ __ata_scsi_queuecmd+0x890/0x1150 drivers/ata/libata-scsi.c:4153
+ ata_scsi_queuecmd+0x132/0x200 drivers/ata/libata-scsi.c:4198
+ scsi_dispatch_cmd drivers/scsi/scsi_lib.c:1516 [inline]
+ scsi_queue_rq+0xb84/0x2bf0 drivers/scsi/scsi_lib.c:1758
+ blk_mq_dispatch_rq_list+0x3b6/0x1af0 block/blk-mq.c:2049
+ __blk_mq_sched_dispatch_requests+0x213/0x13c0 block/blk-mq-sched.c:301
+ blk_mq_sched_dispatch_requests+0xeb/0x150 block/blk-mq-sched.c:333
+ blk_mq_run_hw_queue+0x44f/0x530 block/blk-mq.c:2264
+ blk_mq_run_hw_queues+0x105/0x270 block/blk-mq.c:2313
+ blk_mq_requeue_work+0x525/0x850 block/blk-mq.c:1498
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+INFO: NMI handler (nmi_cpu_backtrace_handler) took too long to run: 1.993 msecs
+Sending NMI from CPU 7 to CPUs 2:
+systemd[1]: systemd-udevd.service: Killing process 141 (systemd-udevd) with signal SIGKILL.
+systemd[1]: systemd-journald.service: State 'stop-watchdog' timed out. Killing.
+systemd[1]: systemd-journald.service: Killing process 124 (systemd-journal) with signal SIGKILL.
+systemd[1]: systemd-journald.service: Killing process 280 (journal-offline) with signal SIGKILL.
+NMI backtrace for cpu 2
+CPU: 2 PID: 72 Comm: kworker/2:1 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: events e1000_watchdog
+RIP: 0010:cpu_relax arch/x86/include/asm/vdso/processor.h:19 [inline]
+RIP: 0010:virt_spin_lock arch/x86/include/asm/qspinlock.h:99 [inline]
+RIP: 0010:queued_spin_lock_slowpath+0x147/0xbe0 kernel/locking/qspinlock.c:327
+Code: 2b 04 25 28 00 00 00 0f 85 b1 0a 00 00 48 81 c4 88 00 00 00 5b 5d 41 5c 41 5d 41 5e 41 5f e9 3b 54 19 00 e8 9b 84 67 fd f3 90 <e9> 5c ff ff ff e8 8f 84 67 fd 44 8b 7c 24 48 41 81 ff 00 01 00 00
+RSP: 0018:ffff8881f1709e10 EFLAGS: 00000046
+RAX: 0000000000010002 RBX: 1ffff1103e2e13c3 RCX: ffffffffac76ecd5
+RDX: ffff8881008ed500 RSI: 0000000000000004 RDI: ffffffffad820000
+RBP: ffffffffad820000 R08: 0000000000000000 R09: fffffbfff5b04000
+R10: ffffffffad820003 R11: ffff8881f1709ff8 R12: 0000000000000001
+R13: 0000000000000003 R14: fffffbfff5b04000 R15: 0000000000000001
+FS:  0000000000000000(0000) GS:ffff8881f1700000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055df131f6990 CR3: 00000002126a4003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <IRQ>
+ queued_spin_lock include/asm-generic/qspinlock.h:114 [inline]
+ do_raw_spin_lock include/linux/spinlock.h:187 [inline]
+ __raw_spin_lock include/linux/spinlock_api_smp.h:134 [inline]
+ _raw_spin_lock+0xe8/0xf0 kernel/locking/spinlock.c:154
+ rcu_iw_handler+0x3c/0xe0 kernel/rcu/tree_stall.h:226
+ irq_work_single+0xc8/0x160 kernel/irq_work.c:221
+ __flush_smp_call_function_queue+0x4f0/0xa00 kernel/smp.c:545
+ __sysvec_call_function_single+0x25/0x1d0 arch/x86/kernel/smp.c:267
+ sysvec_call_function_single+0x8c/0xa0 arch/x86/kernel/smp.c:262
+ </IRQ>
+ <TASK>
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+RIP: 0010:__sanitizer_cov_trace_pc+0x0/0x70 kernel/kcov.c:200
+Code: e9 c0 cf b1 02 48 89 f7 e9 8d fd ff ff 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 <f3> 0f 1e fa 48 8b 0c 24 65 48 8b 14 25 40 6f 03 00 65 8b 05 c0 fd
+RSP: 0018:ffff888101dc7bb0 EFLAGS: 00000293
+RAX: 0000000000000000 RBX: ffff88810496cb1c RCX: ffffffffac76d7b4
+RDX: ffff8881008ed500 RSI: 0000000000000293 RDI: ffff88810496cb1c
+RBP: 0000000000000293 R08: 0000000000000002 R09: 000000000001de85
+R10: 0000000000000003 R11: ffff88810496ceb8 R12: 0000000000000000
+R13: 0000000000000000 R14: ffff88810496c000 R15: ffff88810496cd98
+ __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:152 [inline]
+ _raw_spin_unlock_irqrestore+0x4a/0x80 kernel/locking/spinlock.c:194
+ spin_unlock_irqrestore include/linux/spinlock.h:406 [inline]
+ e1000_update_stats+0x1463/0x1d70 drivers/net/ethernet/intel/e1000/e1000_main.c:3737
+ e1000_watchdog+0x2f1/0x1300 drivers/net/ethernet/intel/e1000/e1000_main.c:2499
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+INFO: NMI handler (nmi_cpu_backtrace_handler) took too long to run: 2.051 msecs
+Sending NMI from CPU 7 to CPUs 3:
+NMI backtrace for cpu 3
+CPU: 3 PID: 65 Comm: kworker/3:1 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: ata_sff ata_sff_pio_task
+RIP: 0010:cpu_relax arch/x86/include/asm/vdso/processor.h:19 [inline]
+RIP: 0010:virt_spin_lock arch/x86/include/asm/qspinlock.h:99 [inline]
+RIP: 0010:queued_spin_lock_slowpath+0x147/0xbe0 kernel/locking/qspinlock.c:327
+Code: 2b 04 25 28 00 00 00 0f 85 b1 0a 00 00 48 81 c4 88 00 00 00 5b 5d 41 5c 41 5d 41 5e 41 5f e9 3b 54 19 00 e8 9b 84 67 fd f3 90 <e9> 5c ff ff ff e8 8f 84 67 fd 44 8b 7c 24 48 41 81 ff 00 01 00 00
+RSP: 0018:ffff8881f1789e10 EFLAGS: 00000046
+RAX: 0000000000010002 RBX: 1ffff1103e2f13c3 RCX: ffffffffac76ecd5
+RDX: ffff888100caa200 RSI: 0000000000000004 RDI: ffffffffad820000
+RBP: ffffffffad820000 R08: 0000000000000000 R09: fffffbfff5b04000
+R10: ffffffffad820003 R11: ffff8881f1789ff8 R12: 0000000000000001
+R13: 0000000000000003 R14: fffffbfff5b04000 R15: 0000000000000001
+FS:  0000000000000000(0000) GS:ffff8881f1780000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055df131e6168 CR3: 0000000114f84001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <IRQ>
+ queued_spin_lock include/asm-generic/qspinlock.h:114 [inline]
+ do_raw_spin_lock include/linux/spinlock.h:187 [inline]
+ __raw_spin_lock include/linux/spinlock_api_smp.h:134 [inline]
+ _raw_spin_lock+0xe8/0xf0 kernel/locking/spinlock.c:154
+ rcu_iw_handler+0x3c/0xe0 kernel/rcu/tree_stall.h:226
+ irq_work_single+0xc8/0x160 kernel/irq_work.c:221
+ __flush_smp_call_function_queue+0x4f0/0xa00 kernel/smp.c:545
+ __sysvec_call_function_single+0x25/0x1d0 arch/x86/kernel/smp.c:267
+ sysvec_call_function_single+0x8c/0xa0 arch/x86/kernel/smp.c:262
+ </IRQ>
+ <TASK>
+ asm_sysvec_call_function_single+0x1a/0x20 arch/x86/include/asm/idtentry.h:656
+RIP: 0010:preempt_schedule_irq+0x54/0x90 kernel/sched/core.c:7008
+Code: 40 6f 03 00 48 b8 00 00 00 00 00 fc ff df 48 89 eb 48 c1 eb 03 48 01 c3 e8 19 a8 68 fd 65 ff 05 ea a5 8d 53 fb bf 01 00 00 00 <e8> 27 d1 ff ff fa 65 ff 0d d7 a5 8d 53 80 3b 00 75 17 48 8b 45 00
+RSP: 0018:ffff888100cc7cd8 EFLAGS: 00000203
+RAX: 0000000000000000 RBX: ffffed1020195440 RCX: ffffffffac75c957
+RDX: ffff888100caa200 RSI: 0000000000000000 RDI: 0000000000000001
+RBP: ffff888100caa200 R08: 0000000000000001 R09: ffffed103e2f5031
+R10: ffff8881f17a818f R11: 0000000000000000 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+ irqentry_exit+0x21/0x50 kernel/entry/common.c:432
+ asm_sysvec_reschedule_ipi+0x1a/0x20 arch/x86/include/asm/idtentry.h:654
+RIP: 0010:__raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
+RIP: 0010:_raw_spin_unlock_irq+0x3b/0x60 kernel/locking/spinlock.c:202
+Code: 00 00 00 fc ff df 48 89 da 48 c1 ea 03 0f b6 04 02 48 89 da 83 e2 07 38 d0 7f 04 84 c0 75 23 c6 03 00 fb 65 ff 0d 2d 8f 8c 53 <74> 06 5b e9 4d 91 67 fd e8 48 91 67 fd e8 63 90 09 fd 5b e9 3d 91
+RSP: 0018:ffff888100cc7da8 EFLAGS: 00000286
+RAX: 0000000000000000 RBX: ffff888101a05000 RCX: ffffffffac76dfed
+RDX: 0000000000000000 RSI: ffff88810489017c RDI: ffff888101a05000
+RBP: ffff8881048900b8 R08: 0000000000000003 R09: 0000000000005fb5
+R10: ffff888101a05003 R11: ffffffffad820098 R12: ffff888101015e00
+R13: ffff8881f17b7100 R14: 00000000000000c0 R15: ffff88810125a018
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+task:kworker/3:3     state:R  running task     stack:29336 pid:132   tgid:132   ppid:2      flags:0x00004000
+Workqueue: events_freezable_power_ disk_events_workfn
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5376 [inline]
+ __schedule+0xbda/0x2230 kernel/sched/core.c:6688
+ preempt_schedule_common kernel/sched/core.c:6865 [inline]
+ preempt_schedule+0x5f/0x80 kernel/sched/core.c:6889
+ preempt_schedule_thunk+0x1a/0x30 arch/x86/entry/thunk_64.S:45
+ __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:152 [inline]
+ _raw_spin_unlock_irqrestore+0x64/0x80 kernel/locking/spinlock.c:194
+ spin_unlock_irqrestore include/linux/spinlock.h:406 [inline]
+ ata_scsi_queuecmd+0x19d/0x200 drivers/ata/libata-scsi.c:4204
+ scsi_dispatch_cmd drivers/scsi/scsi_lib.c:1516 [inline]
+ scsi_queue_rq+0xb84/0x2bf0 drivers/scsi/scsi_lib.c:1758
+ blk_mq_dispatch_rq_list+0x3b6/0x1af0 block/blk-mq.c:2049
+ __blk_mq_sched_dispatch_requests+0x213/0x13c0 block/blk-mq-sched.c:301
+ blk_mq_sched_dispatch_requests+0xeb/0x150 block/blk-mq-sched.c:333
+ blk_mq_run_hw_queue+0x44f/0x530 block/blk-mq.c:2264
+ blk_execute_rq+0x1a4/0x350 block/blk-mq.c:1405
+ scsi_execute_cmd+0x41d/0x790 drivers/scsi/scsi_lib.c:238
+ sr_get_events drivers/scsi/sr.c:178 [inline]
+ sr_check_events+0x1c6/0x940 drivers/scsi/sr.c:219
+ cdrom_update_events drivers/cdrom/cdrom.c:1468 [inline]
+ cdrom_check_events+0x68/0x110 drivers/cdrom/cdrom.c:1478
+ sr_block_check_events+0xb0/0xf0 drivers/scsi/sr.c:563
+ disk_check_events+0xc1/0x3b0 block/disk-events.c:193
+ process_one_work+0x583/0xda0 kernel/workqueue.c:2627
+ process_scheduled_works kernel/workqueue.c:2700 [inline]
+ worker_thread+0x981/0x11e0 kernel/workqueue.c:2781
+ kthread+0x263/0x330 kernel/kthread.c:388
+ ret_from_fork+0x48/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+ </TASK>
+systemd-journal (124) used greatest stack depth: 24680 bytes left
+systemd[1]: systemd-udevd.service: Main process exited, code=killed, status=6/ABRT
+systemd[1]: systemd-udevd.service: Failed with result 'watchdog'.
+systemd[1]: systemd-udevd.service: Consumed 4min 54.645s CPU time.
+systemd[1]: systemd-journald.service: Main process exited, code=killed, status=9/KILL
+systemd[1]: systemd-journald.service: Failed with result 'watchdog'.
+systemd[1]: systemd-udevd.service: Scheduled restart job, restart counter is at 1.
+systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+systemd[1]: Stopping Flush Journal to Persistent Storage...
+systemd[1]: Stopped Rule-based Manager for Device Events and Files.
+systemd[1]: systemd-udevd.service: Consumed 4min 54.645s CPU time.
+systemd[1]: Starting Rule-based Manager for Device Events and Files...
+systemd[1]: systemd-journal-flush.service: Succeeded.
+systemd[1]: Stopped Flush Journal to Persistent Storage.
+systemd[1]: Stopped Journal Service.
+systemd[1]: Starting Journal Service...
+systemd[1]: Started Rule-based Manager for Device Events and Files.
+systemd-journald[286]: File /var/log/journal/495cb7baaf694f459d942b793c107665/system.journal corrupted or uncleanly shut down, renaming and replacing.
+systemd[1]: Started Journal Service.
+systemd-journald[286]: Received client request to flush runtime journal.
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+cgroup: Unknown subsys name 'memory'
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+audit: type=1400 audit(1710145844.691:6): avc:  denied  { execmem } for  pid=337 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1

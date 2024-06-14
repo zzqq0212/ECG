@@ -1,0 +1,25 @@
+QEMU emulator version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.17)
+qemu-system-aarch64 ["-m" "4096" "-smp" "4" "-chardev" "socket,id=SOCKSYZ,server=on,wait=off,host=localhost,port=32550" "-mon" "chardev=SOCKSYZ,mode=control" "-display" "none" "-serial" "stdio" "-no-reboot" "-name" "VM-15" "-device" "virtio-rng-pci" "-machine" "virt,virtualization=on" "-cpu" "cortex-a57" "-accel" "tcg,thread=multi" "-device" "virtio-net-pci,netdev=net0" "-netdev" "user,id=net0,restrict=on,hostfwd=tcp:127.0.0.1:36937-:22,hostfwd=tcp::12497-:6060" "-hda" "/data/embfuzz/emblinux/exp-asan/rootfs.ext2" "-snapshot" "-kernel" "/data/embfuzz/emblinux/exp-asan/Image" "-append" "root=/dev/vda console=ttyAMA0 console=ttyAMA0 root=/dev/vda"]
+
+[CPU Info]
+processor           : 0, 1, 2, 3
+BogoMIPS            : 125.00
+Features            : fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
+CPU implementer     : 0x41
+CPU architecture    : 8
+CPU variant         : 0x1
+CPU part            : 0xd07
+CPU revision        : 0
+
+--------------------------------------------------------------------------------
+
+[KVM]
+/sys/module/kvm:
+	halt_poll_ns: 500000
+	halt_poll_ns_grow: 2
+	halt_poll_ns_grow_start: 10000
+	halt_poll_ns_shrink: 0
+
+
+--------------------------------------------------------------------------------
+

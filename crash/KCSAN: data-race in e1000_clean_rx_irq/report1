@@ -1,0 +1,30 @@
+==================================================================
+BUG: KCSAN: data-race in e1000_clean_rx_irq+0xb4/0x980 drivers/net/ethernet/intel/e1000/e1000_main.c:4365
+
+race at unknown origin, with read to 0xffff90840104024c of 1 bytes by interrupt on cpu 0:
+ e1000_clean_rx_irq+0xb4/0x980 drivers/net/ethernet/intel/e1000/e1000_main.c:4365
+ e1000_clean+0x4ed/0x12b0 drivers/net/ethernet/intel/e1000/e1000_main.c:3803
+ __napi_poll+0x66/0x390 net/core/dev.c:6567
+ napi_poll net/core/dev.c:6636 [inline]
+ net_rx_action+0x66e/0x780 net/core/dev.c:6795
+ __do_softirq+0xc0/0x28f kernel/softirq.c:566
+ run_ksoftirqd kernel/softirq.c:956 [inline]
+ run_ksoftirqd+0x1d/0x30 kernel/softirq.c:948
+ smpboot_thread_fn+0x1b9/0x390 kernel/smpboot.c:164
+ kthread+0x180/0x1c0 kernel/kthread.c:388
+ ret_from_fork+0x48/0x60 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:243
+
+value changed: 0x00 -> 0x07
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 14 Comm: ksoftirqd/0 Not tainted 6.8.0-rc7-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+cgroup: Unknown subsys name 'memory'
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+kcsan: could not find function: '__call_rcu_common'
+kcsan: could not find function: 'set_tlb_ubc_flush_pending'
+audit: type=1400 audit(1710043234.733:8): avc:  denied  { execmem } for  pid=289 comm="syz-executor.0" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1

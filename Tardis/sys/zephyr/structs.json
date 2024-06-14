@@ -1,0 +1,43 @@
+{   
+    "k_pipe": [
+        [
+            5,
+            "k_spinlock"
+        ]
+
+    ],
+    "k_heap": [
+        [
+            0,
+            "sys_heap"
+        ], 
+        [
+            1,
+            "_wait_q_t"
+        ], 
+        [
+            2,
+            "k_spinlock"
+        ]
+    ],
+    "k_stack": [
+        [
+            0,
+            "_wait_q_t"
+        ],
+        [
+            1,
+            "k_spinlock"
+        ],
+        [
+            2,
+            "stack_data_t"
+        ]
+    ],
+    "k_timeout_t": [
+        [
+            0,
+            "k_ticks_t"
+        ]
+    ]
+}

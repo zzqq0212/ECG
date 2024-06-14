@@ -1,0 +1,3 @@
+QEMU emulator version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.15)
+qemu-system-x86_64 ["-m" "8192" "-smp" "2" "-chardev" "socket,id=SOCKSYZ,server=on,wait=off,host=localhost,port=17495" "-mon" "chardev=SOCKSYZ,mode=control" "-display" "none" "-serial" "stdio" "-no-reboot" "-name" "VM-7" "-device" "virtio-rng-pci" "-enable-kvm" "-cpu" "host,migratable=off" "-device" "e1000,netdev=net0" "-netdev" "user,id=net0,restrict=on,hostfwd=tcp:127.0.0.1:43277-:22" "-hda" "/data/schefuzz/img/stretch.img" "-snapshot" "-kernel" "/data/schefuzz/v65/bzImage" "-append" "root=/dev/sda console=ttyS0 net.ifnames=0"]
+

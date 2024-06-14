@@ -1,0 +1,1047 @@
+Warning: Permanently added '[localhost]:36305' (ED25519) to the list of known hosts.
+syzkaller login: [   50.958143] audit: type=1400 audit(1710503450.738:8): avc:  denied  { execmem } for  pid=271 comm="syz-executor350" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+executing program
+[   50.969102] loop0: detected capacity change from 0 to 512
+[   50.978637] EXT4-fs (loop0): 1 orphan inode deleted
+[   50.979068] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   50.979995] ext4 filesystem being mounted at /syzkaller.kIf35M/0/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   50.991872] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   50.994995] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   50.998666] syz-executor350 (273) used greatest stack depth: 24760 bytes left
+[   51.004329] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.016983] loop0: detected capacity change from 0 to 512
+[   51.026770] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.027254] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.028417] ext4 filesystem being mounted at /syzkaller.kIf35M/1/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.038850] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.040218] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.047099] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.061698] loop0: detected capacity change from 0 to 512
+[   51.071105] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.071486] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.072578] ext4 filesystem being mounted at /syzkaller.kIf35M/2/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.082118] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.083157] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.093180] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.104754] loop0: detected capacity change from 0 to 512
+[   51.114379] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.114775] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.115686] ext4 filesystem being mounted at /syzkaller.kIf35M/3/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.125152] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.126308] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.134363] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.150759] loop0: detected capacity change from 0 to 512
+[   51.159714] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.160286] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.161680] ext4 filesystem being mounted at /syzkaller.kIf35M/4/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.174880] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.176227] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.194757] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.210337] loop0: detected capacity change from 0 to 512
+[   51.219526] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.219940] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.220911] ext4 filesystem being mounted at /syzkaller.kIf35M/5/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.231387] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.232489] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.242440] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.255193] loop0: detected capacity change from 0 to 512
+[   51.264620] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.265117] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.266338] ext4 filesystem being mounted at /syzkaller.kIf35M/6/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.276544] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.277500] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.291210] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.305708] loop0: detected capacity change from 0 to 512
+[   51.316869] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.317403] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.318665] ext4 filesystem being mounted at /syzkaller.kIf35M/7/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.329783] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.330997] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.340449] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.355099] loop0: detected capacity change from 0 to 512
+[   51.364700] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.365120] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.366129] ext4 filesystem being mounted at /syzkaller.kIf35M/8/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.375378] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.376538] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.384541] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.400239] loop0: detected capacity change from 0 to 512
+[   51.410047] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.410419] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.411535] ext4 filesystem being mounted at /syzkaller.kIf35M/9/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.420634] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.421774] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.429059] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.443326] loop0: detected capacity change from 0 to 512
+[   51.454266] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.455049] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.456417] ext4 filesystem being mounted at /syzkaller.kIf35M/10/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.468575] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.469767] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.483190] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.495799] loop0: detected capacity change from 0 to 512
+[   51.506002] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.506382] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.507343] ext4 filesystem being mounted at /syzkaller.kIf35M/11/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.516405] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.517498] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.526219] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.545773] loop0: detected capacity change from 0 to 512
+[   51.555872] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.556263] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.557293] ext4 filesystem being mounted at /syzkaller.kIf35M/12/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.566329] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.567471] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.576531] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.591268] loop0: detected capacity change from 0 to 512
+[   51.600994] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.601598] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.602954] ext4 filesystem being mounted at /syzkaller.kIf35M/13/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.611762] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.613000] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.621097] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.638767] loop0: detected capacity change from 0 to 512
+[   51.649320] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.650065] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.651555] ext4 filesystem being mounted at /syzkaller.kIf35M/14/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.663814] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.665102] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.674169] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+executing program
+[   51.721187] loop0: detected capacity change from 0 to 512
+[   51.730860] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.731230] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.732146] ext4 filesystem being mounted at /syzkaller.kIf35M/16/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.741118] EXT4-fs error (device loop0): ext4_ext_remove_space:2839: inode #15: comm syz-executor350: path[1].p_hdr == NULL
+[   51.742926] EXT4-fs (loop0): Remounting filesystem read-only
+write to /proc/sys/kernel/hung_task_check_interval_secs failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_kallsyms failed: No such file or directory
+write to /proc/sys/net/core/bpf_jit_harden failed: No such file or directory
+write to /proc/sys/kernel/softlockup_all_cpu_backtrace failed: No such file or directory
+[   51.751529] EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+executing program
+[   51.767417] loop0: detected capacity change from 0 to 512
+[   51.776857] EXT4-fs (loop0): 1 orphan inode deleted
+[   51.777236] EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+[   51.778286] ext4 filesystem being mounted at /syzkaller.kIf35M/17/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+[   51.787732] BUG: unable to handle page fault for address: ffff888109d9f000
+[   51.788611] #PF: supervisor read access in kernel mode
+[   51.789226] #PF: error_code(0x0009) - reserved bit violation
+[   51.789753] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 PTE 9da116380000001
+[   51.790470] Oops: 0009 [#1] PREEMPT SMP KASAN NOPTI
+[   51.791241] CPU: 0 PID: 393 Comm: syz-executor350 Not tainted 6.8.0 #1
+[   51.791912] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   51.792744] RIP: 0010:memmove+0x1e/0x1b0
+[   51.793306] Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+[   51.794861] RSP: 0018:ffff888110307828 EFLAGS: 00010216
+[   51.795255] RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+[   51.795791] RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+[   51.796333] RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+[   51.796835] R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+[   51.797340] R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+[   51.797854] FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+[   51.798426] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.798847] CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+[   51.799353] PKRU: 55555554
+[   51.799560] Call Trace:
+[   51.799749]  <TASK>
+[   51.799921]  ? show_regs+0x96/0xa0
+[   51.800198]  ? __die+0x2d/0x80
+[   51.800450]  ? page_fault_oops+0x35e/0x940
+[   51.800768]  ? is_prefetch.constprop.0+0xb7/0x530
+[   51.801123]  ? __pfx_page_fault_oops+0x10/0x10
+[   51.801463]  ? memmove+0x1e/0x1b0
+[   51.801750]  ? __pfx_is_prefetch.constprop.0+0x10/0x10
+[   51.802140]  ? ext4_dirty_inode+0xa5/0x130
+[   51.802467]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.802835]  ? __ext4_journal_stop+0x10b/0x1f0
+[   51.803173]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.803536]  ? search_module_extables+0x76/0x150
+[   51.803887]  ? memmove+0x1e/0x1b0
+[   51.804177]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.804545]  ? fixup_exception+0x115/0xcb0
+[   51.804865]  ? kernelmode_fixup_or_oops+0x238/0x2b0
+[   51.805235]  ? __bad_area_nosemaphore+0x36c/0x610
+[   51.805623]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.805993]  ? do_kern_addr_fault+0x121/0x150
+[   51.806328]  ? exc_page_fault+0x15b/0x180
+[   51.806677]  ? asm_exc_page_fault+0x26/0x30
+[   51.807020]  ? memmove+0x1e/0x1b0
+[   51.807310]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.807695]  ext4_ext_remove_space+0x1e62/0x3ba0
+[   51.808069]  ? __pfx_ext4_ext_remove_space+0x10/0x10
+[   51.808457]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.808840]  ? __pfx_ext4_es_remove_extent+0x10/0x10
+[   51.809224]  ? __pfx_down_write+0x10/0x10
+[   51.809562]  ext4_punch_hole+0xce0/0xfa0
+[   51.809922]  ext4_fallocate+0xd02/0x3760
+[   51.810249]  ? avc_lookup+0x172/0x1d0
+[   51.810558]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.810914]  ? avc_has_extended_perms+0x701/0xba0
+[   51.811307]  ? __pfx_ext4_fallocate+0x10/0x10
+[   51.811635]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.811998]  ? selinux_file_permission+0x122/0x550
+[   51.812549]  ? __pfx_ext4_fallocate+0x10/0x10
+[   51.813039]  vfs_fallocate+0x4a1/0xd00
+[   51.813372]  ioctl_preallocate+0x192/0x210
+[   51.813685]  ? __pfx_ioctl_preallocate+0x10/0x10
+[   51.814049]  ? __pfx_futex_wait+0x10/0x10
+[   51.814367]  ? __pfx_futex_wake+0x10/0x10
+[   51.814717]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.815095]  do_vfs_ioctl+0x1262/0x15b0
+[   51.815410]  ? __pfx_do_vfs_ioctl+0x10/0x10
+[   51.815777]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.816167]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.816519]  ? ioctl_has_perm.constprop.0.isra.0+0x2b8/0x420
+[   51.816932]  ? __pfx_ioctl_has_perm.constprop.0.isra.0+0x10/0x10
+[   51.817360]  ? __pfx_do_futex+0x10/0x10
+[   51.817666]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.818052]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.818438]  ? sigprocmask+0xf2/0x340
+[   51.818742]  ? __pfx_sigprocmask+0x10/0x10
+[   51.819066]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.819437]  ? __rseq_handle_notify_resume+0x937/0xf00
+[   51.819848]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.820247]  ? selinux_file_ioctl+0xb5/0x280
+[   51.820585]  ? __fget_light+0x18e/0x560
+[   51.820898]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.821280]  __x64_sys_ioctl+0x110/0x210
+[   51.821580]  do_syscall_64+0xb3/0x1b0
+[   51.821857]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   51.822246] RIP: 0033:0x7f9f93fc57bd
+[   51.822528] Code: c3 e8 37 24 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+[   51.823777] RSP: 002b:00007f9f93f47198 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+[   51.824314] RAX: ffffffffffffffda RBX: 00007f9f9405c5d0 RCX: 00007f9f93fc57bd
+[   51.824809] RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+[   51.825307] RBP: 00007f9f94026658 R08: 0000000000000000 R09: 0000000000000000
+[   51.825832] R10: 0000000000000000 R11: 0000000000000246 R12: 0031656c69662f2e
+[   51.826366] R13: 6f6f6c2f7665642f R14: 000001ff7fdfd000 R15: 00007f9f9405c5d8
+[   51.826874]  </TASK>
+[   51.827049] Modules linked in:
+[   51.827282] CR2: ffff888109d9f000
+[   51.827524] ---[ end trace 0000000000000000 ]---
+[   51.827526] BUG: unable to handle page fault for address: ffff888109cce340
+[   51.827839] RIP: 0010:memmove+0x1e/0x1b0
+[   51.828344] #PF: supervisor read access in kernel mode
+[   51.828608] Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+[   51.828919] #PF: error_code(0x0009) - reserved bit violation
+[   51.830174] RSP: 0018:ffff888110307828 EFLAGS: 00010216
+[   51.830505] PGD 108e01067 P4D 108e01067 
+[   51.830856] 
+[   51.830861] RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+[   51.831109] PUD 100181063 
+[   51.831227] RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+[   51.831650] PMD 109d9d063 
+[   51.831849] RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+[   51.832328] BAD
+[   51.832531] R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+[   51.832942] Oops: 0009 [#2] PREEMPT SMP KASAN NOPTI
+[   51.833069] R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+[   51.833478] CPU: 2 PID: 119 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   51.833822] FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+[   51.834227] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   51.834773] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.835225] RIP: 0010:avc_lookup+0xdf/0x1d0
+[   51.835792] CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+[   51.836176] Code: e7 ad 66 ff 49 83 ec 28 0f 84 c1 00 00 00 e8 d8 ad 66 ff 4c 89 e0 48 c1 e8 03 0f b6 04 18 84 c0 74 08 3c 03 0f 8e b6 00 00 00 <45> 8b 3c 24 89 ef 44 89 fe e8 13 a6 66 ff 44 39 fd 75 99 e8 a9 ad
+[   51.836455] PKRU: 55555554
+[   51.836875] RSP: 0018:ffff8881025b7778 EFLAGS: 00010246
+[   51.838086] note: syz-executor350[393] exited with irqs disabled
+[   51.838251] 
+[   51.838256] RAX: 0000000000000000 RBX: dffffc0000000000 RCX: ffffffff8a3fb758
+[   51.839623] RDX: ffff8881129c2200 RSI: 0000000000000005 RDI: ffffffff8f0ec170
+[   51.840101] RBP: 0000000000000001 R08: 0000000000000000 R09: ffff8881025b7828
+[   51.840542] R10: 0000000010000000 R11: 0000000000000000 R12: ffff888109cce340
+[   51.840990] R13: 0000000000000008 R14: 0000000000000005 R15: ffff8881025b7828
+[   51.841495] FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+[   51.842085] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.842504] CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+[   51.842998] PKRU: 55555554
+[   51.843215] Call Trace:
+[   51.843383]  <TASK>
+[   51.843530]  ? show_regs+0x96/0xa0
+[   51.843771]  ? __die+0x2d/0x80
+[   51.843990]  ? page_fault_oops+0x35e/0x940
+[   51.844304]  ? is_prefetch.constprop.0+0xb7/0x530
+[   51.844635]  ? __pfx_page_fault_oops+0x10/0x10
+[   51.844969]  ? avc_lookup+0xdf/0x1d0
+[   51.845259]  ? __pfx_is_prefetch.constprop.0+0x10/0x10
+[   51.845617]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.845936]  ? __read_once_word_nocheck+0x9/0x20
+[   51.846250]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.846562]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.846881]  ? search_module_extables+0x76/0x150
+[   51.847188]  ? avc_lookup+0xdf/0x1d0
+[   51.847440]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.847752]  ? fixup_exception+0x115/0xcb0
+[   51.848033]  ? kernelmode_fixup_or_oops+0x238/0x2b0
+[   51.848391]  ? __bad_area_nosemaphore+0x36c/0x610
+[   51.848762]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.849104]  ? do_kern_addr_fault+0x121/0x150
+[   51.849425]  ? exc_page_fault+0x15b/0x180
+[   51.849723]  ? asm_exc_page_fault+0x26/0x30
+[   51.850045]  ? avc_lookup+0xc8/0x1d0
+[   51.850325]  ? avc_lookup+0xdf/0x1d0
+[   51.850608]  ? avc_lookup+0xc8/0x1d0
+[   51.850883]  avc_has_perm_noaudit+0x58/0x160
+[   51.851233]  ? __inode_security_revalidate+0xf8/0x140
+[   51.851611]  selinux_inode_permission+0x369/0x5d0
+[   51.851921]  ? __pfx_selinux_inode_permission+0x10/0x10
+[   51.852280]  ? __pfx_make_vfsuid+0x10/0x10
+[   51.852610]  ? __pfx_avc_has_perm+0x10/0x10
+[   51.852928]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.853275]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.853627]  ? stack_access_ok+0xf6/0x280
+[   51.853941]  security_inode_permission+0x9c/0x100
+[   51.854296]  inode_permission+0x17b/0x5f0
+[   51.854596]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.854950]  link_path_walk.part.0.constprop.0+0x26f/0xce0
+[   51.855347]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.855697]  ? kernel_text_address+0x5b/0xc0
+[   51.856019]  ? __pfx_link_path_walk.part.0.constprop.0+0x10/0x10
+[   51.856462]  ? security_file_alloc+0x38/0x170
+[   51.856802]  path_lookupat+0x92/0x760
+[   51.857078]  path_openat+0x238f/0x36f0
+[   51.857346]  ? __pfx_stack_trace_save+0x10/0x10
+[   51.857663]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.857976]  ? kasan_save_stack+0x34/0x50
+[   51.858246]  ? kasan_save_stack+0x24/0x50
+[   51.858517]  ? kasan_save_track+0x14/0x30
+[   51.858789]  ? __kasan_slab_alloc+0x59/0x70
+[   51.859074]  ? kmem_cache_alloc+0xde/0x250
+[   51.859361]  ? getname_flags.part.0+0x50/0x500
+[   51.859665]  ? do_sys_openat2+0xec/0x1d0
+[   51.859941]  ? __x64_sys_openat+0x140/0x1f0
+[   51.860251]  ? do_syscall_64+0xb3/0x1b0
+[   51.860509]  ? entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   51.860872]  ? __pfx_path_openat+0x10/0x10
+[   51.861159]  ? do_sys_openat2+0x14a/0x1d0
+[   51.861436]  ? __x64_sys_openat+0x140/0x1f0
+[   51.861736]  ? do_syscall_64+0xb3/0x1b0
+[   51.861997]  ? entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   51.862352]  ? __pfx_stack_trace_save+0x10/0x10
+[   51.862666]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.862982]  ? stack_depot_save_flags+0x2e/0x710
+[   51.863293]  do_filp_open+0x1c9/0x420
+[   51.863560]  ? kasan_save_free_info+0x3b/0x60
+[   51.863869]  ? __pfx_do_filp_open+0x10/0x10
+[   51.864210]  ? __sanitizer_cov_trace_switch+0x54/0x90
+[   51.864541]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.864861]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.865264]  ? _raw_spin_lock+0xb9/0x110
+[   51.865554]  ? __pfx__raw_spin_lock+0x10/0x10
+[   51.865858]  ? kasan_save_track+0x14/0x30
+[   51.866157]  ? __kasan_slab_alloc+0x59/0x70
+[   51.866444]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.866782]  ? _raw_spin_unlock+0x46/0x70
+[   51.867056]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.867400]  ? alloc_fd+0x211/0x690
+[   51.867650]  do_sys_openat2+0x164/0x1d0
+[   51.867917]  ? __pfx_do_sys_openat2+0x10/0x10
+[   51.868245]  ? __pfx___seccomp_filter+0x10/0x10
+[   51.868565]  __x64_sys_openat+0x140/0x1f0
+[   51.868850]  ? __pfx___x64_sys_openat+0x10/0x10
+[   51.869162]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.869478]  ? __secure_computing+0x19c/0x300
+[   51.869793]  do_syscall_64+0xb3/0x1b0
+[   51.870043]  entry_SYSCALL_64_after_hwframe+0x6f/0x77
+[   51.870392] RIP: 0033:0x7f4d71fa02a2
+[   51.870632] Code: c0 f6 c2 40 75 52 89 d0 45 31 d2 25 00 00 41 00 3d 00 00 41 00 74 41 64 8b 04 25 18 00 00 00 85 c0 75 65 b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 0f 87 a2 00 00 00 48 8b 4c 24 38 64 48 2b 0c 25
+[   51.871711] RSP: 002b:00007fffcb690760 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
+[   51.872187] RAX: ffffffffffffffda RBX: 0000000000000001 RCX: 00007f4d71fa02a2
+[   51.872621] RDX: 00000000002a0000 RSI: 000055922ba01641 RDI: 0000000000000010
+[   51.873046] RBP: 000055922ba01640 R08: 000055922a212950 R09: 00007f4d72083be0
+[   51.873475] R10: 0000000000000000 R11: 0000000000000246 R12: 000055922ba0de24
+[   51.873907] R13: 0000000000000010 R14: 0000000000000004 R15: 000055922ba01641
+[   51.874341]  </TASK>
+[   51.874493] Modules linked in:
+[   51.874758] CR2: ffff888109cce340
+[   51.874974] ---[ end trace 0000000000000000 ]---
+[   51.874979] BUG: unable to handle page fault for address: ffff888109c35cd4
+[   51.875247] RIP: 0010:memmove+0x1e/0x1b0
+[   51.875942] #PF: supervisor read access in kernel mode
+[   51.876203] Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+[   51.876681] #PF: error_code(0x0009) - reserved bit violation
+[   51.877709] RSP: 0018:ffff888110307828 EFLAGS: 00010216
+[   51.878259] PGD 108e01067 P4D 108e01067 
+[   51.878569] 
+[   51.878574] RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+[   51.878970] PUD 100181063 
+[   51.879075] RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+[   51.879769] PMD 109d9d063 
+[   51.879932] RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+[   51.880665] BAD
+[   51.880822] R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+[   51.881505] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.881615] R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+[   51.882286] #PF: supervisor read access in kernel mode
+[   51.882685] FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+[   51.883347] #PF: error_code(0x0009) - reserved bit violation
+[   51.883781] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.884542] PGD 108e01067 
+[   51.885049] CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+[   51.885601] P4D 108e01067 
+[   51.885871] PKRU: 55555554
+[   51.886540] PUD 100181063 
+[   51.886777] note: systemd-udevd[119] exited with irqs disabled
+[   51.887066] PMD 109d9d063 
+[   51.888064] BAD
+[   51.888519] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.889168] #PF: supervisor read access in kernel mode
+[   51.889685] #PF: error_code(0x0009) - reserved bit violation
+[   51.890250] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.890314] BAD
+[   51.891109] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.891779] #PF: supervisor read access in kernel mode
+[   51.892303] #PF: error_code(0x0009) - reserved bit violation
+[   51.892875] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.892938] BAD
+[   51.893761] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.894427] #PF: supervisor read access in kernel mode
+[   51.894968] #PF: error_code(0x0009) - reserved bit violation
+[   51.895525] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.895588] BAD
+[   51.896455] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.897176] #PF: supervisor read access in kernel mode
+[   51.897703] #PF: error_code(0x0009) - reserved bit violation
+[   51.898269] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.898332] BAD
+[   51.899163] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.899849] #PF: supervisor read access in kernel mode
+[   51.900427] #PF: error_code(0x0009) - reserved bit violation
+[   51.900999] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.901061] BAD
+[   51.901891] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.902567] #PF: supervisor read access in kernel mode
+[   51.903092] #PF: error_code(0x0009) - reserved bit violation
+[   51.903640] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.903699] BAD
+[   51.904504] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.905170] #PF: supervisor read access in kernel mode
+[   51.905579] #PF: error_code(0x0009) - reserved bit violation
+[   51.905977] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.906023] BAD
+[   51.906649] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.907123] #PF: supervisor read access in kernel mode
+[   51.907514] #PF: error_code(0x0009) - reserved bit violation
+[   51.907981] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.908027] BAD
+[   51.908656] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.909142] #PF: supervisor read access in kernel mode
+[   51.909634] #PF: error_code(0x0009) - reserved bit violation
+[   51.910053] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.910099] BAD
+[   51.910707] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.911197] #PF: supervisor read access in kernel mode
+[   51.911582] #PF: error_code(0x0009) - reserved bit violation
+[   51.911999] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.912045] BAD
+[   51.912674] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.913161] #PF: supervisor read access in kernel mode
+[   51.913543] #PF: error_code(0x0009) - reserved bit violation
+[   51.913950] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.913996] BAD
+[   51.914576] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.915057] #PF: supervisor read access in kernel mode
+[   51.915437] #PF: error_code(0x0009) - reserved bit violation
+[   51.915839] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.915884] BAD
+[   51.916531] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.917024] #PF: supervisor read access in kernel mode
+[   51.917412] #PF: error_code(0x0009) - reserved bit violation
+[   51.917818] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.917863] BAD
+[   51.918460] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.918947] #PF: supervisor read access in kernel mode
+[   51.919330] #PF: error_code(0x0009) - reserved bit violation
+[   51.919736] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.919782] BAD
+[   51.920373] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.920837] #PF: supervisor read access in kernel mode
+[   51.921193] #PF: error_code(0x0009) - reserved bit violation
+[   51.921609] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.921654] BAD
+[   51.922215] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.922646] #PF: supervisor read access in kernel mode
+[   51.923005] #PF: error_code(0x0009) - reserved bit violation
+[   51.923407] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.923453] BAD
+[   51.924016] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.924522] #PF: supervisor read access in kernel mode
+[   51.924881] #PF: error_code(0x0009) - reserved bit violation
+[   51.925290] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.925337] BAD
+[   51.925348] traps: PANIC: double fault, error_code: 0x0
+[   51.925359] double fault: 0000 [#3] PREEMPT SMP KASAN NOPTI
+[   51.925383] CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   51.925411] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   51.925425] RIP: 0010:number+0x26/0xa90
+[   51.925461] Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+[   51.925487] RSP: 0018:ffff888109c3bfd0 EFLAGS: 00010082
+[   51.925506] RAX: ffff888109c3c020 RBX: dffffc0000000000 RCX: ffff0a0000000509
+[   51.925524] RDX: 0000000000000033 RSI: ffff888189c3c34f RDI: ffff888109c3c351
+[   51.925542] RBP: 0000000000000018 R08: 0000000000000009 R09: ffffed102138785a
+[   51.925559] R10: 0000000000000010 R11: 727265203a465023 R12: ffff888109c3c351
+[   51.925576] R13: ffffffff8caa0a05 R14: ffff888109c3c351 R15: ffff888189c3c34f
+[   51.925596] FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   51.925621] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.925640] CR2: ffff888109c3bfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+[   51.925658] PKRU: 55555554
+[   51.925666] Call Trace:
+[   51.925676]  <#DF>
+[   51.925684]  ? show_regs+0x96/0xa0
+[   51.925715]  ? die+0x38/0xb0
+[   51.925743]  ? exc_double_fault+0x150/0x160
+[   51.925774]  ? asm_exc_double_fault+0x23/0x30
+[   51.925824]  ? number+0x26/0xa90
+[   51.925854]  </#DF>
+[   51.925860]  <TASK>
+[   51.925870] BUG: unable to handle page fault for address: ffff888109c3bfd0
+[   51.925881] #PF: supervisor read access in kernel mode
+[   51.925893] #PF: error_code(0x0009) - reserved bit violation
+[   51.925905] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.925937] BAD
+[   51.925943] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.925954] #PF: supervisor read access in kernel mode
+[   51.925966] #PF: error_code(0x0009) - reserved bit violation
+[   51.925978] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926009] BAD
+[   51.926015] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926026] #PF: supervisor read access in kernel mode
+[   51.926038] #PF: error_code(0x0009) - reserved bit violation
+[   51.926050] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926081] BAD
+[   51.926087] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926097] #PF: supervisor read access in kernel mode
+[   51.926110] #PF: error_code(0x0009) - reserved bit violation
+[   51.926121] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926152] BAD
+[   51.926158] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926169] #PF: supervisor read access in kernel mode
+[   51.926180] #PF: error_code(0x0009) - reserved bit violation
+[   51.926192] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926223] BAD
+[   51.926229] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926240] #PF: supervisor read access in kernel mode
+[   51.926256] #PF: error_code(0x0009) - reserved bit violation
+[   51.926272] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926314] BAD
+[   51.926322] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926337] #PF: supervisor read access in kernel mode
+[   51.926353] #PF: error_code(0x0009) - reserved bit violation
+[   51.926369] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926410] BAD
+[   51.926417] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926432] #PF: supervisor read access in kernel mode
+[   51.926447] #PF: error_code(0x0009) - reserved bit violation
+[   51.926459] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926490] BAD
+[   51.926496] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926507] #PF: supervisor read access in kernel mode
+[   51.926518] #PF: error_code(0x0009) - reserved bit violation
+[   51.926530] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926560] BAD
+[   51.926566] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926577] #PF: supervisor read access in kernel mode
+[   51.926589] #PF: error_code(0x0009) - reserved bit violation
+[   51.926600] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926630] BAD
+[   51.926636] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926647] #PF: supervisor read access in kernel mode
+[   51.926659] #PF: error_code(0x0009) - reserved bit violation
+[   51.926670] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926701] BAD
+[   51.926707] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926717] #PF: supervisor read access in kernel mode
+[   51.926729] #PF: error_code(0x0009) - reserved bit violation
+[   51.926741] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926771] BAD
+[   51.926777] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926787] #PF: supervisor read access in kernel mode
+[   51.926799] #PF: error_code(0x0009) - reserved bit violation
+[   51.926811] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926841] BAD
+[   51.926847] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926858] #PF: supervisor read access in kernel mode
+[   51.926869] #PF: error_code(0x0009) - reserved bit violation
+[   51.926881] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926911] BAD
+[   51.926917] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926928] #PF: supervisor read access in kernel mode
+[   51.926940] #PF: error_code(0x0009) - reserved bit violation
+[   51.926951] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.926981] BAD
+[   51.926987] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.926998] #PF: supervisor read access in kernel mode
+[   51.927010] #PF: error_code(0x0009) - reserved bit violation
+[   51.927021] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.927051] BAD
+[   51.927057] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.927068] #PF: supervisor read access in kernel mode
+[   51.927080] #PF: error_code(0x0009) - reserved bit violation
+[   51.927091] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.927121] BAD
+[   51.927127] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.927138] #PF: supervisor read access in kernel mode
+[   51.927150] #PF: error_code(0x0009) - reserved bit violation
+[   51.927161] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.927191] BAD
+[   51.927197] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.927208] #PF: supervisor read access in kernel mode
+[   51.927220] #PF: error_code(0x0009) - reserved bit violation
+[   51.927231] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.927270] BAD
+[   51.927276] BUG: unable to handle page fault for address: ffff888109c38000
+[   51.927287] #PF: supervisor read access in kernel mode
+[   51.927298] #PF: error_code(0x0009) - reserved bit violation
+[   51.927310] PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+[   51.927340] BAD
+[   51.927351] traps: PANIC: double fault, error_code: 0x0
+[   51.927360] double fault: 0000 [#4] PREEMPT SMP KASAN NOPTI
+[   51.927382] CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   51.927408] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   51.927433] ==================================================================
+[   51.927441] BUG: KASAN: stack-out-of-bounds in number+0x9df/0xa90
+[   51.927473] Write of size 1 at addr fffffe15b321066a by task systemd-udevd/130
+[   51.927493] 
+[   51.927498] CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+[   51.927524] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   51.927537] Call Trace:
+[   51.927546]  <#DF>
+[   51.927554]  dump_stack_lvl+0x72/0xa0
+[   51.927596]  print_report+0xcc/0x620
+[   51.927630]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.927660]  ? __virt_addr_valid+0x100/0x3a0
+[   51.927699]  ? number+0x9df/0xa90
+[   51.927728]  kasan_report+0xb0/0xe0
+[   51.927762]  ? number+0x9df/0xa90
+[   51.927795]  number+0x9df/0xa90
+[   51.927827]  ? __sanitizer_cov_trace_switch+0x54/0x90
+[   51.927856]  ? __pfx_number+0x10/0x10
+[   51.927886]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.927916]  ? __pfx_format_decode+0x10/0x10
+[   51.927950]  ? page_fault_oops+0x2d6/0x940
+[   51.927979]  vsnprintf+0x785/0x1650
+[   51.928021]  ? __pfx_vsnprintf+0x10/0x10
+[   51.928061]  ? search_module_extables+0x76/0x150
+[   51.928111]  ? page_fault_oops+0x31d/0x940
+[   51.928140]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928173]  ? fixup_exception+0x115/0xcb0
+[   51.928205]  sprintf+0xc4/0x100
+[   51.928247]  ? __pfx_sprintf+0x10/0x10
+[   51.928294]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928323]  ? kallsyms_expand_symbol.constprop.0+0x21e/0x310
+[   51.928367]  ? number+0x26/0xa90
+[   51.928396]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928427]  __sprint_symbol.constprop.0+0x1d1/0x200
+[   51.928471]  ? __pfx___sprint_symbol.constprop.0+0x10/0x10
+[   51.928518]  ? page_fault_oops+0x31d/0x940
+[   51.928544]  ? number+0x26/0xa90
+[   51.928573]  ? number+0x26/0xa90
+[   51.928602]  symbol_string+0x174/0x470
+[   51.928639]  ? __pfx_page_fault_oops+0x10/0x10
+[   51.928665]  ? __pfx_symbol_string+0x10/0x10
+[   51.928701]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928730]  ? search_module_extables+0x76/0x150
+[   51.928759]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928788]  ? fixup_exception+0x115/0xcb0
+[   51.928820]  ? kernelmode_fixup_or_oops+0x238/0x2b0
+[   51.928850]  ? __bad_area_nosemaphore+0x36c/0x610
+[   51.928877]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.928908]  ? do_kern_addr_fault+0x121/0x150
+[   51.928937]  ? exc_page_fault+0x15b/0x180
+[   51.928977]  ? asm_exc_page_fault+0x26/0x30
+[   51.929023]  ? page_fault_oops+0x2d6/0x940
+[   51.929048]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929079]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929107]  ? data_push_tail.part.0+0x366/0x4c0
+[   51.929152]  ? __pfx_data_push_tail.part.0+0x10/0x10
+[   51.929193]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929223]  ? put_dec_trunc8+0x263/0x2f0
+[   51.929259]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929296]  ? widen_string+0xd8/0x2a0
+[   51.929329]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929358]  ? widen_string+0xd8/0x2a0
+[   51.929390]  ? __pfx_widen_string+0x10/0x10
+[   51.929424]  ? __pfx_widen_string+0x10/0x10
+[   51.929457]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929486]  ? number+0x7d8/0xa90
+[   51.929518]  ? number+0x26/0xa90
+[   51.929547]  pointer+0x3b5/0xc70
+[   51.929586]  ? fourcc_string+0xdf/0x6c0
+[   51.929623]  ? __pfx_pointer+0x10/0x10
+[   51.929661]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929690]  ? format_decode+0x285/0xb50
+[   51.929723]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929752]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929781]  ? __sanitizer_cov_trace_switch+0x54/0x90
+[   51.929810]  vsnprintf+0x5bb/0x1650
+[   51.929852]  ? __pfx_vsnprintf+0x10/0x10
+[   51.929892]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.929921]  ? local_clock_noinstr+0x23/0x170
+[   51.929961]  ? __pfx__prb_commit+0x10/0x10
+[   51.930002]  vprintk_store+0x4b5/0x980
+[   51.930034]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930063]  ? prb_final_commit+0x68/0xb0
+[   51.930103]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930133]  ? __pfx_vprintk_store+0x10/0x10
+[   51.930166]  ? __pfx_vprintk_store+0x10/0x10
+[   51.930208]  vprintk_emit+0x236/0x440
+[   51.930247]  vprintk+0x56/0x90
+[   51.930288]  _printk+0xbf/0x100
+[   51.930314]  ? __pfx__printk+0x10/0x10
+[   51.930338]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930368]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930398]  ? __pfx__printk+0x10/0x10
+[   51.930424]  ? number+0x26/0xa90
+[   51.930454]  show_iret_regs+0x2d/0x60
+[   51.930484]  __show_regs+0x2a/0x740
+[   51.930526]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930555]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   51.930586]  show_regs+0x55/0xa0
+[   51.930615]  die+0x38/0xb0
+[   51.930645]  exc_double_fault+0x150/0x160
+[   51.930675]  asm_exc_double_fault+0x23/0x30
+[   51.930720] RIP: 0010:number+0x26/0xa90
+[   51.930752] Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+[   51.930778] RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+[   51.930797] RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+[   51.930815] RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+[   51.930833] RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+[   51.930851] R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+[   51.930868] R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+[   51.930893]  </#DF>
+[   51.930901] WARNING: stack recursion on stack type 5
+[   51.930910] 
+[   51.930913] Memory state around the buggy address:
+[   51.930924]  fffffe15b3210500: f1 f1 f1 f1 00 f2 f2 f2 00 f2 f2 f2 00 f2 f2 f2
+[   51.930941]  fffffe15b3210580: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+[   51.930958] >fffffe15b3210600: f1 f1 f1 f1 f1 f1 f1 f1 00 f2 f2 f2 00 02 f3 f3
+[   51.930971]                                                           ^
+[   51.930984]  fffffe15b3210680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[   51.931001]  fffffe15b3210700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[   51.931014] ==================================================================
+[   51.927420] RIP: 0010:number+0x26/0xa90
+[   51.931043] Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+[   51.931068] RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+[   51.931086] RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+[   51.931104] RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+[   51.931121] RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+[   51.931139] R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+[   51.931155] R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+[   51.931175] FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   51.931199] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.931217] CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+[   51.931235] PKRU: 55555554
+[   51.931245] Call Trace:
+[   51.931254]  <#DF>
+[   51.931263]  ? show_regs+0x96/0xa0
+[   51.931292]  ? die+0x38/0xb0
+[   51.931320]  ? exc_double_fault+0x150/0x160
+[   51.931349]  ? asm_exc_double_fault+0x23/0x30
+[   51.931398]  ? number+0x26/0xa90
+[   51.931427]  </#DF>
+[   51.931434] Modules linked in:
+[   51.931444] ---[ end trace 0000000000000000 ]---
+[   51.931453] RIP: 0010:memmove+0x1e/0x1b0
+[   51.931497] Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+[   51.931521] RSP: 0018:ffff888110307828 EFLAGS: 00010216
+[   51.931540] RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+[   51.931557] RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+[   51.931575] RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+[   51.931591] R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+[   51.931609] R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+[   51.931627] FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+[   51.931651] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   51.931670] CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+[   51.931687] PKRU: 55555554
+[   51.931696] Kernel panic - not syncing: Fatal exception in interrupt
+[   53.025918] Shutting down cpus with NMI
+[   53.026046] Kernel Offset: 0x8400000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+
+VM DIAGNOSIS:
+11:50:51  Registers:
+info registers vcpu 0
+RAX=000000000000004d RBX=00000000000003f8 RCX=0000000000000000 RDX=00000000000003f8
+RSI=0000000000000000 RDI=ffffffff8f10e148 RBP=ffffffff8f10e140 RSP=ffff8881103070d0
+R8 =0000000000000000 R9 =ffffed102120981e R10=000000000000004d R11=0000000073706f4f
+R12=000000000000004d R13=ffffffff8f082969 R14=0000000000000010 R15=dffffc0000000000
+RIP=ffffffff8a9ee7bd RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f9f93f47640 00000000 00000000
+GS =0000 ffff88811ae00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe708f87f000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe708f87d000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=ffff888109d9f000 CR3=0000000112202002 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 000000000000c9b3 0000000000000000
+YMM03=0000000000000000 0000000000000000 00007fff93e1aa54 000000000000017e
+YMM04=0000000000000000 0000000000000000 0000555556b773c0 0000000000000000
+YMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000011
+YMM07=0000000000000000 0000000000000000 184abf0ecd64fc00 0000000000000000
+YMM08=0000000000000000 0000000000000000 2f666c65732f636f 72702f0030303031
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000000 RBX=0000000000000000 RCX=ffff888109da8000 RDX=000000000000000b
+RSI=000000000000000e RDI=ffff88810e6df8f8 RBP=ffff88810e6df8f8 RSP=ffff88810e6df7f0
+R8 =0000000000000001 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000
+R12=000000000000000b R13=ffff888109da8000 R14=000000000000000b R15=0000000000000001
+RIP=ffffffff89736074 RFL=00000093 [--S-A-C] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f9f93f68640 00000000 00000000
+GS =0000 ffff88811af00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe3d8da66000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe3d8da64000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=ffff888109da8000 CR3=0000000112202005 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000020280 00007f9f93f27000
+YMM01=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 000000000000c9b3 0000000000000000
+YMM03=0000000000000000 0000000000000000 00007fff93e1aa54 000000000000017e
+YMM04=0000000000000000 0000000000000000 0000555556b773c0 0000000000000000
+YMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000011
+YMM07=0000000000000000 0000000000000000 184abf0ecd64fc00 0000000000000000
+YMM08=0000000000000000 0000000000000000 2f666c65732f636f 72702f0030303031
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 2
+RAX=0000000000000000 RBX=ffff8881025b7ab0 RCX=ffffffff89727889 RDX=ffff8881129c2200
+RSI=0000000000000002 RDI=0000000000000001 RBP=ffffffff8e1e1352 RSP=ffff8881025b79d0
+R8 =ffff8881025b7af0 R9 =ffff8881025b7ab0 R10=0000000000000002 R11=0000000000000000
+R12=0000000000000001 R13=ffffffff8e1e1357 R14=ffff8881025b7af1 R15=0000000000000002
+RIP=ffffffff89a65df0 RFL=00000293 [--S-A-C] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f4d71af48c0 00000000 00000000
+GS =0000 ffff88811b000000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe0935d24000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe0935d22000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f9f94025d40 CR3=0000000102df4004 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 ffff000000ff0000 0000000000000000
+YMM02=0000000000000000 0000000000000000 00007f4d72003075 70632f302f716d2f
+YMM03=0000000000000000 0000000000000000 7269762f73656369 7665642f7379732f
+YMM04=0000000000000000 0000000000000000 2f2f2f2f2f2f2f2f 2f2f2f2f2f2f2f2f
+YMM05=0000000000000000 0000000000000000 000055922b9f5780 000055922ba0de90
+YMM06=0000000000000000 0000000000000000 000055922ba05ac0 00000000ffffffff
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 3a212d2b007b3d0d 0a0920002c0d0a09
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000002000000000 0000002000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 3
+RAX=0000000000000000 RBX=00007f7a3eebe8e6 RCX=0000000000000000 RDX=0000000000000007
+RSI=1ffffffff1bd1288 RDI=0000000000000007 RBP=00007f7a3eebe8e6 RSP=ffff8881001ff978
+R8 =ffff8881001ffa02 R9 =ffff8881001ff9c0 R10=00007f7a3eebe000 R11=0000000000000000
+R12=ffff8881001ffa18 R13=ffff8881001ffa90 R14=ffff8881001f0000 R15=ffff8881001ffa60
+RIP=ffffffff897e80c3 RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f7a3e6f5900 00000000 00000000
+GS =0000 ffff88811b100000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe416c1d2000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe416c1d0000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f9f93f69000 CR3=00000001014e8004 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 00000000ffffff00
+YMM01=0000000000000000 0000000000000000 7379732f646d6574 7379732f6374652f
+YMM02=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 0000ff0000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 2e2e2e2e2e2e2e2e 2e2e2e2e2e2e2e2e
+YMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 000056081094f490 00000002ffffffff
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 6f6d2e7375622d31 656c69662d37312d
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 4
+RAX=0000000000000000 RBX=0000000000000001 RCX=ffffffff8c77afbf RDX=ffff88810a60b300
+RSI=0000000000000000 RDI=0000000000000005 RBP=ffffffff8f06652c RSP=ffff888109c3f888
+R8 =0000000000000000 R9 =fffffbfff1e0cca5 R10=0000000000000001 R11=0000000000000000
+R12=0000000000000007 R13=fffffbfff1e0cca5 R14=0000000000000001 R15=0000000000000001
+RIP=ffffffff8c77afc1 RFL=00000093 [--S-A-C] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f4d71af48c0 00000000 00000000
+GS =0000 ffff88811b200000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe15b3207000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe15b3205000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=ffff888109c35cd4 CR3=000000010901a003 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000f00000003 000055922b9f3c20
+YMM02=0000000000000000 0000000000000000 ffffff0f0e0d0c0b 0a09080706050403
+YMM03=0000000000000000 0000000000000000 696e656420737365 636341002f737973
+YMM04=0000000000000000 0000000000000000 0036303235353331 343d44455a494c41
+YMM05=0000000000000000 0000000000000000 4d554e5145530034 333d5145534b5349
+YMM06=0000000000000000 0000000000000000 706f6f6c2f766564 2f3d454d414e5645
+YMM07=0000000000000000 0000000000000000 5f4b534944006b63 6f6c623d4d455453
+YMM08=0000000000000000 0000000000000000 49006d756e203c20 69000a313a56000a
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000002000000000 0000002000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

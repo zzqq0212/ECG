@@ -1,0 +1,86 @@
+EXT4-fs (loop2): too many log groups per flexible block group
+EXT4-fs (loop2): failed to initialize mballoc (-12)
+EXT4-fs (loop2): mount failed
+==================================================================
+BUG: KCSAN: data-race in __bitmap_weight / scsi_device_unbusy
+
+write (marked) to 0xffff934900947340 of 8 bytes by interrupt on cpu 2:
+ instrument_atomic_write include/linux/instrumented.h:83 [inline]
+ set_bit include/asm-generic/bitops/instrumented-atomic.h:28 [inline]
+ sbitmap_deferred_clear_bit include/linux/sbitmap.h:333 [inline]
+ sbitmap_put include/linux/sbitmap.h:342 [inline]
+ scsi_device_unbusy+0xd3/0x190 drivers/scsi/scsi_lib.c:299
+ scsi_finish_command+0x49/0x220 drivers/scsi/scsi.c:166
+ scsi_complete+0xab/0x220 drivers/scsi/scsi_lib.c:1437
+ blk_complete_reqs+0x88/0xa0 block/blk-mq.c:1131
+ blk_done_softirq+0x1d/0x30 block/blk-mq.c:1136
+ __do_softirq+0xc0/0x293 kernel/softirq.c:566
+ invoke_softirq kernel/softirq.c:440 [inline]
+ __irq_exit_rcu kernel/softirq.c:663 [inline]
+ irq_exit_rcu+0x65/0x90 kernel/softirq.c:679
+ common_interrupt+0xa2/0xb0 arch/x86/kernel/irq.c:247
+ asm_common_interrupt+0x26/0x40 arch/x86/include/asm/idtentry.h:640
+ __preempt_count_dec_and_test arch/x86/include/asm/preempt.h:95 [inline]
+ __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
+ _raw_spin_unlock_irq+0x18/0x30 kernel/locking/spinlock.c:202
+ spin_unlock_irq include/linux/spinlock.h:401 [inline]
+ unlock_page_lruvec_irq include/linux/memcontrol.h:1645 [inline]
+ mlock_folio_batch+0x108c/0x1a30 mm/mlock.c:208
+ mlock_new_folio+0x190/0x220 mm/mlock.c:283
+ folio_add_lru_vma+0x51/0x60 mm/swap.c:535
+ do_anonymous_page mm/memory.c:4214 [inline]
+ do_pte_missing mm/memory.c:3729 [inline]
+ handle_pte_fault mm/memory.c:5039 [inline]
+ __handle_mm_fault+0xbf4/0x1960 mm/memory.c:5180
+ handle_mm_fault+0x101/0x3e0 mm/memory.c:5345
+ faultin_page mm/gup.c:956 [inline]
+ __get_user_pages+0x20b/0xa70 mm/gup.c:1239
+ populate_vma_page_range+0xd4/0x120 mm/gup.c:1677
+ __mm_populate+0xa7/0x280 mm/gup.c:1786
+ do_mlock+0x22d/0x440 mm/mlock.c:665
+ __do_sys_mlock mm/mlock.c:673 [inline]
+ __se_sys_mlock mm/mlock.c:671 [inline]
+ __x64_sys_mlock+0x35/0x40 mm/mlock.c:671
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+read to 0xffff934900947340 of 8 bytes by task 5214 on cpu 0:
+ __bitmap_weight+0x76/0xb0 lib/bitmap.c:340
+ bitmap_weight include/linux/bitmap.h:416 [inline]
+ __sbitmap_weight+0x89/0x130 lib/sbitmap.c:308
+ sbitmap_cleared lib/sbitmap.c:315 [inline]
+ sbitmap_weight+0x27/0x40 lib/sbitmap.c:320
+ scsi_device_busy include/scsi/scsi_device.h:638 [inline]
+ scsi_mq_get_budget+0x190/0x1e0 drivers/scsi/scsi_lib.c:1684
+ blk_mq_get_dispatch_budget block/blk-mq.h:254 [inline]
+ __blk_mq_do_dispatch_sched block/blk-mq-sched.c:114 [inline]
+ blk_mq_do_dispatch_sched block/blk-mq-sched.c:184 [inline]
+ __blk_mq_sched_dispatch_requests+0x7a2/0xc30 block/blk-mq-sched.c:309
+ blk_mq_sched_dispatch_requests+0xc1/0x100 block/blk-mq-sched.c:333
+ blk_mq_run_hw_queue+0x303/0x330 block/blk-mq.c:2264
+ blk_mq_dispatch_plug_list block/blk-mq.c:2764 [inline]
+ blk_mq_flush_plug_list.part.0+0x364/0xbd0 block/blk-mq.c:2812
+ blk_mq_flush_plug_list+0x30/0x40 block/blk-mq.c:2782
+ __blk_flush_plug+0x227/0x280 block/blk-core.c:1150
+ blk_finish_plug block/blk-core.c:1174 [inline]
+ blk_finish_plug+0x4e/0x70 block/blk-core.c:1171
+ do_madvise.part.0+0x5a6/0x1520 mm/madvise.c:1442
+ do_madvise mm/madvise.c:1453 [inline]
+ __do_sys_madvise mm/madvise.c:1453 [inline]
+ __se_sys_madvise mm/madvise.c:1451 [inline]
+ __x64_sys_madvise+0x92/0xb0 mm/madvise.c:1451
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x47/0x100 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+value changed: 0x0000000000000000 -> 0x0000000000000001
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 5214 Comm: syz-executor.3 Not tainted 6.7.0-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.2'.

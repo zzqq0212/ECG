@@ -1,0 +1,39 @@
+==================================================================
+BUG: KCSAN: data-race in poll_schedule_timeout.constprop.0 / pollwake
+
+write to 0xffff9a9a00627a60 of 4 bytes by task 333 on cpu 0:
+ __pollwake fs/select.c:198 [inline]
+ pollwake+0xd0/0x120 fs/select.c:218
+ __wake_up_common+0x74/0x140 kernel/sched/wait.c:107
+ __wake_up_common_lock+0x7e/0xd0 kernel/sched/wait.c:138
+ pipe_read+0x70b/0x7c0 fs/pipe.c:391
+ call_read_iter include/linux/fs.h:1871 [inline]
+ new_sync_read fs/read_write.c:389 [inline]
+ vfs_read+0x54a/0x5a0 fs/read_write.c:470
+ ksys_read+0x11c/0x160 fs/read_write.c:613
+ __do_sys_read fs/read_write.c:623 [inline]
+ __se_sys_read fs/read_write.c:621 [inline]
+ __x64_sys_read+0x41/0x50 fs/read_write.c:621
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9a9a00627a60 of 4 bytes by task 327 on cpu 1:
+ poll_schedule_timeout.constprop.0+0x44/0xb0 fs/select.c:243
+ do_select+0xc9d/0xe00 fs/select.c:607
+ core_sys_select+0x217/0x4e0 fs/select.c:681
+ kern_select+0xe2/0x140 fs/select.c:722
+ __do_sys_select fs/select.c:729 [inline]
+ __se_sys_select fs/select.c:726 [inline]
+ __x64_sys_select+0x65/0x80 fs/select.c:726
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x00000000 -> 0x00000001
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 327 Comm: sshd Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+sshd (327) used greatest stack depth: 11560 bytes left

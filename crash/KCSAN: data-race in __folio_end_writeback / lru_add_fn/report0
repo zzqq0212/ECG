@@ -1,0 +1,205 @@
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.2'.
+==================================================================
+BUG: KCSAN: data-race in __folio_end_writeback / lru_add_fn
+
+read-write (marked) to 0xffffe06b847196c0 of 8 bytes by task 6387 on cpu 2:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ test_and_clear_bit include/asm-generic/bitops/instrumented-atomic.h:85 [inline]
+ folio_test_clear_unevictable include/linux/page-flags.h:554 [inline]
+ lru_add_fn+0x2f/0x480 mm/swap.c:165
+ folio_batch_move_lru+0x120/0x1b0 mm/swap.c:217
+ folio_batch_add_and_move+0x7e/0xd0 mm/swap.c:234
+ folio_add_lru+0x49/0x80 mm/swap.c:517
+ folio_putback_lru mm/vmscan.c:812 [inline]
+ reclaim_folio_list+0x159/0x1c0 mm/vmscan.c:2105
+ reclaim_pages+0x256/0x2c0 mm/vmscan.c:2137
+ madvise_cold_or_pageout_pte_range+0x850/0x9b0 mm/madvise.c:527
+ walk_pmd_range mm/pagewalk.c:143 [inline]
+ walk_pud_range mm/pagewalk.c:221 [inline]
+ walk_p4d_range mm/pagewalk.c:256 [inline]
+ walk_pgd_range+0x7d7/0xf20 mm/pagewalk.c:293
+ __walk_page_range+0x2eb/0x300 mm/pagewalk.c:395
+ walk_page_range+0x1f5/0x320 mm/pagewalk.c:521
+ madvise_pageout_page_range mm/madvise.c:586 [inline]
+ madvise_pageout+0x1dc/0x500 mm/madvise.c:613
+ madvise_vma_behavior mm/madvise.c:1032 [inline]
+ madvise_walk_vmas mm/madvise.c:1261 [inline]
+ do_madvise.part.0+0x4a1/0x1550 mm/madvise.c:1441
+ do_madvise mm/madvise.c:1454 [inline]
+ __do_sys_madvise mm/madvise.c:1454 [inline]
+ __se_sys_madvise mm/madvise.c:1452 [inline]
+ __x64_sys_madvise+0x92/0xb0 mm/madvise.c:1452
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb4/0x1c0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+read to 0xffffe06b847196c0 of 8 bytes by task 38 on cpu 0:
+ page_to_nid include/linux/mm.h:1649 [inline]
+ page_pgdat include/linux/mm.h:1869 [inline]
+ folio_pgdat include/linux/mm.h:1879 [inline]
+ lruvec_stat_mod_folio include/linux/vmstat.h:601 [inline]
+ __folio_end_writeback+0xa5/0x560 mm/page-writeback.c:2977
+ folio_end_writeback+0x64/0x170 mm/filemap.c:1599
+ ext4_finish_bio+0x4fb/0x5e0 fs/ext4/page-io.c:145
+ ext4_release_io_end+0x93/0x1d0 fs/ext4/page-io.c:160
+ ext4_end_io_end fs/ext4/page-io.c:194 [inline]
+ ext4_do_flush_completed_IO fs/ext4/page-io.c:259 [inline]
+ ext4_end_io_rsv_work+0xc9/0x340 fs/ext4/page-io.c:273
+ process_one_work+0x34d/0x750 kernel/workqueue.c:2633
+ process_scheduled_works kernel/workqueue.c:2706 [inline]
+ worker_thread+0x69b/0x9a0 kernel/workqueue.c:2787
+ kthread+0x180/0x1c0 kernel/kthread.c:388
+ ret_from_fork+0x48/0x60 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:243
+
+value changed: 0x0200000000008108 -> 0x0200000000008128
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 38 Comm: kworker/u8:1 Not tainted 6.8.0-rc7-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: ext4-rsv-conversion ext4_end_io_rsv_work
+==================================================================
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 10 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 1300 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 10 bytes leftover after parsing attributes in process `syz-executor.0'.
+__nla_validate_parse: 2 callbacks suppressed
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 1300 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): orphan cleanup on readonly fs
+EXT4-fs error (device loop0): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop0): ext4_orphan_get:1397: comm syz-executor.0: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs error (device loop0): ext4_inlinedir_to_tree:1401: inode #12: block 7: comm syz-executor.0: path /syzkaller-testdir4074403338/syzkaller.vSc7Vn/358/file0/file0: bad entry in directory: rec_len is smaller than minimal - offset=4, inode=67108877, rec_len=0, size=60 fake=0
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): orphan cleanup on readonly fs
+EXT4-fs error (device loop0): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop0): ext4_orphan_get:1397: comm syz-executor.0: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs error (device loop0): ext4_inlinedir_to_tree:1401: inode #12: block 7: comm syz-executor.0: path /syzkaller-testdir4074403338/syzkaller.vSc7Vn/359/file0/file0: bad entry in directory: rec_len is smaller than minimal - offset=4, inode=67108877, rec_len=0, size=60 fake=0
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): orphan cleanup on readonly fs
+EXT4-fs error (device loop0): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop0): ext4_orphan_get:1397: comm syz-executor.0: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs error (device loop0): ext4_inlinedir_to_tree:1401: inode #12: block 7: comm syz-executor.0: path /syzkaller-testdir4074403338/syzkaller.vSc7Vn/360/file0/file0: bad entry in directory: rec_len is smaller than minimal - offset=4, inode=67108877, rec_len=0, size=60 fake=0
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): orphan cleanup on readonly fs
+EXT4-fs error (device loop0): ext4_xattr_ibody_find:2263: inode #15: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop0): ext4_orphan_get:1397: comm syz-executor.0: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs warning (device loop0): __ext4fs_dirhash:281: invalid/unsupported hash tree version 135
+EXT4-fs error (device loop0): ext4_inlinedir_to_tree:1401: inode #12: block 7: comm syz-executor.0: path /syzkaller-testdir4074403338/syzkaller.vSc7Vn/361/file0/file0: bad entry in directory: rec_len is smaller than minimal - offset=4, inode=67108877, rec_len=0, size=60 fake=0
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 1304 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 1300 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop3): stripe (65535) is not aligned with cluster size (16), stripe is disabled
+EXT4-fs error (device loop3): ext4_ext_check_inode:520: inode #17: comm syz-executor.3: pblk 0 bad header/extent: invalid magic - magic 7973, entries 27514, max 27745(0), depth 25964(25964)
+EXT4-fs (loop3): no journal found
+I/O error, dev loop3, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 0
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop3): stripe (65535) is not aligned with cluster size (16), stripe is disabled
+EXT4-fs error (device loop3): ext4_ext_check_inode:520: inode #17: comm syz-executor.3: pblk 0 bad header/extent: invalid magic - magic 7973, entries 27514, max 27745(0), depth 25964(25964)
+EXT4-fs (loop3): no journal found
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs error (device loop2): ext4_orphan_get:1394: inode #15: comm syz-executor.2: casefold flag without casefold feature
+EXT4-fs error (device loop2): ext4_orphan_get:1397: comm syz-executor.2: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop3): stripe (65535) is not aligned with cluster size (16), stripe is disabled
+EXT4-fs error (device loop3): ext4_ext_check_inode:520: inode #17: comm syz-executor.3: pblk 0 bad header/extent: invalid magic - magic 7973, entries 27514, max 27745(0), depth 25964(25964)
+EXT4-fs (loop3): no journal found
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs error (device loop2): ext4_orphan_get:1394: inode #15: comm syz-executor.2: casefold flag without casefold feature
+EXT4-fs error (device loop2): ext4_orphan_get:1397: comm syz-executor.2: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+loop3: detected capacity change from 0 to 1024
+EXT4-fs (loop3): stripe (65535) is not aligned with cluster size (16), stripe is disabled
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs error (device loop3): ext4_ext_check_inode:520: inode #17: comm syz-executor.3: pblk 0 bad header/extent: invalid magic - magic 7973, entries 27514, max 27745(0), depth 25964(25964)
+EXT4-fs (loop3): no journal found
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs error (device loop2): ext4_orphan_get:1394: inode #15: comm syz-executor.2: casefold flag without casefold feature
+EXT4-fs error (device loop2): ext4_orphan_get:1397: comm syz-executor.2: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs error (device loop2): ext4_orphan_get:1394: inode #15: comm syz-executor.2: casefold flag without casefold feature
+EXT4-fs error (device loop2): ext4_orphan_get:1397: comm syz-executor.2: couldn't read orphan inode 15 (err -117)
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+9pnet: Limiting 'msize' to 1048576 as this is the maximum supported by transport fd
+9pnet: Limiting 'msize' to 1048576 as this is the maximum supported by transport fd
+9pnet: Limiting 'msize' to 1048576 as this is the maximum supported by transport fd
+tmpfs: Bad value for 'mpol'
+9pnet: Limiting 'msize' to 1048576 as this is the maximum supported by transport fd
+tmpfs: Bad value for 'mpol'
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop2): ext4_do_update_inode:5082: inode #3: comm syz-executor.2: corrupted inode contents
+EXT4-fs error (device loop2): ext4_dirty_inode:5942: inode #3: comm syz-executor.2: mark_inode_dirty error
+tmpfs: Bad value for 'mpol'
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 64: padding at end of block bitmap is not set
+Quota error (device loop2): write_blk: dquota write failed
+Quota error (device loop2): qtree_write_dquot: Error -117 occurred while creating quota
+Quota error (device loop2): write_blk: dquota write failed
+Quota error (device loop2): qtree_write_dquot: Error -28 occurred while creating quota
+Quota error (device loop2): write_blk: dquota write failed
+Quota error (device loop2): qtree_write_dquot: Error -28 occurred while creating quota
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir712055234/syzkaller.Js6vmN/433/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+tmpfs: Bad value for 'mpol'
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop2): ext4_do_update_inode:5082: inode #3: comm syz-executor.2: corrupted inode contents
+EXT4-fs error (device loop2): ext4_dirty_inode:5942: inode #3: comm syz-executor.2: mark_inode_dirty error
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 64: padding at end of block bitmap is not set
+Quota error (device loop2): write_blk: dquota write failed
+Quota error (device loop2): qtree_write_dquot: Error -117 occurred while creating quota
+Quota error (device loop2): write_blk: dquota write failed
+Quota error (device loop2): qtree_write_dquot: Error -28 occurred while creating quota
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir712055234/syzkaller.Js6vmN/434/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop2): ext4_do_update_inode:5082: inode #3: comm syz-executor.2: corrupted inode contents
+EXT4-fs error (device loop2): ext4_dirty_inode:5942: inode #3: comm syz-executor.2: mark_inode_dirty error
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 64: padding at end of block bitmap is not set
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir712055234/syzkaller.Js6vmN/435/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+EXT4-fs error (device loop2): ext4_do_update_inode:5082: inode #3: comm syz-executor.2: corrupted inode contents
+EXT4-fs error (device loop2): ext4_dirty_inode:5942: inode #3: comm syz-executor.2: mark_inode_dirty error
+EXT4-fs error (device loop2): ext4_validate_block_bitmap:440: comm syz-executor.2: bg 0: block 64: padding at end of block bitmap is not set
+EXT4-fs (loop2): 1 orphan inode deleted
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir712055234/syzkaller.Js6vmN/436/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+netlink: 124 bytes leftover after parsing attributes in process `syz-executor.2'.

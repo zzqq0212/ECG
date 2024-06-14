@@ -1,0 +1,64 @@
+==================================================================
+BUG: KCSAN: data-race in fsnotify / fsnotify_detach_connector_from_object
+
+write (marked) to 0xffff98fe00b27688 of 8 bytes by task 130 on cpu 2:
+ fsnotify_detach_connector_from_object+0xb5/0x170 fs/notify/mark.c:265
+ fsnotify_put_mark+0x228/0x340 fs/notify/mark.c:316
+ __do_sys_inotify_rm_watch fs/notify/inotify/inotify_user.c:819 [inline]
+ __se_sys_inotify_rm_watch fs/notify/inotify/inotify_user.c:793 [inline]
+ __x64_sys_inotify_rm_watch+0xc1/0x110 fs/notify/inotify/inotify_user.c:793
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb4/0x1c0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+read to 0xffff98fe00b27688 of 8 bytes by task 113 on cpu 0:
+ fsnotify+0xcdf/0xdb0 fs/notify/fsnotify.c:524
+ __fsnotify_parent+0x3fe/0x610 fs/notify/fsnotify.c:230
+ fsnotify_parent include/linux/fsnotify.h:77 [inline]
+ fsnotify_file include/linux/fsnotify.h:100 [inline]
+ fsnotify_file include/linux/fsnotify.h:92 [inline]
+ fsnotify_open include/linux/fsnotify.h:370 [inline]
+ do_dentry_open+0x74d/0xb70 fs/open.c:1009
+ vfs_open+0x66/0x70 fs/open.c:1087
+ do_open fs/namei.c:3645 [inline]
+ path_openat+0x166a/0x1ca0 fs/namei.c:3802
+ do_filp_open+0x15b/0x280 fs/namei.c:3829
+ do_sys_openat2+0xc6/0x110 fs/open.c:1404
+ do_sys_open fs/open.c:1419 [inline]
+ __do_sys_openat fs/open.c:1435 [inline]
+ __se_sys_openat fs/open.c:1430 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1430
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb4/0x1c0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+value changed: 0xffff98fe01b8d8e8 -> 0x0000000000000000
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 113 Comm: systemd-udevd Not tainted 6.8.0-rc7-rt6 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 3760 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 3760 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 3760 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 3760 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 3760 bytes leftover after parsing attributes in process `syz-executor.3'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.0'.
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pid=25650 comm=syz-executor.0
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 9004 bytes leftover after parsing attributes in process `syz-executor.0'.
+audit: type=1326 audit(1710044926.126:24): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=25955 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fd2f25d202d code=0x0
+EXT4-fs warning (device sda): ext4_group_extend:1883: will only finish group (1048576 blocks, 12288 new)
+EXT4-fs warning (device sda): ext4_group_extend:1889: can't read last block, resize aborted
+audit: type=1400 audit(1710044926.353:25): avc:  denied  { node_bind } for  pid=26036 comm="syz-executor.0" saddr=::ffff:224.0.0.2 scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:object_r:node_t:s0 tclass=icmp_socket permissive=1
+audit: type=1326 audit(1710044926.976:26): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26074 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fd2f25d202d code=0x0
+audit: type=1326 audit(1710044926.977:27): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26074 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fd2f25d202d code=0x0
+EXT4-fs warning (device sda): ext4_group_extend:1883: will only finish group (1048576 blocks, 12288 new)
+EXT4-fs warning (device sda): ext4_group_extend:1889: can't read last block, resize aborted
+audit: type=1326 audit(1710044927.119:28): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26142 comm="syz-executor.3" exe="/syz-executor.3" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fd2f25d202d code=0x0
+audit: type=1326 audit(1710044929.259:29): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26547 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fcb1eadb02d code=0xf7720000
+audit: type=1326 audit(1710044929.504:30): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26601 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7fcb1eadb02d code=0xf7720000
+audit: type=1326 audit(1710044929.986:31): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26607 comm="syz-executor.2" exe="/syz-executor.2" sig=31 arch=c000003e syscall=317 compat=0 ip=0x7fcb1eadb02d code=0xf7720000
+audit: type=1326 audit(1710044930.201:32): auid=0 uid=0 gid=0 ses=4 subj=system_u:system_r:kernel_t:s0 pid=26686 comm="syz-executor.1" exe="/syz-executor.1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7f6a8ed4302d code=0x0

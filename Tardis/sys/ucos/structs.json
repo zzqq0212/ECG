@@ -1,0 +1,562 @@
+{
+    "OSRedzoneHitHook": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSMemCreate": [
+        [
+            0,
+            "OS_MEM"
+        ]
+    ],
+    "OSMemGet": [
+        [
+            0,
+            "OS_MEM"
+        ]
+    ],
+    "OSMemPut": [
+        [
+            0,
+            "OS_MEM"
+        ]
+    ],
+    "OSTimeDlyResume": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTmrCreate": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrDel": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrRemainGet": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrSet": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrStart": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrStateGet": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSTmrStop": [
+        [
+            0,
+            "OS_TMR"
+        ]
+    ],
+    "OSSemCreate": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSSemDel": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSSemPend": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSSemPendAbort": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSSemPost": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSSemSet": [
+        [
+            0,
+            "OS_SEM"
+        ]
+    ],
+    "OSFlagCreate": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSFlagDel": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSFlagPend": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSFlagPendAbort": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSFlagPost": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSFlagPost$res": [
+        [
+            0,
+            "OS_FLAG_GRP"
+        ]
+    ],
+    "OSQCreate": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "OSQDel": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "OSQFlush": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "OSQPend": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "OSQPendAbort": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "OSQPost": [
+        [
+            0,
+            "OS_Q"
+        ]
+    ],
+    "Mem_SegCreate": [
+        [
+            1,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_SegClr": [
+        [
+            0,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_SegAlloc": [
+        [
+            1,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_SegAllocExt": [
+        [
+            1,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_SegAllocHW": [
+        [
+            1,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_SegRemSizeGet": [
+        [
+            0,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_PoolCreate": [
+        [
+            0,
+            "MEM_POOL"
+        ]
+    ],
+    "Mem_PoolClr": [
+        [
+            0,
+            "MEM_POOL"
+        ]
+    ],
+    "Mem_PoolBlkGet": [
+        [
+            0,
+            "MEM_POOL"
+        ]
+    ],
+    "Mem_PoolBlkFree": [
+        [
+            0,
+            "MEM_POOL"
+        ]
+    ],
+    "Mem_PoolBlkGetNbrAvail": [
+        [
+            0,
+            "MEM_POOL"
+        ]
+    ],
+    "Mem_DynPoolCreate": [
+        [
+            1,
+            "MEM_DYN_POOL"
+        ],
+        [
+            2,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_DynPoolCreateHW": [
+        [
+            1,
+            "MEM_DYN_POOL"
+        ],
+        [
+            2,
+            "MEM_SEG"
+        ]
+    ],
+    "Mem_DynPoolBlkGet": [
+        [
+            0,
+            "MEM_DYN_POOL"
+        ]
+    ],
+    "Mem_DynPoolBlkFree": [
+        [
+            0,
+            "MEM_DYN_POOL"
+        ]
+    ],
+    "Mem_DynPoolBlkNbrAvailGet": [
+        [
+            0,
+            "MEM_DYN_POOL"
+        ]
+    ],
+    "OSMutexCreate": [
+        [
+            0,
+            "OS_MUTEX"
+        ]
+    ],
+    "OSMutexDel": [
+        [
+            0,
+            "OS_MUTEX"
+        ]
+    ],
+    "OSMutexPend": [
+        [
+            0,
+            "OS_MUTEX"
+        ]
+    ],
+    "OSMutexPendAbort": [
+        [
+            0,
+            "OS_MUTEX"
+        ]
+    ],
+    "OSMutexPost": [
+        [
+            0,
+            "OS_MUTEX"
+        ]
+    ],
+    "OSTaskChangePrio": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskCreate": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskDel": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskRegGet": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskRegSet": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskResume": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskSuspend": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskStkChk": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskTimeQuantaSet": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskCreateHook": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskDelHook": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskReturnHook": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskSemPendAbort": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskSemPost": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskSemSet": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskQFlush": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskQPendAbort": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "OSTaskQPost": [
+        [
+            0,
+            "OS_TCB"
+        ]
+    ],
+    "NetIF_DevCfgTxRdySignal": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetIF_DevTxRdySignal": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_Init": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_Start": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_Stop": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_Rx": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_Tx": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_AddrMulticastAdd": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_AddrMulticastRemove": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_ISR_Handler": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_IO_Ctrl": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_MII_Rd": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_MII_Wr": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_RxDescInit": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_RxDescFreeAll": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_RxDescPtrCurInc": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetDev_TxDescInit": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_Init": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_EnDis": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_LinkStateGet": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_LinkStateSet": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_AutoNegStart": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ],
+    "NetPhy_AddrProbe": [
+        [
+            0,
+            "NET_IF"
+        ]
+    ]
+}

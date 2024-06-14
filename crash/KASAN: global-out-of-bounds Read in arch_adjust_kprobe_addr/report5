@@ -1,0 +1,97 @@
+==================================================================
+BUG: KASAN: global-out-of-bounds in arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+Read of size 4 at addr ffffffffac24b600 by task syz-executor.1/33999
+
+CPU: 1 PID: 33999 Comm: syz-executor.1 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ arch_adjust_kprobe_addr+0x10a/0x120 arch/x86/kernel/kprobes/core.c:338
+ _kprobe_addr+0x11b/0x150 kernel/kprobes.c:1479
+ register_kprobe+0xe0/0x1630 kernel/kprobes.c:1622
+ __register_trace_kprobe kernel/trace/trace_kprobe.c:510 [inline]
+ __register_trace_kprobe+0x26a/0x2d0 kernel/trace/trace_kprobe.c:478
+ create_local_trace_kprobe+0x2db/0x490 kernel/trace/trace_kprobe.c:1821
+ perf_kprobe_init+0x119/0x200 kernel/trace/trace_event_perf.c:267
+ perf_kprobe_event_init+0xfc/0x1d0 kernel/events/core.c:10342
+ perf_try_init_event+0x130/0x570 kernel/events/core.c:11672
+ perf_init_event kernel/events/core.c:11742 [inline]
+ perf_event_alloc.part.0+0xefa/0x34d0 kernel/events/core.c:12022
+ perf_event_alloc kernel/events/core.c:12431 [inline]
+ __do_sys_perf_event_open+0x4da/0x23e0 kernel/events/core.c:12529
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7ff53d60202d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ff53c971028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007ff53d73df80 RCX: 00007ff53d60202d
+RDX: 0000000000000000 RSI: ffffffffffffffff RDI: 0000000020000600
+RBP: 00007ff53d6634a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000002 R14: 00007ff53d73df80 R15: 00007ff53c951000
+ </TASK>
+
+The buggy address belongs to the variable:
+ acpi_gbl_auto_serialize_methods+0x0/0x33c0
+
+The buggy address belongs to the physical page:
+page:000000006b5e0253 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x125e4b
+flags: 0x200000000004000(reserved|node=0|zone=2)
+page_type: 0xffffffff()
+raw: 0200000000004000 ffffea00049792c8 ffffea00049792c8 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffffac24b500: 01 f9 f9 f9 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+ ffffffffac24b580: 01 f9 f9 f9 f9 f9 f9 f9 01 f9 f9 f9 f9 f9 f9 f9
+>ffffffffac24b600: 01 f9 f9 f9 f9 f9 f9 f9 00 00 00 00 00 00 00 00
+                   ^
+ ffffffffac24b680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffffac24b700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+perf: interrupt took too long (34849 > 34581), lowering kernel.perf_event_max_sample_rate to 5000
+9pnet_fd: Insufficient options for proto=fd
+pimreg: entered allmulticast mode
+pimreg: left allmulticast mode

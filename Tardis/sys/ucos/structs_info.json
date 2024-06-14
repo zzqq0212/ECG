@@ -1,0 +1,836 @@
+{
+    "OS_TMR": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "CallbackPtr",
+            "type": "OS_TMR_CALLBACK_PTR"
+        },
+        {
+            "name": "CallbackPtrArg",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "NextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TMR"
+        },
+        {
+            "name": "PrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TMR"
+        },
+        {
+            "name": "Remain",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "Dly",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "Period",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "Opt",
+            "type": "OS_OPT"
+        },
+        {
+            "name": "State",
+            "type": "OS_STATE"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TMR"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TMR"
+        }
+    ],
+    "OS_FLAG_GRP": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "PendList",
+            "type": "OS_PEND_LIST"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_FLAG_GRP"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_FLAG_GRP"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "Flags",
+            "type": "OS_FLAGS"
+        }
+    ],
+    "OS_TCB": [
+        {
+            "name": "StkPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_STK"
+        },
+        {
+            "name": "ExtPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "StkLimitPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_STK"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "NextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "PrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "TickNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "TickPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "StkBasePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_STK"
+        },
+        {
+            "name": "TaskEntryAddr",
+            "type": "OS_TASK_PTR"
+        },
+        {
+            "name": "TaskEntryArg",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "PendNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "PendPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "PendObjPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_PEND_OBJ"
+        },
+        {
+            "name": "PendOn",
+            "type": "OS_STATE"
+        },
+        {
+            "name": "Prio",
+            "type": "OS_PRIO"
+        },
+        {
+            "name": "BasePrio",
+            "type": "OS_PRIO"
+        },
+        {
+            "name": "MutexGrpHeadPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MUTEX"
+        },
+        {
+            "name": "StkSize",
+            "type": "CPU_STK_SIZE"
+        },
+        {
+            "name": "Opt",
+            "type": "OS_OPT"
+        },
+        {
+            "name": "SemCtr",
+            "type": "OS_SEM_CTR"
+        },
+        {
+            "name": "TickRemain",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "TickCtrPrev",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "TimeQuanta",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "TimeQuantaCtr",
+            "type": "OS_TICK"
+        },
+        {
+            "name": "MsgPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "MsgSize",
+            "type": "OS_MSG_SIZE"
+        },
+        {
+            "name": "MsgQ",
+            "type": "OS_MSG_Q"
+        },
+        {
+            "name": "MsgQPendTime",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "MsgQPendTimeMax",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "RegTbl",
+            "type": "array",
+            "single": "OS_REG",
+            "num": "OS_CFG_TASK_REG_TBL_SIZE"
+        },
+        {
+            "name": "FlagsPend",
+            "type": "OS_FLAGS"
+        },
+        {
+            "name": "FlagsRdy",
+            "type": "OS_FLAGS"
+        },
+        {
+            "name": "FlagsOpt",
+            "type": "OS_OPT"
+        },
+        {
+            "name": "SuspendCtr",
+            "type": "OS_NESTING_CTR"
+        },
+        {
+            "name": "CPUUsage",
+            "type": "OS_CPU_USAGE"
+        },
+        {
+            "name": "CPUUsageMax",
+            "type": "OS_CPU_USAGE"
+        },
+        {
+            "name": "CtxSwCtr",
+            "type": "OS_CTX_SW_CTR"
+        },
+        {
+            "name": "CyclesDelta",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "CyclesStart",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "CyclesTotal",
+            "type": "OS_CYCLES"
+        },
+        {
+            "name": "CyclesTotalPrev",
+            "type": "OS_CYCLES"
+        },
+        {
+            "name": "SemPendTime",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "SemPendTimeMax",
+            "type": "CPU_TS"
+        },
+        {
+            "name": "StkUsed",
+            "type": "CPU_STK_SIZE"
+        },
+        {
+            "name": "StkFree",
+            "type": "CPU_STK_SIZE"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        }
+    ],
+    "OS_PEND_LIST": [
+        {
+            "name": "HeadPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "TailPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "NbrEntries",
+            "type": "OS_OBJ_QTY"
+        }
+    ],
+    "OS_PEND_OBJ": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "PendList",
+            "type": "OS_PEND_LIST"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        }
+    ],
+    "OS_MUTEX": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "PendList",
+            "type": "OS_PEND_LIST"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MUTEX"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MUTEX"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "MutexGrpNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MUTEX"
+        },
+        {
+            "name": "OwnerTCBPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_TCB"
+        },
+        {
+            "name": "OwnerNestingCtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_NESTING_CTR"
+        }
+    ],
+    "OS_MSG_Q": [
+        {
+            "name": "InPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MSG"
+        },
+        {
+            "name": "OutPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MSG"
+        },
+        {
+            "name": "NbrEntriesSize",
+            "type": "OS_MSG_QTY"
+        },
+        {
+            "name": "NbrEntries",
+            "type": "OS_MSG_QTY"
+        }
+    ],
+    "OS_MSG": [
+        {
+            "name": "NextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MSG"
+        },
+        {
+            "name": "MsgPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "MsgSize",
+            "type": "OS_MSG_SIZE"
+        }
+    ],
+    "OS_SEM": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "PendList",
+            "type": "OS_PEND_LIST"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_SEM"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_SEM"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "Ctr",
+            "type": "OS_SEM_CTR"
+        }
+    ],
+    "OS_MEM": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "AddrPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "FreeListPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "BlkSize",
+            "type": "OS_MEM_SIZE"
+        },
+        {
+            "name": "NbrMax",
+            "type": "OS_MEM_QTY"
+        },
+        {
+            "name": "NbrFree",
+            "type": "OS_MEM_QTY"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MEM"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_MEM"
+        }
+    ],
+    "MEM_SEG": [
+        {
+            "name": "AddrBase",
+            "type": "CPU_ADDR"
+        },
+        {
+            "name": "AddrEnd",
+            "type": "CPU_ADDR"
+        },
+        {
+            "name": "AddrNext",
+            "type": "CPU_ADDR"
+        },
+        {
+            "name": "NextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "MEM_SEG"
+        },
+        {
+            "name": "PaddingAlign",
+            "type": "CPU_SIZE_T"
+        }
+    ],
+    "MEM_POOL": [
+        {
+            "name": "PoolAddrStart",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "PoolAddrEnd",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "BlkNbr",
+            "type": "MEM_POOL_BLK_QTY"
+        },
+        {
+            "name": "BlkSize",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "BlkFreeTbl",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "BlkFreeTblIx",
+            "type": "CPU_SIZE_T"
+        }
+    ],
+    "MEM_DYN_POOL": [
+        {
+            "name": "PoolSegPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "MEM_SEG"
+        },
+        {
+            "name": "BlkSize",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "BlkAlign",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "BlkPaddingAlign",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "BlkFreePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "void"
+        },
+        {
+            "name": "BlkQtyMax",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "BlkAllocCnt",
+            "type": "CPU_SIZE_T"
+        }
+    ],
+    "MEM_SEG_INFO": [
+        {
+            "name": "UsedSize",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "TotalSize",
+            "type": "CPU_SIZE_T"
+        },
+        {
+            "name": "AddrBase",
+            "type": "CPU_ADDR"
+        },
+        {
+            "name": "AddrNextAlloc",
+            "type": "CPU_ADDR"
+        }
+    ],
+    "OS_Q": [
+        {
+            "name": "Type",
+            "type": "OS_OBJ_TYPE"
+        },
+        {
+            "name": "NamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "PendList",
+            "type": "OS_PEND_LIST"
+        },
+        {
+            "name": "DbgPrevPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_Q"
+        },
+        {
+            "name": "DbgNextPtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "OS_Q"
+        },
+        {
+            "name": "DbgNamePtr",
+            "type": "ptr",
+            "size": 4,
+            "obj": "CPU_CHAR"
+        },
+        {
+            "name": "MsgQ",
+            "type": "OS_MSG_Q"
+        }
+    ],
+    "basic_type": [
+        {
+            "name": "CPU_STK",
+            "size": 32
+        },
+        {
+            "name": "void",
+            "size": 0
+        },
+        {
+            "name": "CPU_CHAR",
+            "size": 8
+        },
+        {
+            "name": "OS_TASK_PTR",
+            "size": 0
+        },
+        {
+            "name": "OS_STATE",
+            "size": 8
+        },
+        {
+            "name": "OS_STATUS",
+            "size": 8
+        },
+        {
+            "name": "CPU_STK_SIZE",
+            "size": 32
+        },
+        {
+            "name": "OS_PRIO",
+            "size": 8
+        },
+        {
+            "name": "OS_OPT",
+            "size": 16
+        },
+        {
+            "name": "CPU_TS",
+            "size": 32
+        },
+        {
+            "name": "OS_SEM_CTR",
+            "size": 32
+        },
+        {
+            "name": "OS_TICK",
+            "size": 32
+        },
+        {
+            "name": "OS_MSG_SIZE",
+            "size": 16
+        },
+        {
+            "name": "OS_REG",
+            "size": 32
+        },
+        {
+            "name": "OS_FLAGS",
+            "size": 32
+        },
+        {
+            "name": "OS_NESTING_CTR",
+            "size": 8
+        },
+        {
+            "name": "OS_CPU_USAGE",
+            "size": 16
+        },
+        {
+            "name": "OS_CTX_SW_CTR",
+            "size": 32
+        },
+        {
+            "name": "OS_CYCLES",
+            "size": 32
+        },
+        {
+            "name": "OS_OBJ_TYPE",
+            "size": 32
+        },
+        {
+            "name": "OS_TMR_CALLBACK_PTR",
+            "size": 0
+        },
+        {
+            "name": "OS_OBJ_QTY",
+            "size": 16
+        },
+        {
+            "name": "OS_MEM_SIZE",
+            "size": 16
+        },
+        {
+            "name": "OS_MEM_QTY",
+            "size": 16
+        },
+        {
+            "name": "OS_MSG_SIZE",
+            "size": 16
+        },
+        {
+            "name": "OS_MSG_QTY",
+            "size": 16
+        },
+        {
+            "name": "OS_NESTING_CTR",
+            "size": 8
+        },
+        {
+            "name": "CPU_ADDR",
+            "size": 32
+        },
+        {
+            "name": "CPU_SIZE_T",
+            "size": 32
+        }
+    ]
+}

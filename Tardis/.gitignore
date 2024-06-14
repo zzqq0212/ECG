@@ -1,0 +1,17 @@
+
+/~
+/bin
+tmp
+vm.log
+.vscode
+.idea
+**/target
+*/pkg/
+Cargo.lock
+third_party
+my-file
+feryr_prog/bin
+/config/*
+sys/ucos_wrapper
+log
+/third-party/*

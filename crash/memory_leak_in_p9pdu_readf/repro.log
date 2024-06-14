@@ -1,0 +1,356 @@
+Warning: Permanently added '[localhost]:45023' (ED25519) to the list of known hosts.
+2023/12/21 06:01:35 ignoring optional flag "sandboxArg"="0"
+2023/12/21 06:01:35 parsed 1 programs
+syzkaller login: [  830.888014] kmemleak: Automatic memory scanning thread ended
+[  830.939128] cgroup: Unknown subsys name 'net'
+[  830.993022] cgroup: Unknown subsys name 'rlimit'
+[  859.835146] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+[  859.842667] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=272 'syz-execprog'
+2023/12/21 06:02:04 executed programs: 0
+[  859.864462] audit: type=1400 audit(1703138524.831:6): avc:  denied  { execmem } for  pid=295 comm="syz-executor.2" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+[  892.241067] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[  892.245225] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.286434] 9pnet_fd: Insufficient options for proto=fd
+[  892.289467] 9pnet_fd: Insufficient options for proto=fd
+2023/12/21 06:02:37 executed programs: 8
+[  892.405322] 9pnet_fd: Insufficient options for proto=fd
+[  892.430133] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  892.450357] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[  892.457672] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.464225] 9pnet_fd: Insufficient options for proto=fd
+[  892.475324] 9pnet_fd: Insufficient options for proto=fd
+[  892.518592] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  892.528270] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.536099] 9pnet_fd: Insufficient options for proto=fd
+[  892.556627] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[  892.558014] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.576032] 9pnet_fd: Insufficient options for proto=fd
+[  892.588307] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[  892.589823] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.598400] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  892.599624] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[  892.599922] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  892.600711] 9pnet: p9_errstr2errno: server reported unknown error 1844674407370
+[  892.604424] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+2023/12/21 06:03:32 executed programs: 22
+2023/12/21 06:03:57 executed programs: 23
+[  972.911791] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[  972.913083] 9pnet: p9_errstr2errno: server reported unknown error 1844674407370
+[  972.915484] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[  972.916942] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  972.923395] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[  972.924302] 9pnet: p9_errstr2errno: server reported unknown error 18446744073
+[  972.931882] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[  972.932288] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[  972.932645] 9pnet_fd: Insufficient options for proto=fd
+[  972.932936] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  972.934889] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  972.943566] 9pnet_fd: Insufficient options for proto=fd
+[  973.012263] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  973.013242] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  973.016676] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  973.017943] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  973.021753] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[  973.021845] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  973.022629] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  973.023748] 9pnet_fd: Insufficient options for proto=fd
+[  973.030584] 9pnet: p9_errstr2errno: server reported unknown error 1844674407370
+[  973.036832] 9pnet_fd: Insufficient options for proto=fd
+[  973.047220] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[  973.048386] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  973.099595] 9pnet: p9_errstr2errno: server reported unknown error 184
+[  989.120984] selinux_netlink_send: 1 callbacks suppressed
+[  989.120997] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[  989.122275] 9pnet: p9_errstr2errno: server reported unknown error 184
+2023/12/21 06:04:39 executed programs: 39
+[ 1014.622674] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1014.625162] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1014.626073] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.627660] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1014.629900] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1014.630851] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.634158] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1014.643198] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1014.650794] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1014.653884] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.662638] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1014.664074] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.715963] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1014.716847] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.724501] 9pnet_fd: Insufficient options for proto=fd
+[ 1014.724604] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1014.725846] 9pnet: p9_errstr2errno: server reported unknown error 184467440737095
+[ 1014.726432] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1014.754855] 9pnet: p9_errstr2errno: server reported unknown error 184
+2023/12/21 06:05:34 executed programs: 51
+2023/12/21 06:06:00 executed programs: 52
+[ 1095.093768] selinux_netlink_send: 2 callbacks suppressed
+[ 1095.093779] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1095.094947] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1095.096152] 9pnet: p9_errstr2errno: server reported unknown error 18446744073
+[ 1095.097921] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.104482] 9pnet_fd: Insufficient options for proto=fd
+[ 1095.105342] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1095.106299] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1095.107213] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.108094] 9pnet_fd: Insufficient options for proto=fd
+[ 1095.118846] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1095.192268] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1095.196529] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1095.197157] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1095.197963] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.199157] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.204729] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1095.211534] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1095.214950] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.236512] 9pnet_fd: Insufficient options for proto=fd
+[ 1095.273116] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1095.276146] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1111.063343] selinux_netlink_send: 2 callbacks suppressed
+[ 1111.063355] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1111.065227] 9pnet: p9_errstr2errno: server reported unknown error 184
+2023/12/21 06:06:16 executed programs: 67
+[ 1111.107383] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1111.108726] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1111.126919] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1111.129626] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1111.135258] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1111.137183] 9pnet: p9_errstr2errno: server reported unknown error 184
+2023/12/21 06:07:20 executed programs: 71
+[ 1175.721999] 9pnet_fd: Insufficient options for proto=fd
+[ 1175.724447] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1175.728481] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1175.728900] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.729786] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.733548] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1175.734857] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.737490] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1175.740993] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.747945] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1175.748977] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.760018] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1175.760942] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.843086] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1175.844592] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1175.846312] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1175.846599] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.847401] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.850555] 9pnet_fd: Insufficient options for proto=fd
+[ 1175.853939] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1175.854996] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1175.862529] 9pnet_fd: Insufficient options for proto=fd
+[ 1175.862817] 9pnet_fd: Insufficient options for proto=fd
+[ 1191.357443] kworker/dying (243) used greatest stack depth: 24168 bytes left
+[ 1191.848095] 9pnet_fd: Insufficient options for proto=fd
+2023/12/21 06:08:02 executed programs: 87
+[ 1217.465302] selinux_netlink_send: 1 callbacks suppressed
+[ 1217.465313] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1217.470955] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1217.471850] 9pnet: p9_errstr2errno: server reported unknown error 184467440737095
+[ 1217.473933] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1217.474662] 9pnet_fd: Insufficient options for proto=fd
+[ 1217.476008] 9pnet: p9_errstr2errno: server reported unknown error 1844674407370
+[ 1217.476924] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=47 comm=kworker/3:1
+[ 1217.477257] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1217.477778] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.478506] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.480265] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1217.484028] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.498532] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1217.499533] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.568752] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=141 comm=kworker/0:2
+[ 1217.570849] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.571312] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=146 comm=kworker/2:2
+[ 1217.571543] SELinux: unrecognized netlink message: protocol=0 nlmsg_type=65380 sclass=netlink_route_socket pid=48 comm=kworker/1:1
+[ 1217.573741] 9pnet: p9_errstr2errno: server reported unknown error 184
+[ 1217.580523] 9pnet: p9_errstr2errno: server reported unknown error 184
+2023/12/21 06:08:57 executed programs: 99
+[ 1297.575025] kmemleak: 1 new suspected memory leaks (see /sys/kernel/debug/kmemleak)
+BUG: memory leak
+unreferenced object 0xffff8881070ed200 (size 32):
+  comm "syz-executor.7", pid 5646, jiffies 4295884393 (age 93.522s)
+  hex dump (first 32 bytes):
+    31 38 34 34 36 37 34 34 30 37 33 37 30 39 35 35  1844674407370955
+    31 00 0e 07 81 88 ff ff 5f 74 00 73 30 00 00 00  1......._t.s0...
+  backtrace:
+    [<00000000ad8f727c>] __kmalloc+0x4a/0x160
+    [<0000000041fd51bf>] p9pdu_readf+0xdb0/0x1b20
+    [<00000000726454fd>] p9_check_errors+0x2e8/0x610
+    [<00000000bb32e528>] p9_client_rpc+0x4a2/0xb20
+    [<00000000ba85a156>] p9_client_create+0xb48/0x11c0
+    [<0000000032e8f703>] v9fs_session_init+0x1e8/0x1580
+    [<00000000bc87ed88>] v9fs_mount+0xbd/0xad0
+    [<000000006d2e763c>] legacy_get_tree+0x10a/0x210
+    [<000000005f1f1629>] vfs_get_tree+0x92/0x340
+    [<0000000058ad3f55>] path_mount+0x4c9/0x1ae0
+    [<00000000b42e0344>] __x64_sys_mount+0x23b/0x2d0
+    [<00000000524d9ad9>] do_syscall_64+0x3f/0x90
+    [<00000000865b05bf>] entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+
+VM DIAGNOSIS:
+06:09:36  Registers:
+info registers vcpu 0
+RAX=0000000000000000 RBX=ffffffff912513e8 RCX=ffffffff8d0ae998 RDX=ffffffff9102a640
+RSI=ffffffff8d0ae989 RDI=ffffffff9120a480 RBP=ffffffff9218db7d RSP=ffff8881f7009a10
+R8 =0000000000000000 R9 =fffffbfff263f370 R10=ffffffff931f9b87 R11=0000000000000000
+R12=0000000000000000 R13=ffffffff9218db7d R14=ffffffff912513e8 R15=ffff88811d2c3970
+RIP=ffffffff8ced8990 RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff8881f7000000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe157ce7f000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe157ce7d000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00005569083a6338 CR3=0000000118282004 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 656a626f20646563 6e6572656665726e
+YMM02=0000000000000000 0000000000000000 3a29323320657a69 7328203030326465
+YMM03=0000000000000000 0000000000000000 363520646970202c 22372e726f747563
+YMM04=0000000000000000 0000000000000000 3034343736343438 3120203533203533
+YMM05=0000000000000000 0000000000000000 3033203433203433 2037332036332034
+YMM06=0000000000000000 0000000000000000 2973657479622032 3320747372696628
+YMM07=0000000000000000 0000000000000000 352e333920656761 2820333933343838
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=0000000000000001 RBX=ffff888100a8f948 RCX=ffff888100a90000 RDX=ffff888100a8f948
+RSI=0000000000000001 RDI=ffff888100a8f948 RBP=ffff888100a8f940 RSP=ffff888100a8f848
+R8 =ffffffff91c39c92 R9 =ffff888100a8f948 R10=0000000000001245 R11=0000000000034001
+R12=0000000000000008 R13=ffff888100a8f950 R14=ffff888100a8f958 R15=ffff888100a88000
+RIP=ffffffff8cd21b89 RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff8881f7080000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe7cea26b000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe7cea269000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007f4842edfe10 CR3=000000010dc4a003 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001fa0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 532e29646d432a28 2e636578652f736f
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 6b61656c2079726f 6d656d203a475542
+YMM05=0000000000000000 0000000000000000 202020200a306432 78302f6233327830
+YMM06=0000000000000000 0000000000000000 6139643432353030 3030303030303c5b
+YMM07=0000000000000000 0000000000000000 5f6c6c6163737973 5f6f64205d3e3964
+YMM08=0000000000000000 0000000000000000 2020200a30397830 2f663378302b3436
+YMM09=0000000000000000 0000000000000000 3062353638303030 30303030303c5b20
+YMM10=0000000000000000 0000000000000000 435359535f797274 6e65205d3e666235
+YMM11=0000000000000000 0000000000000000 6677685f72657466 615f34365f4c4c41
+YMM12=0000000000000000 0000000000000000 0a0a386478302f65 3678302b656d6172
+YMM13=0000000000000000 0000000000000000 0000000000000041 000000c00003c000
+YMM14=0000000000000000 0000000000000000 000000000000000c 000000c000036050
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 2
+RAX=0000000000000001 RBX=ffffffff91251240 RCX=00000000b6b8324c RDX=1ffff11020117144
+RSI=0000000000000001 RDI=0000000031458024 RBP=00007f06a5efa40c RSP=ffff8881f7109a10
+R8 =0000000000000000 R9 =fffffbfff263f370 R10=ffffffff931f9b87 R11=0000000000000000
+R12=ffff8881f7109b50 R13=00007f06a5efa40c R14=ffff8881008b8000 R15=ffff88811305dbd0
+RIP=ffffffff8d0ae8d6 RFL=00000246 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007f06a5730900 00000000 00000000
+GS =0000 ffff8881f7100000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe5a82ed5000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe5a82ed3000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fdfeaf00000 CR3=000000010dabe001 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 2c2c2c2c2c2c2c2c 2c2c2c2c2c2c2c2c
+YMM01=0000000000000000 0000000000000000 000000ff00000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 000000ff00000000 0000000000000000
+YMM03=0000000000000000 0000000000000000 7061002d70706100 2d6d657473797300
+YMM04=0000000000000000 0000000000000000 2f2f2f2f2f2f2f2f 2f2f2f2f2f2f2f2f
+YMM05=0000000000000000 0000000000000000 5a5a5a5a5a5a5a5a 5a5a5a5a5a5a5a5a
+YMM06=0000000000000000 0000000000000000 2020202020202020 2020202020202020
+YMM07=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM08=0000000000000000 0000000000000000 6578450065725074 7261745363657845
+YMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000200000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 3
+RAX=0000000080000001 RBX=ffff88811db28000 RCX=ffffffff8d44fd3d RDX=fffff940009456a7
+RSI=0000000000000004 RDI=ffffea0004a2b530 RBP=ffffea0004a2b500 RSP=ffff88811d35f6c8
+R8 =0000000000000001 R9 =fffff940009456a6 R10=ffffea0004a2b533 R11=0000000000000000
+R12=ffffea0004a2b500 R13=0000000000000000 R14=00000000011b3000 R15=ffff88811d35fae8
+RIP=ffffffff8d0a714b RFL=00000286 [--S--P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffff8881f7180000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe6c9791a000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe6c97918000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fdff526f780 CR3=000000010dc4a001 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001fa0
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 402813a37c7dd0ac
+YMM01=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM02=0000000000000000 0000000000000000 0000000000000000 4109f28000000000
+YMM03=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM04=0000000000000000 0000000000000000 732f6c61636f6c2f 7273752f3d485441
+YMM05=0000000000000000 0000000000000000 622f6c61636f6c2f 7273752f3a6e6962
+YMM06=0000000000000000 0000000000000000 73752f3a6e696273 2f7273752f3a6e69
+YMM07=0000000000000000 0000000000000000 6e69622f3a6e6962 732f3a6e69622f72
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM09=0000000000000000 0000000000000000 0000000000000000 41cdcd6500000000
+YMM10=0000000000000000 0000000000000000 0000000000469501 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000007 0000000000a67dc3
+YMM14=0000000000000000 0000000000000000 000000000000000d 0000000000a82c5a
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

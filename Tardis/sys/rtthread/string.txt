@@ -1,0 +1,13 @@
+resource str_ptr_res[intptr]
+rt_strstr$res1(pstr str_ptr_res, pstr_srch ptr[in, CPU_CHAR]) str_ptr_res
+rt_strcasecmp(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR]) (ignore_return)
+rt_strncpy(p1_str ptr[in, CPU_CHAR], p2_str ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+rt_strncmp(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res, len_max CPU_SIZE_T) (ignore_return)
+rt_strcmp(p1_str ptr[in, CPU_CHAR], p2_str str_ptr_res) (ignore_return)
+rt_strnlen(pstr ptr[in, CPU_CHAR], len_max CPU_SIZE_T) (ignore_return)
+rt_strlen(pstr ptr[in, CPU_CHAR]) (ignore_return)
+rt_strdup(pstr_dest ptr[out, CPU_CHAR]) str_ptr_res
+rt_snprintf(pstr_dest ptr[in, CPU_CHAR], pstr_cat str_ptr_res) str_ptr_res
+
+type CPU_CHAR int8
+type CPU_SIZE_T int32

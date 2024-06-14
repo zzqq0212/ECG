@@ -1,0 +1,16 @@
+#Kernel Modules
+rt_show_version()
+
+rt_system_timer_init()
+
+rt_system_scheduler_init()
+
+rt_system_signal_init()
+
+#rt_application_init()
+
+rt_system_timer_thread_init()
+
+rt_thread_idle_init()
+
+rt_system_scheduler_start()

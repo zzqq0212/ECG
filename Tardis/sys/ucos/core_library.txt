@@ -1,0 +1,24 @@
+# resource cnt_lead_zero_data[CPU_DATA]
+# resource pop_cnt_32_data[int8]
+#
+# # CPU_CntLeadZerosXX
+# CPU_CntLeadZeros(val CPU_DATA) cnt_lead_zero_data
+# CPU_CntLeadZeros08(val int8) cnt_lead_zero_data
+# CPU_CntLeadZeros16(val int16) cnt_lead_zero_data
+# CPU_CntLeadZeros32(val int32) cnt_lead_zero_data
+# CPU_CntLeadZeros64(val int64) cnt_lead_zero_data
+#
+# # CPU_CntTrailZerosXX
+# CPU_CntTrailZeros(val CPU_DATA) cnt_lead_zero_data
+# CPU_CntTrailZeros08(val int8) cnt_lead_zero_data
+# CPU_CntTrailZeros16(val int16) cnt_lead_zero_data
+# CPU_CntTrailZeros32(val int32) cnt_lead_zero_data
+# CPU_CntTrailZeros64(val int64) cnt_lead_zero_data
+#
+# CPU_Init()
+# CPU_PopCnt32(value int32) (ignore_return)
+# CPU_StatReset()
+# CPU_SW_EXCEPTION()
+#
+# type CPU_DATA int32
+#

@@ -1,0 +1,161 @@
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /file1 supports timestamps until 2038-01-19 (0x7fffffff)
+==================================================================
+BUG: KASAN: slab-use-after-free in ext4_ext_binsearch fs/ext4/extents.c:837 [inline]
+BUG: KASAN: slab-use-after-free in ext4_find_extent+0xbff/0xc70 fs/ext4/extents.c:953
+Read of size 4 at addr ffff88810453a00c by task syz-executor486/293
+
+CPU: 4 PID: 293 Comm: syz-executor486 Not tainted 6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x50/0x70 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ ext4_ext_binsearch fs/ext4/extents.c:837 [inline]
+ ext4_find_extent+0xbff/0xc70 fs/ext4/extents.c:953
+ ext4_ext_remove_space+0x1152/0x36b0 fs/ext4/extents.c:2828
+ ext4_punch_hole+0xb8c/0xe70 fs/ext4/inode.c:3994
+ ext4_fallocate+0xb68/0x3240 fs/ext4/extents.c:4741
+ vfs_fallocate+0x360/0xae0 fs/open.c:328
+ ioctl_preallocate+0x172/0x1f0 fs/ioctl.c:291
+ file_ioctl fs/ioctl.c:334 [inline]
+ do_vfs_ioctl+0x109e/0x13c0 fs/ioctl.c:850
+ __do_sys_ioctl fs/ioctl.c:869 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0xef/0x1e0 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f43f8a42e7d
+Code: c3 e8 d7 21 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffdafa8a398 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0031656c69662f2e RCX: 00007f43f8a42e7d
+RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+RBP: 0000000000000001 R08: 00007ffdafa8a598 R09: 00007ffdafa8a598
+R10: 00007ffdafa8a598 R11: 0000000000000246 R12: 0000000000000001
+R13: 00007ffdafa8a588 R14: 00007f43f8ac1530 R15: 0000000000000001
+ </TASK>
+
+Allocated by task 167:
+ kasan_save_stack+0x24/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x14/0x30 mm/kasan/common.c:68
+ unpoison_slab_object mm/kasan/common.c:312 [inline]
+ __kasan_slab_alloc+0x59/0x70 mm/kasan/common.c:338
+ kasan_slab_alloc include/linux/kasan.h:201 [inline]
+ slab_post_alloc_hook mm/slub.c:3813 [inline]
+ slab_alloc_node mm/slub.c:3860 [inline]
+ kmem_cache_alloc+0xde/0x250 mm/slub.c:3867
+ getname_flags.part.0+0x4f/0x4c0 fs/namei.c:140
+ getname_flags include/linux/audit.h:322 [inline]
+ getname+0x89/0xd0 fs/namei.c:219
+ do_sys_openat2+0xe3/0x190 fs/open.c:1398
+ do_sys_open fs/open.c:1419 [inline]
+ __do_sys_openat fs/open.c:1435 [inline]
+ __se_sys_openat fs/open.c:1430 [inline]
+ __x64_sys_openat+0x141/0x1f0 fs/open.c:1430
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+Freed by task 167:
+ kasan_save_stack+0x24/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x14/0x30 mm/kasan/common.c:68
+ kasan_save_free_info+0x3b/0x60 mm/kasan/generic.c:589
+ poison_slab_object mm/kasan/common.c:240 [inline]
+ poison_slab_object mm/kasan/common.c:211 [inline]
+ __kasan_slab_free+0x106/0x190 mm/kasan/common.c:256
+ kasan_slab_free include/linux/kasan.h:184 [inline]
+ slab_free_hook mm/slub.c:2121 [inline]
+ slab_free mm/slub.c:4299 [inline]
+ kmem_cache_free+0x97/0x220 mm/slub.c:4363
+ putname+0x104/0x150 fs/namei.c:274
+ do_sys_openat2+0x11f/0x190 fs/open.c:1412
+ do_sys_open fs/open.c:1419 [inline]
+ __do_sys_openat fs/open.c:1435 [inline]
+ __se_sys_openat fs/open.c:1430 [inline]
+ __x64_sys_openat+0x141/0x1f0 fs/open.c:1430
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+
+The buggy address belongs to the object at ffff888104539100
+ which belongs to the cache names_cache of size 4096
+The buggy address is located 3852 bytes inside of
+ freed 4096-byte region [ffff888104539100, ffff88810453a100)
+
+The buggy address belongs to the physical page:
+page:0000000093a9d887 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x104538
+head:0000000093a9d887 order:3 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+flags: 0x200000000000840(slab|head|node=0|zone=2)
+page_type: 0xffffffff()
+raw: 0200000000000840 ffff88810018ea00 dead000000000122 0000000000000000
+raw: 0000000000000000 0000000000070007 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff888104539f00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff888104539f80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff88810453a000: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                      ^
+ ffff88810453a080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88810453a100: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+------------[ cut here ]------------
+kernel BUG at fs/ext4/extents.c:3180!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 293 Comm: syz-executor486 Tainted: G    B              6.8.0-rc7 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:ext4_split_extent_at+0x7d6/0xbc0 fs/ext4/extents.c:3180
+Code: 04 25 28 00 00 00 0f 85 5e 03 00 00 48 81 c4 d0 00 00 00 89 e8 5b 5d 41 5c 41 5d 41 5e 41 5f e9 4b 9a 7e 02 e8 bb 39 ad ff 90 <0f> 0b e8 b3 39 ad ff 48 8b 74 24 28 8b 6c 24 30 48 b8 00 00 00 00
+RSP: 0018:ffff888110727740 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88810694b030 RCX: ffffffff9231a6c5
+RDX: ffff88810f326600 RSI: 0000000000000002 RDI: ffff888104545e24
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000050000028
+R10: ffffffff970cddc7 R11: 6e696c6261736944 R12: ffff888104545e20
+R13: 0000000000000000 R14: ffff888104e48b18 R15: 0000000000000000
+FS:  00005555561613c0(0000) GS:ffff8881f7200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020020000 CR3: 000000010ee5c001 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_force_split_extent_at fs/ext4/extents.c:338 [inline]
+ ext4_ext_remove_space+0x2313/0x36b0 fs/ext4/extents.c:2875
+ ext4_punch_hole+0xb8c/0xe70 fs/ext4/inode.c:3994
+ ext4_fallocate+0xb68/0x3240 fs/ext4/extents.c:4741
+ vfs_fallocate+0x360/0xae0 fs/open.c:328
+ ioctl_preallocate+0x172/0x1f0 fs/ioctl.c:291
+ file_ioctl fs/ioctl.c:334 [inline]
+ do_vfs_ioctl+0x109e/0x13c0 fs/ioctl.c:850
+ __do_sys_ioctl fs/ioctl.c:869 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0xef/0x1e0 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f43f8a42e7d
+Code: c3 e8 d7 21 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffdafa8a398 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0031656c69662f2e RCX: 00007f43f8a42e7d
+RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+RBP: 0000000000000001 R08: 00007ffdafa8a598 R09: 00007ffdafa8a598
+R10: 00007ffdafa8a598 R11: 0000000000000246 R12: 0000000000000001
+R13: 00007ffdafa8a588 R14: 00007f43f8ac1530 R15: 0000000000000001
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:ext4_split_extent_at+0x7d6/0xbc0 fs/ext4/extents.c:3180
+Code: 04 25 28 00 00 00 0f 85 5e 03 00 00 48 81 c4 d0 00 00 00 89 e8 5b 5d 41 5c 41 5d 41 5e 41 5f e9 4b 9a 7e 02 e8 bb 39 ad ff 90 <0f> 0b e8 b3 39 ad ff 48 8b 74 24 28 8b 6c 24 30 48 b8 00 00 00 00
+RSP: 0018:ffff888110727740 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88810694b030 RCX: ffffffff9231a6c5
+RDX: ffff88810f326600 RSI: 0000000000000002 RDI: ffff888104545e24
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000050000028
+R10: ffffffff970cddc7 R11: 6e696c6261736944 R12: ffff888104545e20
+R13: 0000000000000000 R14: ffff888104e48b18 R15: 0000000000000000
+FS:  00005555561613c0(0000) GS:ffff8881f7200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020020000 CR3: 000000010ee5c001 CR4: 0000000000770ef0
+PKRU: 55555554

@@ -1,0 +1,58 @@
+------------[ cut here ]------------
+unexpected event refcount: 2; ptr=00000000a887cb6c
+WARNING: CPU: 1 PID: 78316 at kernel/events/core.c:5254 free_event+0x8b/0xb0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5254
+Modules linked in:
+CPU: 1 PID: 78316 Comm: syz-executor.1 Not tainted 6.7.0 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:free_event+0x8b/0xb0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5254
+Code: b8 00 00 00 00 00 fc ff df 48 c1 ea 03 80 3c 02 00 75 23 48 8b b5 38 02 00 00 48 89 ea 48 c7 c7 80 5b 8d bc e8 f6 2b c3 ff 90 <0f> 0b 90 90 5d 41 5c e9 f9 a8 ef ff 4c 89 e7 e8 21 02 1c 00 eb d3
+RSP: 0018:ffff88802d4579e0 EFLAGS: 00010282
+RAX: 0000000000000000 RBX: ffff88802d4577e0 RCX: ffffffffb991f5b8
+RDX: ffff888004a9c400 RSI: 0000000000000008 RDI: ffff88802d4577e8
+RBP: ffff88800afd44e8 R08: 0000000000000001 R09: ffffed1005a8aefd
+R10: ffff88802d4577ef R11: 7463657078656e75 R12: ffff88800afd4720
+R13: ffff88802d457a50 R14: ffff88800afd44e8 R15: dffffc0000000000
+FS:  0000000000000000(0000) GS:ffff8880a4280000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d222000 CR3: 0000000003c9e005 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ perf_event_release_kernel+0x4f6/0x750 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5421
+ perf_release+0x37/0x50 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/events/core.c:5442
+ __fput+0x235/0xb20 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/fs/file_table.c:394
+ task_work_run+0x15c/0x230 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/task_work.c:180
+ exit_task_work root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/./include/linux/task_work.h:38 [inline]
+ do_exit+0x94c/0x23d0 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:869
+ do_group_exit+0xb7/0x260 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/exit.c:1018
+ get_signal+0x1bbf/0x1d00 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/signal.c:2904
+ arch_do_signal_or_restart+0x7e/0x670 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/arch/x86/kernel/signal.c:309
+ exit_to_user_mode_loop root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0xd9/0x120 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/entry/common.c:204
+ irqentry_exit_to_user_mode+0xa/0x20 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/kernel/entry/common.c:309
+ exc_page_fault+0x92/0x130 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/arch/x86/mm/fault.c:1566
+ asm_exc_page_fault+0x26/0x30 root/zhangqiang/kernel_fuzzing/zq-LLM-OS/llm-syz-environment/linux-6.7/./arch/x86/include/asm/idtentry.h:570
+RIP: 0033:0x7f46a0fbd7d0
+Code: Unable to access opcode bytes at 0x7f46a0fbd7a6.
+RSP: 002b:00007f46a02f8f98 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 00007f46a10c5f80 RCX: 0000000000000000
+RDX: 00007f46a02f8fb0 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 00007f46a0feb4a6 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000002 R14: 00007f46a10c5f80 R15: 00007f46a02d9000
+ </TASK>
+---[ end trace 0000000000000000 ]---
+9pnet_fd: Insufficient options for proto=fd
+9pnet_fd: Insufficient options for proto=fd
+9pnet_fd: Insufficient options for proto=fd
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=80348 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=80359 comm=syz-executor.0
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=80398 comm=syz-executor.1
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=0 sclass=netlink_xfrm_socket pid=80572 comm=syz-executor.0
+EXT4-fs warning (device sda): verify_group_input:136: Cannot add at group 0 (only 32 groups)
+__nla_validate_parse: 18 callbacks suppressed
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.0'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.0'.
+nfs4: Bad value for 'source'
+SELinux:  Context system_u:object_r:depmod_exec_t:s0 is not valid (left unmapped).

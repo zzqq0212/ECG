@@ -1,0 +1,444 @@
+syzkaller login: [   17.385134] ==================================================================
+[   17.385794] BUG: KCSAN: data-race in generic_write_end / mpage_submit_folio
+[   17.386268] 
+[   17.386393] write to 0xffffa17185221378 of 8 bytes by task 363 on cpu 1:
+[   17.386860]  generic_write_end+0x9d/0x200
+[   17.387163]  ext4_da_write_end+0xfb/0x600
+[   17.387455]  generic_perform_write+0x205/0x360
+[   17.387771]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.388099]  ext4_file_write_iter+0xcd/0xdd0
+[   17.388405]  vfs_write+0x5d0/0x700
+[   17.388665]  ksys_write+0x9e/0x160
+[   17.388922]  __x64_sys_write+0x41/0x50
+[   17.389198]  do_syscall_64+0x3e/0x90
+[   17.389473]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.389828] 
+[   17.389950] read to 0xffffa17185221378 of 8 bytes by task 31 on cpu 0:
+[   17.390378]  mpage_submit_folio+0x58/0x130
+[   17.390671]  mpage_map_and_submit_buffers+0x31c/0x5a0
+[   17.391018]  ext4_do_writepages+0xcd5/0x1830
+[   17.391327]  ext4_writepages+0x19c/0x320
+[   17.391620]  do_writepages+0xb5/0x2e0
+[   17.391898]  __writeback_single_inode+0x72/0x650
+[   17.392227]  writeback_sb_inodes+0x463/0x930
+[   17.392530]  __writeback_inodes_wb+0x72/0x160
+[   17.392853]  wb_writeback+0x211/0x4e0
+[   17.393124]  wb_workfn+0x5df/0x8e0
+[   17.393381]  process_one_work+0x545/0x9c0
+[   17.393668]  worker_thread+0x33d/0x8d0
+[   17.393945]  kthread+0x1b1/0x200
+[   17.394199]  ret_from_fork+0x2f/0x50
+[   17.394456]  ret_from_fork_asm+0x1b/0x30
+[   17.394743] 
+[   17.394867] value changed: 0x000000000121e000 -> 0x0000000001220000
+[   17.395276] 
+[   17.395395] Reported by Kernel Concurrency Sanitizer on:
+[   17.395742] CPU: 0 PID: 31 Comm: kworker/u4:2 Not tainted 6.5.0 #8
+[   17.396155] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.396679] Workqueue: writeback wb_workfn (flush-8:0)
+[   17.397058] ==================================================================
+[   17.534586] ==================================================================
+[   17.535131] BUG: KCSAN: data-race in generic_write_end / mpage_process_page_bufs
+[   17.535686] 
+[   17.535812] write to 0xffffa17185221378 of 8 bytes by task 363 on cpu 1:
+[   17.536256]  generic_write_end+0x9d/0x200
+[   17.536605]  ext4_da_write_end+0xfb/0x600
+[   17.536943]  generic_perform_write+0x205/0x360
+[   17.537290]  ext4_buffered_write_iter+0xa9/0x1c0
+[   17.537642]  ext4_file_write_iter+0xcd/0xdd0
+[   17.537973]  vfs_write+0x5d0/0x700
+[   17.538244]  ksys_write+0x9e/0x160
+[   17.538523]  __x64_sys_write+0x41/0x50
+[   17.538819]  do_syscall_64+0x3e/0x90
+[   17.539116]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   17.539500] 
+[   17.539625] read to 0xffffa17185221378 of 8 bytes by task 31 on cpu 0:
+[   17.540091]  mpage_process_page_bufs+0x33/0x3f0
+[   17.540440]  mpage_prepare_extent_to_map+0x79a/0x9d0
+[   17.540836]  ext4_do_writepages+0x80d/0x1830
+[   17.541184]  ext4_writepages+0x19c/0x320
+[   17.541490]  do_writepages+0xb5/0x2e0
+[   17.541791]  __writeback_single_inode+0x72/0x650
+[   17.542146]  writeback_sb_inodes+0x463/0x930
+[   17.542492]  __writeback_inodes_wb+0x72/0x160
+[   17.542830]  wb_writeback+0x211/0x4e0
+[   17.543112]  wb_workfn+0x5df/0x8e0
+[   17.543397]  process_one_work+0x545/0x9c0
+[   17.543705]  worker_thread+0x33d/0x8d0
+[   17.543994]  kthread+0x1b1/0x200
+[   17.544258]  ret_from_fork+0x2f/0x50
+[   17.544533]  ret_from_fork_asm+0x1b/0x30
+[   17.544874] 
+[   17.545012] value changed: 0x0000000001a18000 -> 0x0000000001a1a000
+[   17.545521] 
+[   17.545659] Reported by Kernel Concurrency Sanitizer on:
+[   17.546059] CPU: 0 PID: 31 Comm: kworker/u4:2 Not tainted 6.5.0 #8
+[   17.546529] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+[   17.547135] Workqueue: writeback wb_workfn (flush-8:0)
+[   17.547525] ==================================================================
+[   17.560187] scp (363) used greatest stack depth: 11896 bytes left
+Warning: Permanently added '[localhost]:24679' (ED25519) to the list of known hosts.
+2023/10/30 09:47:08 fuzzer started
+2023/10/30 09:47:08 dialing manager at localhost:37497
+[   19.557810] cgroup: Unknown subsys name 'net'
+[   19.561856] cgroup: Unknown subsys name 'rlimit'
+[   19.562291] cgroup: Unknown subsys name 'memory'
+[   19.595667] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+2023/10/30 09:47:09 syscalls: 2193
+2023/10/30 09:47:09 code coverage: enabled
+2023/10/30 09:47:09 comparison tracing: CONFIG_KCOV_ENABLE_COMPARISONS is not enabled
+2023/10/30 09:47:09 extra coverage: enabled
+2023/10/30 09:47:09 delay kcov mmap: enabled
+2023/10/30 09:47:09 setuid sandbox: enabled
+2023/10/30 09:47:09 namespace sandbox: /proc/self/ns/user does not exist
+2023/10/30 09:47:09 Android sandbox: enabled
+2023/10/30 09:47:09 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2023/10/30 09:47:09 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2023/10/30 09:47:09 net packet injection: /dev/net/tun does not exist
+2023/10/30 09:47:09 net device setup: enabled
+2023/10/30 09:47:09 concurrency sanitizer: enabled
+2023/10/30 09:47:09 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2023/10/30 09:47:09 NIC VF setup: PCI device 0000:00:11.0 is not available
+2023/10/30 09:47:09 USB emulation: /dev/raw-gadget does not exist
+2023/10/30 09:47:09 hci packet injection: /dev/vhci does not exist
+2023/10/30 09:47:09 wifi device emulation: /sys/class/mac80211_hwsim/ does not exist
+2023/10/30 09:47:09 802.15.4 emulation: /sys/bus/platform/devices/mac802154_hwsim does not exist
+2023/10/30 09:47:09 swap file: enabled
+[   19.608143] kcsan: could not find function: 'should_defer_flush'
+[   19.610313] kcsan: could not find function: 'poll_schedule_timeout'
+[   19.618831] kcsan: could not find function: '__call_rcu_common'
+2023/10/30 09:47:09 suppressing KCSAN reports in functions: 'blk_mq_sched_dispatch_requests' 'mas_wr_bnode' 'has_bh_in_lru' '__folio_start_writeback' 'wq_worker_tick' 'ext4_free_inodes_count' 'evict' 'e1000_clean' 'delayacct_add_tsk' 'step_into' 'tick_nohz_idle_stop_tick' 'audit_log_start' 'should_defer_flush' 'filemap_get_pages' '_find_first_bit' 'ext4_fill_raw_inode' 'xas_clear_mark' 'poll_schedule_timeout' 'lookup_fast' 'fsnotify_free_mark' 'copyin' 'filemap_splice_read' 'e1000_clean_rx_irq' 'tick_nohz_next_event' 'fsnotify' 'filemap_fault' 'generic_fillattr' 'kauditd_thread' 'folio_unlock' 'ktime_get_mono_fast_ns' 'd_splice_alias' 'vfs_readlink' 'atime_needs_update' '_find_next_zero_bit' 'memchr_inv' 'xas_find_marked' 'n_tty_lookahead_flow_ctrl' 'lru_add_fn' 'mas_wr_node_store' 'tick_sched_do_timer' 'folio_mark_accessed' '__filemap_add_folio' '__call_rcu_common' 'kernfs_refresh_inode' 'do_readlinkat' 'xa_get_order' 'jbd2_journal_commit_transaction' 'process_one_work' 'next_uptodate_page' 'ext4_mb_good_group' '__folio_mark_dirty' 'dput' 'folio_clear_dirty_for_io' 'wq_worker_running' 'ext4_do_writepages' 'generic_write_end' 
+2023/10/30 09:47:09 fetching corpus: 50, signal 18750/20500 (executing program)
+2023/10/30 09:47:09 fetching corpus: 100, signal 27125/30411 (executing program)
+2023/10/30 09:47:09 fetching corpus: 150, signal 36351/40929 (executing program)
+2023/10/30 09:47:09 fetching corpus: 200, signal 39867/45763 (executing program)
+2023/10/30 09:47:09 fetching corpus: 250, signal 45198/52243 (executing program)
+2023/10/30 09:47:09 fetching corpus: 300, signal 48326/56511 (executing program)
+2023/10/30 09:47:09 fetching corpus: 350, signal 52646/61802 (executing program)
+2023/10/30 09:47:09 fetching corpus: 400, signal 57056/67074 (executing program)
+2023/10/30 09:47:10 fetching corpus: 450, signal 59049/70068 (executing program)
+2023/10/30 09:47:10 fetching corpus: 500, signal 61982/73783 (executing program)
+2023/10/30 09:47:10 fetching corpus: 550, signal 63584/76321 (executing program)
+2023/10/30 09:47:10 fetching corpus: 600, signal 66131/79609 (executing program)
+2023/10/30 09:47:10 fetching corpus: 650, signal 68066/82335 (executing program)
+2023/10/30 09:47:10 fetching corpus: 700, signal 69655/84686 (executing program)
+2023/10/30 09:47:10 fetching corpus: 750, signal 70621/86538 (executing program)
+2023/10/30 09:47:10 fetching corpus: 800, signal 72167/88807 (executing program)
+2023/10/30 09:47:10 fetching corpus: 850, signal 74771/91850 (executing program)
+2023/10/30 09:47:10 fetching corpus: 900, signal 76324/94041 (executing program)
+2023/10/30 09:47:10 fetching corpus: 950, signal 77335/95789 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1000, signal 78474/97595 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1050, signal 79765/99500 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1100, signal 81201/101446 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1150, signal 82719/103442 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1200, signal 83856/105099 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1250, signal 85111/106805 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1300, signal 86504/108593 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1350, signal 87383/110000 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1400, signal 88595/111574 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1450, signal 90284/113461 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1500, signal 91350/114904 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1550, signal 92052/116106 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1600, signal 93138/117486 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1650, signal 93887/118701 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1700, signal 94498/119788 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1750, signal 95036/120835 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1800, signal 95881/122016 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1850, signal 96724/123238 (executing program)
+2023/10/30 09:47:10 fetching corpus: 1900, signal 97589/124378 (executing program)
+2023/10/30 09:47:11 fetching corpus: 1950, signal 98429/125503 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2000, signal 99207/126592 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2050, signal 100161/127715 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2100, signal 100596/128629 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2150, signal 101065/129471 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2200, signal 101814/130409 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2250, signal 103859/131810 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2300, signal 104948/132848 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2350, signal 105522/133696 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2400, signal 106158/134525 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2450, signal 106556/135232 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2500, signal 107492/136092 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2550, signal 108314/136933 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2600, signal 108881/137710 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2650, signal 109686/138483 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2700, signal 110132/139149 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2750, signal 110756/139875 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2800, signal 111364/140578 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2850, signal 111954/141266 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2900, signal 112444/141874 (executing program)
+2023/10/30 09:47:11 fetching corpus: 2950, signal 112945/142505 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3000, signal 113250/143061 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3050, signal 113609/143627 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3100, signal 114222/144255 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3150, signal 114697/144797 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3200, signal 115193/145335 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3250, signal 115603/145851 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3300, signal 116133/146417 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3350, signal 116756/146881 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3400, signal 117158/147368 (executing program)
+2023/10/30 09:47:11 fetching corpus: 3450, signal 117760/147853 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3500, signal 118269/148332 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3550, signal 118692/148798 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3600, signal 119215/149204 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3650, signal 119659/149644 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3700, signal 120129/150067 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3750, signal 120353/150471 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3800, signal 120881/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3850, signal 121257/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3900, signal 121838/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 3950, signal 122098/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4000, signal 122415/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4050, signal 122847/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4100, signal 123179/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4150, signal 123540/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4200, signal 123956/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4250, signal 124415/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4300, signal 124681/150531 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4350, signal 124975/150536 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4400, signal 125300/150536 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4450, signal 125592/150536 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4500, signal 125916/150546 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4550, signal 126162/150550 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4600, signal 126401/150550 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4650, signal 126656/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4700, signal 126975/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4750, signal 127470/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4800, signal 127833/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4850, signal 128161/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4900, signal 128436/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 4950, signal 128746/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 5000, signal 129105/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 5050, signal 129356/150554 (executing program)
+2023/10/30 09:47:12 fetching corpus: 5100, signal 130008/150555 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5150, signal 130225/150557 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5200, signal 130510/150560 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5250, signal 130764/150560 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5300, signal 131006/150560 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5350, signal 131264/150560 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5400, signal 131458/150563 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5450, signal 131658/150563 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5500, signal 131958/150563 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5550, signal 132156/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5600, signal 132379/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5650, signal 132674/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5700, signal 132955/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5750, signal 133444/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5800, signal 133672/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5850, signal 133964/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5900, signal 134247/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 5950, signal 134449/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6000, signal 134625/150572 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6050, signal 134774/150575 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6100, signal 134995/150575 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6150, signal 135230/150575 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6200, signal 135427/150575 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6250, signal 135754/150575 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6300, signal 135968/150577 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6350, signal 136176/150577 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6400, signal 136341/150577 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6450, signal 136520/150577 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6500, signal 136855/150577 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6550, signal 137013/150583 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6600, signal 137213/150583 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6650, signal 137435/150585 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6700, signal 137609/150585 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6750, signal 137781/150585 (executing program)
+2023/10/30 09:47:13 fetching corpus: 6800, signal 137985/150585 (executing program)
+2023/10/30 09:47:14 fetching corpus: 6850, signal 138255/150585 (executing program)
+2023/10/30 09:47:14 fetching corpus: 6900, signal 138472/150586 (executing program)
+2023/10/30 09:47:14 fetching corpus: 6950, signal 138683/150591 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7000, signal 139055/150591 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7050, signal 139362/150591 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7100, signal 139627/150591 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7150, signal 139849/150592 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7200, signal 139989/150592 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7250, signal 140280/150592 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7300, signal 140468/150593 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7350, signal 140689/150597 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7400, signal 140894/150597 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7450, signal 141162/150598 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7500, signal 141378/150598 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7550, signal 141630/150600 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7600, signal 141851/150600 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7650, signal 142042/150601 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7700, signal 142298/150622 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7750, signal 142475/150622 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7800, signal 142733/150622 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7850, signal 142983/150622 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7900, signal 143258/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 7950, signal 143439/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8000, signal 143614/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8050, signal 143790/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8100, signal 143927/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8150, signal 144063/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8200, signal 144217/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8250, signal 144431/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8300, signal 144584/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8350, signal 144833/150623 (executing program)
+2023/10/30 09:47:14 fetching corpus: 8400, signal 145012/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8450, signal 145210/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8500, signal 145439/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8550, signal 145725/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8600, signal 145980/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8650, signal 146160/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8700, signal 146357/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8750, signal 146512/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8800, signal 146662/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8850, signal 146819/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8900, signal 146970/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 8950, signal 147274/150623 (executing program)
+2023/10/30 09:47:15 fetching corpus: 9000, signal 147416/150624 (executing program)
+2023/10/30 09:47:15 fetching corpus: 9029, signal 147488/150624 (executing program)
+2023/10/30 09:47:15 fetching corpus: 9029, signal 147488/150624 (executing program)
+2023/10/30 09:47:16 starting 2 fuzzer processes
+[   26.646598] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=386 'syz-fuzzer'
+09:47:16 executing program 1:
+clock_gettime(0x0, &(0x7f0000000000)={<r0=>0x0, <r1=>0x0})
+setsockopt$sock_timeval(0xffffffffffffffff, 0x1, 0x15, &(0x7f0000000040)={r0, r1/1000+60000}, 0x10)
+clock_gettime(0x0, &(0x7f00000000c0)={<r2=>0x0, <r3=>0x0})
+semtimedop(0xffffffffffffffff, &(0x7f0000000080)=[{0xa5a8d323531b22bf, 0x1ff, 0x800}, {0x4, 0x6}, {0x5, 0xd0d}], 0x3, &(0x7f0000000100)={r2, r3+10000000})
+clock_gettime(0x1, &(0x7f0000000140))
+sendmsg$DEVLINK_CMD_TRAP_GROUP_SET(0xffffffffffffffff, &(0x7f00000002c0)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000000280)={&(0x7f00000001c0)={0xb8, 0x0, 0x300, 0x70bd29, 0x25dfdbfb, {}, [{@pci={{0x8}, {0x11}}, {0xd}, {0x5}}, {@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0xd}, {0x5, 0x83, 0x1}}, {@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0xd}, {0x5}}]}, 0xb8}, 0x1, 0x0, 0x0, 0x24000001}, 0x41)
+pselect6(0x40, &(0x7f0000000300)={0x2, 0x884, 0x3, 0x76, 0x8000000000000000, 0x33a4000, 0x3, 0x1ff}, &(0x7f0000000340)={0x101, 0x1ff, 0x7, 0x6, 0x2, 0x0, 0x0, 0xfffffffffffff801}, &(0x7f0000000380)={0xffffffffffff7fff, 0x5, 0x1f, 0x5, 0x1, 0x36, 0x5, 0x1ff}, &(0x7f00000003c0), &(0x7f0000000440)={&(0x7f0000000400)={[0x40000000000]}, 0x8})
+r4 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000480), 0x181000, 0x0)
+sendmsg$TIPC_CMD_SET_LINK_TOL(r4, &(0x7f00000005c0)={&(0x7f00000004c0)={0x10, 0x0, 0x0, 0x2}, 0xc, &(0x7f0000000580)={&(0x7f0000000500)={0x68, 0x0, 0x800, 0x70bd2a, 0x25dfdbfb, {{}, {}, {0x4c, 0x18, {0x8, @link='syz1\x00'}}}, ["", "", "", "", "", "", "", "", "", ""]}, 0x68}, 0x1, 0x0, 0x0, 0x20040040}, 0x4011)
+semctl$IPC_RMID(0x0, 0x0, 0x0)
+sendmsg$TIPC_NL_BEARER_ENABLE(r4, &(0x7f0000000800)={&(0x7f0000000600)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f00000007c0)={&(0x7f0000000640)={0x174, 0x0, 0x200, 0x70bd28, 0x25dfdbfd, {}, [@TIPC_NLA_LINK={0xb0, 0x4, 0x0, 0x1, [@TIPC_NLA_LINK_PROP={0x4c, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_TOL={0x8, 0x2, 0x7f}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x4}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x80000001}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x1}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0x63}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0xd72}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x1a4}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0xffffff14}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x200}]}, @TIPC_NLA_LINK_NAME={0x9, 0x1, 'syz0\x00'}, @TIPC_NLA_LINK_NAME={0x9, 0x1, 'syz1\x00'}, @TIPC_NLA_LINK_PROP={0x1c, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_PRIO={0x8, 0x1, 0xe}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x7}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x1}]}, @TIPC_NLA_LINK_PROP={0x2c, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_WIN={0x8, 0x3, 0x8}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0xffff}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x7f}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x14}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0x1}]}]}, @TIPC_NLA_LINK={0x1c, 0x4, 0x0, 0x1, [@TIPC_NLA_LINK_NAME={0x9, 0x1, 'syz0\x00'}, @TIPC_NLA_LINK_PROP={0xc, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_TOL={0x8, 0x2, 0xffffffff}]}]}, @TIPC_NLA_NET={0x2c, 0x7, 0x0, 0x1, [@TIPC_NLA_NET_NODEID={0xc, 0x3, 0x8}, @TIPC_NLA_NET_ID={0x8, 0x1, 0x1}, @TIPC_NLA_NET_NODEID_W1={0xc, 0x4, 0x5}, @TIPC_NLA_NET_ADDR={0x8, 0x2, 0x9}]}, @TIPC_NLA_SOCK={0xc, 0x2, 0x0, 0x1, [@TIPC_NLA_SOCK_HAS_PUBL={0x4}, @TIPC_NLA_SOCK_HAS_PUBL={0x4}]}, @TIPC_NLA_MEDIA={0x5c, 0x5, 0x0, 0x1, [@TIPC_NLA_MEDIA_PROP={0x34, 0x2, 0x0, 0x1, [@TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x1c}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x1e}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x10001}, @TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x18}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x4}, @TIPC_NLA_PROP_WIN={0x8}]}, @TIPC_NLA_MEDIA_NAME={0x8, 0x1, 'eth\x00'}, @TIPC_NLA_MEDIA_NAME={0x8, 0x1, 'eth\x00'}, @TIPC_NLA_MEDIA_NAME={0x7, 0x1, 'ib\x00'}, @TIPC_NLA_MEDIA_PROP={0xc, 0x2, 0x0, 0x1, [@TIPC_NLA_PROP_WIN={0x8, 0x3, 0x6084}]}]}]}, 0x174}, 0x1, 0x0, 0x0, 0x4000054}, 0x809)
+pselect6(0x40, &(0x7f0000000840)={0x6, 0xcf1, 0x40, 0xffff, 0x0, 0x8, 0x200, 0x9}, &(0x7f0000000880)={0x2, 0x7fffffffffffffff, 0x101, 0x2, 0x0, 0x853, 0x2, 0x1ff}, &(0x7f00000008c0)={0x60, 0x0, 0x9, 0x6f2, 0x100, 0x1, 0x2, 0x2}, &(0x7f0000000900), &(0x7f0000000980)={&(0x7f0000000940)={[0x8000000000000000]}, 0x8})
+mmap(&(0x7f0000fff000/0x1000)=nil, 0x1000, 0x2000001, 0x50, r4, 0x6688d000)
+lseek(r4, 0x1ff, 0x3)
+sendfile(0xffffffffffffffff, r4, &(0x7f00000009c0)=0x800, 0x0)
+preadv(0xffffffffffffffff, &(0x7f0000000ec0)=[{&(0x7f0000000a00)=""/167, 0xa7}, {&(0x7f0000000ac0)=""/55, 0x37}, {&(0x7f0000000b00)=""/183, 0xb7}, {&(0x7f0000000bc0)=""/69, 0x45}, {&(0x7f0000000c40)=""/95, 0x5f}, {&(0x7f0000000cc0)=""/110, 0x6e}, {&(0x7f0000000d40)=""/155, 0x9b}, {&(0x7f0000000e00)=""/160, 0xa0}], 0x8, 0xfffffffb, 0x8001)
+process_vm_writev(0x0, &(0x7f0000001480)=[{&(0x7f0000000f40)=""/20, 0x14}, {&(0x7f0000000f80)=""/114, 0x72}, {&(0x7f0000001000)=""/222, 0xde}, {&(0x7f0000001100)=""/164, 0xa4}, {&(0x7f00000011c0)=""/202, 0xca}, {&(0x7f00000012c0)=""/41, 0x29}, {&(0x7f0000001300)=""/249, 0xf9}, {&(0x7f0000001400)=""/73, 0x49}], 0x8, &(0x7f0000001940)=[{&(0x7f0000001500)=""/197, 0xc5}, {&(0x7f0000001600)=""/213, 0xd5}, {&(0x7f0000001700)=""/168, 0xa8}, {&(0x7f00000017c0)=""/101, 0x65}, {&(0x7f0000001840)=""/253, 0xfd}], 0x5, 0x0)
+setsockopt$SO_BINDTODEVICE(r4, 0x1, 0x19, &(0x7f00000019c0)='team_slave_1\x00', 0x10)
+clock_getres(0x5, &(0x7f0000001a00))
+futex(&(0x7f0000001a40)=0x1, 0x6, 0x0, &(0x7f0000001a80), &(0x7f0000001ac0), 0x2)
+futex(&(0x7f0000001b00), 0x5, 0x2, &(0x7f0000001b40)={0x0, 0x3938700}, &(0x7f0000001b80)=0x1, 0x1)
+futex(&(0x7f0000001bc0), 0x80, 0x1, &(0x7f0000001c00), &(0x7f0000001c40)=0x1, 0x0)
+r5 = openat$bsg(0xffffffffffffff9c, &(0x7f0000001c80), 0x64000, 0x0)
+getsockopt$inet6_buf(r5, 0x29, 0xcc, &(0x7f0000001cc0)=""/183, &(0x7f0000001d80)=0xb7)
+pselect6(0x40, &(0x7f0000001dc0)={0xffff, 0x1, 0x1f, 0x800, 0x6, 0x9, 0x5, 0x8}, &(0x7f0000001e00)={0x8000000000000001, 0x6, 0x80, 0x100000000, 0x200000000, 0x1, 0xffffffffffffffea, 0x6f}, &(0x7f0000001e40)={0x5, 0x8, 0x1, 0x0, 0xfffffffffffff800, 0x9, 0x7ff, 0x86}, &(0x7f0000001e80)={0x0, 0x3938700}, &(0x7f0000001f00)={&(0x7f0000001ec0)={[0x7439]}, 0x8})
+r6 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000001f40), 0x1000, 0x0)
+read(r6, &(0x7f0000001f80)=""/233, 0xe9)
+futex(&(0x7f0000002080)=0x1, 0x7, 0x0, &(0x7f00000020c0), &(0x7f0000002100)=0x1, 0x2)
+sendmsg$TIPC_CMD_SET_LINK_TOL(r5, &(0x7f0000002240)={&(0x7f0000002140)={0x10, 0x0, 0x0, 0xa27dd76ce5d51a9c}, 0xc, &(0x7f0000002200)={&(0x7f0000002180)={0x68, 0x0, 0x800, 0x70bd28, 0x25dfdbfb, {{}, {}, {0x4c, 0x18, {0xd53a, @link='syz0\x00'}}}, ["", "", "", "", ""]}, 0x68}, 0x1, 0x0, 0x0, 0x40010}, 0x81)
+ioctl$BTRFS_IOC_QGROUP_CREATE(r5, 0x4010942a, &(0x7f0000002280)={0x1, 0x8})
+
+09:47:16 executing program 0:
+ioctl$sock_SIOCGPGRP(0xffffffffffffffff, 0x8904, &(0x7f0000000000)=<r0=>0x0)
+ptrace$ARCH_MAP_VDSO_64(0x1e, r0, 0x7, 0x2003)
+setpriority(0x0, 0x0, 0x6)
+fcntl$getownex(0xffffffffffffffff, 0x10, &(0x7f0000000040)={0x0, <r1=>0x0})
+prctl$PR_SCHED_CORE(0x3e, 0x3, r1, 0x2, &(0x7f0000000080))
+capset(&(0x7f00000000c0)={0x19980330}, &(0x7f0000000100)={0x7, 0x0, 0x2, 0x3, 0x1, 0xffffffe1})
+r2 = signalfd4(0xffffffffffffffff, &(0x7f0000000140)={[0x2]}, 0x8, 0x0)
+getsockopt$sock_cred(r2, 0x1, 0x11, &(0x7f0000000180)={0x0, <r3=>0x0}, &(0x7f00000001c0)=0xc)
+fcntl$dupfd(r2, 0x406, r2)
+r4 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000200), 0x4100, 0x0)
+r5 = socket$unix(0x1, 0x1, 0x0)
+ioctl$sock_SIOCADDDLCI(r5, 0x8980, &(0x7f0000000240)={'ip6gretap0\x00', 0x7})
+r6 = socket$inet(0x2, 0x800, 0x800)
+ioctl$sock_inet_SIOCGIFPFLAGS(r6, 0x8935, &(0x7f0000000280)={'veth0_to_bond\x00'})
+setsockopt$inet_msfilter(r6, 0x0, 0x29, &(0x7f00000002c0)={@local, @multicast1, 0x1, 0x3, [@rand_addr=0x64010102, @multicast2, @broadcast]}, 0x1c)
+getsockopt$inet_pktinfo(r2, 0x0, 0x8, &(0x7f0000000300)={0x0, @dev, @empty}, &(0x7f0000000340)=0xc)
+ioctl$F2FS_IOC_COMMIT_ATOMIC_WRITE(r5, 0xf502, 0x0)
+lseek(r4, 0x4, 0x2)
+fcntl$getownex(r2, 0x10, &(0x7f0000000380)={0x0, <r7=>0x0})
+ptrace$ARCH_MAP_VDSO_64(0x1e, r7, 0x81, 0x2003)
+sendmsg(r5, &(0x7f0000002a80)={&(0x7f00000003c0)=@in={0x2, 0x4e22, @initdev={0xac, 0x1e, 0x1, 0x0}}, 0x80, &(0x7f0000000700)=[{&(0x7f0000000440)="504f48559c2425938bc3c025bf0c75c9222b0cc4684579a8e1caa638a7bbceef9bd8005e9abb32e92c52107935e1652ce8c0533be154c9613b6cf6df01b68d24d68f2de14288e1876ca6d4f0cd2007b26aa8c6e38838b949d66992190b89110414e07f0f8a561049b7d9d09858480ef82cf181da64cedc35fa2e1e7e628d87ed3bf7562b5cc24d27507c", 0x8a}, {&(0x7f0000000500)="fd3ac410b2c1cc36348fb9a3d6223b93492b4692a3ddbc84e724f1d3e45889ff6508d6d1e868442267122a39f4f7af3e9ffbd4f2bd659deb827773db8aaae28a5d394160c1c6ce7ff20bfc0dace22c7537e2bdc1e26f7151fb0a8a4ce940988a8b944486518d71ae184637710f5d6cd7b1d4745ff38f50c75644acb7697a6c88c9ed65c32e670c808e3d63a68576e9927a658a565591f2956c7c2e2e2af4510595a401daeba7863146b75cc8d46afc5312c4df49785f492da97989dfa9398cb720f90ead9d85c13a8f9a51b1bf8744551c812989664188767e51a83e1999e978696a220691093a23d5", 0xe9}, {&(0x7f0000000600)="4f5ce4be53889eaf4d6306ab67607c43aa823ca2f80e407c729b0db2a591b611eb04c13acf9e60e3998a8c4eafc5e83a1865eb1f48f7a80e78f7c0cfac574d8f8a9bfdfe86dae8c03a7a7db49c3f0f90ccea7b92fa6dffe589cdc4aa260a750120c81aee996da5383c620aed953290edd8d885bf42c0bc5d06d1d3b210577800b1981535f1ace6db88dc81cb204d562827acd9259b1cda6951f90a9e64a39f18fd3fddf2ffe1dd2278ac99cbd99bd159f2cc3725ad85c12eac7cbe268c8a13af231c87fe646b5986131d8c1524c155d7b8bc8e90c96218", 0xd7}], 0x3, &(0x7f0000000740)=[{0x10, 0x0, 0x200}, {0x38, 0x115, 0x3, "251572e44651cae5a454952aa9cdef263373e55140a5475906fb07f0a3f555bef6fde8"}, {0x58, 0x10b, 0x6, "5a75c89be93a8983f3301de4d0aa53dd96932cfd5ce6dcd1e241820809aa7d12c508f89c52cc327075304d0c898e878216e0f60e265f22f3450d7f06da4114df4b91d13a3e"}, {0x1010, 0x101, 0x3, "2987f74d5bf111abb117285d7e58f908983f7d4fd56710136ccfeb8952603bc256bbd6012a5d583b977b3dc77ecf44ccfee8dd4b864b20d7ea7921700e98ceeee58c15d87f2ac3dfc93b2b41429fe8462c8cd7d6a87d3c1e416e086a47a39d1eceb93016d6fdf0bca61292a9f2ab1384cba45b5b32653424933f653ec20b5e005b8259882364616af1278f3e6e78c50273b123c4caab8b5c77c0b7553cf9e687c0164a1e555e673757d6494833f1a28d22e9adb186cb67e51ba48a03cae8be4cb6eed4fea84522c641a4ec3eca82566b8e6d31e5debde42b31ee646b0b6f4a32f39016b137b5ebb5abd9df53549e92c9aa57e08acd5d8244e147cdab2f533d48bf46ac0e14e4c0eaee46175b641a924967cf18ad5f46f6d2e581b6894117e2855747056589eeccfc32b4c79397cb58fb9103122391b4f855391e562687b84ac1819a28eddb53369b6ae5e62155986593990b978bda9ff2dece62a9d1797e01f334c2be68c38056c1de832fc5c84e7571d0de10a917889506f197bf78847b88954fecf2b2845a110e492f5c3fa81304689ec025f8a120a33e5df1086c61e6255ece4d4cf51dbd77c38125467883e976a4ae4da05ece787bee35bb41a3cf460f2fa246aa02893f87f576e507a3d27a7cea61935acfe5a7ae7f681a4f369bc0767851ee9056fb51a12a7dfcd309bfa19af400e2b74a241d062b5bf232e54e5b8e35be0016d788b625140b06c83e0a32dc83a3340f47f74f6e43de1e63fc2b0e6e70dffbfc160a4522c8b52703bf92eb94f44a5f40a1b755203c716302d31c2652db1272f9214af0d7ec9b479e5c00c8cc290d136c632b8a9f83a384cc8f18914d8e1b9058f27deb4aa3f6f6bf272973879a32b11193d0d394c291c90c81260411cc2da7e03b0670c32d812f5f3d48c948877e2d3778fda432fb886b9f6bd87702e9f5b499a52364006d7a88324b0b492c51eaa624f5725adcb9328a908e1c2107445ddf64775bbe352101c865344fe3cadad4fea2dd68bd631a35db24c9ae317bd76cbb1b7e334711a0a6f759bdae61c3ea2975b35b0287ad19eb34511002a5285b0b4b010ca98b555d01a43b65d7f1e8b01e6cb29da2ef9b41b996099227c87f93717732b88d1a16afe8cb5c2e7f8179fcdd10e0dad3ee7153b619930f2edc1e888561117856a30acc1650b65672afeffd33f2fcc77ecc35b83369f2ceb03d118b70b9218048eb758ec9bbdf31a9abdab55d343db73873be3025ac7f003e0bf8dee237179a819ccfc777585da44c7fffa3cf3fcb71f0ffc6fd4cd755e6f5928bca22a71a13cc333f9ce16f8cf5033d0a9bf48c4073441542ced02359acc90d3c6113a90ee876c91bba3c615059dc9192d8226e887bfff1c426b9c041eaafd7781ac7c6b0263879ccad4a911accdcb3991a9892b3bc9fd7866f92af63baa3d4c09237766ad118794a2f3e31acd4f9794ad6a8aba9cf85247a8a1943470aabe7218bf6c96f3bdc29e51126c039dc0ca3b2e127cc46185f3b997eca3701f8eff5facaeb6e67dc2c7519ee508a2253b0c8d11e6b3cac35955dce66be493605b100e4aefd49ca857da4e140befba8fd008dc0b4c0800118cfb72f53ac2db70b3f181bb9b0594a48fd5b3b7358296b12ecd3ff433e22d8cfefa2d9412a792c7aca9f5a1215c9611561c7eb6244eb3455afc1bc98dd8e0b459d6cb6e321adfea48651cb262b4d7ebd5e8fb939c58f4a831f50a76f12253cdfbb0a8bad8449e3765ded5ebf8002a98fecc31f455519fd89b3f75ef747ff3fadca6a755418eafdf243df9c8ece3137d7219f4500f7c4fb6f04d025ab385c6bdd2bf5327db9cebfc8f600bda7b50c23058dba467b527e7796ee76c2f58a98a7d7f93f441bec4a8ae70d887b1f9c424a7a5f71dc407523f5b05ab2df243f9fca6963da8e0422a19a25f9d923dc696c4855c0eabbd00afaae0ef79ab1021ab0e66c7519e59bd6c88dcfc58021322bf2388e33e567171e095c368cb815f9ca91341e366eaff18deb389aee0a5b85a54f9a2f72fa6ef092e1cf9e29ba9c8d051191dfe2977f1ecb37b9e492c04d2d51fe0f533012fa809e00dea84f6106295a6905b7311dc0dee54590898e182f89a629bfbe7b8bd10305e2ed30f55d902eff4b73998eb2c06c1daafff21b3ec2809f61120be1090756c3a4df00304e7a911b0ea47cec636e15235171c47c413239544744e2a647b06fde0a279c5a88d9df163e8822f751e1003b9369276e669089bc3abedf51c5ed8ead0717679aa7a214b150fee952e5e06ef0d9de99841a45179aaa70e3e3ad09cd36cf76939e43b0cc88133bce793b75d41352055af51825a7cc8aebc2955a2a0b5b0fa59a73786148fe720b97cacc64314e20024c2c86830067316d60934f5dff7baf3ee962bf29c6c15184308c40602d39c8e7819e0d689ad6cf970f83c4d83e1a7434ba7153740dad5217de0b5f66a7ae560c1ec06b1bb782a4b203136d91180751577d5d8e5c6dac7ff8af6155cdfc7c315cb8cf506fa5f86061d5617a14055751ffaeb3d7d69f0eaaa7af7898ec2804c1496652fc74a6df9acc030ba59d34a56ed4901524b0445f912600ec32f434b8c2808589b94859e2c0ce75e517973719381d1c1fcc5ed888fbe8894ac61a0578aafa5a4637367045e8271f8997e6d733eb49e369aac57d7306879bd8152bc39cf6976c945cea65d9ab18c888c0b6c8538be9f3d1b70eaf407361e502d9761756e5f7b322ee97fe8a49ec6a08a60dda5543d05cff0babc39f319bd13a22547fa016d537c3869c92330aa7451b47116b27e8d7de1b5010834abd3b0c28685fae06a843fa3a9385a000e5e14ac4727684b00b8c98d6d564e549b7c3e871c25e1e0440eb4687b91301bc47ae6aaacf455fdd4cd086726cdd74b78940436de099e03c1036926f0004289e1efed7c272198a29e36999c75925ce10e451fd21cc83827a36f763a944ae576e1e4fa28cbe35f917a5f276e21ae747a556595d27a683b5e2182a385ae14dfd399a07c992511cddaa57aa2aa9c0c9517fea641383f8ac0929a4b0c5249be419c4b8e82de2888509cdc492f2f46d3c01a461ce101a69c0f15cbdb3575a6140cbeaff52b2abef68231e6d4c925ac403494e89323f50e815feb433dc55764423456d10147e7f44f08a4e17a9747b735224a66ed82180911c24bd2c42ccf740f8dd0d3680d1675374bbbeab43b6739cdb84120b7dab1729a3c5a4b357b91f5ad6cc16b6185637cfc1dace43294e06b07fd45341783bab0bfd7f28c4cd6f94da07b4444e99c307451fb35571caa8e6e30eb27ab5fd09372819c7e135012a04e310a873c2e7646ab2e58bd4d1b354f105b25ad767ceb0f859bab22b735ec2c751bfdfa8062bbad73cabda07e2c7de1031815ca7e14a7f627f7a219ff3befd271d67a8eb4cee70b9202c5177fe35c5ead5e043aaebb8d45fd6bd3dcb4e491cab3dc71ec172d7b327b2a1d92979d9d324b839c9c7d2899d78c5f5e0cd19c893c99035483175a9bcd636c049eafd1646003bc1974cf5abed94aa078c81e6833ed065d92bcfbe3760e1365970b0a720138406f038506e1c83abdd6acba0b65e65a50b9a66cdff7685522503f809751056c4ca1d76feb18753798b4e62f1a37becd4a243b3defb879382bc762567ffa3e8bfa45d5272805ac22c67f3255b986b053b6c830e975b00c17baeaccad36dced8ff68c8596036ab5927c9d0e9cbbf183a0d05076fa286d278803db897fffbf9d02ea5c67668e84a989b701de8ea3d7436df14591f7aa5b80df27b0aa304088c86564cec788d3d490f3c3da3a7876f61df0a982c4e61fa8d449395d0d4e3bec52b3692846c741bd0fe59aa6783f254b134b472b67364cf9c1bee95a2a0387844715493e1b53295892db58340eaed9ac33be2e455864f34238d7519b4d55013d978ac0c677d8d9dce52caa128b52d64ff7a75c5d2db38a321c77313008939ed48b92aa854e9ef003ec66e6724b72ce6cb869ae8108b861230079769169d799a17f66027c6e921b71c08249fe13452aacc9b29b7816a89f251c215a122b2d19e4fdfa116f09619150718eb1f74517d2a27ed32d634df10788de328e8a49f2df50d1eeb8dd95bb01ac17d837ebde05ccc6b8eab35590bc502ac52deba247259b5e55b1aedc6d4d577aff0350b42ebd90532906966f5603a74a2b4c121c877783bc453e5bcf204b530ab859d4d47fb4841808c7df5722c73a0d6a73b05846f65ba32c26535cf5d54ae4ffe9a69b64193f6756b8fbb3bcd012006424ee2d4b8e82360ad10c327ff720709836433567f24993084b5732a28f06451f5046b7b512f07372433af8e99adc1409a8c68f4cda30181124960f1855e99bd15fd2fb00eb5432ccbc25c7f5c803100c4b19ff59784fdd9e85c395396a85817fe3e7e0f92db72be50a21af0d2d9a575fd9f806dc3693004f4ea3c7dbd968f9b593dee177dc78e81ebb8504c329198cb066f774b9543a8e2e2c02f40b85638ae443afaa324df00b52a320888cb8b20c4d8b9d1e0800bc5ba21c79efb5e30d5392a9fe2d61659a7de32f932c05596e5cec97e920b93379176d258ec2b948a88a82bc356e547f74212af31446cdb14bd39721859ed6facdaf011d6bf5549030dbc417aa50dbb4a207dcbb87c33c80b4b304380f1895c274a026b453d1189f9ff4c9c1834073a3ee9c466173ae09f43c063aba06cef6ea5e13bec96e923f2684add2e302f082c45e773d5a62b15241be8c672983e199ea9787e0faf17e3ce91a4bf76dd657545ab5d7685f4c3b6e13477abe2a066343df6dbec331574f52875fa6ce8119f09a6b1b2ea2f9d3e256cbed45609c161a6446392141cd4c8dbd245c19f63708514c5305a9f420a8718626f7340d3e31c2ef5cfab9cdfe2b47311bedde2da7adb84b21f5aa45c38b734147337ed244913345341809510082d11d0cd24c8f6b22231398845af61603247dcaf4b052ca98136421463d0bde58b4f32ddc00f172c3ccc472592350bfe9d942ac1b3fef24cbc90e6c17db1e632addc6e3dad00f16548690298ec9ee7283841c7b9a485eae960304f7bbe76425c8a6653401a689fb125db5428d7a3a121654778a1b7497898e6709c23ba530390e1f91744222b14546df602c20a258fd2d61755d69a2724a933e599dfdbe22bf91feca746866daf4e1bb863442dff1fe3a40da3eab594f951056dada832c5348f8ec484057be9543871705b88905dd77953255c0445855003651d98c20943fc7b5e1ec1bb87717e51f2af0a678dfc3ffad2874db634da825ae79eeee3234f8e98b575caa40e912b136190fbe2c26c4d605460a268992a386dfdb775e26b287091a0eb9e145d8f40264da51643c98d03c66d57da52a199c9e90dbcd70ce0b4fda9f9fcc4fffbdd9dd422d3e98e9fafab19f20372540b777e8470dca0930ebef6d454cdcc4f62d04940cfa728918e6ea786c9657b117a8c80f89e94872f19e9796076af4a855ef8c31da5a2babda1860b7fc4aa04637565ab05ddca1e4dc5766bcce460105522374058b06e2382a342fa65d9be3067a9310d1b3d8a5e447f199609069776eec7e4c4285a32b2941c076b5fa5b2e06ccced8192521019d307a00def5c22b600c4bb62b678abc8f6388e37bf323f5338666912e58530a5e654c112b3effbfc47231dec21648e4fa0cd53eccdbd22349ffb18528db9a6f48df6df40163c27a56408fd9abd82c2e8d081ad32f8a9035b125430735d554275c2dfa96fb73a7e16"}, {0xc0, 0x10e, 0x5, "3cecb5dd0e6ffced2027b00976146923b0b8d82ac3d1961d022aa0b6aa64e542701e291c307c17558e7aca7711bb8b614b5333d6fb423c2191b9bdc4e5ba1a6524e717f4a171fd84504580ad8b63386f88b8b95b32e7b26366caf36fe0620aebac9ea30eac19b5da0c21a188ffeae2f8e69f84cc2dff4ad049e232f792b235e7203bfc507e382d383f7cab99f7566de71f984c59bdf70398e042ee8855d224f99672e306b1f85128e864969b118aa4d8"}, {0xb0, 0x10a, 0x101, "e874d3e573a4b6c193e5b2dc1d6ff18f1137826501e37a924228af894f51c4fd152e85ebce58933b992cebe9580000da1b85f1137d2890176bbee284d381660c60a902be1fa4423f87354a92b7d6fb435ca400803fd5a22aa8b37e8d183389410458d6d571110d39cd2b6ac1556f27582b8cd00eb301bf14bb45daa796b5c7708d5485196412c18ab14ee4d5ea7bc67a9cf29ace62cde113b9a06cdb2124"}, {0x1010, 0x110, 0xffffffff, "f229e1ea3bcf0f7370c9e181f271dafc7c85244cf048b1917850a06d69e9473f79d6504181c77fc1cb1f6181b2ac9b049726fb5d214e54b4f7f3f39e5cf75d206c6844e620b8a6a2979a6562564416061a8869411504be932ee7d2c96115db402f0bb332f5b8fc2df3ed7b7dab4d3781ac96a145c92441a65389d161892d73aff49d0ae2a4d417e83625f8bdb4b5f29af1a74c0f78aca311be804a3d5bd06aa3254c96b90796b246fdc3d1d2933d3bcf58687ed93a8a93fd71536d0d93c45f47af96dfa6ed3035924fb615874d35de3134685c12f2ea40fb0d7d40ababc36fcd990a1bf40b09e550342f881c4c3fa0698360ea8fea8756cea3d6bb17abf083b58e8c03d12ddf68013db39ff3cb6d8d65a3f45382a1e534f5b6e0e70b9e22edf2520b00efc302043cf3c4a4d343652b84600a8f0e0667819927f0067976531d9988e76c7c0aadb18c247facacfa8ede0f83d3333855001bb18d44380871035ecce127aa0aca15efa18c148757968e14261178eee529886a3215142978cd2a8665b9ec134ddfc07aaf8d73211eba46247647d5e0f96af9a73ce2cc97dcc366ad43c2da0ce2aa8a3648e92207a1e9345544493b04c457f00a862b716887942622edab76d770684cc115627336e8a0d5ec0fd0fee8a4a4025ebb7d1e0ea9c3e661ca1a8c685ded0d70320e8ba6d1c2168252516d8c81006bb3e80f53d3cb5bd375ebfc3b36e5d2462b564fe3ac5d4254a40243a7c08c1332383fd6aec4ac2c9899f827f8647bdacc71040369e1a71f5967c79ae8c0c75f51568a5557d6655df4b3105a4a865688a35a1b6889bee88d30f48a75aa0bd5d0a2c7b5733e205769c915d13965be6e0865748b7a6fc62b7a4bffda5206749b537ba667f12c82f040decd8dfc61ba70aca84a36517796dc24682f1d8cb549359c337571a281127e15186791df8bbc00b2119b3fd6472fee20da6dc8cc2b1b21e7691e642fbcec68b6c575844ffc6dfa7c541dfe73a7ee14d5cca8cf844dbba095aaf2159f33d5c0151484e1addbe08c79bbeb95e075dcc35eb5805371669be109911e2eb258c801a12db9a79fe7269317b3b1b1abe026670897a2ce537a14717066439daabcf13f21a19b5399234daebc48c488f5ec3611e10bc9cd60840b57661bc77f8244158d6a8f2601d2b5dcccd145a18ab9de7422a5fe5e377044da70ddde71fdf223a06ad810e58217787b39b538a305681332ebc4f72eb9c58ce75f543c5a2a6c627a644d683d51e552f5389d57b7992b9500c5556c622e988c70c1d72e42712758f00d2f4101b804f93254e24ebf99f04e2e0c0df327eb6412c31101cec329840f50a0f17ea74ff07636e636d60aaa79b71382f7caeb86fd3ee19683e78633129d1fbb3f5b3262bc979b9b610f597f88c1518f063a8bcbb78dd54b8520f8ce6178529f290cf8432d7d49466b40d90850baf9b135f67103e2a3ac7e842139dd221467ba8e2b844e442aeb7cbd317ca610e0a491140eb06c5181c7f1b11b0342a70395f9f843d5e45ac9e1f964d64ed50a2815d8a3ece1786e5f36dd37842db0de8da9cff51ae95a73a72aadb70935c0e09e80e3be7d122929d8058e6bed787ab42cc05e845eef55b12a08c22bc5415e944e099abdb530d73aa61a5589f3e20df101fb5eba097cbc791ee2f864314aaafae5417d3d24cc766210ce03f6aa0333d810a697d522c460502280cb7776593d994a3acaebf158f95564118961dd3efbd7fba75460c558e7e8b8ae8e3fcd1ed8aaa97943246e79be1706cc37ced781fc019a3f66a76ecb6a57738e885d215fce159066727a96d5c56f499e31af8aa509c53c23b076aa7bc1ff509e29d3a11fad8511293c8736fa099c00cb8026af461bdae6a1baa699ef5e48320d40ad9cb0e4b883c6f4ae7997474af6abeb8a8305012ed229b7065d94806095f24d90e936d99004f4b16698e83cd587189a13faa6df7dd1dea2845ad0ab4c7786c2d730766d66ea3ea26a4d2c50dabd816eddf344c4a2aadb7429e4b7028c1772eb9a2b7e9ceb6523a05c1941ed00538ec0d7d52f3cce9b501a8e23a7e3efde4a833c9aaf6b470bfc6a8f04dc8aed3781d408d2a1c69f13ae883229423e4c4a9cafe119776991d8c1fcc0c2f4f073587986bc813e45319bb6a98526277eb84a5aaf858d70714b2fa64c5acf592f7c1b849056204be3de663158f122e5c53ca52fd507b9351ec0d9be1b7a62317900e1e721105ad5324ba5cd6898b999b6a0379b2c90802fcfdc2c76a7f43164a6eb1e7e9361a56b125c0a22f001a7bdc5c4943c162b648c55bb28845fae786077240c14766fcac758eef8be83dcebe62c67c104d5cc8fa1b7c02163f2b035c7222c136937dedb721d71fce437e640328719bbb6e6452cc94fecb8827e600b5c2661c3f4a970c7dc5c29953519ba4573b4942b0046c90c960fdb4f7e0e97a04cd1bbf46db671b4146398086a81c97e5a8eb5f5f9ad9a4a303514a9ad6c3e62017ce4669f26a2c326696a8c367c063d7f6d0e5650ddb7062c392b7219f3cd519d898e864d515a88c14982f1c77c6f1f30a951fde6fc06b05de42e18311d494a1b3b294e2f91b345b50c1a682d1fe1d2491931ae6f26ef2e327fdbc4e8f2d71278b0bc6d6f6904117c30691c931e15bf9bbc1a79a6dbb5c07481a3c37d9d86d66d2c0e63c5eca1d06d5192dfd8fb0a2a395fc7c335e8188f784c6a173546b9d7f4832c32412b8513ab7c9d61dc098ba0930f543a5416d48fc02aa038f192b07d877d7dc4a7406a4a2df722166f88dbf48cbcbc54118593a7a16d601e479cb1a282483cacc5144170ec13e1baf10368674c984842b645e6e7217a4ed7aad4cff5cf344b3764d7a0df0ed3e0ef1dd750f5658d9356523a52215f12cf8e2c9295472a80c19d1628b3e643fad57b8ca71674358c68d80a89eb0af408547f5c56804baa1de1d3d2efcea776fdf8dca063468c886785c5fd11aa2baf46e5dc65eee2d5c3bd71aa342ca72d73641b916d6e18fe9030fa171df4f77583c7601069eded6fef18d79f0afdfb01a452e7d41b6ebf6c9ba9d23e39cda5d6ef2e2a51fa535d3ba33941aee54642edc2c3f13880ceff528e95bbc75fd2abb4e287a81409d03af0477f2dd3ceb5bc3fa11c35c328f23a6e434b11badbd2a5f6a0e820a7761d013c6bb1c9d0cb81505aff8f661fa1248898cee909418292a3e228ad3544aca2392f8979abb179942159059277320e9114017ce9ef021daa03692ffb8c626e7ee2ac1bc7518800c3012e7d89a805a8e6d808fcbeabc1e3e03549f61f49548923486245f180d58e7c3dff6d8c11be0025d5dbd95f13db806d39ffdd8ba6a548dec647096dce25eca0d4d1941ad31b586b2b6142d114c288ec33d3679fd635853bc0b5881fb64869777db8be06b8278cd80d1d184116be9b10ad59e5d26a18f165b9dba7c4f802cfed135ae309965870db26a755d5e8b0d5d474756d9d87da2a57e077034b032a3163e328e54ba43b321f90d5ad61f9d4ae847630c044dfb261afc8a79a51afd7a67da3134832c7f9a280473a9c3374ffb8e410c8a76aa69b655bfb7d1cfb1c4b6d07a54e5ec60e114d3843cd3fdeb400c84d24e184a5ca69c5bf0f9b7efaae964388f530615111fceb4a726e69d71b620e946aa39cdea7efa15a895b51396b71d62451215dd7d93b58f28a95fb8e33371b75645f7abc64bb93cf1ba40f259678b3214d48d2bd7bc37d98d42cd59dc421603ec134e464a8ffaeeeb356e2046f2aea3bd376ce3d1a62dc9bb0f641f0f7c1d1548171c11385147d0d24b73bfa15e8ad69b72456ddaf0b7c38f242432d8af5137a18c2a1c8e6fb4652b0e965c77f1cdd7c02e8d9892ff549425670a8fe62211e28d867ef455c0d291f8e80ee840103d1aa851a82a819fb21201c63516d90e8a44c5392417383c14c00bceb74dde25a45fbd2d28b99a2266965ae8a12d7c37c1d19bc88d607da18e288298b4c6db182b5848cc5fdb969f35bff2d52e78fb58a69e87e961981f88819ec86de2033a8e7e35eef6a3202fd49132af258445b7aed04790779ce921b86dd9122130ea740adcc3cce69f1f2ef734da7d0988eff27b422b68a7c435f1fe9415f45eff32726c5e4626d3ebe8c6951e686f7af158dc5530b1f85c9961791a48525fef6e7c2c6863d0e54effed3d2863a53e8fe164ed59556e76894affd83f8ea4380fbb011537696e84caddc74e33e6772b4f3bb7989080810506a87afbeb43009f8de905f46cb999ce1976da86ce9e6373da7c104439c137f036aededc00b60dbfcc328496f60d5b7a7369cd8cbf49d72a712c05d8eb72eb9703f701374cc7e4addb1d51601f4df0141a1d47a430c37725dd7ed454160072bb44d0adc6ccaa224a7c8a496665b070cfbc6c9e17a9b0961272212953261cbf42697d5d89d63a40fa70e5361a6e7f5a9c86640dda469bf215f61f2c2a708faf01d520fbc5bb4335c434f923c966a3d18e7ebcd555b0b34b4ceafc70f8934594f05091c667b0bab70e148e980ff9c785d41e3a16f52ea9710baf9841bf9e1fca16eceac628f655555f8f723adc788b7a32f3b512ac10091be6f56997433b3b5571c30118574912c1ac996f72aa47444db871ea7a2129b50e1ff39cf882018201a0da3abf3bceaf60aee78a1d7edf005cba35a489df93d44521d3ff1b23f82dbee7948fe82d412464e5c0dd940796b3430a249c99f09bd0fd4bb85b03837201db86930e630876d2bc6f34c5bee49130a8c4637f524d78debbf87f935347e0ba85a9f3d394da3c79bc64c9c00f4ef775c9dc6b23077ff07c85299bae517ddc400b1329f6d1af586f1e8adaccea3455c8c87b61a0c78b0b6b461ae2adf48c6ff52bbae016dc6dd74f8ba93eee270f66d9248b9370b1aaf8f359ec826a3636e031680d61075bcf5307cb924c9a0c4c8c61dca0b5fc09bd6dc0d26ed86f74a62e93f411f739a71140360d6ae637dbf3917152295dbbd7ad65b1824cade24bd7eaf93c9a51e36394797c04fd7e7fc960e5e27740a0c767d79f63ddf0805c7766c43d86e5f5357cb95e380c44ecd514429d56b279b56bde2c13b85fa4217866248827c859a2af987543ac707b34be4f704d0bcff50d6d853196da4686db4509f8a5c920ef73425b62f3869e782af43a59554c24f913b150541403a43d80df98eab1d31cddd37c6a5447e51a5046fd0e70cbcc64252061ab1262df94fbf9af210034c8841d5c0f7784253da5b2952c046a3ce0c4d8277e2e862e6d620dda58414d1c161b9df8f10a87d539eddad1c874a4b63addee617ed1a26b552db1b168b48ccc3b63b1d1a1c1c4f0938507580c28db59f02262dedc8f57d48b72f85767206f393671a2bb241398682cbfa6cb35f2359f60dd5ac468d8923dea87b485b02f5770aff9543b76f05e3cf4c35d72cb28efe24e607aab17e18cc26a2f01ae74284f8df2d8758addb3174ee564e9139412ad78c5e03a442cc0b23a51bc74183d3050f24ebc9a2fbca953d107892e10e8c3d8f902736683fd11ef3748b86267462822870423c9790beea18878e9650b14d73f9e04ed316a6d7cf6353530c2bb4a7080729752f723937a11e52f3ec9b1b893b230dd9ce79cae4cf062d1262555f873e514b29ab8bbcc485affdad23bddd9a738c2e5e286c100610b046a538979233640f4c15df7e5431e3a1179dff87eab9d1a4594b6c552a92cdd3036ae77a54c8898c075bb1289ab4a66a76034b1e68e6687485dc215137cdf0c8bb2094201017ce"}, {0xf8, 0xeb, 0x7, "f0f63abcce7714783e65067a4422921b2dfd505398a67b9c0d01c2631528b28c8c12202db5f7c0da6a560322da7b13a3e3f4f2ae3d19e2633699f6d61979438c7bef8197a885f88168ff8789c00b66027438d95478b98c589398de92547380259d82d0add71496f67565e9fd0f2e2c092a5b06570fabacd8c328c5064b8c500fc2bb61a1ecba1497b51cd0029e8114087014951298051d93149bbae7a0c106c6e9418531b76b4691bdfb3b5f32b54b8e01eca9a7687a4021d58e67e6980558119a675d9a79fabd1e2c9b202d4da3d520ae5f943a3b9a6c589955dd280a83168d4196"}], 0x2328}, 0x2890)
+syz_clone(0x1400, &(0x7f0000002ac0)="7bb4e2d031ec8e72d0f32511", 0xc, &(0x7f0000002b00), &(0x7f0000002b40), &(0x7f0000002b80))
+r8 = socket$inet_icmp_raw(0x2, 0x3, 0x1)
+fallocate(r8, 0x0, 0x54ad4db0, 0x8000)
+ptrace$ARCH_SHSTK_STATUS(0x1e, r1, &(0x7f0000002bc0), 0x5005)
+lchown(&(0x7f0000002c00)='./file0\x00', r3, 0xffffffffffffffff)
+ioctl$F2FS_IOC_START_VOLATILE_WRITE(0xffffffffffffffff, 0xf503, 0x0)
+fcntl$notify(r4, 0x402, 0x80000002)
+perf_event_open(&(0x7f0000002c80)={0x4, 0x80, 0xff, 0x18, 0x4, 0x76, 0x0, 0x8, 0x1, 0xa, 0x1, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x2, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0x0, 0x1, 0x1, 0x1, 0x1, 0x0, 0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x7e180000, 0x1, @perf_bp={&(0x7f0000002c40), 0x1}, 0x80000, 0x7, 0xfffffffb, 0x2, 0x7fffffff, 0x40000000, 0x1, 0x0, 0x8, 0x0, 0x6}, 0xffffffffffffffff, 0xd, 0xffffffffffffffff, 0x9)
+sendmsg$TIPC_CMD_GET_LINKS(r4, &(0x7f0000002dc0)={&(0x7f0000002d00)={0x10, 0x0, 0x0, 0x20000000}, 0xc, &(0x7f0000002d80)={&(0x7f0000002d40)={0x24, 0x0, 0x300, 0x70bd2a, 0x25dfdbfe, {{}, {}, {0x8}}, ["", "", ""]}, 0x24}, 0x1, 0x0, 0x0, 0x40c8059}, 0x0)
+
+[   26.672444] audit: type=1400 audit(1698659236.704:8): avc:  denied  { execmem } for  pid=411 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1
+
+VM DIAGNOSIS:
+09:47:08  Registers:
+info registers vcpu 0
+RAX=0000000000000000 RBX=0000000000000000 RCX=ffffffff846515b4 RDX=0000000000000005
+RSI=ffffffff84ec1c84 RDI=00000000000092dc RBP=ffffffff8520c900 RSP=ffffffff85203e68
+R8 =ffffffff864c4410 R9 =0000000000000000 R10=0000000000000005 R11=0001ffffffffffff
+R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
+RIP=ffffffff846524bf RFL=00000216 [----AP-] CPL=0 II=0 A20=1 SMM=0 HLT=1
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 0000000000000000 00000000 00000000
+GS =0000 ffffa172b7c00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe01e3e61000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe01e3e5f000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fcf09ee4068 CR3=00000001003e8001 CR4=00770ef0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 63206e6f69737365 73203a296e6f6973
+YMM01=0000000000000000 0000000000000000 7365733a64687373 2878696e755f6d61
+YMM02=0000000000000000 0000000000000000 70203a5d3436335b 646873732038303a
+YMM03=0000000000000000 0000000000000000 37343a3930203033 2074634f3e36383c
+YMM04=0000000000000000 0000000000000000 ffffffffffffff00 ffff0000ff000000
+YMM05=0000000000000000 0000000000000000 656e6f6e2e6e6f6d 6561642c6e6f7263
+YMM06=0000000000000000 0000000000000000 3b656e6f6e2e7669 7270687475612c68
+YMM07=0000000000000000 0000000000000000 7475613b6e726177 3d2e2a3b65636974
+YMM08=0000000000000000 0000000000000000 0000000000000020 0000000000002000
+YMM09=0000000000000000 0000000000000000 0000ffffffffffff ffffffffffffff00
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+info registers vcpu 1
+RAX=ffffa17183cbb8a0 RBX=0000000000000005 RCX=0001a17183cbb8a0 RDX=0000000000000319
+RSI=0001ffffffffffff RDI=ffffa17183cbb8a0 RBP=ffffa62b808dbea0 RSP=ffffa62b808dbc88
+R8 =ffffffff864c44b0 R9 =0000000000000000 R10=ffffffff84628176 R11=0001a62b808dbed9
+R12=ffffa62b808dbd00 R13=ffffa62b808dbd10 R14=ffffa62b808dbd40 R15=ffffa62b808dbea8
+RIP=ffffffff82e72710 RFL=00000282 [--S----] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 0000000000000000 00000000 00000000
+CS =0010 0000000000000000 ffffffff 00a09b00 DPL=0 CS64 [-RA]
+SS =0018 0000000000000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0000 0000000000000000 00000000 00000000
+FS =0000 00007fb6db96a8c0 00000000 00000000
+GS =0000 ffffa172b7d00000 00000000 00000000
+LDT=0000 0000000000000000 00000000 00000000
+TR =0040 fffffe6efeda6000 00004087 00008b00 DPL=0 TSS64-busy
+GDT=     fffffe6efeda4000 0000007f
+IDT=     fffffe0000000000 00000fff
+CR0=80050033 CR2=00007fb6d632e170 CR3=00000001003f2002 CR4=00770ee0
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000d01
+FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80
+FPR0=0000000000000000 0000 FPR1=0000000000000000 0000
+FPR2=0000000000000000 0000 FPR3=0000000000000000 0000
+FPR4=0000000000000000 0000 FPR5=0000000000000000 0000
+FPR6=0000000000000000 0000 FPR7=0000000000000000 0000
+YMM00=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM01=0000000000000000 0000000000000000 2e322e302e30313d 656d616e74736f68
+YMM02=0000000000000000 0000000000000000 20322e322e302e30 313d726464612032
+YMM03=0000000000000000 0000000000000000 736572206873733d 6c616e696d726574
+YMM04=0000000000000000 0000000000000000 2022646873732f6e 6962732f7273752f
+YMM05=0000000000000000 0000000000000000 ffff000000000000 0000000000000000
+YMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM07=0000000000000000 0000000000000000 0000ff00000000ff 0000000000ffffff
+YMM08=0000000000000000 0000000000000000 0000000000000000 0000000000202020
+YMM09=0000000000000000 0000000000000000 ff0000ffffffffff ff00000000ffffff
+YMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM11=0000000000000000 0000000000000000 0f4790056c4bc3fd 830d52ed55a010c3
+YMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000
+YMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000

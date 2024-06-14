@@ -1,0 +1,34 @@
+include <Source/os.h>
+
+# resource os_obj_qty_res[OS_OBJ_QTY]
+resource os_flags_res[OS_FLAGS]
+
+OSFlagCreate(p_grp ptr[out, os_flag_grp_res], p_name ptr[in, CPU_CHAR], flags OS_FLAGS, p_err ptr[out, const[OS_ERR_NONE, int16]])
+OSFlagDel(p_grp ptr[in, os_flag_grp_res], opt flags[del_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSFlagPend(p_grp ptr[in, os_flag_grp_res], flags OS_FLAGS, timeout OS_TICK, opt flags[pend_opt_flags], p_ts ptr[inout, CPU_TS], p_err ptr[out, const[OS_ERR_NONE, int16]]) os_flags_res
+OSFlagPendAbort(p_grp ptr[in, os_flag_grp_res], opt flags[abort_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+# os_obj_qty_res
+OSFlagPendGetFlagsRdy(p_err ptr[out, const[OS_ERR_NONE, int16]]) os_flags_res
+OSFlagPost(p_grp ptr[in, os_flag_grp_res], flags OS_FLAGS, opt flags[post_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) os_flags_res
+
+OSFlagPost$res(p_grp ptr[in, os_flag_grp_res], flags os_flags_res, opt flags[post_opt_flags], p_err ptr[out, const[OS_ERR_NONE, int16]]) (ignore_return)
+
+del_opt_flags = OS_OPT_DEL_NO_PEND, OS_OPT_DEL_ALWAYS
+pend_opt_flags = OS_OPT_POST_FLAG_SET, OS_OPT_POST_FLAG_CLR, OS_OPT_POST_NO_SCHED
+abort_opt_flags = OS_OPT_PEND_ABORT_1, OS_OPT_PEND_ABORT_ALL, OS_OPT_POST_NO_SCHED
+post_opt_flags = OS_OPT_POST_FLAG_SET, OS_OPT_POST_FLAG_CLR, OS_OPT_POST_NO_SCHED
+
+type CPU_CHAR int8
+type OS_PRIO int8[0:30]
+type OS_REG int16
+type OS_MSG_QTY int16
+type OS_MSG_SIZE int16
+type CPU_TS int32
+type CPU_STK int32
+type OS_FLAGS int32
+type OS_SEM_CTR int32
+# type CPU_STK_SIZE int32
+type OS_TASK_PTR ptr[in, int64]
+
+resource os_flag_grp_res[intptr]

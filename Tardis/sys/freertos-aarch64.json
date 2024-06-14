@@ -1,0 +1,210 @@
+{
+    "syscall": [
+        {"name": "xTaskCreate",
+        "arguments": [
+            {
+                "name": "pvTaskCode",
+                "meta_type": "func_ptr",
+                "type": "TaskFunction_t",
+                "size": "4"
+            },
+            {
+                "name": "pcName",
+                "meta_type": "ptr",
+                "type": "char*",
+                "size": "4"
+            },
+            {
+                "name": "uxStackDepth",
+                "meta_type": "uint16_t",
+                "type": "configSTACK_DEPTH_TYPE",
+                "size": "4"
+            },
+            {
+                "name": "pvParameters",
+                "meta_type": "ptr",
+                "type": "void*",
+                "size": "4"
+            },
+            {
+                "name": "uxPriority",
+                "meta_type": "long",
+                "type": "UBaseType_t",
+                "size": "4"
+            },
+            {
+                "name": "pxCreatedTask",
+                "meta_type": "struct_ptr",
+                "type": "TaskHandle_t*",
+                "size": "4"
+            }
+        ],
+        "return": {
+            "name": "pxCreatedTask",
+            "meta_type": "struct_ptr",
+            "type": "TaskHandle_t*",
+            "size": "4"
+        },
+        "inputs": {
+            "name": "pxCreatedTask",
+            "meta_type": "struct_ptr",
+            "type": "TaskHandle_t*",
+            "size": "4"
+        },
+        "attr": [
+            {"unsafe":  true},
+            {"check": true}
+        ]
+    }
+    ],
+    "structs": [
+        {
+            "name": "tskTaskControlBlock",
+            "fields": [
+                {
+                    "name": "pxTopOfStack",
+                    "meta_type": "uint32_t",
+                    "type": "StackType_t*",
+                    "size": "8"
+                },
+                {
+                    "name": "xMPUSettings",
+                    "meta_type": "struct",
+                    "type": "MPU_SETTINGS",
+                    "size": "unknown"
+                },
+                {
+                    "name": "xStateListItem",
+                    "meta_type": "struct",
+                    "type": "ListItem_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "xEventListItem",
+                    "meta_type": "struct",
+                    "type": "ListItem_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "uxPriority",
+                    "meta_type": "uint32_t",
+                    "type": "UBaseType_t",
+                    "size": "8"
+                },
+                {  
+                    "name": "pxStack",
+                    "meta_type": "uint32_t",
+                    "type": "StackType_t*",
+                    "size": "8"
+                },
+                {
+                    "name": "pcTaskName",
+                    "meta_type": "array",
+                    "type": "char[configMAX_TASK_NAME_LEN]",
+                    "size": "configMAX_TASK_NAME_LEN"
+                },
+                {
+                    "name": "uxCriticalNesting",
+                    "meta_type": "variable",
+                    "type": "UBaseType_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "uxBasePriority",
+                    "meta_type": "variable",
+                    "type": "UBaseType_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "pxTaskTag",
+                    "meta_type": "pointer",
+                    "type": "TaskHookFunction_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "pvThreadLocalStoragePointers",
+                    "meta_type": "array",
+                    "type": "void*[configNUM_THREAD_LOCAL_STORAGE_POINTERS]",
+                    "size": "configNUM_THREAD_LOCAL_STORAGE_POINTERS"
+                },
+                {
+                    "name": "ulRunTimeCounter",
+                    "meta_type": "variable",
+                    "type": "uint32_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "xNewLib_reent",
+                    "meta_type": "struct",
+                    "type": "struct _reent",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ulNotifiedValue",
+                    "meta_type": "variable",
+                    "type": "uint32_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ucNotifyState",
+                    "meta_type": "variable",
+                    "type": "uint8_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ucStaticallyAllocated",
+                    "meta_type": "variable",
+                    "type": "uint8_t",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ucDelayAborted",
+                    "meta_type": "variable",
+                    "type": "uint8_t",
+                    "size": "unknown"
+                }
+            ]
+        },
+        {
+            "name": "MPU_SETTINGS",
+            "fields": [
+                {
+                    "name": "ulMAIR0",
+                    "meta_type": "variable",
+                    "type": "uint32_t",
+                    "size": "4"
+                },
+                {
+                    "name": "xRegionsSettings",
+                    "meta_type": "array",
+                    "type": "MPURegionSettings_t[portTOTAL_NUM_REGIONS]",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ulContext",
+                    "meta_type": "array",
+                    "type": "uint32_t[MAX_CONTEXT_SIZE]",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ulTaskFlags",
+                    "meta_type": "variable",
+                    "type": "uint32_t",
+                    "size": "4"
+                },
+                {
+                    "name": "xSystemCallStackInfo",
+                    "meta_type": "struct",
+                    "type": "xSYSTEM_CALL_STACK_INFO",
+                    "size": "unknown"
+                },
+                {
+                    "name": "ulAccessControlList",
+                    "meta_type": "array",
+                    "type": "uint32_t[(configPROTECTED_KERNEL_OBJECT_POOL_SIZE / portACL_ENTRY_SIZE_BITS) + 1]",
+                    "size": "unknown"
+                }
+            ]
+        }
+    ]
+}

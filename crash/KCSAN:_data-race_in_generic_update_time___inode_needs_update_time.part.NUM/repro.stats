@@ -1,0 +1,477 @@
+Extracting prog: 35.650154298s
+Minimizing prog: 4m47.25606242s
+Simplifying prog options: 39.59123309s
+Extracting C: 20.456162637s
+Simplifying C: 1m34.487847078s
+
+
+151 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 136 programs
+single: executing 2 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-setsockopt$inet_msfilter-getsockopt$inet_pktinfo-bind$packet-sendmsg$inet6-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+r1 = open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r2 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r2, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r2, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+r3 = socket$inet(0x2, 0x3, 0x5)
+setsockopt$inet_msfilter(r3, 0x0, 0x8, &(0x7f0000001480)=ANY=[@ANYBLOB='0'], 0x1)
+getsockopt$inet_pktinfo(r3, 0x0, 0x8, &(0x7f0000000040)={<r4=>0x0, @local, @local}, &(0x7f0000000140)=0xc)
+bind$packet(r2, &(0x7f0000000100)={0x11, 0x0, r4, 0x1, 0x0, 0x6, @local}, 0x14)
+sendmsg$inet6(r1, &(0x7f0000000440)={0x0, 0x0, &(0x7f0000000400)=[{&(0x7f0000000240)="aea886711685bdab9c02dc2736b68b740f2abbf120fcaab18fa74be57b55e65edb30c93b967b87", 0x27}, {&(0x7f0000000280)="504d4ce4a63ae318d631e2b4cbe8f19e527539d1e958edd581be5089ae88e17c97681233e5f021262dbd1e449743ebe392503261c43964dee03d2faa03aaf4503492016a1c646ae81f6019d73f3aef0c97e24b2e6e4ac45a371014b89baff7dbd10e09c6537dcac69d74e3e7c60515bdb0efbff3bcf532bd50869cbc3e6d094ac9fc28f85505c8", 0x87}, {&(0x7f0000000340)="b78f80bb825431052a98fe91844582ef1bd6a97698f538952388879b21019cb327135778d6631fddbf95f660cceea86c9fa9f299dd9737a1fd6a1cf52800439b938ffd24abe4ab57ced0537d2f20c5b5c1ebc171b89525305355b1e1533619fba9ff83938442ceef0dfafaf1494b4d4d9201e55253184e638bde888b20ad0706b9f2796f5b9e24fc134f8f9aa38c88bba567568668a8ef0f8a9b98287e45bf6cc1bcb1831e81a00707077fffab", 0xad}, {&(0x7f0000001780)="6af8222137fe5576bf2b31b1dc8d6e385e4a162a872c58c8925b601a13ba0fb74a61b60824c0636e02f2d95ccf10b15d0fb234cbbb5d6afb5c1e24da13f624a4946012653348e5df6e393bcd6c9f345f59de65288c6aca2fc99b1c2d40f6f40ed3994ff879bcd87e2cd288f3e2b21e709cfc774b6678240e67998b75e3775ea6ac840011f0025236f70171b03ae3dd6099b43859bbe90d937abdb15fc12df594934930a495441cda76bd1de511b58d36e78d1f951840b7a480105b4d4c285168198c0fc4e1b0c9d0c0caa649f9f590d0bd830ecddb947252258d85796883a2251367c229674accd3998d3cd24b6cdbe3ae23c3dc4bf0ecb747a4c347d005b6d5f17e674d85fba9d6bd937b8f2966a69e8815aab1c982e3d0cca6890de2a5c905b3e67e4cb1d87aa5ad38954332eaebf16c154aa7a676369d40ec4ac63250ce02e6bd3a154853c57d2e420f460040b343e82ca3fd49c69817403272a0ab4cdc640a5c885a79c0fdcc9ae5ff871560570ee513d43e04109f24ad9b1d4d4e19c2332837ac6e2638862ed4bb17563c81eb428d738915cfa1f21229b4f6a36d8a6a791cd72242a385e5368bd0c37a917ddbad231405b3f8c64a4673744fa22a94a4a80c9003b78b50d6da2c07ab7c4fe9dc787c7004e627018d8966b72a7237a2622f79b01ceb65123670bc4282ad79ac1f36b5118c6e0e12a29ba4ed0b6bf311219dcf70957c7171203f0df885167de90060d57511ec9053eab6d0b885c4da77b438a06e67feca17e56faf5432aabbe9ab82f72c56d9ead6d48df43dd339d0baa69159c29cb2509686c139d814c90bf2bc8fbe98405997e85acd84ae41bbfa7ecc1e3c0b4ddbfb9e3d584272e44f2d1a843bae20861086d2889027fbff13412518a16f9c1bf9ff687fa21686f8ec5d0076d2e55c0367cb9133e34df8952a4d602580a29fd9bd5db480604b65826343a1e9c3588200aead6eb5aed1a8fd0371868baf47720c7e6fd1457619fc683254490441a483db6a30af5f3d74b77d8ff4ae8f89fd7c82f5e87a37858ad86764561502fbe4b209d8d572a6b02d6ea143db6f40b380e6b621b32bed1859c1d21d218047092aee06adbd2915a0506946d23ecf5219ece539f39c5924ab8076017fba6a4772bbae3b43933c6a0bfc35cd9a2d5d0fbfeab956bd24b7a96d1b300f1fa5ab9e54b41d9ee7a33c4ecd65fc1fe4cec2c7ae0d26e5c55440be1860003d6b22a01d5533e6bc175ddf6f09fecc7fc7f4f61f38222d6d38e8017736c9bc3f31fe2d1684b6ba44c2703505c08e614c2b3d2b035d8f20724bbb900f62255c3e966b01a40eac469d2283f6ccc193be052daf1f05f420e1dc796eaa3a4f94d12f1364c89571c21bb1108f0ff6f212374ab64b177c2c7950f102a2b6de33f98b0eb910e0f01dfc86925197da8d6139817bd4eec18e1fd206f5ac5dbba83280f0e933c0b61c64c78599aee8fd72608da863fcb1c52854992ea691fe930341a8fbe696bb1a48ce89f1cb61f529e38a63abe939211c9ac122d89aa056c9ac274d7ee247474c94c4d1762864cfc6524e5a279c0230c7486ec449991058c37c5cc6eb129dcecf239d231f1275193ff78fd1e6c418e2d6d9bdc39be5872f434e1f5e31763ab1a07916647806570ebc8e6b739cf50feca4be7047536d9459f6f63f99a22b581dfabbc1f5cf790933165d931067173915371fe019fa2199c1c04e0f33770d3247345bb415a6f1634bf73a614b93e470387c69050dde14b0780fb10c780a23a7b7c2e962887cb8bc94d69a2b2c8fb55c1a356093bdd643ef06183bd8c6bbe4be76d885e7a1d2b5a31a126a7ada7ef45aba4c6663d7d404087f2e748c5df5dab846b607cdd77599d6415dd177f8258bda444aa3454b0be7b4dc2cae6d62cb0f3f4e24187f742bb17013fd79da96efc2beb688ff14aa8798dc90bcdfab102d44be8378d0735ccaf756396d64ccc50dbd516d20e910825c13aecf3dea7806d3657f832a49956cffde78c3994f4a552ccca498c05f64d0bb352a0fb82aaa9c82bb9bbb8bf8738de53a10d0a7c45c3bb987f91be4a8c8e8db94ce4af22ebe944ed23ad9328d53c7d6117f7831ca4ddbb33f0229676c7de182dfd964c22d031e8ac5e39e4f0120bf51a084e57ecf3f6ec53560d3ba207882fbc7734da338c0886b25205dbe430cda5af9c7e6d2d9ce97cbe994de7ccca5c87e4c234d5562fe4b0a9258224fbd287e88e49417752086c3a7ac26cfc2e2801ec9783b8d1f91ca0307de9cba3567a0cbdd5d7e8f698de8efde9ffe01dd43eb866ad80e2bbc2ffaca7f228375d3ecc799433681d9021d6c54742af683abcc6aa1035bf5ea3dae0cc8aba3796cb5ef73024ebe08d8b2c84d23f00c879c1dec6c6d069f354270c19dc9387413f12c8531dbf91f05f1620785d13985ec6204f9bdbc27f692d44d048b484e5655c93e82cbe8fb51ad0d418200a55966b510b3ef51efac5d40c2c751297f52eef0a2a37ed1f5e8daee95f32ea1a0149ab2875cc048732de5f97bdcbd68e2991e525a8e7c1647fc04fa89ab374827a0a43a587d9f5d06fbf3ba8735e10d46a5fe31c83930e14cb9e1971b88b6ad92307acbd58c54cb0793395da3c9829990e74e63e9b9256bfcd6860c11274abd59b863f9d21ac824770fcd6397ca4154a4d39d16d686c4e4be3b0df32196360a78bfd9dcd0db36c49b9e4cb5af4d8e7a622e2c70ac8b79a3df3bd99c53bbb5a7315486e8c40ffa3b7fe9029a3487202b1832305babb49d60971e76b332bc4a578c8cf62b9bf1412fb973d5afc2d10d17b215f7086433775687b47e3000381ac99906a0c376b24f0528fbaa21ebf8b988d30ad8eae05a485c50ce2521da1211a6554bf686b002074e8c2b13e9a6bf9dcb235caf553d80d04d2eae3eb6a14039f92269933937035764f2dccb4fedb86acb96fada7e6ce6d16633187b6cec5283bdc185a7289835b612642b92465a498cd5385713181ad6ac141ca7181edb7309f15fc647221d0931a866c349d3af4ae7d2287fd9c1b81627a27f70d6b3367099d91f8d687c92a32c8d630a5f5b49839482140a17fc2b8d04b54c8032642bd0d352210e55fc338f0b976d577766bce486b8af10f0411d2cb0c518dc689203c26f0f0ab8313139eea023ca702da26f62b615d6ae0f6cfe88b8da73eff5afb2df3d618bdd0c7bb4319d1959e3aa686dae45e2753c7f0c7966255153e60382d3b346dd78e0917408ccc6b662f00367929cafdbdec95fe7b33533e248ac30054bad446f04a9481259373d8c7424401204a5cb824878bf5c78bace3f60438ad9906fb80f24fdb0eb315c37c01390593e333e7b020faf7649cb1606acfb3e19283989ea2ce9d20a9b75db1f204102a193fb99dceb8b7e19a2b09a1f79a46bbed37fe6920f73cdb9313e57732e9e722b5ee9177ee07e1ebf31b5c384784644a27ae3ff3127b28fd6ed887f590b4885ddd62dae6a643970723eb558fa086df364888e07a1e070120ac25ce65127d4e640005c451614e3a7cf07b8fed35f5ed7644e38a66c2fd5b08bdf47344c5479c0a5a5fc415aa090b84db8062dd47d543280fd2422557636fc25441c73a1a43b56803809f4df5f10a83b3d29a52c5ed5d9a33624dcf33b67d5f4fad9f465ed561d5cf2d659c5f785fcb2ad46d08ec541f355404b1e6f6488e93c350ec8bff73a0a6475d14af78c1afde7904579b8878e38b2335045e4d14d0635264cd26592d70e27c0e7d7540e899827481b45284dce7fb942d43593fe551fb851a507ff115670baab8be9b229094d4c261810bea6461ade17b06cd53f66254657666cd6e8a3d88afdc370d46a7fc6a8f1c3359375b361a4b94936a0ca2a81929047e70061ccb7c713d375daca5f4ad4c2d88389d097ab9a7670f61e36a14b2362aae48b366abd32add2cd29813aecacb66d4cea99d4ab24d075d0937caee5b4804712c442d5cb993ce1abdb0487273d4270cc39ba80a4e883fa7903e91841da752ccac8f7cf027c1398daf2caea7741f38391cfd9dc4bcd0ed114bb51d4917766dee3eae7a8eb5bc2ef9000e5a108f5b59b341912dd3d8d38291827706cab72ef5d0b2f1b7892a044d0ff20c39aaceee85c80b5ae3e0713736e2c4759b7d2ab817f59d29d720f92bde8a0b7dc77147b300b74475f55e0494b1a44f8d726ba387d824fd0d1379f5812552c6ee4efdc6f126e6d18d126bd01c487ae9dbe3c89621dcce355d57854f5a05325222b484423432a6761a5cd8a8a46fa65854d98197c131a4bb12843c209838defd79c55607dd9252f5cd17b0c3816ad04f5dc1010d93536c658331eb281527fe035ccec20246ad9421a323539542743838b4c1791ea9929c1f40da0c1a445c8118de790e7489273ff2927cf3351b5ba050ac77b75578928cfe6489981f1c94f2cb44b09224a7e93b3613e1a29e880e5450737e2c64c11293cd855695d75962c08773719a8e99c948a6a04f41bc8c421c33a88998fa7c7ddc26d0bcb9bfae9cc3323cc55697ff1520d1e1390c74fdedc58043fc5b3498af8ca6b816aba561b9512d012d40d4a7df73bd75f0ae9d3a8573afdbcea2403bbe5d3fff0df4e7de89cdbbc265664d17d63f43024553297c9d5e624774a0095c94b2979b7158736162fac8e8f9ae43f9423d8f2f74222dabaef632f3dc29cb8e346fc1800aa060afc86826e74a2b9019d6aca3c0b94c36bcb881faa604d7fb16b51d9a4e6e9fc4d279d1d4eeb96ec54c31db2918bb93a37153be7482f33b449f376fe3693e402e12483e38644b4282cc4d51268baf3bd52669ae2a86231bea2919058f53609b465ca2bc04a8e5f1f09bcde62f659f951e1700f30f19078f31d15665d813907712f609f148e2500da822a59ac9b495798a9ccfd8784f85ecdd05ed53cf5c7feec8a3f6edc3da647bb69e5bf12dd49bff7f38033bd823cbe47fca88926564ff1ab2ea3a878fe9868d90d603b9a813ef7f3c1eb15e33574f802e551d73692a333e8f07f698cc39b8bc631a03e9289cf985fd3515a2884b549d261c2e3f3aa2a979b3430e75d471e1a31ae26505fcd3fbdabcb91aa2440abfd05d7cd80bf9fb5608963bef0ab4af2a471c3dbd3b27e71717443478d236ae60412ff6e0fcedad44ec2bdc50413839d90b08e6f22d2d0b2a01d198f2978c097548e5d628b2d45876c750fd146cfaf948356287cd4aa8a2b705edba94eb60d622049b9327dd270961a9d96aa829d178278c18591148f84516d5826ea65a9db0a9a5764abfa3ff434ca4862f9f8b1d38e1aa84b6411367b10f0e76c6f8476141f6d94cc9221976746a6358d1f89abf49ce5a7e39132f32b4b6bb96f4f67e301982810a0ea22a8a64dd9f1dc8d1f39af8bde78f3385ff54a236b83c6ccd86ecc884fd5512a6baa14f38aef7b68632a3a58c2945059fdbb53b5136a438c6be41a32431eed93fa504fac8d3b94676d674a9710ce823ac2b1e4f5e7f75339a5152395f3393b0e054d6a94f9a78a72f41bb204cb43a7224701c61df7297dac283451463a4894d46b3bd27ab9ab19a01198ec6350562cc72dc739da4ad84098f0f130fc1435c17a5578917428bd8579c69ca2a34e740cd7e40f5e29d151b3d291cacc4a36c1b4fc8f4b2369534f7da9ceeced9032c61b39bd63fae8f21caffddca014054cbd39dcbc076d85c455b19830ce04743f7650abf418f1619888a69d507a3b6d8f02bc49eeb42d33bd9b190f63f6080172ab3bf996bdf2fee683beda15a4310d58aed6c97454bd48", 0x1000}], 0x4, &(0x7f0000000500)=[@dstopts_2292={{0x20, 0x29, 0x4, {0x87, 0x0, '\x00', [@padn={0x1, 0x3, [0x0, 0x0, 0x0]}]}}}, @dstopts_2292={{0x68, 0x29, 0x4, {0x2c, 0x9, '\x00', [@hao={0xc9, 0x10, @empty}, @enc_lim={0x4, 0x1, 0xc0}, @padn={0x1, 0x1, [0x0]}, @generic, @ra={0x5, 0x2, 0x1}, @hao={0xc9, 0x10, @private1}, @padn={0x1, 0x1, [0x0]}, @ra={0x5, 0x2, 0x8d6f}, @calipso={0x7, 0x10, {0x1, 0x2, 0x2, 0xacaf, [0x1]}}]}}}, @dontfrag={{0x14, 0x29, 0x3e, 0x80000000}}, @pktinfo={{0x24, 0x29, 0x32, {@private1={0xfc, 0x1, '\x00', 0x1}, r4}}}], 0xc8}, 0x40000)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+single: successfully extracted reproducer
+found reproducer with 17 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-setsockopt$inet_msfilter-getsockopt$inet_pktinfo-bind$packet-sendmsg$inet6
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+r1 = open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r2 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r2, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r2, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+r3 = socket$inet(0x2, 0x3, 0x5)
+setsockopt$inet_msfilter(r3, 0x0, 0x8, &(0x7f0000001480)=ANY=[@ANYBLOB='0'], 0x1)
+getsockopt$inet_pktinfo(r3, 0x0, 0x8, &(0x7f0000000040)={<r4=>0x0, @local, @local}, &(0x7f0000000140)=0xc)
+bind$packet(r2, &(0x7f0000000100)={0x11, 0x0, r4, 0x1, 0x0, 0x6, @local}, 0x14)
+sendmsg$inet6(r1, &(0x7f0000000440)={0x0, 0x0, &(0x7f0000000400)=[{&(0x7f0000000240)="aea886711685bdab9c02dc2736b68b740f2abbf120fcaab18fa74be57b55e65edb30c93b967b87", 0x27}, {&(0x7f0000000280)="504d4ce4a63ae318d631e2b4cbe8f19e527539d1e958edd581be5089ae88e17c97681233e5f021262dbd1e449743ebe392503261c43964dee03d2faa03aaf4503492016a1c646ae81f6019d73f3aef0c97e24b2e6e4ac45a371014b89baff7dbd10e09c6537dcac69d74e3e7c60515bdb0efbff3bcf532bd50869cbc3e6d094ac9fc28f85505c8", 0x87}, {&(0x7f0000000340)="b78f80bb825431052a98fe91844582ef1bd6a97698f538952388879b21019cb327135778d6631fddbf95f660cceea86c9fa9f299dd9737a1fd6a1cf52800439b938ffd24abe4ab57ced0537d2f20c5b5c1ebc171b89525305355b1e1533619fba9ff83938442ceef0dfafaf1494b4d4d9201e55253184e638bde888b20ad0706b9f2796f5b9e24fc134f8f9aa38c88bba567568668a8ef0f8a9b98287e45bf6cc1bcb1831e81a00707077fffab", 0xad}, {&(0x7f0000001780)="6af8222137fe5576bf2b31b1dc8d6e385e4a162a872c58c8925b601a13ba0fb74a61b60824c0636e02f2d95ccf10b15d0fb234cbbb5d6afb5c1e24da13f624a4946012653348e5df6e393bcd6c9f345f59de65288c6aca2fc99b1c2d40f6f40ed3994ff879bcd87e2cd288f3e2b21e709cfc774b6678240e67998b75e3775ea6ac840011f0025236f70171b03ae3dd6099b43859bbe90d937abdb15fc12df594934930a495441cda76bd1de511b58d36e78d1f951840b7a480105b4d4c285168198c0fc4e1b0c9d0c0caa649f9f590d0bd830ecddb947252258d85796883a2251367c229674accd3998d3cd24b6cdbe3ae23c3dc4bf0ecb747a4c347d005b6d5f17e674d85fba9d6bd937b8f2966a69e8815aab1c982e3d0cca6890de2a5c905b3e67e4cb1d87aa5ad38954332eaebf16c154aa7a676369d40ec4ac63250ce02e6bd3a154853c57d2e420f460040b343e82ca3fd49c69817403272a0ab4cdc640a5c885a79c0fdcc9ae5ff871560570ee513d43e04109f24ad9b1d4d4e19c2332837ac6e2638862ed4bb17563c81eb428d738915cfa1f21229b4f6a36d8a6a791cd72242a385e5368bd0c37a917ddbad231405b3f8c64a4673744fa22a94a4a80c9003b78b50d6da2c07ab7c4fe9dc787c7004e627018d8966b72a7237a2622f79b01ceb65123670bc4282ad79ac1f36b5118c6e0e12a29ba4ed0b6bf311219dcf70957c7171203f0df885167de90060d57511ec9053eab6d0b885c4da77b438a06e67feca17e56faf5432aabbe9ab82f72c56d9ead6d48df43dd339d0baa69159c29cb2509686c139d814c90bf2bc8fbe98405997e85acd84ae41bbfa7ecc1e3c0b4ddbfb9e3d584272e44f2d1a843bae20861086d2889027fbff13412518a16f9c1bf9ff687fa21686f8ec5d0076d2e55c0367cb9133e34df8952a4d602580a29fd9bd5db480604b65826343a1e9c3588200aead6eb5aed1a8fd0371868baf47720c7e6fd1457619fc683254490441a483db6a30af5f3d74b77d8ff4ae8f89fd7c82f5e87a37858ad86764561502fbe4b209d8d572a6b02d6ea143db6f40b380e6b621b32bed1859c1d21d218047092aee06adbd2915a0506946d23ecf5219ece539f39c5924ab8076017fba6a4772bbae3b43933c6a0bfc35cd9a2d5d0fbfeab956bd24b7a96d1b300f1fa5ab9e54b41d9ee7a33c4ecd65fc1fe4cec2c7ae0d26e5c55440be1860003d6b22a01d5533e6bc175ddf6f09fecc7fc7f4f61f38222d6d38e8017736c9bc3f31fe2d1684b6ba44c2703505c08e614c2b3d2b035d8f20724bbb900f62255c3e966b01a40eac469d2283f6ccc193be052daf1f05f420e1dc796eaa3a4f94d12f1364c89571c21bb1108f0ff6f212374ab64b177c2c7950f102a2b6de33f98b0eb910e0f01dfc86925197da8d6139817bd4eec18e1fd206f5ac5dbba83280f0e933c0b61c64c78599aee8fd72608da863fcb1c52854992ea691fe930341a8fbe696bb1a48ce89f1cb61f529e38a63abe939211c9ac122d89aa056c9ac274d7ee247474c94c4d1762864cfc6524e5a279c0230c7486ec449991058c37c5cc6eb129dcecf239d231f1275193ff78fd1e6c418e2d6d9bdc39be5872f434e1f5e31763ab1a07916647806570ebc8e6b739cf50feca4be7047536d9459f6f63f99a22b581dfabbc1f5cf790933165d931067173915371fe019fa2199c1c04e0f33770d3247345bb415a6f1634bf73a614b93e470387c69050dde14b0780fb10c780a23a7b7c2e962887cb8bc94d69a2b2c8fb55c1a356093bdd643ef06183bd8c6bbe4be76d885e7a1d2b5a31a126a7ada7ef45aba4c6663d7d404087f2e748c5df5dab846b607cdd77599d6415dd177f8258bda444aa3454b0be7b4dc2cae6d62cb0f3f4e24187f742bb17013fd79da96efc2beb688ff14aa8798dc90bcdfab102d44be8378d0735ccaf756396d64ccc50dbd516d20e910825c13aecf3dea7806d3657f832a49956cffde78c3994f4a552ccca498c05f64d0bb352a0fb82aaa9c82bb9bbb8bf8738de53a10d0a7c45c3bb987f91be4a8c8e8db94ce4af22ebe944ed23ad9328d53c7d6117f7831ca4ddbb33f0229676c7de182dfd964c22d031e8ac5e39e4f0120bf51a084e57ecf3f6ec53560d3ba207882fbc7734da338c0886b25205dbe430cda5af9c7e6d2d9ce97cbe994de7ccca5c87e4c234d5562fe4b0a9258224fbd287e88e49417752086c3a7ac26cfc2e2801ec9783b8d1f91ca0307de9cba3567a0cbdd5d7e8f698de8efde9ffe01dd43eb866ad80e2bbc2ffaca7f228375d3ecc799433681d9021d6c54742af683abcc6aa1035bf5ea3dae0cc8aba3796cb5ef73024ebe08d8b2c84d23f00c879c1dec6c6d069f354270c19dc9387413f12c8531dbf91f05f1620785d13985ec6204f9bdbc27f692d44d048b484e5655c93e82cbe8fb51ad0d418200a55966b510b3ef51efac5d40c2c751297f52eef0a2a37ed1f5e8daee95f32ea1a0149ab2875cc048732de5f97bdcbd68e2991e525a8e7c1647fc04fa89ab374827a0a43a587d9f5d06fbf3ba8735e10d46a5fe31c83930e14cb9e1971b88b6ad92307acbd58c54cb0793395da3c9829990e74e63e9b9256bfcd6860c11274abd59b863f9d21ac824770fcd6397ca4154a4d39d16d686c4e4be3b0df32196360a78bfd9dcd0db36c49b9e4cb5af4d8e7a622e2c70ac8b79a3df3bd99c53bbb5a7315486e8c40ffa3b7fe9029a3487202b1832305babb49d60971e76b332bc4a578c8cf62b9bf1412fb973d5afc2d10d17b215f7086433775687b47e3000381ac99906a0c376b24f0528fbaa21ebf8b988d30ad8eae05a485c50ce2521da1211a6554bf686b002074e8c2b13e9a6bf9dcb235caf553d80d04d2eae3eb6a14039f92269933937035764f2dccb4fedb86acb96fada7e6ce6d16633187b6cec5283bdc185a7289835b612642b92465a498cd5385713181ad6ac141ca7181edb7309f15fc647221d0931a866c349d3af4ae7d2287fd9c1b81627a27f70d6b3367099d91f8d687c92a32c8d630a5f5b49839482140a17fc2b8d04b54c8032642bd0d352210e55fc338f0b976d577766bce486b8af10f0411d2cb0c518dc689203c26f0f0ab8313139eea023ca702da26f62b615d6ae0f6cfe88b8da73eff5afb2df3d618bdd0c7bb4319d1959e3aa686dae45e2753c7f0c7966255153e60382d3b346dd78e0917408ccc6b662f00367929cafdbdec95fe7b33533e248ac30054bad446f04a9481259373d8c7424401204a5cb824878bf5c78bace3f60438ad9906fb80f24fdb0eb315c37c01390593e333e7b020faf7649cb1606acfb3e19283989ea2ce9d20a9b75db1f204102a193fb99dceb8b7e19a2b09a1f79a46bbed37fe6920f73cdb9313e57732e9e722b5ee9177ee07e1ebf31b5c384784644a27ae3ff3127b28fd6ed887f590b4885ddd62dae6a643970723eb558fa086df364888e07a1e070120ac25ce65127d4e640005c451614e3a7cf07b8fed35f5ed7644e38a66c2fd5b08bdf47344c5479c0a5a5fc415aa090b84db8062dd47d543280fd2422557636fc25441c73a1a43b56803809f4df5f10a83b3d29a52c5ed5d9a33624dcf33b67d5f4fad9f465ed561d5cf2d659c5f785fcb2ad46d08ec541f355404b1e6f6488e93c350ec8bff73a0a6475d14af78c1afde7904579b8878e38b2335045e4d14d0635264cd26592d70e27c0e7d7540e899827481b45284dce7fb942d43593fe551fb851a507ff115670baab8be9b229094d4c261810bea6461ade17b06cd53f66254657666cd6e8a3d88afdc370d46a7fc6a8f1c3359375b361a4b94936a0ca2a81929047e70061ccb7c713d375daca5f4ad4c2d88389d097ab9a7670f61e36a14b2362aae48b366abd32add2cd29813aecacb66d4cea99d4ab24d075d0937caee5b4804712c442d5cb993ce1abdb0487273d4270cc39ba80a4e883fa7903e91841da752ccac8f7cf027c1398daf2caea7741f38391cfd9dc4bcd0ed114bb51d4917766dee3eae7a8eb5bc2ef9000e5a108f5b59b341912dd3d8d38291827706cab72ef5d0b2f1b7892a044d0ff20c39aaceee85c80b5ae3e0713736e2c4759b7d2ab817f59d29d720f92bde8a0b7dc77147b300b74475f55e0494b1a44f8d726ba387d824fd0d1379f5812552c6ee4efdc6f126e6d18d126bd01c487ae9dbe3c89621dcce355d57854f5a05325222b484423432a6761a5cd8a8a46fa65854d98197c131a4bb12843c209838defd79c55607dd9252f5cd17b0c3816ad04f5dc1010d93536c658331eb281527fe035ccec20246ad9421a323539542743838b4c1791ea9929c1f40da0c1a445c8118de790e7489273ff2927cf3351b5ba050ac77b75578928cfe6489981f1c94f2cb44b09224a7e93b3613e1a29e880e5450737e2c64c11293cd855695d75962c08773719a8e99c948a6a04f41bc8c421c33a88998fa7c7ddc26d0bcb9bfae9cc3323cc55697ff1520d1e1390c74fdedc58043fc5b3498af8ca6b816aba561b9512d012d40d4a7df73bd75f0ae9d3a8573afdbcea2403bbe5d3fff0df4e7de89cdbbc265664d17d63f43024553297c9d5e624774a0095c94b2979b7158736162fac8e8f9ae43f9423d8f2f74222dabaef632f3dc29cb8e346fc1800aa060afc86826e74a2b9019d6aca3c0b94c36bcb881faa604d7fb16b51d9a4e6e9fc4d279d1d4eeb96ec54c31db2918bb93a37153be7482f33b449f376fe3693e402e12483e38644b4282cc4d51268baf3bd52669ae2a86231bea2919058f53609b465ca2bc04a8e5f1f09bcde62f659f951e1700f30f19078f31d15665d813907712f609f148e2500da822a59ac9b495798a9ccfd8784f85ecdd05ed53cf5c7feec8a3f6edc3da647bb69e5bf12dd49bff7f38033bd823cbe47fca88926564ff1ab2ea3a878fe9868d90d603b9a813ef7f3c1eb15e33574f802e551d73692a333e8f07f698cc39b8bc631a03e9289cf985fd3515a2884b549d261c2e3f3aa2a979b3430e75d471e1a31ae26505fcd3fbdabcb91aa2440abfd05d7cd80bf9fb5608963bef0ab4af2a471c3dbd3b27e71717443478d236ae60412ff6e0fcedad44ec2bdc50413839d90b08e6f22d2d0b2a01d198f2978c097548e5d628b2d45876c750fd146cfaf948356287cd4aa8a2b705edba94eb60d622049b9327dd270961a9d96aa829d178278c18591148f84516d5826ea65a9db0a9a5764abfa3ff434ca4862f9f8b1d38e1aa84b6411367b10f0e76c6f8476141f6d94cc9221976746a6358d1f89abf49ce5a7e39132f32b4b6bb96f4f67e301982810a0ea22a8a64dd9f1dc8d1f39af8bde78f3385ff54a236b83c6ccd86ecc884fd5512a6baa14f38aef7b68632a3a58c2945059fdbb53b5136a438c6be41a32431eed93fa504fac8d3b94676d674a9710ce823ac2b1e4f5e7f75339a5152395f3393b0e054d6a94f9a78a72f41bb204cb43a7224701c61df7297dac283451463a4894d46b3bd27ab9ab19a01198ec6350562cc72dc739da4ad84098f0f130fc1435c17a5578917428bd8579c69ca2a34e740cd7e40f5e29d151b3d291cacc4a36c1b4fc8f4b2369534f7da9ceeced9032c61b39bd63fae8f21caffddca014054cbd39dcbc076d85c455b19830ce04743f7650abf418f1619888a69d507a3b6d8f02bc49eeb42d33bd9b190f63f6080172ab3bf996bdf2fee683beda15a4310d58aed6c97454bd48", 0x1000}], 0x4, &(0x7f0000000500)=[@dstopts_2292={{0x20, 0x29, 0x4, {0x87, 0x0, '\x00', [@padn={0x1, 0x3, [0x0, 0x0, 0x0]}]}}}, @dstopts_2292={{0x68, 0x29, 0x4, {0x2c, 0x9, '\x00', [@hao={0xc9, 0x10, @empty}, @enc_lim={0x4, 0x1, 0xc0}, @padn={0x1, 0x1, [0x0]}, @generic, @ra={0x5, 0x2, 0x1}, @hao={0xc9, 0x10, @private1}, @padn={0x1, 0x1, [0x0]}, @ra={0x5, 0x2, 0x8d6f}, @calipso={0x7, 0x10, {0x1, 0x2, 0x2, 0xacaf, [0x1]}}]}}}, @dontfrag={{0x14, 0x29, 0x3e, 0x80000000}}, @pktinfo={{0x24, 0x29, 0x32, {@private1={0xfc, 0x1, '\x00', 0x1}, r4}}}], 0xc8}, 0x40000)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-setsockopt$inet_msfilter-getsockopt$inet_pktinfo-bind$packet-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r1, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+r2 = socket$inet(0x2, 0x3, 0x5)
+setsockopt$inet_msfilter(r2, 0x0, 0x8, &(0x7f0000001480)=ANY=[@ANYBLOB='0'], 0x1)
+getsockopt$inet_pktinfo(r2, 0x0, 0x8, &(0x7f0000000040)={<r3=>0x0, @local, @local}, &(0x7f0000000140)=0xc)
+bind$packet(r1, &(0x7f0000000100)={0x11, 0x0, r3, 0x1, 0x0, 0x6, @local}, 0x14)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in poll_schedule_timeout.constprop.NUM / pollwake
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-setsockopt$inet_msfilter-getsockopt$inet_pktinfo-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r1, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+r2 = socket$inet(0x2, 0x3, 0x5)
+setsockopt$inet_msfilter(r2, 0x0, 0x8, &(0x7f0000001480)=ANY=[@ANYBLOB='0'], 0x1)
+getsockopt$inet_pktinfo(r2, 0x0, 0x8, &(0x7f0000000040)={0x0, @local, @local}, &(0x7f0000000140)=0xc)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-setsockopt$inet_msfilter-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r1, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+r2 = socket$inet(0x2, 0x3, 0x5)
+setsockopt$inet_msfilter(r2, 0x0, 0x8, &(0x7f0000001480)=ANY=[@ANYBLOB='0'], 0x1)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-socket$inet-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r1, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+socket$inet(0x2, 0x3, 0x5)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmsg-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmsg(r1, &(0x7f0000000140)={0x0, 0x0, &(0x7f0000000040)=[{&(0x7f0000000240)=""/72, 0x48}], 0x1}, 0x0)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-setsockopt$packet_int-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+r1 = socket$packet(0x11, 0x3, 0x300)
+setsockopt$packet_int(r1, 0x107, 0xf, &(0x7f0000002180)=0xfc, 0x3c3)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-socket$packet-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+socket$packet(0x11, 0x3, 0x300)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-open-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+open(&(0x7f0000000080)='./file0\x00', 0x200, 0xe3)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-sendto$inet6-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+sendto$inet6(r0, &(0x7f00000001c0)="4810766d770fd242a9ea1e607f66cd7324d73a2ec25226e2bf77be3a844d27a8eff4512dd9edade1a0a2f0e02fd6d17603ee48555d09f85decba782cef161a41dbb9da17eeb72c158f66220b755cd8bf4742cb05f450f8b5a1a67198372f1eef4c9194856c7032cb33d4a687227e50bc059c6ad51a4e1de20f40", 0x7a, 0x0, 0x0, 0x0)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-sendto$inet6-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+sendto$inet6(r0, &(0x7f00000000c0)="044aac2f202c5feda71e039a57a93088fdcce4afe28aac61837792741a190670ccbe1a2b00aa77a87d56a3f12c7920ad02928a5d1014e5b896f000fcf6521928480be9af82613a5c661f4110adba358afd8b5b4ef1702051e393ede2698112a1f1bdf1d0f568546ed322ab4c53545bd2cd6e48522f0c154cb3c6864dc30ae921db100f1ee97a234503338f8fdf356472da0c7ab62f274f34", 0xfffffffffffffee0, 0x20000004, &(0x7f0000b63fe4)={0xa, 0x2}, 0x1c)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in poll_schedule_timeout.constprop.NUM / pollwake
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-setsockopt$inet6_tcp_int-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+setsockopt$inet6_tcp_int(r0, 0x6, 0x2000000000000022, &(0x7f0000000040), 0x4)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-bind$inet6-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+bind$inet6(r0, &(0x7f0000d84000)={0xa, 0x2, 0x0, @ipv4={'\x00', '\xff\xff', @loopback}}, 0x1c)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-setsockopt$inet6_tcp_TCP_CONGESTION-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+setsockopt$inet6_tcp_TCP_CONGESTION(r0, 0x6, 0xd, &(0x7f0000000180)='reno\x00', 0x5)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in generic_fillattr / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-setsockopt$inet6_tcp_int-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+setsockopt$inet6_tcp_int(r0, 0x6, 0xa, &(0x7f0000000000)=0xbf, 0x4)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet6_tcp-recvmmsg
+detailed listing:
+executing program 0:
+r0 = socket$inet6_tcp(0xa, 0x1, 0x0)
+recvmmsg(r0, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+detailed listing:
+executing program 0:
+recvmmsg(0xffffffffffffffff, &(0x7f0000000740)=[{{0x0, 0x0, &(0x7f00000004c0)=[{&(0x7f0000000780)=""/4084, 0x20001774}], 0x1}}], 0x1, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+detailed listing:
+executing program 0:
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program did not crash
+simplifying guilty program options
+testing program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+detailed listing:
+executing program 0:
+recvmmsg(0xffffffffffffffff, 0x0, 0x0, 0x120, 0x0)
+
+program crashed: KCSAN: data-race in kernfs_refresh_inode / kernfs_refresh_inode
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program crashed: KCSAN: data-race in ext4_free_inodes_count / ext4_free_inodes_set
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program crashed: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.NUM
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program crashed: KCSAN: data-race in blk_mq_sched_dispatch_requests / blk_mq_sched_dispatch_requests
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:2 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): recvmmsg
+program crashed: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.NUM
+reproducing took 8m0.806380926s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+read to 0xffff9794004a4eb8 of 8 bytes by task 700 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x43/0x130 fs/inode.c:2081
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9794004a4eb8 of 16 bytes by task 699 on cpu 0:
+ generic_update_time+0x74/0x150 fs/inode.c:1887
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 699 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffff9794004a4ea8 of 16 bytes by task 5019 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9794004a4eb0 of 8 bytes by task 5018 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000000000f5f7090 -> 0x000000000f7df510
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5018 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+read to 0xffff9794004a4eb8 of 8 bytes by task 700 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x43/0x130 fs/inode.c:2081
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9794004a4eb8 of 16 bytes by task 699 on cpu 0:
+ generic_update_time+0x74/0x150 fs/inode.c:1887
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 699 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffff9794004a4ea8 of 16 bytes by task 5019 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9794004a4eb0 of 8 bytes by task 5018 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000000000f5f7090 -> 0x000000000f7df510
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5018 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+

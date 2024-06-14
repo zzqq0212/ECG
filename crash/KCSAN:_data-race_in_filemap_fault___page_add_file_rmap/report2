@@ -1,0 +1,54 @@
+==================================================================
+BUG: KCSAN: data-race in filemap_fault / page_add_file_rmap
+
+read-write (marked) to 0xffffdfcbc42e0780 of 8 bytes by task 355 on cpu 0:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ test_and_set_bit_lock include/asm-generic/bitops/instrumented-lock.h:57 [inline]
+ folio_trylock include/linux/pagemap.h:922 [inline]
+ lock_folio_maybe_drop_mmap mm/filemap.c:3108 [inline]
+ filemap_fault+0x153/0xec0 mm/filemap.c:3318
+ __do_fault+0x79/0x1b0 mm/memory.c:4198
+ do_read_fault mm/memory.c:4547 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x12ba/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+read to 0xffffdfcbc42e0780 of 8 bytes by task 356 on cpu 1:
+ __lruvec_stat_mod_folio include/linux/vmstat.h:615 [inline]
+ page_add_file_rmap+0x17a/0x210 mm/rmap.c:1357
+ do_set_pte+0x1fc/0x450 mm/memory.c:4342
+ filemap_map_pages+0x434/0x840 mm/filemap.c:3550
+ do_fault_around mm/memory.c:4510 [inline]
+ do_read_fault mm/memory.c:4542 [inline]
+ do_fault mm/memory.c:4670 [inline]
+ do_pte_missing mm/memory.c:3664 [inline]
+ handle_pte_fault mm/memory.c:4939 [inline]
+ __handle_mm_fault+0x184a/0x2050 mm/memory.c:5079
+ handle_mm_fault+0xff/0x3d0 mm/memory.c:5233
+ do_user_addr_fault+0x2bd/0x780 arch/x86/mm/fault.c:1392
+ handle_page_fault arch/x86/mm/fault.c:1486 [inline]
+ exc_page_fault+0x86/0x1d0 arch/x86/mm/fault.c:1542
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+value changed: 0x02fffc0000020015 -> 0x02fffc0000020095
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 356 Comm: gcc Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+cgroup: Unknown subsys name 'memory'
+Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+kcsan: could not find function: '__call_rcu_common'
+kcsan: could not find function: 'recalc_bh_state'
+kcsan: could not find function: 'should_defer_flush'
+kcsan: could not find function: 'poll_schedule_timeout'
+memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=352 'syz-fuzzer'
+audit: type=1400 audit(1698662370.656:8): avc:  denied  { execmem } for  pid=384 comm="syz-executor.1" scontext=system_u:system_r:kernel_t:s0 tcontext=system_u:system_r:kernel_t:s0 tclass=process permissive=1

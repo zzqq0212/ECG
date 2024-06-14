@@ -1,0 +1,15 @@
+{
+	"fuzzer_path": "./",
+	"target_os": "freertos",
+	"arch": "aarch64",
+	"qmp_path": "/data/embfuzz/qemu/scripts/qmp",
+	"workdir": "/data/embfuzz/feryr/workdir",
+	"kernel_obj": "/data/embfuzz/FreeRTOS/FreeRTOS/Demo/CORTEX_RASPI3",
+	"machine_type": "raspi3b",
+	"cpu_num": 1,
+	"mem_size": 1024,
+	"port": 8899,
+	"unique_id": "",
+	"corpus_path": "",
+	"func_addr": "80000270"
+}

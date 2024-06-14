@@ -1,0 +1,84 @@
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+read to 0xffff9794004a4eb8 of 8 bytes by task 700 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x43/0x130 fs/inode.c:2081
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+write to 0xffff9794004a4eb8 of 16 bytes by task 699 on cpu 0:
+ generic_update_time+0x74/0x150 fs/inode.c:1887
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 699 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffff9794004a4ea8 of 16 bytes by task 5019 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffff9794004a4eb0 of 8 bytes by task 5018 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000000000f5f7090 -> 0x000000000f7df510
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5018 Comm: syz-executor804 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

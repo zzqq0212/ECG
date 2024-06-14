@@ -1,0 +1,99 @@
+==================================================================
+BUG: KCSAN: data-race in d_splice_alias / d_splice_alias
+
+read-write (marked) to 0xffffa2e6414ac280 of 4 bytes by task 4338 on cpu 1:
+ instrument_atomic_read_write include/linux/instrumented.h:97 [inline]
+ start_dir_add fs/dcache.c:2603 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x3c5/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e6414ac280 of 4 bytes by task 4337 on cpu 0:
+ start_dir_add fs/dcache.c:2602 [inline]
+ __d_add fs/dcache.c:2783 [inline]
+ d_splice_alias+0x39f/0x8a0 fs/dcache.c:3182
+ proc_pid_instantiate+0x10b/0x130 fs/proc/base.c:3432
+ proc_pid_lookup+0xf9/0x1e0 fs/proc/base.c:3463
+ proc_root_lookup+0x24/0x70 fs/proc/root.c:324
+ __lookup_slow+0xe3/0x1f0 fs/namei.c:1690
+ lookup_slow fs/namei.c:1707 [inline]
+ walk_component+0x1cc/0x2b0 fs/namei.c:1998
+ link_path_walk.part.0.constprop.0+0x324/0x660 fs/namei.c:2322
+ link_path_walk fs/namei.c:2250 [inline]
+ path_openat+0x128/0x1c90 fs/namei.c:3789
+ do_filp_open+0x15b/0x280 fs/namei.c:3820
+ do_sys_openat2+0xc6/0x110 fs/open.c:1407
+ do_sys_open fs/open.c:1422 [inline]
+ __do_sys_openat fs/open.c:1438 [inline]
+ __se_sys_openat fs/open.c:1433 [inline]
+ __x64_sys_openat+0xb9/0x120 fs/open.c:1433
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x000020f0 -> 0x000020f2
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 0 PID: 4337 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+==================================================================
+BUG: KCSAN: data-race in generic_update_time / inode_needs_update_time.part.0
+
+write to 0xffffa2e644236ea8 of 16 bytes by task 5396 on cpu 0:
+ generic_update_time+0x10d/0x150 fs/inode.c:1889
+ inode_update_time fs/inode.c:1913 [inline]
+ __file_update_time fs/inode.c:2098 [inline]
+ file_update_time+0x12a/0x140 fs/inode.c:2129
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+read to 0xffffa2e644236eb0 of 8 bytes by task 5397 on cpu 1:
+ timespec64_equal include/linux/time64.h:49 [inline]
+ inode_needs_update_time.part.0+0x94/0x130 fs/inode.c:2078
+ inode_needs_update_time fs/inode.c:2075 [inline]
+ file_update_time+0x74/0x140 fs/inode.c:2125
+ pipe_write+0x90d/0xcc0 fs/pipe.c:601
+ call_write_iter include/linux/fs.h:1877 [inline]
+ new_sync_write fs/read_write.c:491 [inline]
+ vfs_write+0x5d0/0x700 fs/read_write.c:584
+ ksys_write+0x11c/0x160 fs/read_write.c:637
+ __do_sys_write fs/read_write.c:649 [inline]
+ __se_sys_write fs/read_write.c:646 [inline]
+ __x64_sys_write+0x41/0x50 fs/read_write.c:646
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3e/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+
+value changed: 0x0000000022c2dd68 -> 0x0000000022f0a428
+
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 PID: 5397 Comm: syz-executor142 Not tainted 6.5.0 #8
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================

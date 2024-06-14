@@ -1,0 +1,1302 @@
+Extracting prog: 1m29.148509495s
+Minimizing prog: 8m58.160440447s
+Simplifying prog options: 0s
+Extracting C: 26.708889854s
+Simplifying C: 2m34.341194656s
+
+
+290 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 290 programs
+single: executing 5 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet-getsockopt$inet_pktinfo-syz_mount_image$ext4-socket$inet-getsockopt$inet_pktinfo-syz_mount_image$ext4
+detailed listing:
+executing program 0:
+r0 = socket$inet(0x2, 0x4, 0x6)
+getsockopt$inet_pktinfo(r0, 0x0, 0x8, &(0x7f0000000040)={0x0, @remote, @broadcast}, &(0x7f0000000080)=0xc)
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000240)='./file0\x00', 0x0, &(0x7f00000001c0)=ANY=[], 0x1, 0x7b3, &(0x7f0000000d80)="$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")
+socket$inet(0x2, 0x4, 0x6) (async)
+getsockopt$inet_pktinfo(r0, 0x0, 0x8, &(0x7f0000000040)={0x0, @remote, @broadcast}, &(0x7f0000000080)=0xc) (async)
+syz_mount_image$ext4(&(0x7f0000000000)='ext4\x00', &(0x7f0000000240)='./file0\x00', 0x0, &(0x7f00000001c0)=ANY=[], 0x1, 0x7b3, &(0x7f0000000d80)="$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") (async)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program crashed: BUG: unable to handle kernel paging request in corrupted
+single: successfully extracted reproducer
+found reproducer with 9 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+sendfile(r0, 0xffffffffffffffff, 0x0, 0x8000005c)
+write$binfmt_script(0xffffffffffffffff, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r0 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(0xffffffffffffffff, r0, 0x0, 0x8000005c)
+write$binfmt_script(r0, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(0xffffffffffffffff, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(0xffffffffffffffff, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(0x0, 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(0x0, 0x10d07e, 0x34) (async, rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34) (rerun: 32)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program crashed: BUG: unable to handle kernel paging request in corrupted
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program crashed: BUG: unable to handle kernel paging request in ext4_ext_remove_space
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(0x0, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, 0x0, 0x0, 0x1000, 0x0) (rerun: 32)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program crashed: BUG: unable to handle kernel paging request in mempool_alloc
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(0x0, 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, 0x0, 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0) (async)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, &(0x7f0000000080)={0x0, 0x0, 0x0, 0x1ff7fdfd000, 0x0, 0x48000000})
+
+program crashed: general protection fault in mt_find
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+detailed listing:
+executing program 0:
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file1\x00', 0x4500, &(0x7f0000000540)={[{@errors_remount}, {@sysvgroups}, {@dioread_lock}, {@grpquota}, {@noauto_da_alloc}, {@resgid}, {@barrier}, {@auto_da_alloc}, {@usrquota}]}, 0x12, 0x4b4, &(0x7f0000001b00)="$eJzs3d9rW9cdAPDvvbay/HBmZ9tDFlgWlgwnbJHseEnMHrIMxvIU2Ja9Z54tG2PZMpacxCYMh/0BgzHWQp/61JdC/4BCyZ9QCoH2vbSlpbRJ+9CHtiqSrtLElWKHyL5gfz5wfM+5V9L3e2x0dc+9x7oB7FunIuJqRAxExLmIGM7Wp1m51mxstB/36OHd6WZJotG48VkSSbau81pJtjzSfkocjIi/XYv4Z/LDuLW19YWpSqW8krVL9cXlUm1t/fz84tRcea68NDExfmny8uTFybG+9HMkIq786aP//+e1P19567e337/5ydl/NdMayrY/2Y9+ane90PpddAxGxMpOBMvBQLYs5JwHAADb0zzG/0lE/Kp1/D8cA62jUwAAAGAvafxhKL5OIhoAAADAnpW25sAmaTGbCzAUaVostufw/iwOp5Vqrf6b2erq0kx7ruxIFNLZ+Up5LJsrPBKFpNkez+bYdtoXNrUnIuJYRPxv+FCrXZyuVmbyPvkBAAAA+8SRTeP/L4fb438AAABgjxnJOwEAAABgxxn/AwAAwN5n/A8AAAB72l+uX2+WRuf+1zO31lYXqrfOz5RrC8XF1enidHVluThXrc61vrNvcavXq1Sry7+LpdU7pXq5Vi/V1tZvLlZXl+o355+6BTYAAACwi4798v57SURs/P5QqzQdyDspYFckz/PgD3cuD2D3DeSdAJCbwbwTAHJTyDsBIHdbnQfoOXnn7f7nAgAA7IzRn/e+/u/cAOxtad4JAAC7zvV/2L8KZgDCvvfjLba/+PX/RuO5EgIAAPpuqFWStJhdCxyKNC0WI462bgtQSGbnK+WxbHzw7nDhR832eOuZyfP97zAAAAAAAAAAAAAAAAAAAAAAAAAA7GONRhINAAAAYE+LSD9OWt/mHzE6fGZo8/mBA8lXw61lRNx+5cZLd6bq9ZXx5vrPH6+vv5ytv5DHGQwAAABgs844vTOOBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB+evTw7nSn7GbcT/8YESPd4g/GwdbyYBQi4vAXSQw+8bwkIgb6EH/jXkQc7xY/aaYVI1kW3eIfyjF+GhFH+hAf9rP7zf3P1W7vvzROtZbd33+DWXlRvfd/6eP930CP/c/RbcY48eCNUs/49yJODHbf/3TiJz3in95m/H/8fX2917bGqxGjXT9/kqdileqLy6Xa2vr5+cWpufJceWliYvzS5OXJi5Njpdn5Sjn72TXGf3/x5rfP6v/hHvFHtuj/mW32/5sHdx7+tF0tdIt/9nT3z9/jPeKn2Wffr7N6c/top77Rrj/p5OvvnHxW/2d69H+rv//Zbfb/3F///cE2HwoA7ILa2vrCVKVSXlFRUVF5XMl7zwQAAPTb9wf9eWcCAAAAAAAAAAAAAAAAAAAA+9dufJ3Y5pgb+XQVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCZvgsAAP//96DU7Q==")
+r0 = open(&(0x7f00000000c0)='./file1\x00', 0x147942, 0x0)
+open(&(0x7f0000000000)='./bus\x00', 0x10d07e, 0x34)
+mount(&(0x7f0000000380)=@loop={'/dev/loop', 0x0}, &(0x7f0000000140)='./bus\x00', 0x0, 0x1000, 0x0)
+r1 = open(&(0x7f0000000400)='./bus\x00', 0x14113e, 0x0)
+sendfile(r0, r1, 0x0, 0x8000005c)
+write$binfmt_script(r1, &(0x7f0000000100)=ANY=[], 0x208e24b) (async)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0)
+ioctl$FS_IOC_RESVSP(r0, 0x40305829, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program crashed: general protection fault in srso_alias_safe_ret
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:5 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program crashed: BUG: unable to handle kernel paging request in ext4_ext_remove_space
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program crashed: BUG: unable to handle kernel paging request in ext4_ext_remove_space
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program crashed: BUG: unable to handle kernel paging request in ext4_ext_remove_space
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$ext4-open-open-mount-open-sendfile-write$binfmt_script-ioctl$BLKTRACESTOP-ioctl$FS_IOC_RESVSP
+program did not crash
+reproducing took 13m28.359055663s
+repro crashed as (corrupted=false):
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.kIf35M/17/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+BUG: unable to handle page fault for address: ffff888109d9f000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 PTE 9da116380000001
+Oops: 0009 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 0 PID: 393 Comm: syz-executor350 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_ext_rm_leaf fs/ext4/extents.c:2712 [inline]
+ ext4_ext_remove_space+0x1e62/0x3ba0 fs/ext4/extents.c:2934
+ ext4_punch_hole+0xce0/0xfa0 fs/ext4/inode.c:3994
+ ext4_fallocate+0xd02/0x3760 fs/ext4/extents.c:4741
+ vfs_fallocate+0x4a1/0xd00 fs/open.c:328
+ ioctl_preallocate+0x192/0x210 fs/ioctl.c:291
+ file_ioctl fs/ioctl.c:334 [inline]
+ do_vfs_ioctl+0x1262/0x15b0 fs/ioctl.c:850
+ __do_sys_ioctl fs/ioctl.c:869 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0x110/0x210 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f9f93fc57bd
+Code: c3 e8 37 24 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f9f93f47198 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007f9f9405c5d0 RCX: 00007f9f93fc57bd
+RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+RBP: 00007f9f94026658 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0031656c69662f2e
+R13: 6f6f6c2f7665642f R14: 000001ff7fdfd000 R15: 00007f9f9405c5d8
+ </TASK>
+Modules linked in:
+CR2: ffff888109d9f000
+---[ end trace 0000000000000000 ]---
+BUG: unable to handle page fault for address: ffff888109cce340
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+#PF: supervisor read access in kernel mode
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+#PF: error_code(0x0009) - reserved bit violation
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+PGD 108e01067 P4D 108e01067 
+
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+PUD 100181063 
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+PMD 109d9d063 
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+BAD
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+Oops: 0009 [#2] PREEMPT SMP KASAN NOPTI
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+CPU: 2 PID: 119 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RIP: 0010:avc_search_node security/selinux/avc.c:532 [inline]
+RIP: 0010:avc_lookup+0xdf/0x1d0 security/selinux/avc.c:560
+CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+Code: e7 ad 66 ff 49 83 ec 28 0f 84 c1 00 00 00 e8 d8 ad 66 ff 4c 89 e0 48 c1 e8 03 0f b6 04 18 84 c0 74 08 3c 03 0f 8e b6 00 00 00 <45> 8b 3c 24 89 ef 44 89 fe e8 13 a6 66 ff 44 39 fd 75 99 e8 a9 ad
+PKRU: 55555554
+RSP: 0018:ffff8881025b7778 EFLAGS: 00010246
+note: syz-executor350[393] exited with irqs disabled
+
+RAX: 0000000000000000 RBX: dffffc0000000000 RCX: ffffffff8a3fb758
+RDX: ffff8881129c2200 RSI: 0000000000000005 RDI: ffffffff8f0ec170
+RBP: 0000000000000001 R08: 0000000000000000 R09: ffff8881025b7828
+R10: 0000000010000000 R11: 0000000000000000 R12: ffff888109cce340
+R13: 0000000000000008 R14: 0000000000000005 R15: ffff8881025b7828
+FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ avc_has_perm_noaudit+0x58/0x160 security/selinux/avc.c:1154
+ selinux_inode_permission+0x369/0x5d0 security/selinux/hooks.c:3125
+ security_inode_permission+0x9c/0x100 security/security.c:2196
+ inode_permission fs/namei.c:537 [inline]
+ inode_permission+0x17b/0x5f0 fs/namei.c:504
+ may_lookup fs/namei.c:1719 [inline]
+ link_path_walk.part.0.constprop.0+0x26f/0xce0 fs/namei.c:2274
+ link_path_walk fs/namei.c:2255 [inline]
+ path_lookupat+0x92/0x760 fs/namei.c:2485
+ do_o_path fs/namei.c:3773 [inline]
+ path_openat+0x238f/0x36f0 fs/namei.c:3795
+ do_filp_open+0x1c9/0x420 fs/namei.c:3829
+ do_sys_openat2+0x164/0x1d0 fs/open.c:1404
+ do_sys_open fs/open.c:1419 [inline]
+ __do_sys_openat fs/open.c:1435 [inline]
+ __se_sys_openat fs/open.c:1430 [inline]
+ __x64_sys_openat+0x140/0x1f0 fs/open.c:1430
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f4d71fa02a2
+Code: c0 f6 c2 40 75 52 89 d0 45 31 d2 25 00 00 41 00 3d 00 00 41 00 74 41 64 8b 04 25 18 00 00 00 85 c0 75 65 b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 0f 87 a2 00 00 00 48 8b 4c 24 38 64 48 2b 0c 25
+RSP: 002b:00007fffcb690760 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
+RAX: ffffffffffffffda RBX: 0000000000000001 RCX: 00007f4d71fa02a2
+RDX: 00000000002a0000 RSI: 000055922ba01641 RDI: 0000000000000010
+RBP: 000055922ba01640 R08: 000055922a212950 R09: 00007f4d72083be0
+R10: 0000000000000000 R11: 0000000000000246 R12: 000055922ba0de24
+R13: 0000000000000010 R14: 0000000000000004 R15: 000055922ba01641
+ </TASK>
+Modules linked in:
+CR2: ffff888109cce340
+---[ end trace 0000000000000000 ]---
+BUG: unable to handle page fault for address: ffff888109c35cd4
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+#PF: supervisor read access in kernel mode
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+#PF: error_code(0x0009) - reserved bit violation
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+PGD 108e01067 P4D 108e01067 
+
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+PUD 100181063 
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+PMD 109d9d063 
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+BAD
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+BUG: unable to handle page fault for address: ffff888109c38000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+#PF: supervisor read access in kernel mode
+FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+#PF: error_code(0x0009) - reserved bit violation
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+PGD 108e01067 
+CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+P4D 108e01067 
+PKRU: 55555554
+PUD 100181063 
+note: systemd-udevd[119] exited with irqs disabled
+PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+traps: PANIC: double fault, error_code: 0x0
+double fault: 0000 [#3] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:ffff888109c3bfd0 EFLAGS: 00010082
+RAX: ffff888109c3c020 RBX: dffffc0000000000 RCX: ffff0a0000000509
+RDX: 0000000000000033 RSI: ffff888189c3c34f RDI: ffff888109c3c351
+RBP: 0000000000000018 R08: 0000000000000009 R09: ffffed102138785a
+R10: 0000000000000010 R11: 727265203a465023 R12: ffff888109c3c351
+R13: ffffffff8caa0a05 R14: ffff888109c3c351 R15: ffff888189c3c34f
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109c3bfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <#DF>
+ </#DF>
+ <TASK>
+BUG: unable to handle page fault for address: ffff888109c3bfd0
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+traps: PANIC: double fault, error_code: 0x0
+double fault: 0000 [#4] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+BUG: KASAN: stack-out-of-bounds in number+0x9df/0xa90 lib/vsprintf.c:564
+Write of size 1 at addr fffffe15b321066a by task systemd-udevd/130
+
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <#DF>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ number+0x9df/0xa90 lib/vsprintf.c:564
+ vsnprintf+0x785/0x1650 lib/vsprintf.c:2890
+ sprintf+0xc4/0x100 lib/vsprintf.c:3028
+ __sprint_symbol.constprop.0+0x1d1/0x200 kernel/kallsyms.c:503
+ symbol_string+0x174/0x470 lib/vsprintf.c:1002
+ pointer+0x3b5/0xc70 lib/vsprintf.c:2422
+ vsnprintf+0x5bb/0x1650 lib/vsprintf.c:2828
+ vprintk_store+0x4b5/0x980 kernel/printk/printk.c:2187
+ vprintk_emit+0x236/0x440 kernel/printk/printk.c:2284
+ vprintk+0x56/0x90 kernel/printk/printk_safe.c:42
+ _printk+0xbf/0x100 kernel/printk/printk.c:2328
+ show_ip arch/x86/kernel/dumpstack.c:142 [inline]
+ show_iret_regs+0x2d/0x60 arch/x86/kernel/dumpstack.c:149
+ __show_regs+0x2a/0x740 arch/x86/kernel/process_64.c:75
+ show_regs+0x55/0xa0 arch/x86/kernel/dumpstack.c:472
+ __die_body arch/x86/kernel/dumpstack.c:420 [inline]
+ __die arch/x86/kernel/dumpstack.c:434 [inline]
+ die+0x38/0xb0 arch/x86/kernel/dumpstack.c:447
+ exc_double_fault+0x150/0x160 arch/x86/kernel/traps.c:466
+ asm_exc_double_fault+0x23/0x30 arch/x86/include/asm/idtentry.h:615
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+ </#DF>
+WARNING: stack recursion on stack type 5
+
+Memory state around the buggy address:
+ fffffe15b3210500: f1 f1 f1 f1 00 f2 f2 f2 00 f2 f2 f2 00 f2 f2 f2
+ fffffe15b3210580: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+>fffffe15b3210600: f1 f1 f1 f1 f1 f1 f1 f1 00 f2 f2 f2 00 02 f3 f3
+                                                          ^
+ fffffe15b3210680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ fffffe15b3210700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <#DF>
+ </#DF>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+----------------
+Code disassembly (best guess):
+   0:	90                   	nop
+   1:	90                   	nop
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	90                   	nop
+   5:	90                   	nop
+   6:	90                   	nop
+   7:	90                   	nop
+   8:	90                   	nop
+   9:	90                   	nop
+   a:	90                   	nop
+   b:	90                   	nop
+   c:	f3 0f 1e fa          	endbr64
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	48 39 fe             	cmp    %rdi,%rsi
+  16:	7d 0f                	jge    0x27
+  18:	49 89 f0             	mov    %rsi,%r8
+  1b:	49 01 d0             	add    %rdx,%r8
+  1e:	49 39 f8             	cmp    %rdi,%r8
+  21:	0f 8f b5 00 00 00    	jg     0xdc
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 d6 84 1a 00       	jmp    0x1a8507
+  31:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00
+  3b:	48                   	rex.W
+  3c:	81                   	.byte 0x81
+  3d:	fa                   	cli
+  3e:	a8 02                	test   $0x2,%al
+
+final repro crashed as (corrupted=false):
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.kIf35M/17/file1 supports timestamps until 2038-01-19 (0x7fffffff)
+BUG: unable to handle page fault for address: ffff888109d9f000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 PTE 9da116380000001
+Oops: 0009 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 0 PID: 393 Comm: syz-executor350 Not tainted 6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ext4_ext_rm_leaf fs/ext4/extents.c:2712 [inline]
+ ext4_ext_remove_space+0x1e62/0x3ba0 fs/ext4/extents.c:2934
+ ext4_punch_hole+0xce0/0xfa0 fs/ext4/inode.c:3994
+ ext4_fallocate+0xd02/0x3760 fs/ext4/extents.c:4741
+ vfs_fallocate+0x4a1/0xd00 fs/open.c:328
+ ioctl_preallocate+0x192/0x210 fs/ioctl.c:291
+ file_ioctl fs/ioctl.c:334 [inline]
+ do_vfs_ioctl+0x1262/0x15b0 fs/ioctl.c:850
+ __do_sys_ioctl fs/ioctl.c:869 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0x110/0x210 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f9f93fc57bd
+Code: c3 e8 37 24 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f9f93f47198 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007f9f9405c5d0 RCX: 00007f9f93fc57bd
+RDX: 0000000020000080 RSI: 0000000040305829 RDI: 0000000000000004
+RBP: 00007f9f94026658 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0031656c69662f2e
+R13: 6f6f6c2f7665642f R14: 000001ff7fdfd000 R15: 00007f9f9405c5d8
+ </TASK>
+Modules linked in:
+CR2: ffff888109d9f000
+---[ end trace 0000000000000000 ]---
+BUG: unable to handle page fault for address: ffff888109cce340
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+#PF: supervisor read access in kernel mode
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+#PF: error_code(0x0009) - reserved bit violation
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+PGD 108e01067 P4D 108e01067 
+
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+PUD 100181063 
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+PMD 109d9d063 
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+BAD
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+Oops: 0009 [#2] PREEMPT SMP KASAN NOPTI
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+CPU: 2 PID: 119 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+FS:  00007f9f93f47640(0000) GS:ffff88811ae00000(0000) knlGS:0000000000000000
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RIP: 0010:avc_search_node security/selinux/avc.c:532 [inline]
+RIP: 0010:avc_lookup+0xdf/0x1d0 security/selinux/avc.c:560
+CR2: ffff888109d9f000 CR3: 0000000112202002 CR4: 0000000000770ef0
+Code: e7 ad 66 ff 49 83 ec 28 0f 84 c1 00 00 00 e8 d8 ad 66 ff 4c 89 e0 48 c1 e8 03 0f b6 04 18 84 c0 74 08 3c 03 0f 8e b6 00 00 00 <45> 8b 3c 24 89 ef 44 89 fe e8 13 a6 66 ff 44 39 fd 75 99 e8 a9 ad
+PKRU: 55555554
+RSP: 0018:ffff8881025b7778 EFLAGS: 00010246
+note: syz-executor350[393] exited with irqs disabled
+
+RAX: 0000000000000000 RBX: dffffc0000000000 RCX: ffffffff8a3fb758
+RDX: ffff8881129c2200 RSI: 0000000000000005 RDI: ffffffff8f0ec170
+RBP: 0000000000000001 R08: 0000000000000000 R09: ffff8881025b7828
+R10: 0000000010000000 R11: 0000000000000000 R12: ffff888109cce340
+R13: 0000000000000008 R14: 0000000000000005 R15: ffff8881025b7828
+FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ avc_has_perm_noaudit+0x58/0x160 security/selinux/avc.c:1154
+ selinux_inode_permission+0x369/0x5d0 security/selinux/hooks.c:3125
+ security_inode_permission+0x9c/0x100 security/security.c:2196
+ inode_permission fs/namei.c:537 [inline]
+ inode_permission+0x17b/0x5f0 fs/namei.c:504
+ may_lookup fs/namei.c:1719 [inline]
+ link_path_walk.part.0.constprop.0+0x26f/0xce0 fs/namei.c:2274
+ link_path_walk fs/namei.c:2255 [inline]
+ path_lookupat+0x92/0x760 fs/namei.c:2485
+ do_o_path fs/namei.c:3773 [inline]
+ path_openat+0x238f/0x36f0 fs/namei.c:3795
+ do_filp_open+0x1c9/0x420 fs/namei.c:3829
+ do_sys_openat2+0x164/0x1d0 fs/open.c:1404
+ do_sys_open fs/open.c:1419 [inline]
+ __do_sys_openat fs/open.c:1435 [inline]
+ __se_sys_openat fs/open.c:1430 [inline]
+ __x64_sys_openat+0x140/0x1f0 fs/open.c:1430
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xb3/0x1b0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6f/0x77
+RIP: 0033:0x7f4d71fa02a2
+Code: c0 f6 c2 40 75 52 89 d0 45 31 d2 25 00 00 41 00 3d 00 00 41 00 74 41 64 8b 04 25 18 00 00 00 85 c0 75 65 b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 0f 87 a2 00 00 00 48 8b 4c 24 38 64 48 2b 0c 25
+RSP: 002b:00007fffcb690760 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
+RAX: ffffffffffffffda RBX: 0000000000000001 RCX: 00007f4d71fa02a2
+RDX: 00000000002a0000 RSI: 000055922ba01641 RDI: 0000000000000010
+RBP: 000055922ba01640 R08: 000055922a212950 R09: 00007f4d72083be0
+R10: 0000000000000000 R11: 0000000000000246 R12: 000055922ba0de24
+R13: 0000000000000010 R14: 0000000000000004 R15: 000055922ba01641
+ </TASK>
+Modules linked in:
+CR2: ffff888109cce340
+---[ end trace 0000000000000000 ]---
+BUG: unable to handle page fault for address: ffff888109c35cd4
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+#PF: supervisor read access in kernel mode
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+#PF: error_code(0x0009) - reserved bit violation
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+PGD 108e01067 P4D 108e01067 
+
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+PUD 100181063 
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+PMD 109d9d063 
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+BAD
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+BUG: unable to handle page fault for address: ffff888109c38000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+#PF: supervisor read access in kernel mode
+FS:  00007f4d71af48c0(0000) GS:ffff88811b000000(0000) knlGS:0000000000000000
+#PF: error_code(0x0009) - reserved bit violation
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+PGD 108e01067 
+CR2: ffff888109d9d670 CR3: 0000000102df4004 CR4: 0000000000770ef0
+P4D 108e01067 
+PKRU: 55555554
+PUD 100181063 
+note: systemd-udevd[119] exited with irqs disabled
+PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+traps: PANIC: double fault, error_code: 0x0
+double fault: 0000 [#3] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:ffff888109c3bfd0 EFLAGS: 00010082
+RAX: ffff888109c3c020 RBX: dffffc0000000000 RCX: ffff0a0000000509
+RDX: 0000000000000033 RSI: ffff888189c3c34f RDI: ffff888109c3c351
+RBP: 0000000000000018 R08: 0000000000000009 R09: ffffed102138785a
+R10: 0000000000000010 R11: 727265203a465023 R12: ffff888109c3c351
+R13: ffffffff8caa0a05 R14: ffff888109c3c351 R15: ffff888189c3c34f
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffff888109c3bfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <#DF>
+ </#DF>
+ <TASK>
+BUG: unable to handle page fault for address: ffff888109c3bfd0
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+BUG: unable to handle page fault for address: ffff888109c38000
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0009) - reserved bit violation
+PGD 108e01067 P4D 108e01067 PUD 100181063 PMD 109d9d063 
+BAD
+traps: PANIC: double fault, error_code: 0x0
+double fault: 0000 [#4] PREEMPT SMP KASAN NOPTI
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+==================================================================
+BUG: KASAN: stack-out-of-bounds in number+0x9df/0xa90 lib/vsprintf.c:564
+Write of size 1 at addr fffffe15b321066a by task systemd-udevd/130
+
+CPU: 4 PID: 130 Comm: systemd-udevd Tainted: G      D            6.8.0 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <#DF>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x72/0xa0 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xcc/0x620 mm/kasan/report.c:488
+ kasan_report+0xb0/0xe0 mm/kasan/report.c:601
+ number+0x9df/0xa90 lib/vsprintf.c:564
+ vsnprintf+0x785/0x1650 lib/vsprintf.c:2890
+ sprintf+0xc4/0x100 lib/vsprintf.c:3028
+ __sprint_symbol.constprop.0+0x1d1/0x200 kernel/kallsyms.c:503
+ symbol_string+0x174/0x470 lib/vsprintf.c:1002
+ pointer+0x3b5/0xc70 lib/vsprintf.c:2422
+ vsnprintf+0x5bb/0x1650 lib/vsprintf.c:2828
+ vprintk_store+0x4b5/0x980 kernel/printk/printk.c:2187
+ vprintk_emit+0x236/0x440 kernel/printk/printk.c:2284
+ vprintk+0x56/0x90 kernel/printk/printk_safe.c:42
+ _printk+0xbf/0x100 kernel/printk/printk.c:2328
+ show_ip arch/x86/kernel/dumpstack.c:142 [inline]
+ show_iret_regs+0x2d/0x60 arch/x86/kernel/dumpstack.c:149
+ __show_regs+0x2a/0x740 arch/x86/kernel/process_64.c:75
+ show_regs+0x55/0xa0 arch/x86/kernel/dumpstack.c:472
+ __die_body arch/x86/kernel/dumpstack.c:420 [inline]
+ __die arch/x86/kernel/dumpstack.c:434 [inline]
+ die+0x38/0xb0 arch/x86/kernel/dumpstack.c:447
+ exc_double_fault+0x150/0x160 arch/x86/kernel/traps.c:466
+ asm_exc_double_fault+0x23/0x30 arch/x86/include/asm/idtentry.h:615
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+ </#DF>
+WARNING: stack recursion on stack type 5
+
+Memory state around the buggy address:
+ fffffe15b3210500: f1 f1 f1 f1 00 f2 f2 f2 00 f2 f2 f2 00 f2 f2 f2
+ fffffe15b3210580: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+>fffffe15b3210600: f1 f1 f1 f1 f1 f1 f1 f1 00 f2 f2 f2 00 02 f3 f3
+                                                          ^
+ fffffe15b3210680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ fffffe15b3210700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+RIP: 0010:number+0x26/0xa90 lib/vsprintf.c:459
+Code: 90 90 90 90 41 57 49 89 f7 41 56 49 89 fe 41 55 41 54 55 53 48 bb 00 00 00 00 00 fc ff df 48 81 ec f0 00 00 00 48 8d 44 24 50 <48> 89 54 24 18 48 c7 44 24 50 b3 8a b5 41 48 c1 e8 03 48 89 44 24
+RSP: 0018:fffffe15b320cfd0 EFLAGS: 00010082
+RAX: fffffe15b320d020 RBX: dffffc0000000000 RCX: ffff103000001005
+RDX: ffff888109c38000 RSI: fffffe15b320d3d8 RDI: fffffe15b320d400
+RBP: fffffe15b320d400 R08: ffff0a00ffffff05 R09: fffffbc2b6641a98
+R10: 00000000ffffffff R11: 0000000000000000 R12: fffffe15b320d3d8
+R13: 0000000000001000 R14: fffffe15b320d400 R15: fffffe15b320d3d8
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <#DF>
+ </#DF>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:memmove+0x1e/0x1b0 arch/x86/lib/memmove_64.S:44
+Code: 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 48 89 f8 48 39 fe 7d 0f 49 89 f0 49 01 d0 49 39 f8 0f 8f b5 00 00 00 48 89 d1 <f3> a4 e9 d6 84 1a 00 66 2e 0f 1f 84 00 00 00 00 00 48 81 fa a8 02
+RSP: 0018:ffff888110307828 EFLAGS: 00010216
+RAX: ffff888109d3303c RBX: ffff888109d33000 RCX: fffffffffff9400c
+RDX: ffffffffffffffc4 RSI: ffff888109d9f000 RDI: ffff888109d9eff4
+RBP: ffff888109d33002 R08: 0000000000000000 R09: fffff940008b7d86
+R10: 000000001ff7fdfc R11: ffff88810fc66a68 R12: ffff88810c252000
+R13: 0000000000000004 R14: ffff888109d33040 R15: dffffc0000000000
+FS:  00007f4d71af48c0(0000) GS:ffff88811b200000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: fffffe15b320cfc8 CR3: 000000010901a003 CR4: 0000000000770ef0
+PKRU: 55555554
+----------------
+Code disassembly (best guess):
+   0:	90                   	nop
+   1:	90                   	nop
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	90                   	nop
+   5:	90                   	nop
+   6:	90                   	nop
+   7:	90                   	nop
+   8:	90                   	nop
+   9:	90                   	nop
+   a:	90                   	nop
+   b:	90                   	nop
+   c:	f3 0f 1e fa          	endbr64
+  10:	48 89 f8             	mov    %rdi,%rax
+  13:	48 39 fe             	cmp    %rdi,%rsi
+  16:	7d 0f                	jge    0x27
+  18:	49 89 f0             	mov    %rsi,%r8
+  1b:	49 01 d0             	add    %rdx,%r8
+  1e:	49 39 f8             	cmp    %rdi,%r8
+  21:	0f 8f b5 00 00 00    	jg     0xdc
+  27:	48 89 d1             	mov    %rdx,%rcx
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	e9 d6 84 1a 00       	jmp    0x1a8507
+  31:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  38:	00 00 00
+  3b:	48                   	rex.W
+  3c:	81                   	.byte 0x81
+  3d:	fa                   	cli
+  3e:	a8 02                	test   $0x2,%al
+

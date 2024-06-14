@@ -1,0 +1,1895 @@
+diff --git a/pkg/ast/parser.go b/pkg/ast/parser.go
+index b74c159fd..b2709e2ed 100644
+--- a/pkg/ast/parser.go
++++ b/pkg/ast/parser.go
+@@ -129,7 +128,10 @@ func (p *parser) parseTop() Node {
+ 		return p.parseResource()
+ 	case tokIdent:
+ 		name := p.parseIdent()
+-		if name.Name == "type" {
++		switch name.Name {
++		case "meta":
++			return p.parseMeta()
++		case "type":
+ 			return p.parseTypeDef()
+ 		}
+ 		switch p.tok {
+@@ -153,7 +155,6 @@ func (p *parser) parseTop() Node {
+ 
+ func (p *parser) next() {
+ 	p.tok, p.lit, p.pos = p.s.Scan()
+-	fmt.Printf("p.tok: %v, p.lit: %v, p.pos: %v\n", p.tok, p.lit, p.pos)
+ }
+ 
+ func (p *parser) consume(tok token) {
+@@ -192,6 +193,13 @@ func (p *parser) parseComment() *Comment {
+ 	return c
+ }
+ 
++func (p *parser) parseMeta() *Meta {
++	return &Meta{
++		Pos:   p.pos,
++		Value: p.parseType(),
++	}
++}
++
+ func (p *parser) parseDefine() *Define {
+ 	pos0 := p.pos
+ 	p.consume(tokDefine)
+@@ -356,7 +364,6 @@ func (p *parser) parseStrFlags(name *Ident) *StrFlags {
+ }
+ 
+ func (p *parser) parseStruct(name *Ident) *Struct {
+-	fmt.Println("enter func parseStruct, begin prase struct")
+ 	str := &Struct{
+ 		Pos:  name.Pos,
+ 		Name: name,
+@@ -392,7 +399,6 @@ func (p *parser) parseStruct(name *Ident) *Struct {
+ 		}
+ 		p.consume(tokRBrack)
+ 	}
+-	fmt.Println("exit the parseStruct")
+ 	return str
+ }
+ 
+diff --git a/pkg/build/linux_generated.go b/pkg/build/linux_generated.go
+index 819a7b090..f8922e410 100644
+--- a/pkg/build/linux_generated.go
++++ b/pkg/build/linux_generated.go
+@@ -106,6 +106,7 @@ PermitRootLogin yes
+ PasswordAuthentication yes
+ PermitEmptyPasswords yes
+ ClientAliveInterval 420
++Subsystem sftp /usr/lib/openssh/sftp-server
+ EOF
+ sudo sed -i "s#^root:\*:#root::#g" disk.mnt/etc/shadow
+ 
+@@ -157,4 +158,3 @@ s390x)
+ 	;;
+ esac
+ `
+-
+diff --git a/pkg/compiler/compiler.go b/pkg/compiler/compiler.go
+index b924b5d90..b3e39be06 100644
+--- a/pkg/compiler/compiler.go
++++ b/pkg/compiler/compiler.go
+@@ -7,6 +7,7 @@ package compiler
+ 
+ import (
+ 	"fmt"
++	"path/filepath"
+ 	"sort"
+ 	"strconv"
+ 	"strings"
+@@ -74,12 +75,12 @@ func createCompiler(desc *ast.Description, target *targets.Target, eh ast.ErrorH
+ // Compile compiles sys description.
+ func Compile(desc *ast.Description, consts map[string]uint64, target *targets.Target, eh ast.ErrorHandler) *Prog {
+ 	comp := createCompiler(desc.Clone(), target, eh)
++	comp.filterArch()
+ 	comp.typecheck()
+ 	// The subsequent, more complex, checks expect basic validity of the tree,
+ 	// in particular corrent number of type arguments. If there were errors,
+ 	// don't proceed to avoid out-of-bounds references to type arguments.
+ 	if comp.errors != 0 {
+-		fmt.Println("typecheck error!")
+ 		return nil
+ 	}
+ 	if consts == nil {
+@@ -92,11 +93,9 @@ func Compile(desc *ast.Description, consts map[string]uint64, target *targets.Ta
+ 	if comp.target.SyscallNumbers {
+ 		comp.assignSyscallNumbers(consts)
+ 	}
+-	fmt.Println("consts: ", consts)
+ 	comp.patchConsts(consts)
+ 	comp.check()
+ 	if comp.errors != 0 {
+-		fmt.Println("patch error!")
+ 		return nil
+ 	}
+ 	syscalls := comp.genSyscalls()
+@@ -154,6 +153,24 @@ func (comp *compiler) warning(pos ast.Pos, msg string, args ...interface{}) {
+ 	comp.warnings = append(comp.warnings, warn{pos, fmt.Sprintf(msg, args...)})
+ }
+ 
++func (comp *compiler) filterArch() {
++	files := comp.fileList()
++	comp.desc = comp.desc.Filter(func(n ast.Node) bool {
++		pos, typ, name := n.Info()
++		meta := files[filepath.Base(pos.File)]
++		if meta.SupportsArch(comp.target.Arch) {
++			return true
++		}
++		switch n.(type) {
++		case *ast.Resource, *ast.Struct, *ast.Call, *ast.TypeDef:
++			// This is required to keep the unsupported diagnostic working,
++			// otherwise sysgen will think that these things are still supported on some arches.
++			comp.unsupported[typ+" "+name] = true
++		}
++		return false
++	})
++}
++
+ func (comp *compiler) structIsVarlen(name string) bool {
+ 	if varlen, ok := comp.structVarlen[name]; ok {
+ 		return varlen
+diff --git a/pkg/compiler/types.go b/pkg/compiler/types.go
+index da1bca2a7..9e75de18d 100644
+--- a/pkg/compiler/types.go
++++ b/pkg/compiler/types.go
+@@ -19,6 +19,7 @@ type typeDesc struct {
+ 	Names        []string
+ 	CanBeTypedef bool       // can be type alias target?
+ 	CantBeOpt    bool       // can't be marked as opt?
++	CantBeOut    bool       // can't be used as an explicitly output argument
+ 	NeedBase     bool       // needs base type when used as field?
+ 	MaxColon     int        // max number of colons (int8:2) on fields
+ 	OptArgs      int        // number of optional arguments in Args array
+@@ -164,6 +165,7 @@ func getIntAlignment(comp *compiler, base prog.IntTypeCommon) uint64 {
+ var typePtr = &typeDesc{
+ 	Names:        []string{"ptr", "ptr64"},
+ 	CanBeArgRet:  canBeArg,
++	CantBeOut:    true,
+ 	CanBeTypedef: true,
+ 	Args:         []namedArg{{Name: "direction", Type: typeArgDir}, {Name: "type", Type: typeArgType}},
+ 	Gen: func(comp *compiler, t *ast.Type, args []*ast.Type, base prog.IntTypeCommon) prog.Type {
+@@ -289,6 +291,7 @@ var typeLen = &typeDesc{
+ 	Names:       []string{"len", "bytesize", "bytesize2", "bytesize4", "bytesize8", "bitsize", "offsetof"},
+ 	CanBeArgRet: canBeArg,
+ 	CantBeOpt:   true,
++	CantBeOut:   true,
+ 	NeedBase:    true,
+ 	Args:        []namedArg{{Name: "len target", Type: typeArgLenTarget}},
+ 	Gen: func(comp *compiler, t *ast.Type, args []*ast.Type, base prog.IntTypeCommon) prog.Type {
+@@ -325,6 +328,7 @@ var typeConst = &typeDesc{
+ 	CanBeArgRet:  canBeArg,
+ 	CanBeTypedef: true,
+ 	CantBeOpt:    true,
++	CantBeOut:    true,
+ 	NeedBase:     true,
+ 	Args:         []namedArg{{Name: "value", Type: typeArgInt}},
+ 	CheckConsts: func(comp *compiler, t *ast.Type, args []*ast.Type, base prog.IntTypeCommon) {
+@@ -367,6 +371,7 @@ var typeFlags = &typeDesc{
+ 	CanBeArgRet:  canBeArg,
+ 	CanBeTypedef: true,
+ 	CantBeOpt:    true,
++	CantBeOut:    true,
+ 	NeedBase:     true,
+ 	Args:         []namedArg{{Name: "flags", Type: typeArgFlags}},
+ 	CheckConsts: func(comp *compiler, t *ast.Type, args []*ast.Type, base prog.IntTypeCommon) {
+@@ -469,6 +474,7 @@ var typeCsum = &typeDesc{
+ 	Names:     []string{"csum"},
+ 	NeedBase:  true,
+ 	CantBeOpt: true,
++	CantBeOut: true,
+ 	OptArgs:   1,
+ 	Args: []namedArg{
+ 		{Name: "csum target", Type: typeArgLenTarget},
+@@ -517,6 +523,7 @@ func genCsumKind(t *ast.Type) prog.CsumKind {
+ var typeProc = &typeDesc{
+ 	Names:        []string{"proc"},
+ 	CanBeArgRet:  canBeArg,
++	CantBeOut:    true,
+ 	CanBeTypedef: true,
+ 	NeedBase:     true,
+ 	Args: []namedArg{
+@@ -555,6 +562,7 @@ var typeProc = &typeDesc{
+ var typeText = &typeDesc{
+ 	Names:     []string{"text"},
+ 	CantBeOpt: true,
++	CantBeOut: true,
+ 	Args:      []namedArg{{Name: "kind", Type: typeArgTextType}},
+ 	Varlen: func(comp *compiler, t *ast.Type, args []*ast.Type) bool {
+ 		return true
+@@ -754,6 +762,7 @@ var typeFmt = &typeDesc{
+ 	Names:        []string{"fmt"},
+ 	CanBeTypedef: true,
+ 	CantBeOpt:    true,
++	CantBeOut:    true,
+ 	Args: []namedArg{
+ 		{Name: "format", Type: typeFmtFormat},
+ 		{Name: "value", Type: typeArgType, IsArg: true},
+@@ -908,26 +917,30 @@ func init() {
+ 		}
+ 		// Need to cache type in structTypes before generating fields to break recursion.
+ 		comp.structTypes[t.Ident] = typ
+-		fields := comp.genFieldArray(s.Fields, make([]uint64, len(s.Fields)))
+-		if s.IsUnion {
+-			typ.(*prog.UnionType).Fields = fields
++		fields, overlayField := comp.genFieldArray(s.Fields, make([]uint64, len(s.Fields)))
++		switch typ1 := typ.(type) {
++		case *prog.UnionType:
++			typ1.Fields = fields
+ 			for _, f := range fields {
+-				if a := f.Type.Alignment(); typ.(*prog.UnionType).TypeAlign < a {
+-					typ.(*prog.UnionType).TypeAlign = a
++				if a := f.Type.Alignment(); typ1.TypeAlign < a {
++					typ1.TypeAlign = a
+ 				}
+ 			}
+-		} else {
+-			typ.(*prog.StructType).Fields = fields
++		case *prog.StructType:
++			typ1.Fields = fields
++			if overlayField >= 0 {
++				typ1.OverlayField = overlayField
++			}
+ 			attrs := comp.parseAttrs(structAttrs, s, s.Attrs)
+ 			if align := attrs[attrAlign]; align != 0 {
+-				typ.(*prog.StructType).TypeAlign = align
++				typ1.TypeAlign = align
+ 			} else if attrs[attrPacked] != 0 {
+-				typ.(*prog.StructType).TypeAlign = 1
++				typ1.TypeAlign = 1
+ 			} else {
+ 				for _, f := range fields {
+ 					a := f.Type.Alignment()
+-					if typ.(*prog.StructType).TypeAlign < a {
+-						typ.(*prog.StructType).TypeAlign = a
++					if typ1.TypeAlign < a {
++						typ1.TypeAlign = a
+ 					}
+ 				}
+ 			}
+@@ -1061,6 +1074,7 @@ type optional[T] [
+ # prog/any.go knows layout of these types.
+ ANYUNION [
+ 	ANYBLOB		array[int8]
++	ANYRES8		ANYRES8
+ 	ANYRES16	ANYRES16
+ 	ANYRES32	ANYRES32
+ 	ANYRES64	ANYRES64
+@@ -1074,10 +1088,17 @@ ANYPTRS [
+ 	ANYPTR64	ptr64[in, array[ANYUNION]]
+ ]
+ 
++resource ANYRES8[int8]: -1, 0
+ resource ANYRES16[int16]: -1, 0
+ resource ANYRES32[int32]: -1, 0
+ resource ANYRES64[int64]: -1, 0
+ 
++syz_builtin0(a ptr[in, ANYPTRS]) (disabled)
++syz_builtin1(a ptr[out, ANYUNION]) (disabled)
++syz_builtin2() ANYRES8 (disabled)
++syz_builtin3() ANYRES16 (disabled)
++syz_builtin4() ANYRES32 (disabled)
++syz_builtin5() ANYRES64 (disabled)
+ `
+ 
+ func init() {
+diff --git a/pkg/html/generated.go b/pkg/html/generated.go
+deleted file mode 100644
+index 4981eb85d..000000000
+--- a/pkg/html/generated.go
++++ /dev/null
+@@ -1,278 +0,0 @@
+-// Code generated by pkg/html/html.go. DO NOT EDIT.
+-package html
+-const style = `
+-#topbar {
+-	padding: 5px 10px;
+-	background: #E0EBF5;
+-}
+-
+-#topbar a {
+-	color: #375EAB;
+-	text-decoration: none;
+-}
+-
+-h1, h2, h3, h4 {
+-	margin: 0;
+-	padding: 0;
+-	color: #375EAB;
+-	font-weight: bold;
+-}
+-
+-.navigation_tab {
+-	border: 1px solid black;
+-	padding: 4px;
+-	margin: 4px;
+-}
+-
+-.navigation_tab_selected {
+-	font-weight: bold;
+-	border: 2px solid black;
+-	padding: 4px;
+-	margin: 4px;
+-}
+-
+-.position_table .navigation {
+-	padding-top: 15px;
+-	padding-bottom: 6px;
+-}
+-
+-table {
+-	border: 1px solid #ccc;
+-	margin: 20px 5px;
+-	border-collapse: collapse;
+-	white-space: nowrap;
+-	text-overflow: ellipsis;
+-	overflow: hidden;
+-}
+-
+-table caption {
+-	font-weight: bold;
+-}
+-
+-table td, table th {
+-	vertical-align: top;
+-	padding: 2px 8px;
+-	text-overflow: ellipsis;
+-	overflow: hidden;
+-}
+-
+-.namespace {
+-	font-weight: bold;
+-	font-size: large;
+-	color: #375EAB;
+-}
+-
+-.position_table {
+-	border: 0px;
+-	margin: 0px;
+-	width: 100%;
+-	border-collapse: collapse;
+-}
+-
+-.position_table td, .position_table tr {
+-	vertical-align: center;
+-	padding: 0px;
+-}
+-
+-.position_table .namespace_td {
+-	width: 100%;
+-	padding-top: 10px;
+-	padding-left: 20px;
+-}
+-
+-.position_table .search {
+-	text-align: right;
+-}
+-
+-.list_table td, .list_table th {
+-	border-left: 1px solid #ccc;
+-}
+-
+-.list_table th {
+-	background: #F4F4F4;
+-}
+-
+-.list_table tr:nth-child(2n) {
+-	background: #F4F4F4;
+-}
+-
+-.list_table tr:hover {
+-	background: #ffff99;
+-}
+-
+-.list_table .namespace {
+-	width: 100pt;
+-	max-width: 100pt;
+-}
+-
+-.list_table .title {
+-	width: 350pt;
+-	max-width: 350pt;
+-}
+-
+-.list_table .commit_list {
+-	width: 500pt;
+-	max-width: 500pt;
+-}
+-
+-.list_table .tag {
+-	font-family: monospace;
+-	font-size: 8pt;
+-	max-width: 60pt;
+-}
+-
+-.list_table .opts {
+-	width: 40pt;
+-	max-width: 40pt;
+-}
+-
+-.list_table .status {
+-	width: 250pt;
+-	max-width: 250pt;
+-}
+-
+-.list_table .patched {
+-	width: 60pt;
+-	max-width: 60pt;
+-	text-align: center;
+-}
+-
+-.list_table .kernel {
+-	width: 80pt;
+-	max-width: 80pt;
+-}
+-
+-.list_table .maintainers {
+-	width: 150pt;
+-	max-width: 150pt;
+-}
+-
+-.list_table .result {
+-	width: 60pt;
+-	max-width: 60pt;
+-}
+-
+-.list_table .stat {
+-	width: 55pt;
+-	font-family: monospace;
+-	text-align: right;
+-}
+-
+-.list_table .bisect_status {
+-	width: 75pt;
+-	max-width: 75pt;
+-	font-family: monospace;
+-	text-align: right;
+-}
+-
+-.list_table .date {
+-	width: 60pt;
+-	max-width: 60pt;
+-	font-family: monospace;
+-	text-align: right;
+-}
+-
+-.list_table .stat_name {
+-	width: 150pt;
+-	max-width: 150pt;
+-	font-family: monospace;
+-}
+-
+-.list_table .stat_value {
+-	width: 120pt;
+-	max-width: 120pt;
+-	font-family: monospace;
+-}
+-
+-.bad {
+-	color: #f00;
+-	font-weight: bold;
+-}
+-
+-.inactive {
+-	color: #888;
+-}
+-
+-.plain {
+-	text-decoration: none;
+-}
+-
+-textarea {
+-	width:100%;
+-	font-family: monospace;
+-}
+-
+-.mono {
+-	font-family: monospace;
+-}
+-
+-.info_link {
+-	color: #25a7db;
+-	text-decoration: none;
+-}
+-`
+-const js = `
+-// Copyright 2018 syzkaller project authors. All rights reserved.
+-// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+-
+-function sortTable(item, colName, conv, desc = false) {
+-	table = item.parentNode.parentNode.parentNode.parentNode;
+-	rows = table.rows;
+-	col = findColumnByName(rows[0].getElementsByTagName("th"), colName);
+-	values = [];
+-	for (i = 1; i < rows.length; i++)
+-		values.push([conv(rows[i].getElementsByTagName("td")[col].textContent), rows[i]]);
+-	if (desc)
+-		desc = !isSorted(values.slice().reverse())
+-	else
+-		desc = isSorted(values);
+-	values.sort(function(a, b) {
+-		if (a[0] == b[0]) return 0;
+-		if (desc && a[0] > b[0] || !desc && a[0] < b[0]) return -1;
+-		return 1;
+-	});
+-	for (i = 0; i < values.length; i++)
+-		table.tBodies[0].appendChild(values[i][1]);
+-	return false;
+-}
+-
+-function findColumnByName(headers, colName) {
+-	for (i = 0; i < headers.length; i++) {
+-		if (headers[i].textContent == colName)
+-			return i;
+-	}
+-	return 0;
+-}
+-
+-function isSorted(values) {
+-	for (i = 0; i < values.length - 1; i++) {
+-		if (values[i][0] > values[i + 1][0])
+-			return false;
+-	}
+-	return true;
+-}
+-
+-function textSort(v) { return v == "" ? "zzz" : v.toLowerCase(); }
+-function numSort(v) { return -parseInt(v); }
+-function floatSort(v) { return -parseFloat(v); }
+-function reproSort(v) { return v == "C" ? 0 : v == "syz" ? 1 : 2; }
+-function patchedSort(v) { return v == "" ? -1 : parseInt(v); }
+-function lineSort(v) { return -v.split(/\r\n|\r|\n/g).length }
+-
+-function timeSort(v) {
+-	if (v == "now")
+-		return 0;
+-	m = v.indexOf('m');
+-	h = v.indexOf('h');
+-	d = v.indexOf('d');
+-	if (m > 0 && h < 0)
+-		return parseInt(v);
+-	if (h > 0 && m > 0)
+-		return parseInt(v) * 60 + parseInt(v.substring(h + 1));
+-	if (d > 0 && h > 0)
+-		return parseInt(v) * 60 * 24 + parseInt(v.substring(d + 1)) * 60;
+-	if (d > 0)
+-		return parseInt(v) * 60 * 24;
+-	return 1000000000;
+-}
+-`
+diff --git a/sys/syz-extract/extract.go b/sys/syz-extract/extract.go
+index b60fe2883..c3629ee17 100644
+--- a/sys/syz-extract/extract.go
++++ b/sys/syz-extract/extract.go
+@@ -58,20 +58,16 @@ type Extractor interface {
+ }
+ 
+ var extractors = map[string]Extractor{
+-	targets.Akaros:   new(akaros),
+-	targets.Linux:    new(linux),
+-	targets.FreeBSD:  new(freebsd),
+-	targets.Darwin:   new(darwin),
+-	targets.NetBSD:   new(netbsd),
+-	targets.OpenBSD:  new(openbsd),
+-	"android":        new(linux),
+-	targets.Fuchsia:  new(fuchsia),
+-	targets.Windows:  new(windows),
+-	targets.Trusty:   new(trusty),
+-	targets.UCOS:     new(ucos),
+-	targets.FreeRTOS: new(freertos),
+-	targets.Rtthread: new(rtthread),
+-	targets.Zephyr:   new(zephyr),
++	targets.Akaros:  new(akaros),
++	targets.Linux:   new(linux),
++	targets.FreeBSD: new(freebsd),
++	targets.Darwin:  new(darwin),
++	targets.NetBSD:  new(netbsd),
++	targets.OpenBSD: new(openbsd),
++	"android":       new(linux),
++	targets.Fuchsia: new(fuchsia),
++	targets.Windows: new(windows),
++	targets.Trusty:  new(trusty),
+ }
+ 
+ func main() {
+@@ -79,17 +75,12 @@ func main() {
+ 	if *flagBuild && *flagBuildDir != "" {
+ 		tool.Failf("-build and -builddir is an invalid combination")
+ 	}
+-
+-	OS, archArray, files, err := archFileList(*flagOS, *flagArch, flag.Args())
+-	if err != nil {
+-		tool.Fail(err)
+-	}
+-
++	OS := *flagOS
+ 	extractor := extractors[OS]
+ 	if extractor == nil {
+ 		tool.Failf("unknown os: %v", OS)
+ 	}
+-	arches, err := createArches(OS, archArray, files)
++	arches, nfiles, err := createArches(OS, archList(OS, *flagArch), flag.Args())
+ 	if err != nil {
+ 		tool.Fail(err)
+ 	}
+@@ -97,14 +88,11 @@ func main() {
+ 		tool.Fail(fmt.Errorf("provide path to kernel checkout via -sourcedir " +
+ 			"flag (or make extract SOURCEDIR)"))
+ 	}
+-	fmt.Println(*flagSourceDir)
+-	fmt.Println(*flagBuild)
+-
+ 	if err := extractor.prepare(*flagSourceDir, *flagBuild, arches); err != nil {
+ 		tool.Fail(err)
+ 	}
+ 
+-	jobC := make(chan interface{}, len(archArray)*len(files))
++	jobC := make(chan interface{}, len(arches)+nfiles)
+ 	for _, arch := range arches {
+ 		jobC <- arch
+ 	}
+@@ -115,11 +103,8 @@ func main() {
+ 
+ 	failed := false
+ 	constFiles := make(map[string]*compiler.ConstFile)
+-	for _, file := range files {
+-		constFiles[file] = compiler.NewConstFile()
+-	}
+ 	for _, arch := range arches {
+-		fmt.Printf("generating %v/%v...\n", arch.target.OS, arch.target.Arch)
++		fmt.Printf("generating %v/%v...\n", OS, arch.target.Arch)
+ 		<-arch.done
+ 		if arch.err != nil {
+ 			failed = true
+@@ -133,6 +118,9 @@ func main() {
+ 				fmt.Printf("%v: %v\n", f.name, f.err)
+ 				continue
+ 			}
++			if constFiles[f.name] == nil {
++				constFiles[f.name] = compiler.NewConstFile()
++			}
+ 			constFiles[f.name].AddArch(f.arch.target.Arch, f.consts, f.undeclared)
+ 		}
+ 	}
+@@ -181,14 +169,27 @@ func worker(extractor Extractor, jobC chan interface{}) {
+ 	}
+ }
+ 
+-func createArches(OS string, archArray, files []string) ([]*Arch, error) {
++func createArches(OS string, archArray, files []string) ([]*Arch, int, error) {
++	errBuf := new(bytes.Buffer)
++	eh := func(pos ast.Pos, msg string) {
++		fmt.Fprintf(errBuf, "%v: %v\n", pos, msg)
++	}
++	top := ast.ParseGlob(filepath.Join("sys", OS, "*.txt"), eh)
++	if top == nil {
++		return nil, 0, fmt.Errorf("%v", errBuf.String())
++	}
++	allFiles := compiler.FileList(top, OS, eh)
++	if allFiles == nil {
++		return nil, 0, fmt.Errorf("%v", errBuf.String())
++	}
++	nfiles := 0
+ 	var arches []*Arch
+ 	for _, archStr := range archArray {
+ 		buildDir := ""
+ 		if *flagBuild {
+ 			dir, err := ioutil.TempDir("", "syzkaller-kernel-build")
+ 			if err != nil {
+-				return nil, fmt.Errorf("failed to create temp dir: %v", err)
++				return nil, 0, fmt.Errorf("failed to create temp dir: %v", err)
+ 			}
+ 			buildDir = dir
+ 		} else if *flagBuildDir != "" {
+@@ -199,7 +200,7 @@ func createArches(OS string, archArray, files []string) ([]*Arch, error) {
+ 
+ 		target := targets.Get(OS, archStr)
+ 		if target == nil {
+-			return nil, fmt.Errorf("unknown arch: %v", archStr)
++			return nil, 0, fmt.Errorf("unknown arch: %v", archStr)
+ 		}
+ 
+ 		arch := &Arch{
+@@ -210,7 +211,17 @@ func createArches(OS string, archArray, files []string) ([]*Arch, error) {
+ 			build:       *flagBuild,
+ 			done:        make(chan bool),
+ 		}
+-		for _, f := range files {
++		archFiles := files
++		if len(archFiles) == 0 {
++			for file, meta := range allFiles {
++				if meta.NoExtract || !meta.SupportsArch(archStr) {
++					continue
++				}
++				archFiles = append(archFiles, file)
++			}
++		}
++		sort.Strings(archFiles)
++		for _, f := range archFiles {
+ 			arch.files = append(arch.files, &File{
+ 				arch: arch,
+ 				name: f,
+@@ -218,8 +229,21 @@ func createArches(OS string, archArray, files []string) ([]*Arch, error) {
+ 			})
+ 		}
+ 		arches = append(arches, arch)
++		nfiles += len(arch.files)
+ 	}
+-	return arches, nil
++	return arches, nfiles, nil
++}
++
++func archList(OS, arches string) []string {
++	if arches != "" {
++		return strings.Split(arches, ",")
++	}
++	var archArray []string
++	for arch := range targets.List[OS] {
++		archArray = append(archArray, arch)
++	}
++	sort.Strings(archArray)
++	return archArray
+ }
+ 
+ func checkUnsupportedCalls(arches []*Arch) bool {
+@@ -247,66 +271,6 @@ func checkUnsupportedCalls(arches []*Arch) bool {
+ 	return failed
+ }
+ 
+-func archFileList(os, arch string, files []string) (string, []string, []string, error) {
+-	// Note: this is linux-specific and should be part of Extractor and moved to linux.go.
+-	android := false
+-	if os == "android" {
+-		android = true
+-		os = targets.Linux
+-	}
+-	var arches []string
+-	if arch != "" {
+-		arches = strings.Split(arch, ",")
+-	} else {
+-		for arch := range targets.List[os] {
+-			arches = append(arches, arch)
+-		}
+-		if android {
+-			arches = []string{targets.I386, targets.AMD64, targets.ARM, targets.ARM64}
+-		}
+-		sort.Strings(arches)
+-	}
+-	if len(files) == 0 {
+-		fmt.Println("os = %v", os)
+-		matches, err := filepath.Glob(filepath.Join("sys", os, "*.txt"))
+-		if err != nil || len(matches) == 0 {
+-			return "", nil, nil, fmt.Errorf("failed to find sys files: %v", err)
+-		}
+-		manualFiles := map[string]bool{
+-			// Not upstream, generated on https://github.com/multipath-tcp/mptcp_net-next
+-			"vnet_mptcp.txt": true,
+-			// Was in linux-next, but then was removed, fate is unknown.
+-			"dev_watch_queue.txt": true,
+-			// Not upstream, generated on:
+-			// https://chromium.googlesource.com/chromiumos/third_party/kernel d2a8a1eb8b86
+-			"dev_bifrost.txt": true,
+-			// ION support was removed from kernel.
+-			// We plan to leave the descriptions for some time as is and later remove them.
+-			"dev_ion.txt": true,
+-			// Not upstream, generated on unknown tree.
+-			"dev_img_rogue.txt": true,
+-		}
+-		androidFiles := map[string]bool{
+-			"dev_tlk_device.txt": true,
+-			// This was generated on:
+-			// https://source.codeaurora.org/quic/la/kernel/msm-4.9 msm-4.9
+-			"dev_video4linux.txt": true,
+-			// This was generated on:
+-			// https://chromium.googlesource.com/chromiumos/third_party/kernel 3a36438201f3
+-			"fs_incfs.txt": true,
+-		}
+-		for _, f := range matches {
+-			f = filepath.Base(f)
+-			if manualFiles[f] || os == targets.Linux && android != androidFiles[f] {
+-				continue
+-			}
+-			files = append(files, f)
+-		}
+-		sort.Strings(files)
+-	}
+-	return os, arches, files, nil
+-}
+-
+ func processArch(extractor Extractor, arch *Arch) (map[string]*compiler.ConstInfo, error) {
+ 	errBuf := new(bytes.Buffer)
+ 	eh := func(pos ast.Pos, msg string) {
+@@ -316,8 +280,6 @@ func processArch(extractor Extractor, arch *Arch) (map[string]*compiler.ConstInf
+ 	if top == nil {
+ 		return nil, fmt.Errorf("%v", errBuf.String())
+ 	}
+-	fmt.Print("print the ast of txt......")
+-	fmt.Println(top)
+ 	infos := compiler.ExtractConsts(top, arch.target, eh)
+ 	if infos == nil {
+ 		return nil, fmt.Errorf("%v", errBuf.String())
+@@ -329,8 +291,6 @@ func processArch(extractor Extractor, arch *Arch) (map[string]*compiler.ConstInf
+ }
+ 
+ func processFile(extractor Extractor, arch *Arch, file *File) (map[string]uint64, map[string]bool, error) {
+-
+-	// process const varible in .txt file into .const
+ 	inname := filepath.Join("sys", arch.target.OS, file.name)
+ 	if file.info == nil {
+ 		return nil, nil, fmt.Errorf("const info for input file %v is missing", inname)
+diff --git a/sys/syz-extract/fetch.go b/sys/syz-extract/fetch.go
+index cca4fa2ce..12c2f5d7d 100644
+--- a/sys/syz-extract/fetch.go
++++ b/sys/syz-extract/fetch.go
+@@ -123,16 +123,10 @@ func compile(cc string, args []string, data *CompileData) (string, []byte, error
+ 	if err := srcTemplate.Execute(src, data); err != nil {
+ 		return "", nil, fmt.Errorf("failed to generate source: %v", err)
+ 	}
+-	fmt.Print("data in compile")
+-	fmt.Println(data)
+-	fmt.Print("src in compile")
+-	fmt.Println(src)
+ 	binFile, err := osutil.TempFile("syz-extract-bin")
+ 	if err != nil {
+ 		return "", nil, err
+ 	}
+-	fmt.Printf("bin file = ")
+-	fmt.Println(binFile)
+ 	args = append(args, []string{
+ 		"-x", "c", "-",
+ 		"-o", binFile,
+diff --git a/sys/syz-extract/freertos.go b/sys/syz-extract/freertos.go
+deleted file mode 100644
+index 2cdd7ba83..000000000
+--- a/sys/syz-extract/freertos.go
++++ /dev/null
+@@ -1,87 +0,0 @@
+-//  main()
+-//  archFileList(): extract the os, arches, and files
+-//  createArches(): - init arch and *.txt files
+-//  *linux.prepare(): check the source dir if not cleaned then exec make clean else do nothing
+-//  make the channel named jobC, whose len is len(arches)*len(files), post all arch to the chan
+-//  worker(): process arch and files, in arch processing post files into chan
+-//  	processArch(): extract txt to AST, synax check, extract const identify and prapareArch()?
+-// 	processFile():
+-
+-// see system config file in "Micrium/Software/uC-CPU/ARM-Cortex-A/ARMv7-A/GNU/cpu.h"
+-
+-package main
+-
+-import (
+-	"fmt"
+-	"path/filepath"
+-	"runtime"
+-	"strings"
+-	"time"
+-
+-	"github.com/google/syzkaller/pkg/compiler"
+-	"github.com/google/syzkaller/pkg/osutil"
+-)
+-
+-type freertos struct{}
+-
+-func (*freertos) prepare(sourcedir string, build bool, arches []*Arch) error {
+-	// Up to now, only arm is supported
+-	// check the few files to see make clean is needed or not is a better choice
+-	fmt.Println("======prepare")
+-	if build {
+-		for _, a := range arches {
+-			arch := a.target.KernelArch
+-			fmt.Printf("make clean ARCH = %v\n", arch)
+-			out, err := osutil.RunCmd(time.Hour, sourcedir, "make", "clean", "-j", fmt.Sprint(runtime.NumCPU()))
+-			if err != nil {
+-				return fmt.Errorf("make clean failed: %v\n%s", err, out)
+-			}
+-		}
+-	} else {
+-		if len(arches) > 1 {
+-			return fmt.Errorf("more than 1 arch is invalid without -build")
+-		}
+-	}
+-	return nil
+-}
+-
+-func (*freertos) prepareArch(arch *Arch) error {
+-	archName := arch.target.Arch
+-	// Use the the correct name for FreeBSD/i386
+-	if archName == "riscv64" {
+-		archName = "riscv64"
+-	} else {
+-		return fmt.Errorf("failed to locate arch: %v", archName)
+-	}
+-	return nil
+-}
+-
+-func (*freertos) processFile(arch *Arch, info *compiler.ConstInfo) (map[string]uint64, map[string]bool, error) {
+-	fmt.Println("======== process File")
+-	dir := arch.sourceDir
+-	args := []string{
+-		"-g",
+-		"-Os",
+-		// "-mcpu=cortex-a7",
+-		// "-fno-stack-protector",
+-		// "-nostdlib",
+-		// "-fno-builtin",
+-		// "-fno-mudflap",
+-		// "-U_FORTIFY_SOURCE",
+-		"-I", filepath.Join(dir, ""),
+-	}
+-	for _, incdir := range info.Incdirs {
+-		args = append(args, "-I"+filepath.Join(dir, incdir))
+-	}
+-	if arch.includeDirs != "" {
+-		for _, dir := range strings.Split(arch.includeDirs, ",") {
+-			args = append(args, "-I"+dir)
+-		}
+-	}
+-	params := &extractParams{
+-		DeclarePrintf: true,
+-		TargetEndian:  arch.target.HostEndian,
+-	}
+-	return extract(info, "gcc", args, params)
+-	// arm-linux-gnueabi-gcc
+-}
+diff --git a/sys/syz-extract/linux.go b/sys/syz-extract/linux.go
+index e4f8d1bfe..10284d221 100644
+--- a/sys/syz-extract/linux.go
++++ b/sys/syz-extract/linux.go
+@@ -13,7 +13,6 @@ import (
+ 	"github.com/google/syzkaller/pkg/build"
+ 	"github.com/google/syzkaller/pkg/compiler"
+ 	"github.com/google/syzkaller/pkg/osutil"
+-	"github.com/google/syzkaller/sys/targets"
+ )
+ 
+ type linux struct{}
+@@ -62,9 +61,11 @@ func (*linux) prepareArch(arch *Arch) error {
+ #define va_copy __builtin_va_copy
+ #define __va_copy __builtin_va_copy
+ `,
+-		"asm/a.out.h": "",
+-		"asm/prctl.h": "",
+-		"asm/mce.h":   "",
++		"asm/a.out.h":    "",
++		"asm/prctl.h":    "",
++		"asm/mce.h":      "",
++		"asm/msr.h":      "",
++		"uapi/asm/msr.h": "",
+ 	} {
+ 		fullPath := filepath.Join(arch.buildDir, "syzkaller", hdr)
+ 		if err := osutil.MkdirAll(filepath.Dir(fullPath)); err != nil {
+@@ -87,6 +88,8 @@ func (*linux) prepareArch(arch *Arch) error {
+ 		// powerpc arch is configured to be big-endian by default, but we want little-endian powerpc.
+ 		// Since all of our archs are little-endian for now, we just blindly switch it.
+ 		"-d", "CPU_BIG_ENDIAN", "-e", "CPU_LITTLE_ENDIAN",
++		// s390 enables BTF in defconfig, but our packaged toolchains can't build it.
++		"-d", "DEBUG_INFO_BTF",
+ 		// Without CONFIG_NETFILTER kernel does not build.
+ 		"-e", "NETFILTER",
+ 		// include/net/mptcp.h is the only header in kernel that guards some
+@@ -113,14 +116,6 @@ func (*linux) prepareArch(arch *Arch) error {
+ }
+ 
+ func (*linux) processFile(arch *Arch, info *compiler.ConstInfo) (map[string]uint64, map[string]bool, error) {
+-	if strings.HasSuffix(info.File, "_kvm.txt") &&
+-		(arch.target.Arch == targets.ARM || arch.target.Arch == targets.RiscV64) {
+-		// Hack: KVM is not supported on ARM anymore. We may want some more official support
+-		// for marking descriptions arch-specific, but so far this combination is the only
+-		// one. For riscv64, KVM is not supported yet but might be in the future.
+-		// Note: syz-sysgen also ignores this file for arm and riscv64.
+-		return nil, nil, nil
+-	}
+ 	headerArch := arch.target.KernelHeaderArch
+ 	sourceDir := arch.sourceDir
+ 	buildDir := arch.buildDir
+diff --git a/sys/syz-extract/rtthread.go b/sys/syz-extract/rtthread.go
+deleted file mode 100644
+index 5f878336c..000000000
+--- a/sys/syz-extract/rtthread.go
++++ /dev/null
+@@ -1,74 +0,0 @@
+-//  main()
+-//  archFileList(): extract the os, arches, and files
+-//  createArches(): - init arch and *.txt files
+-//  *linux.prepare(): check the source dir if not cleaned then exec make clean else do nothing
+-//  make the channel named jobC, whose len is len(arches)*len(files), post all arch to the chan
+-//  worker(): process arch and files, in arch processing post files into chan
+-//  	processArch(): extract txt to AST, synax check, extract const identify and prapareArch()?
+-// 	processFile():
+-
+-// see system config file in "Micrium/Software/uC-CPU/ARM-Cortex-A/ARMv7-A/GNU/cpu.h"
+-
+-package main
+-
+-import (
+-	"path/filepath"
+-	"strings"
+-
+-	"github.com/google/syzkaller/pkg/compiler"
+-)
+-
+-type rtthread struct{}
+-
+-func (*rtthread) prepare(sourcedir string, build bool, arches []*Arch) error {
+-	// Up to now, only arm is supported
+-	// check the few files to see make clean is needed or not is a better choice
+-	// if build {
+-	// 	for _, a := range arches {
+-	// 		arch := a.target.KernelArch
+-	// 		fmt.Printf("make clean ARCH = %v\n", arch)
+-	// 		out, err := osutil.RunCmd(time.Hour, sourcedir, "make", "clean", "-j", fmt.Sprint(runtime.NumCPU()))
+-	// 		if err != nil {
+-	// 			return fmt.Errorf("make clean failed: %v\n%s", err, out)
+-	// 		}
+-	// 	}
+-	// } else {
+-	// 	if len(arches) > 1 {
+-	// 		return fmt.Errorf("more than 1 arch is invalid without -build")
+-	// 	}
+-	// }
+-	return nil
+-}
+-
+-func (*rtthread) prepareArch(arch *Arch) error {
+-	return nil
+-}
+-
+-func (*rtthread) processFile(arch *Arch, info *compiler.ConstInfo) (map[string]uint64, map[string]bool, error) {
+-	dir := arch.sourceDir
+-	args := []string{
+-		"-g",
+-		"-Os",
+-		// "-mcpu=cortex-a7",
+-		// "-fno-stack-protector",
+-		// "-nostdlib",
+-		// "-fno-builtin",
+-		// "-fno-mudflap",
+-		// "-U_FORTIFY_SOURCE",
+-		"-I", filepath.Join(dir, ""),
+-	}
+-	for _, incdir := range info.Incdirs {
+-		args = append(args, "-I"+filepath.Join(dir, incdir))
+-	}
+-	if arch.includeDirs != "" {
+-		for _, dir := range strings.Split(arch.includeDirs, ",") {
+-			args = append(args, "-I"+dir)
+-		}
+-	}
+-	params := &extractParams{
+-		DeclarePrintf: true,
+-		TargetEndian:  arch.target.HostEndian,
+-	}
+-	return extract(info, "gcc", args, params)
+-	// arm-linux-gnueabi-gcc
+-}
+diff --git a/sys/syz-extract/ucos.go b/sys/syz-extract/ucos.go
+deleted file mode 100644
+index 88741143b..000000000
+--- a/sys/syz-extract/ucos.go
++++ /dev/null
+@@ -1,83 +0,0 @@
+-//  main()
+-//  archFileList(): extract the os, arches, and files
+-//  createArches(): - init arch and *.txt files
+-//  *linux.prepare(): check the source dir if not cleaned then exec make clean else do nothing
+-//  make the channel named jobC, whose len is len(arches)*len(files), post all arch to the chan
+-//  worker(): process arch and files, in arch processing post files into chan
+-//  	processArch(): extract txt to AST, synax check, extract const identify and prapareArch()?
+-// 	processFile():
+-
+-// see system config file in "Micrium/Software/uC-CPU/ARM-Cortex-A/ARMv7-A/GNU/cpu.h"
+-
+-package main
+-
+-import (
+-	"fmt"
+-	"path/filepath"
+-	// "runtime"
+-	"strings"
+-	"time"
+-
+-	"github.com/google/syzkaller/pkg/compiler"
+-	// "github.com/google/syzkaller/pkg/osutil"
+-)
+-
+-type ucos struct{}
+-
+-func (*ucos) prepare(sourcedir string, build bool, arches []*Arch) error {
+-	// Up to now, only arm is supported
+-	// check the few files to see make clean is needed or not is a better choice
+-	if build {
+-		for _, a := range arches {
+-			arch := a.target.KernelArch
+-			fmt.Printf("make clean ARCH = %v\n", arch)
+-			fmt.Printf("time, sourcedir = %v, %v\n", time.Hour, sourcedir)
+-			// out, err := osutil.RunCmd(time.Hour, sourcedir, "make", "clean", "-j", fmt.Sprint(runtime.NumCPU()))
+-			// if err != nil {
+-			// 	return fmt.Errorf("make clean failed: %v\n%s", err, out)
+-			// }
+-		}
+-	} else {
+-		if len(arches) > 1 {
+-			return fmt.Errorf("more than 1 arch is invalid without -build")
+-		}
+-	}
+-	return nil
+-}
+-
+-func (*ucos) prepareArch(arch *Arch) error {
+-	return nil
+-}
+-
+-func (*ucos) processFile(arch *Arch, info *compiler.ConstInfo) (map[string]uint64, map[string]bool, error) {
+-	dir := arch.sourceDir
+-	args := []string{
+-		"-g",
+-		"-Os",
+-		// "-mcpu=cortex-a7",
+-		// "-fno-stack-protector",
+-		// "-nostdlib",
+-		// "-fno-builtin",
+-		// "-fno-mudflap",
+-		// "-U_FORTIFY_SOURCE",
+-		"-I", filepath.Join(dir, "Micrium/Software/uC-CPU"), // cpu module
+-		"-I", filepath.Join(dir, "Micrium/Software/uC-LIB"), // lib module
+-		"-I", filepath.Join(dir, "Micrium/Software/uC-TCP-IP"), // OS module
+-		"-I", filepath.Join(dir, "Micrium/Software/uCOS-III"), // OS module
+-		"-I", filepath.Join(dir, "Micrium/Software/uC-DHCPc"), // OS module
+-	}
+-	for _, incdir := range info.Incdirs {
+-		args = append(args, "-I"+filepath.Join(dir, incdir))
+-	}
+-	if arch.includeDirs != "" {
+-		for _, dir := range strings.Split(arch.includeDirs, ",") {
+-			args = append(args, "-I"+dir)
+-		}
+-	}
+-	params := &extractParams{
+-		DeclarePrintf: true,
+-		TargetEndian:  arch.target.HostEndian,
+-	}
+-	return extract(info, "gcc", args, params)
+-	// arm-linux-gnueabi-gcc
+-}
+diff --git a/sys/syz-extract/zephyr.go b/sys/syz-extract/zephyr.go
+deleted file mode 100644
+index 433eead5b..000000000
+--- a/sys/syz-extract/zephyr.go
++++ /dev/null
+@@ -1,74 +0,0 @@
+-//  main()
+-//  archFileList(): extract the os, arches, and files
+-//  createArches(): - init arch and *.txt files
+-//  *linux.prepare(): check the source dir if not cleaned then exec make clean else do nothing
+-//  make the channel named jobC, whose len is len(arches)*len(files), post all arch to the chan
+-//  worker(): process arch and files, in arch processing post files into chan
+-//  	processArch(): extract txt to AST, synax check, extract const identify and prapareArch()?
+-// 	processFile():
+-
+-// see system config file in "Micrium/Software/uC-CPU/ARM-Cortex-A/ARMv7-A/GNU/cpu.h"
+-
+-package main
+-
+-import (
+-	"path/filepath"
+-	"strings"
+-
+-	"github.com/google/syzkaller/pkg/compiler"
+-)
+-
+-type zephyr struct{}
+-
+-func (*zephyr) prepare(sourcedir string, build bool, arches []*Arch) error {
+-	// Up to now, only arm is supported
+-	// check the few files to see make clean is needed or not is a better choice
+-	// if build {
+-	// 	for _, a := range arches {
+-	// 		arch := a.target.KernelArch
+-	// 		fmt.Printf("make clean ARCH = %v\n", arch)
+-	// 		out, err := osutil.RunCmd(time.Hour, sourcedir, "make", "clean", "-j", fmt.Sprint(runtime.NumCPU()))
+-	// 		if err != nil {
+-	// 			return fmt.Errorf("make clean failed: %v\n%s", err, out)
+-	// 		}
+-	// 	}
+-	// } else {
+-	// 	if len(arches) > 1 {
+-	// 		return fmt.Errorf("more than 1 arch is invalid without -build")
+-	// 	}
+-	// }
+-	return nil
+-}
+-
+-func (*zephyr) prepareArch(arch *Arch) error {
+-	return nil
+-}
+-
+-func (*zephyr) processFile(arch *Arch, info *compiler.ConstInfo) (map[string]uint64, map[string]bool, error) {
+-	dir := arch.sourceDir
+-	args := []string{
+-		"-g",
+-		"-Os",
+-		// "-mcpu=cortex-a7",
+-		// "-fno-stack-protector",
+-		// "-nostdlib",
+-		// "-fno-builtin",
+-		// "-fno-mudflap",
+-		// "-U_FORTIFY_SOURCE",
+-		"-I", filepath.Join(dir, ""),
+-	}
+-	for _, incdir := range info.Incdirs {
+-		args = append(args, "-I"+filepath.Join(dir, incdir))
+-	}
+-	if arch.includeDirs != "" {
+-		for _, dir := range strings.Split(arch.includeDirs, ",") {
+-			args = append(args, "-I"+dir)
+-		}
+-	}
+-	params := &extractParams{
+-		DeclarePrintf: true,
+-		TargetEndian:  arch.target.HostEndian,
+-	}
+-	return extract(info, "gcc", args, params)
+-	// arm-linux-gnueabi-gcc
+-}
+diff --git a/sys/syz-sysgen/sysgen.go b/sys/syz-sysgen/sysgen.go
+index 7ee1b9081..0427272f8 100644
+--- a/sys/syz-sysgen/sysgen.go
++++ b/sys/syz-sysgen/sysgen.go
+@@ -5,7 +5,6 @@ package main
+ 
+ import (
+ 	"bytes"
+-	"encoding/json"
+ 	"flag"
+ 	"fmt"
+ 	"io"
+@@ -36,6 +35,11 @@ type SyscallData struct {
+ 	Attrs    []uint64
+ }
+ 
++type Define struct {
++	Name  string
++	Value string
++}
++
+ type ArchData struct {
+ 	Revision   string
+ 	ForkServer int
+@@ -45,6 +49,7 @@ type ArchData struct {
+ 	NumPages   uint64
+ 	DataOffset uint64
+ 	Calls      []SyscallData
++	Defines    []Define
+ }
+ 
+ type OSData struct {
+@@ -65,8 +70,6 @@ type ExecutorData struct {
+ 
+ var srcDir = flag.String("src", "", "path to root of syzkaller source dir")
+ var outDir = flag.String("out", "", "path to out dir")
+-var genJson = flag.Bool("gen_json", true, "generate json representation")
+-var jsonOutDir = flag.String("json_out", "json", "path to json representation")
+ 
+ func main() {
+ 	defer tool.Init()()
+@@ -76,30 +79,18 @@ func main() {
+ 		OSList = append(OSList, OS)
+ 	}
+ 	sort.Strings(OSList)
+-	fmt.Println("execute the syzgen")
+-
+-	if *genJson {
+-		osutil.MkdirAll(filepath.Join(*outDir, "sys", *jsonOutDir))
+-	}
+ 
+ 	data := &ExecutorData{}
+ 	for _, OS := range OSList {
+ 		descriptions := ast.ParseGlob(filepath.Join(*srcDir, "sys", OS, "*.txt"), nil)
+-		fmt.Println("print ast in txt: ", descriptions)
+ 		if descriptions == nil {
+-			fmt.Println("exit in extract txt file")
+ 			os.Exit(1)
+ 		}
+-		fmt.Println("extract txt file successed!")
+ 		constFile := compiler.DeserializeConstFile(filepath.Join(*srcDir, "sys", OS, "*.const"), nil)
+ 		if constFile == nil {
+-			fmt.Println("exit in extract const file")
+ 			os.Exit(1)
+ 		}
+ 		osutil.MkdirAll(filepath.Join(*outDir, "sys", OS, "gen"))
+-		if *genJson {
+-			osutil.MkdirAll(filepath.Join(*outDir, "sys", *jsonOutDir, OS))
+-		}
+ 
+ 		var archs []string
+ 		for arch := range targets.List[OS] {
+@@ -107,19 +98,12 @@ func main() {
+ 		}
+ 		sort.Strings(archs)
+ 
+-		type Job struct {
+-			Target      *targets.Target
+-			OK          bool
+-			Errors      []string
+-			Unsupported map[string]bool
+-			ArchData    ArchData
+-		}
+ 		var jobs []*Job
+ 		for _, arch := range archs {
+ 			jobs = append(jobs, &Job{
+-				Target: targets.List[OS][arch],
++				Target:      targets.List[OS][arch],
++				Unsupported: make(map[string]bool),
+ 			})
+-			fmt.Println("jobs: ", targets.List[OS][arch])
+ 		}
+ 		sort.Slice(jobs, func(i, j int) bool {
+ 			return jobs[i].Target.Arch < jobs[j].Target.Arch
+@@ -131,48 +115,7 @@ func main() {
+ 			job := job
+ 			go func() {
+ 				defer wg.Done()
+-				eh := func(pos ast.Pos, msg string) {
+-					job.Errors = append(job.Errors, fmt.Sprintf("%v: %v\n", pos, msg))
+-				}
+-				consts := constFile.Arch(job.Target.Arch)
+-				top := descriptions
+-				if OS == targets.Linux && (job.Target.Arch == targets.ARM || job.Target.Arch == targets.RiscV64) {
+-					// Hack: KVM is not supported on ARM anymore. On riscv64 it
+-					// is not supported yet but might be in the future.
+-					// Note: syz-extract also ignores this file for arm and riscv64.
+-					top = descriptions.Filter(func(n ast.Node) bool {
+-						pos, _, _ := n.Info()
+-						return !strings.HasSuffix(pos.File, "_kvm.txt")
+-					})
+-				}
+-				if OS == targets.TestOS {
+-					constInfo := compiler.ExtractConsts(top, job.Target, eh)
+-					compiler.FabricateSyscallConsts(job.Target, constInfo, consts)
+-				}
+-				fmt.Println("exec compile")
+-				prog := compiler.Compile(top, consts, job.Target, eh)
+-				if prog == nil {
+-					fmt.Println(("compile failed!"))
+-					return
+-				}
+-				job.Unsupported = prog.Unsupported
+-
+-				sysFile := filepath.Join(*outDir, "sys", OS, "gen", job.Target.Arch+".go")
+-				out := new(bytes.Buffer)
+-				generate(job.Target, prog, consts, out)
+-				rev := hash.String(out.Bytes())
+-				fmt.Fprintf(out, "const revision_%v = %q\n", job.Target.Arch, rev)
+-				writeSource(sysFile, out.Bytes())
+-				// generate json representation.
+-				if *genJson {
+-					generate_json(job.Target, prog, consts, rev)
+-				}
+-
+-				job.ArchData = generateExecutorSyscalls(job.Target, prog.Syscalls, rev)
+-
+-				// Don't print warnings, they are printed in syz-check.
+-				job.Errors = nil
+-				job.OK = true
++				processJob(job, descriptions, constFile)
+ 			}()
+ 		}
+ 		wg.Wait()
+@@ -220,39 +163,43 @@ func main() {
+ 	writeExecutorSyscalls(data)
+ }
+ 
+-func generate_json(target *targets.Target, prg *compiler.Prog, consts map[string]uint64, rev string) {
+-	type Type struct {
+-		Name  string
+-		Value prog.Type
+-	}
+-	types := make([]Type, 0, len(prg.Types))
+-	for _, ty := range prg.Types {
+-		types = append(types, Type{Name: reflect.TypeOf(ty).Elem().Name(), Value: ty})
++type Job struct {
++	Target      *targets.Target
++	OK          bool
++	Errors      []string
++	Unsupported map[string]bool
++	ArchData    ArchData
++}
++
++func processJob(job *Job, descriptions *ast.Description, constFile *compiler.ConstFile) {
++	eh := func(pos ast.Pos, msg string) {
++		job.Errors = append(job.Errors, fmt.Sprintf("%v: %v\n", pos, msg))
+ 	}
+-	type Sys struct {
+-		Target    *targets.Target
+-		Syscalls  []*prog.Syscall
+-		Types     []Type
+-		Resources []*prog.ResourceDesc
+-		Consts    map[string]uint64
+-		Revision  string
++	consts := constFile.Arch(job.Target.Arch)
++	if job.Target.OS == targets.TestOS {
++		constInfo := compiler.ExtractConsts(descriptions, job.Target, eh)
++		compiler.FabricateSyscallConsts(job.Target, constInfo, consts)
+ 	}
+-	sys := Sys{
+-		Target:    target,
+-		Syscalls:  prg.Syscalls,
+-		Types:     types,
+-		Resources: prg.Resources,
+-		Consts:    consts,
+-		Revision:  rev,
++	prog := compiler.Compile(descriptions, consts, job.Target, eh)
++	if prog == nil {
++		return
+ 	}
+-	jsonFile := filepath.Join(*outDir, "sys", *jsonOutDir, target.OS, target.Arch+".json")
+-	sys_json, err := json.Marshal(sys)
+-	if err != nil {
+-		fmt.Printf("failed to marshal target %v/%v: %v\n", target.OS, target.Arch, err)
+-		os.Exit(1)
++	for what := range prog.Unsupported {
++		job.Unsupported[what] = true
+ 	}
+-	writeSource(jsonFile, sys_json)
+ 
++	sysFile := filepath.Join(*outDir, "sys", job.Target.OS, "gen", job.Target.Arch+".go")
++	out := new(bytes.Buffer)
++	generate(job.Target, prog, consts, out)
++	rev := hash.String(out.Bytes())
++	fmt.Fprintf(out, "const revision_%v = %q\n", job.Target.Arch, rev)
++	writeSource(sysFile, out.Bytes())
++
++	job.ArchData = generateExecutorSyscalls(job.Target, prog.Syscalls, rev)
++
++	// Don't print warnings, they are printed in syz-check.
++	job.Errors = nil
++	job.OK = true
+ }
+ 
+ func generate(target *targets.Target, prg *compiler.Prog, consts map[string]uint64, out io.Writer) {
+@@ -315,6 +262,7 @@ func generateExecutorSyscalls(target *targets.Target, syscalls []*prog.Syscall,
+ 	if target.ExecutorUsesShmem {
+ 		data.Shmem = 1
+ 	}
++	defines := make(map[string]string)
+ 	for _, c := range syscalls {
+ 		var attrVals []uint64
+ 		attrs := reflect.ValueOf(c.Attrs)
+@@ -338,10 +286,25 @@ func generateExecutorSyscalls(target *targets.Target, syscalls []*prog.Syscall,
+ 			}
+ 		}
+ 		data.Calls = append(data.Calls, newSyscallData(target, c, attrVals[:last+1]))
++		// Some syscalls might not be present on the compiling machine, so we
++		// generate definitions for them.
++		if target.SyscallNumbers && !strings.HasPrefix(c.CallName, "syz_") &&
++			target.NeedSyscallDefine(c.NR) {
++			defines[target.SyscallPrefix+c.CallName] = fmt.Sprintf("%d", c.NR)
++		}
+ 	}
+ 	sort.Slice(data.Calls, func(i, j int) bool {
+ 		return data.Calls[i].Name < data.Calls[j].Name
+ 	})
++	// Get a sorted list of definitions.
++	defineNames := []string{}
++	for key := range defines {
++		defineNames = append(defineNames, key)
++	}
++	sort.Strings(defineNames)
++	for _, key := range defineNames {
++		data.Defines = append(data.Defines, Define{key, defines[key]})
++	}
+ 	return data
+ }
+ 
+@@ -418,7 +381,10 @@ struct call_props_t { {{range $attr := $.CallProps}}
+ #define SYZ_PAGE_SIZE {{.PageSize}}
+ #define SYZ_NUM_PAGES {{.NumPages}}
+ #define SYZ_DATA_OFFSET {{.DataOffset}}
++{{range $c := $arch.Defines}}#ifndef {{$c.Name}}
++#define {{$c.Name}} {{$c.Value}}
+ #endif
++{{end}}#endif
+ {{end}}
+ #endif
+ {{end}}
+diff --git a/sys/syz-sysgen/sysgen.go.orig b/sys/syz-sysgen/sysgen.go.orig
+deleted file mode 100644
+index 88f0a1029..000000000
+--- a/sys/syz-sysgen/sysgen.go.orig
++++ /dev/null
+@@ -1,392 +0,0 @@
+-// Copyright 2015/2016 syzkaller project authors. All rights reserved.
+-// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+-
+-package main
+-
+-import (
+-	"bytes"
+-	"flag"
+-	"fmt"
+-	"io"
+-	"io/ioutil"
+-	"os"
+-	"path/filepath"
+-	"reflect"
+-	"sort"
+-	"strings"
+-	"sync"
+-	"text/template"
+-
+-	"github.com/google/syzkaller/pkg/ast"
+-	"github.com/google/syzkaller/pkg/compiler"
+-	"github.com/google/syzkaller/pkg/hash"
+-	"github.com/google/syzkaller/pkg/osutil"
+-	"github.com/google/syzkaller/pkg/serializer"
+-	"github.com/google/syzkaller/pkg/tool"
+-	"github.com/google/syzkaller/prog"
+-	"github.com/google/syzkaller/sys/targets"
+-)
+-
+-type SyscallData struct {
+-	Name     string
+-	CallName string
+-	NR       int32
+-	NeedCall bool
+-	Attrs    []uint64
+-}
+-
+-type ArchData struct {
+-	Revision   string
+-	ForkServer int
+-	Shmem      int
+-	GOARCH     string
+-	PageSize   uint64
+-	NumPages   uint64
+-	DataOffset uint64
+-	Calls      []SyscallData
+-}
+-
+-type OSData struct {
+-	GOOS  string
+-	Archs []ArchData
+-}
+-
+-type CallPropDescription struct {
+-	Type string
+-	Name string
+-}
+-
+-type ExecutorData struct {
+-	OSes      []OSData
+-	CallAttrs []string
+-	CallProps []CallPropDescription
+-}
+-
+-var srcDir = flag.String("src", "", "path to root of syzkaller source dir")
+-var outDir = flag.String("out", "", "path to out dir")
+-
+-func main() {
+-	defer tool.Init()()
+-
+-	var OSList []string
+-	for OS := range targets.List {
+-		OSList = append(OSList, OS)
+-	}
+-	sort.Strings(OSList)
+-	fmt.Println("execute the syzgen")
+-
+-	data := &ExecutorData{}
+-	for _, OS := range OSList {
+-		descriptions := ast.ParseGlob(filepath.Join(*srcDir, "sys", OS, "*.txt"), nil)
+-		fmt.Println("print ast in txt: ", descriptions)
+-		if descriptions == nil {
+-			fmt.Println("exit in extract txt file")
+-			os.Exit(1)
+-		}
+-		fmt.Println("extract txt file successed!")
+-		constFile := compiler.DeserializeConstFile(filepath.Join(*srcDir, "sys", OS, "*.const"), nil)
+-		if constFile == nil {
+-			fmt.Println("exit in extract const file")
+-			os.Exit(1)
+-		}
+-		osutil.MkdirAll(filepath.Join(*outDir, "sys", OS, "gen"))
+-
+-		var archs []string
+-		for arch := range targets.List[OS] {
+-			archs = append(archs, arch)
+-		}
+-		sort.Strings(archs)
+-
+-		type Job struct {
+-			Target      *targets.Target
+-			OK          bool
+-			Errors      []string
+-			Unsupported map[string]bool
+-			ArchData    ArchData
+-		}
+-		var jobs []*Job
+-		for _, arch := range archs {
+-			jobs = append(jobs, &Job{
+-				Target: targets.List[OS][arch],
+-			})
+-			fmt.Println("jobs: ", targets.List[OS][arch])
+-		}
+-		sort.Slice(jobs, func(i, j int) bool {
+-			return jobs[i].Target.Arch < jobs[j].Target.Arch
+-		})
+-		var wg sync.WaitGroup
+-		wg.Add(len(jobs))
+-
+-		for _, job := range jobs {
+-			job := job
+-			go func() {
+-				defer wg.Done()
+-				eh := func(pos ast.Pos, msg string) {
+-					job.Errors = append(job.Errors, fmt.Sprintf("%v: %v\n", pos, msg))
+-				}
+-				consts := constFile.Arch(job.Target.Arch)
+-				top := descriptions
+-				if OS == targets.Linux && (job.Target.Arch == targets.ARM || job.Target.Arch == targets.RiscV64) {
+-					// Hack: KVM is not supported on ARM anymore. On riscv64 it
+-					// is not supported yet but might be in the future.
+-					// Note: syz-extract also ignores this file for arm and riscv64.
+-					top = descriptions.Filter(func(n ast.Node) bool {
+-						pos, _, _ := n.Info()
+-						return !strings.HasSuffix(pos.File, "_kvm.txt")
+-					})
+-				}
+-				if OS == targets.TestOS {
+-					constInfo := compiler.ExtractConsts(top, job.Target, eh)
+-					compiler.FabricateSyscallConsts(job.Target, constInfo, consts)
+-				}
+-				fmt.Println("exec compile")
+-				prog := compiler.Compile(top, consts, job.Target, eh)
+-				if prog == nil {
+-					fmt.Println(("compile failed!"))
+-					return
+-				}
+-				job.Unsupported = prog.Unsupported
+-
+-				sysFile := filepath.Join(*outDir, "sys", OS, "gen", job.Target.Arch+".go")
+-				out := new(bytes.Buffer)
+-				generate(job.Target, prog, consts, out)
+-				rev := hash.String(out.Bytes())
+-				fmt.Fprintf(out, "const revision_%v = %q\n", job.Target.Arch, rev)
+-				writeSource(sysFile, out.Bytes())
+-
+-				job.ArchData = generateExecutorSyscalls(job.Target, prog.Syscalls, rev)
+-
+-				// Don't print warnings, they are printed in syz-check.
+-				job.Errors = nil
+-				job.OK = true
+-			}()
+-		}
+-		wg.Wait()
+-
+-		var syscallArchs []ArchData
+-		unsupported := make(map[string]int)
+-		for _, job := range jobs {
+-			if !job.OK {
+-				fmt.Printf("compilation of %v/%v target failed:\n", job.Target.OS, job.Target.Arch)
+-				for _, msg := range job.Errors {
+-					fmt.Print(msg)
+-				}
+-				os.Exit(1)
+-			}
+-			syscallArchs = append(syscallArchs, job.ArchData)
+-			for u := range job.Unsupported {
+-				unsupported[u]++
+-			}
+-		}
+-		data.OSes = append(data.OSes, OSData{
+-			GOOS:  OS,
+-			Archs: syscallArchs,
+-		})
+-
+-		for what, count := range unsupported {
+-			if count == len(jobs) {
+-				tool.Failf("%v is unsupported on all arches (typo?)", what)
+-			}
+-		}
+-	}
+-
+-	attrs := reflect.TypeOf(prog.SyscallAttrs{})
+-	for i := 0; i < attrs.NumField(); i++ {
+-		data.CallAttrs = append(data.CallAttrs, prog.CppName(attrs.Field(i).Name))
+-	}
+-
+-	props := prog.CallProps{}
+-	props.ForeachProp(func(name, _ string, value reflect.Value) {
+-		data.CallProps = append(data.CallProps, CallPropDescription{
+-			Type: value.Kind().String(),
+-			Name: prog.CppName(name),
+-		})
+-	})
+-
+-	writeExecutorSyscalls(data)
+-}
+-
+-func generate(target *targets.Target, prg *compiler.Prog, consts map[string]uint64, out io.Writer) {
+-	tag := fmt.Sprintf("syz_target,syz_os_%v,syz_arch_%v", target.OS, target.Arch)
+-	if target.VMArch != "" {
+-		tag += fmt.Sprintf(" syz_target,syz_os_%v,syz_arch_%v", target.OS, target.VMArch)
+-	}
+-	fmt.Fprintf(out, "// AUTOGENERATED FILE\n")
+-	fmt.Fprintf(out, "// +build !codeanalysis\n")
+-	fmt.Fprintf(out, "// +build !syz_target %v\n\n", tag)
+-	fmt.Fprintf(out, "package gen\n\n")
+-	fmt.Fprintf(out, "import . \"github.com/google/syzkaller/prog\"\n")
+-	fmt.Fprintf(out, "import . \"github.com/google/syzkaller/sys/%v\"\n\n", target.OS)
+-
+-	fmt.Fprintf(out, "func init() {\n")
+-	fmt.Fprintf(out, "\tRegisterTarget(&Target{"+
+-		"OS: %q, Arch: %q, Revision: revision_%v, PtrSize: %v, PageSize: %v, "+
+-		"NumPages: %v, DataOffset: %v, LittleEndian: %v, ExecutorUsesShmem: %v, "+
+-		"Syscalls: syscalls_%v, Resources: resources_%v, Consts: consts_%v}, "+
+-		"types_%v, InitTarget)\n}\n\n",
+-		target.OS, target.Arch, target.Arch, target.PtrSize, target.PageSize,
+-		target.NumPages, target.DataOffset, target.LittleEndian, target.ExecutorUsesShmem,
+-		target.Arch, target.Arch, target.Arch, target.Arch)
+-
+-	fmt.Fprintf(out, "var resources_%v = ", target.Arch)
+-	serializer.Write(out, prg.Resources)
+-	fmt.Fprintf(out, "\n\n")
+-
+-	fmt.Fprintf(out, "var syscalls_%v = ", target.Arch)
+-	serializer.Write(out, prg.Syscalls)
+-	fmt.Fprintf(out, "\n\n")
+-
+-	fmt.Fprintf(out, "var types_%v = ", target.Arch)
+-	serializer.Write(out, prg.Types)
+-	fmt.Fprintf(out, "\n\n")
+-
+-	constArr := make([]prog.ConstValue, 0, len(consts))
+-	for name, val := range consts {
+-		constArr = append(constArr, prog.ConstValue{Name: name, Value: val})
+-	}
+-	sort.Slice(constArr, func(i, j int) bool {
+-		return constArr[i].Name < constArr[j].Name
+-	})
+-	fmt.Fprintf(out, "var consts_%v = ", target.Arch)
+-	serializer.Write(out, constArr)
+-	fmt.Fprintf(out, "\n\n")
+-}
+-
+-func generateExecutorSyscalls(target *targets.Target, syscalls []*prog.Syscall, rev string) ArchData {
+-	data := ArchData{
+-		Revision:   rev,
+-		GOARCH:     target.Arch,
+-		PageSize:   target.PageSize,
+-		NumPages:   target.NumPages,
+-		DataOffset: target.DataOffset,
+-	}
+-	if target.ExecutorUsesForkServer {
+-		data.ForkServer = 1
+-	}
+-	if target.ExecutorUsesShmem {
+-		data.Shmem = 1
+-	}
+-	for _, c := range syscalls {
+-		var attrVals []uint64
+-		attrs := reflect.ValueOf(c.Attrs)
+-		last := -1
+-		for i := 0; i < attrs.NumField(); i++ {
+-			attr := attrs.Field(i)
+-			val := uint64(0)
+-			switch attr.Type().Kind() {
+-			case reflect.Bool:
+-				if attr.Bool() {
+-					val = 1
+-				}
+-			case reflect.Uint64:
+-				val = attr.Uint()
+-			default:
+-				panic("unsupported syscall attribute type")
+-			}
+-			attrVals = append(attrVals, val)
+-			if val != 0 {
+-				last = i
+-			}
+-		}
+-		data.Calls = append(data.Calls, newSyscallData(target, c, attrVals[:last+1]))
+-	}
+-	sort.Slice(data.Calls, func(i, j int) bool {
+-		return data.Calls[i].Name < data.Calls[j].Name
+-	})
+-	return data
+-}
+-
+-func newSyscallData(target *targets.Target, sc *prog.Syscall, attrs []uint64) SyscallData {
+-	callName, patchCallName := target.SyscallTrampolines[sc.Name]
+-	if !patchCallName {
+-		callName = sc.CallName
+-	}
+-	return SyscallData{
+-		Name:     sc.Name,
+-		CallName: callName,
+-		NR:       int32(sc.NR),
+-		NeedCall: (!target.SyscallNumbers || strings.HasPrefix(sc.CallName, "syz_") || patchCallName) && !sc.Attrs.Disabled,
+-		Attrs:    attrs,
+-	}
+-}
+-
+-func writeExecutorSyscalls(data *ExecutorData) {
+-	osutil.MkdirAll(filepath.Join(*outDir, "executor"))
+-	sort.Slice(data.OSes, func(i, j int) bool {
+-		return data.OSes[i].GOOS < data.OSes[j].GOOS
+-	})
+-	buf := new(bytes.Buffer)
+-	if err := defsTempl.Execute(buf, data); err != nil {
+-		tool.Failf("failed to execute defs template: %v", err)
+-	}
+-	writeFile(filepath.Join(*outDir, "executor", "defs.h"), buf.Bytes())
+-	buf.Reset()
+-	if err := syscallsTempl.Execute(buf, data); err != nil {
+-		tool.Failf("failed to execute syscalls template: %v", err)
+-	}
+-	writeFile(filepath.Join(*outDir, "executor", "syscalls.h"), buf.Bytes())
+-}
+-
+-func writeSource(file string, data []byte) {
+-	if oldSrc, err := ioutil.ReadFile(file); err == nil && bytes.Equal(data, oldSrc) {
+-		return
+-	}
+-	writeFile(file, data)
+-}
+-
+-func writeFile(file string, data []byte) {
+-	outf, err := os.Create(file)
+-	if err != nil {
+-		tool.Failf("failed to create output file: %v", err)
+-	}
+-	defer outf.Close()
+-	outf.Write(data)
+-}
+-
+-var defsTempl = template.Must(template.New("").Parse(`// AUTOGENERATED FILE
+-
+-struct call_attrs_t { {{range $attr := $.CallAttrs}}
+-	uint64_t {{$attr}};{{end}}
+-};
+-
+-struct call_props_t { {{range $attr := $.CallProps}}
+-	{{$attr.Type}} {{$attr.Name}};{{end}}
+-};
+-
+-#define read_call_props_t(var, reader) { \{{range $attr := $.CallProps}}
+-	(var).{{$attr.Name}} = ({{$attr.Type}})(reader); \{{end}}
+-}
+-
+-{{range $os := $.OSes}}
+-#if GOOS_{{$os.GOOS}}
+-#define GOOS "{{$os.GOOS}}"
+-{{range $arch := $os.Archs}}
+-#if GOARCH_{{$arch.GOARCH}}
+-#define GOARCH "{{.GOARCH}}"
+-#define SYZ_REVISION "{{.Revision}}"
+-#define SYZ_EXECUTOR_USES_FORK_SERVER {{.ForkServer}}
+-#define SYZ_EXECUTOR_USES_SHMEM {{.Shmem}}
+-#define SYZ_PAGE_SIZE {{.PageSize}}
+-#define SYZ_NUM_PAGES {{.NumPages}}
+-#define SYZ_DATA_OFFSET {{.DataOffset}}
+-#endif
+-{{end}}
+-#endif
+-{{end}}
+-`))
+-
+-// nolint: lll
+-var syscallsTempl = template.Must(template.New("").Parse(`// AUTOGENERATED FILE
+-// clang-format off
+-{{range $os := $.OSes}}
+-#if GOOS_{{$os.GOOS}}
+-{{range $arch := $os.Archs}}
+-#if GOARCH_{{$arch.GOARCH}}
+-const call_t syscalls[] = {
+-{{range $c := $arch.Calls}}    {"{{$c.Name}}", {{$c.NR}}{{if or $c.Attrs $c.NeedCall}}, { {{- range $attr := $c.Attrs}}{{$attr}}, {{end}}}{{end}}{{if $c.NeedCall}}, (syscall_t){{$c.CallName}}{{end}}},
+-{{end}}};
+-#endif
+-{{end}}
+-#endif
+-{{end}}
+-`))

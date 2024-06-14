@@ -1,0 +1,1 @@
+KASAN: global-out-of-bounds Read in arch_adjust_kprobe_addr

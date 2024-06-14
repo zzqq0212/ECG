@@ -1,0 +1,88 @@
+audit: type=1400 audit(1707133350.517:18): avc:  denied  { associate } for  pid=8831 comm="syz-executor.1" name="bsg" dev="devtmpfs" ino=117 scontext=system_u:object_r:unlabeled_t:s0 tcontext=system_u:object_r:device_t:s0 tclass=filesystem permissive=1 srawcon="system_u:obj"
+rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+rcu: 	0-....: (643 ticks this GP) idle=1914/1/0x4000000000000000 softirq=201798/201799 fqs=25704
+rcu: 	(detected by 2, t=105002 jiffies, g=155541, q=23463 ncpus=4)
+Sending NMI from CPU 2 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 PID: 8788 Comm: syz-executor.3 Not tainted 6.5.0 #14
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:check_kcov_mode kernel/kcov.c:173 [inline]
+RIP: 0010:__sanitizer_cov_trace_pc+0x11/0x70 kernel/kcov.c:207
+Code: 1f 84 00 00 00 00 00 66 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 65 8b 05 7d 38 39 7b 89 c6 48 8b 0c 24 <81> e6 00 01 00 00 65 48 8b 14 25 c0 a9 03 00 a9 00 01 ff 00 74 0e
+RSP: 0018:ffff8881f7009568 EFLAGS: 00000046
+RAX: 0000000000000101 RBX: 0000000000000011 RCX: ffffffff84cf3a3d
+RDX: ffff88810d3954c0 RSI: 0000000000000101 RDI: 0000000000000001
+RBP: 0000000000000101 R08: ffff8881f7036c68 R09: ffffe8ffffc115b8
+R10: ffff8881f7009848 R11: 0000000000000000 R12: 0000000000000014
+R13: ffffe8ffffc115b8 R14: ffffe8ffffc4c000 R15: dffffc0000000000
+FS:  00007f5ffebeb640(0000) GS:ffff8881f7000000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f5fff9b4000 CR3: 000000011a6fa002 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <IRQ>
+ get_current arch/x86/include/asm/current.h:41 [inline]
+ tif_need_resched include/linux/thread_info.h:185 [inline]
+ tracing_gen_ctx_irq_test+0x7d/0x150 kernel/trace/trace.c:2723
+ tracing_gen_ctx_flags include/linux/trace_events.h:195 [inline]
+ tracing_gen_ctx include/linux/trace_events.h:202 [inline]
+ perf_trace_buf_update+0x26/0x150 kernel/trace/trace_event_perf.c:423
+ perf_tp_event+0x142/0x1030 kernel/events/core.c:10160
+ perf_trace_run_bpf_submit+0x10b/0x1b0 kernel/events/core.c:10100
+ perf_trace_preemptirq_template+0x251/0x420 include/trace/events/preemptirq.h:14
+ trace_irq_enable include/trace/events/preemptirq.h:40 [inline]
+ trace_hardirqs_on+0xce/0x100 kernel/trace/trace_preemptirq.c:56
+ asm_sysvec_irq_work+0x1a/0x20 arch/x86/include/asm/idtentry.h:671
+RIP: 0010:get_current arch/x86/include/asm/current.h:41 [inline]
+RIP: 0010:__rcu_read_unlock+0xd3/0x4f0 kernel/rcu/tree_plugin.h:429
+Code: 48 89 fa 48 c1 ea 03 0f b6 14 02 48 89 f8 83 e0 07 83 c0 03 38 d0 7c 08 84 d2 0f 85 9d 01 00 00 8b 85 f8 03 00 00 85 c0 75 5a <65> 48 8b 1c 25 c0 a9 03 00 48 8d bb f4 03 00 00 48 b8 00 00 00 00
+RSP: 0018:ffff8881f7009a40 EFLAGS: 00000206
+RAX: 000000000001820c RBX: ffff8881f703c1c0 RCX: 1ffffffff15c783c
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff84b73af1
+RBP: 0000000000000001 R08: 0000000000000001 R09: fffffbfff15bf384
+R10: ffffffff8adf9c27 R11: 0000000000000000 R12: ffffffff88e15a80
+R13: dffffc0000000000 R14: 0000000000000200 R15: 0000000000000001
+ rcu_read_unlock include/linux/rcupdate.h:781 [inline]
+ netif_receive_skb_list_internal+0x717/0xc50 net/core/dev.c:5687
+ gro_normal_list include/net/gro.h:439 [inline]
+ gro_normal_one include/net/gro.h:452 [inline]
+ napi_skb_finish net/core/gro.c:579 [inline]
+ napi_gro_receive+0x74a/0x930 net/core/gro.c:609
+ e1000_receive_skb drivers/net/ethernet/intel/e1000/e1000_main.c:4008 [inline]
+ e1000_clean_rx_irq+0x52a/0xfa0 drivers/net/ethernet/intel/e1000/e1000_main.c:4461
+ e1000_clean+0x865/0x2330 drivers/net/ethernet/intel/e1000/e1000_main.c:3803
+ __napi_poll.constprop.0+0xaa/0x5e0 net/core/dev.c:6460
+ napi_poll net/core/dev.c:6527 [inline]
+ net_rx_action+0x832/0xbc0 net/core/dev.c:6660
+ __do_softirq+0x1b7/0x7d7 kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0x93/0xc0 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0x6e/0x90 arch/x86/kernel/apic/apic.c:1109
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:task_function_call+0xe4/0x160 kernel/events/core.c:122
+Code: 41 0f b6 45 00 40 38 c5 7c 04 84 c0 75 7c 8b 7b 14 b9 01 00 00 00 48 8d 54 24 20 48 c7 c6 00 04 ec 84 e8 3f ad d4 ff 41 89 c4 <85> c0 75 0a e8 03 8d de ff 44 8b 64 24 38 e8 f9 8c de ff 41 83 fc
+RSP: 0018:ffff88810c3bfc28 EFLAGS: 00000246
+RAX: 0000000000000000 RBX: ffff88810d3954c0 RCX: ffffffff84c093bb
+RDX: ffff88810d3954c0 RSI: 0000000000000000 RDI: ffffffff84c08eed
+RBP: 0000000000000007 R08: 0000000000000001 R09: fffffbfff15bf384
+R10: ffffffff8adf9c27 R11: 0000000000000000 R12: 0000000000000000
+R13: ffffed1021a72a9a R14: 1ffff11021877f85 R15: ffff88810d3954d4
+ perf_install_in_context+0x27a/0x4f0 kernel/events/core.c:2871
+ __do_sys_perf_event_open+0x1439/0x2390 kernel/events/core.c:12684
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3f/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7f5fff87ad2d
+Code: c3 e8 97 2b 00 00 0f 1f 80 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f5ffebeb028 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00007f5fff9b7f80 RCX: 00007f5fff87ad2d
+RDX: ffff7fffffffffff RSI: 0000000000000000 RDI: 0000000020000700
+RBP: 00007f5fff8dc4a6 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000002 R14: 00007f5fff9b7f80 R15: 00007f5ffebcb000
+ </TASK>

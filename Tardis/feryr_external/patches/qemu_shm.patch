@@ -1,0 +1,149 @@
+diff --git a/configure b/configure
+index 039467c04b..ad7916dcd5 100755
+--- a/configure
++++ b/configure
+@@ -7,6 +7,7 @@
+ # just as autoconf does.
+ CLICOLOR_FORCE= GREP_OPTIONS=
+ unset CLICOLOR_FORCE GREP_OPTIONS
++QEMU_LDFLAGS="-lrt"
+ 
+ # Don't allow CCACHE, if present, to use cached results of compile tests!
+ export CCACHE_RECACHE=yes
+diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
+index 60718fc342..ae03fb4c5b 100644
+--- a/include/qemu/osdep.h
++++ b/include/qemu/osdep.h
+@@ -383,8 +383,10 @@ void *qemu_try_memalign(size_t alignment, size_t size);
+ void *qemu_memalign(size_t alignment, size_t size);
+ void *qemu_anon_ram_alloc(size_t size, uint64_t *align, bool shared,
+                           bool noreserve);
++void *qemu_shm_ram_alloc(size_t size, uint64_t *align, const char *shm_name);
+ void qemu_vfree(void *ptr);
+ void qemu_anon_ram_free(void *ptr, size_t size);
++void qemu_shm_ram_free(void *ptr, size_t size);
+ 
+ /*
+  * It's an analog of GLIB's g_autoptr_cleanup_generic_gfree(), used to define
+diff --git a/softmmu/physmem.c b/softmmu/physmem.c
+index f67ad29981..45e46a2025 100644
+--- a/softmmu/physmem.c
++++ b/softmmu/physmem.c
+@@ -1536,6 +1536,7 @@ static int file_ram_open(const char *path,
+     return fd;
+ }
+ 
++// TAG: File ram alloc function
+ static void *file_ram_alloc(RAMBlock *block,
+                             ram_addr_t memory,
+                             int fd,
+@@ -1958,6 +1959,18 @@ static void dirty_memory_extend(ram_addr_t old_ram_size,
+     }
+ }
+ 
++static bool block_is_phys_ram(RAMBlock *block) 
++{
++    MachineState *ms = MACHINE(qdev_get_machine());
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++    const char *default_ram_id = mc->default_ram_id;
++    const char *block_id = block->mr->name;
++    bool cmp = strncmp(default_ram_id, block_id, 
++            MAX(strnlen(default_ram_id, 20), strnlen(block_id, 20)));
++    return !cmp;
++}
++
++// TAG: ram block add function
+ static void ram_block_add(RAMBlock *new_block, Error **errp)
+ {
+     const bool noreserve = qemu_ram_is_noreserve(new_block);
+@@ -1972,8 +1985,15 @@ static void ram_block_add(RAMBlock *new_block, Error **errp)
+     qemu_mutex_lock_ramlist();
+     new_block->offset = find_ram_offset(new_block->max_length);
+ 
++    /*
++    qemu_fprintf(stderr, "Adding ram block. Host ptr: %p, size: %ld, name: %s, is ram: %d\n", 
++                 new_block->host, new_block->max_length, new_block->mr->name, new_block->mr->ram);
++    */ 
++    const char *shm_path = getenv("QEMU_RAM_SHM_PATH");
++
+     if (!new_block->host) {
+         if (xen_enabled()) {
++            qemu_fprintf(stderr, "Using zen enabled memory allocation.\n");
+             xen_ram_alloc(new_block->offset, new_block->max_length,
+                           new_block->mr, &err);
+             if (err) {
+@@ -1982,9 +2002,13 @@ static void ram_block_add(RAMBlock *new_block, Error **errp)
+                 return;
+             }
+         } else {
+-            new_block->host = qemu_anon_ram_alloc(new_block->max_length,
+-                                                  &new_block->mr->align,
+-                                                  shared, noreserve);
++            if (block_is_phys_ram(new_block) && shm_path) {
++                new_block->host = qemu_shm_ram_alloc(new_block->max_length, &new_block->mr->align, shm_path);
++            } else {
++                new_block->host = qemu_anon_ram_alloc(new_block->max_length,
++                                                      &new_block->mr->align,
++                                                      shared, noreserve);
++            }
+             if (!new_block->host) {
+                 error_setg_errno(errp, errno,
+                                  "cannot set up guest memory '%s'",
+diff --git a/util/oslib-posix.c b/util/oslib-posix.c
+index e8bdb02e1d..c120b547f3 100644
+--- a/util/oslib-posix.c
++++ b/util/oslib-posix.c
+@@ -247,6 +247,41 @@ void *qemu_anon_ram_alloc(size_t size, uint64_t *alignment, bool shared,
+     return ptr;
+ }
+ 
++void *qemu_shm_ram_alloc(size_t size, uint64_t *alignment, const char *shm_name)
++{
++    // fprintf(stderr, "Allocating shared memory with name and size %s, %ld\n", shm_name, size);
++    const uint32_t qemu_map_flags = QEMU_MAP_SHARED;
++    size_t align = QEMU_VMALLOC_ALIGN;
++    
++    // Open shared memory
++    if (!shm_name) {
++        return NULL;
++    }
++    int shm_fd = shm_open(shm_name, O_CREAT | O_EXCL | O_RDWR, 0777);
++    if (shm_fd == -1) {
++        return NULL;
++    }
++
++    if (ftruncate(shm_fd, size)) {
++        close(shm_fd);
++        shm_unlink(shm_name);
++        return NULL;
++    }
++
++    void *ptr = qemu_ram_mmap(shm_fd, size, align, qemu_map_flags, 0);
++
++    if (ptr == MAP_FAILED) {
++        close(shm_fd);
++        shm_unlink(shm_name);
++        return NULL;
++    }
++    if (alignment) {
++        *alignment = align;
++    }
++    trace_qemu_anon_ram_alloc(size, ptr);
++    return ptr;
++}
++
+ void qemu_vfree(void *ptr)
+ {
+     trace_qemu_vfree(ptr);
+@@ -259,6 +294,11 @@ void qemu_anon_ram_free(void *ptr, size_t size)
+     qemu_ram_munmap(-1, ptr, size);
+ }
+ 
++void qemu_shm_ram_free(void *ptr, size_t size)
++{
++    
++}
++
+ void qemu_set_block(int fd)
+ {
+     int f;
