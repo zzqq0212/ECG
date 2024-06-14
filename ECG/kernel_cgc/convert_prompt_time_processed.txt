@@ -1,0 +1,1655 @@
+
+————————————————————————————————These prompts belong to Node: 【__bad_copy_from】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __bad_copy_from, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __bad_copy_from in the linux kenrel source code.
+## The __bad_copy_from function is called in the sys_gettimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_gettimeofday invokes __se_sys_gettimeofday.
+2. function __se_sys_gettimeofday invokes __do_sys_gettimeofday.
+3. function __do_sys_gettimeofday invokes __bad_copy_from.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __bad_copy_from.
+
+————————————————————————————————These prompts belong to Node: 【clockevent_set_state】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clockevent_set_state, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clockevent_set_state in the linux kenrel source code.
+## The clockevent_set_state function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_switch_state.
+12. function clockevents_switch_state invokes clockevent_set_state.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clockevent_set_state.
+
+————————————————————————————————These prompts belong to Node: 【clockevent_get_state】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clockevent_get_state, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clockevent_get_state in the linux kenrel source code.
+## The clockevent_get_state function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_switch_state.
+12. function clockevents_switch_state invokes clockevent_get_state.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clockevent_get_state.
+
+————————————————————————————————These prompts belong to Node: 【clockevent_state_oneshot】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clockevent_state_oneshot, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clockevent_state_oneshot in the linux kenrel source code.
+## The clockevent_state_oneshot function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_switch_state.
+12. function clockevents_switch_state invokes __clockevents_switch_state.
+13. function __clockevents_switch_state invokes clockevent_state_oneshot.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clockevent_state_oneshot.
+
+————————————————————————————————These prompts belong to Node: 【clockevent_state_shutdown】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clockevent_state_shutdown, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clockevent_state_shutdown in the linux kenrel source code.
+## The clockevent_state_shutdown function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_program_event.
+12. function clockevents_program_event invokes clockevents_program_min_delta.
+13. function clockevents_program_min_delta invokes clockevent_state_shutdown.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clockevent_state_shutdown.
+
+————————————————————————————————These prompts belong to Node: 【ktime_to_ns】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ktime_to_ns, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ktime_to_ns in the linux kenrel source code.
+## The ktime_to_ns function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_program_event.
+12. function clockevents_program_event invokes ktime_to_ns.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ktime_to_ns.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_unlock_irqrestore】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_unlock_irqrestore, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_unlock_irqrestore in the linux kenrel source code.
+## The _raw_spin_unlock_irqrestore function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes _raw_spin_unlock_irqrestore.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_unlock_irqrestore.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_lock_irqsave】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_lock_irqsave, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_lock_irqsave in the linux kenrel source code.
+## The _raw_spin_lock_irqsave function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes _raw_spin_lock_irqsave.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_lock_irqsave.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_unlock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_unlock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_unlock in the linux kenrel source code.
+## The _raw_spin_unlock function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes switch_hrtimer_base.
+10. function switch_hrtimer_base invokes _raw_spin_unlock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_unlock.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_lock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_lock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_lock in the linux kenrel source code.
+## The _raw_spin_lock function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes switch_hrtimer_base.
+10. function switch_hrtimer_base invokes _raw_spin_lock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_lock.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_get_expires_tv】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_get_expires_tv, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_get_expires_tv in the linux kenrel source code.
+## The hrtimer_get_expires_tv function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes hrtimer_get_expires_tv.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_get_expires_tv.
+
+————————————————————————————————These prompts belong to Node: 【ktime_compare】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ktime_compare, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ktime_compare in the linux kenrel source code.
+## The ktime_compare function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes ktime_before.
+10. function ktime_before invokes ktime_compare.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ktime_compare.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_update_lowres】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_update_lowres, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_update_lowres in the linux kenrel source code.
+## The hrtimer_update_lowres function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes hrtimer_update_lowres.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_update_lowres.
+
+————————————————————————————————These prompts belong to Node: 【timerqueue_add】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerqueue_add, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerqueue_add in the linux kenrel source code.
+## The timerqueue_add function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes enqueue_hrtimer.
+10. function enqueue_hrtimer invokes timerqueue_add.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerqueue_add.
+
+————————————————————————————————These prompts belong to Node: 【debug_hrtimer_activate】at below.—————————————————————————————————— 
+# Now I have a kernel internal function debug_hrtimer_activate, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: debug_hrtimer_activate in the linux kenrel source code.
+## The debug_hrtimer_activate function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes enqueue_hrtimer.
+10. function enqueue_hrtimer invokes debug_activate.
+11. function debug_activate invokes debug_hrtimer_activate.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: debug_hrtimer_activate.
+
+————————————————————————————————These prompts belong to Node: 【ktime_set】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ktime_set, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ktime_set in the linux kenrel source code.
+## The ktime_set function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes hrtimer_set_expires_range_ns.
+5. function hrtimer_set_expires_range_ns invokes ktime_add_safe.
+6. function ktime_add_safe invokes ktime_set.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ktime_set.
+
+————————————————————————————————These prompts belong to Node: 【ns_to_ktime】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ns_to_ktime, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ns_to_ktime in the linux kenrel source code.
+## The ns_to_ktime function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes hrtimer_set_expires_range_ns.
+5. function hrtimer_set_expires_range_ns invokes ns_to_ktime.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ns_to_ktime.
+
+————————————————————————————————These prompts belong to Node: 【timerqueue_init】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerqueue_init, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerqueue_init in the linux kenrel source code.
+## The timerqueue_init function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes hrtimer_init_sleeper_on_stack.
+5. function hrtimer_init_sleeper_on_stack invokes hrtimer_init_sleeper.
+6. function hrtimer_init_sleeper invokes __hrtimer_init_sleeper.
+7. function __hrtimer_init_sleeper invokes __hrtimer_init.
+8. function __hrtimer_init invokes timerqueue_init.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerqueue_init.
+
+————————————————————————————————These prompts belong to Node: 【debug_hrtimer_init】at below.—————————————————————————————————— 
+# Now I have a kernel internal function debug_hrtimer_init, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: debug_hrtimer_init in the linux kenrel source code.
+## The debug_hrtimer_init function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes hrtimer_init_sleeper_on_stack.
+5. function hrtimer_init_sleeper_on_stack invokes hrtimer_init_sleeper.
+6. function hrtimer_init_sleeper invokes debug_init.
+7. function debug_init invokes debug_hrtimer_init.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: debug_hrtimer_init.
+
+————————————————————————————————These prompts belong to Node: 【rt_prio】at below.—————————————————————————————————— 
+# Now I have a kernel internal function rt_prio, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: rt_prio in the linux kenrel source code.
+## The rt_prio function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes rt_task.
+5. function rt_task invokes rt_prio.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: rt_prio.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_expires_remaining】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_expires_remaining, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_expires_remaining in the linux kenrel source code.
+## The hrtimer_expires_remaining function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_expires_remaining.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_expires_remaining.
+
+————————————————————————————————These prompts belong to Node: 【__bad_copy_to】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __bad_copy_to, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __bad_copy_to in the linux kenrel source code.
+## The __bad_copy_to function is called in the sys_gettimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_gettimeofday invokes __se_sys_gettimeofday.
+2. function __se_sys_gettimeofday invokes __do_sys_gettimeofday.
+3. function __do_sys_gettimeofday invokes __bad_copy_to.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __bad_copy_to.
+
+————————————————————————————————These prompts belong to Node: 【check_object_size】at below.—————————————————————————————————— 
+# Now I have a kernel internal function check_object_size, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: check_object_size in the linux kenrel source code.
+## The check_object_size function is called in the sys_gettimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_gettimeofday invokes __se_sys_gettimeofday.
+2. function __se_sys_gettimeofday invokes __do_sys_gettimeofday.
+3. function __do_sys_gettimeofday invokes check_object_size.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: check_object_size.
+
+————————————————————————————————These prompts belong to Node: 【_copy_to_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _copy_to_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _copy_to_user in the linux kenrel source code.
+## The _copy_to_user function is called in the sys_gettimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_gettimeofday invokes __se_sys_gettimeofday.
+2. function __se_sys_gettimeofday invokes __do_sys_gettimeofday.
+3. function __do_sys_gettimeofday invokes _copy_to_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _copy_to_user.
+
+————————————————————————————————These prompts belong to Node: 【__copy_overflow】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __copy_overflow, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __copy_overflow in the linux kenrel source code.
+## The __copy_overflow function is called in the sys_gettimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_gettimeofday invokes __se_sys_gettimeofday.
+2. function __se_sys_gettimeofday invokes __do_sys_gettimeofday.
+3. function __do_sys_gettimeofday invokes copy_overflow.
+4. function copy_overflow invokes __copy_overflow.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __copy_overflow.
+
+————————————————————————————————These prompts belong to Node: 【_copy_from_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _copy_from_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _copy_from_user in the linux kenrel source code.
+## The _copy_from_user function is called in the sys_settimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_settimeofday invokes __se_sys_settimeofday.
+2. function __se_sys_settimeofday invokes __do_sys_settimeofday.
+3. function __do_sys_settimeofday invokes _copy_from_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _copy_from_user.
+
+————————————————————————————————These prompts belong to Node: 【in_x32_syscall】at below.—————————————————————————————————— 
+# Now I have a kernel internal function in_x32_syscall, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: in_x32_syscall in the linux kenrel source code.
+## The in_x32_syscall function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes get_timespec.
+4. function get_timespec invokes in_compat_syscall.
+5. function in_compat_syscall invokes in_32bit_syscall.
+6. function in_32bit_syscall invokes in_x32_syscall.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: in_x32_syscall.
+
+————————————————————————————————These prompts belong to Node: 【div_u64_rem】at below.—————————————————————————————————— 
+# Now I have a kernel internal function div_u64_rem, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: div_u64_rem in the linux kenrel source code.
+## The div_u64_rem function is called in the sys_getitimer system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_getitimer invokes __se_sys_getitimer.
+2. function __se_sys_getitimer invokes __do_sys_getitimer.
+3. function __do_sys_getitimer invokes do_getitimer.
+4. function do_getitimer invokes itimer_get_remtime.
+5. function itimer_get_remtime invokes ns_to_timespec.
+6. function ns_to_timespec invokes div_u64_rem.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: div_u64_rem.
+
+————————————————————————————————These prompts belong to Node: 【set_normalized_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function set_normalized_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: set_normalized_timespec in the linux kenrel source code.
+## The set_normalized_timespec function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timespec64_sub.
+5. function timespec64_sub invokes set_normalized_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: set_normalized_timespec.
+
+————————————————————————————————These prompts belong to Node: 【might_fault】at below.—————————————————————————————————— 
+# Now I have a kernel internal function might_fault, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: might_fault in the linux kenrel source code.
+## The might_fault function is called in the sys_time system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_time invokes __se_sys_time.
+2. function __se_sys_time invokes __do_sys_time.
+3. function __do_sys_time invokes might_fault.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: might_fault.
+
+————————————————————————————————These prompts belong to Node: 【kmsan_copy_to_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmsan_copy_to_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmsan_copy_to_user in the linux kenrel source code.
+## The kmsan_copy_to_user function is called in the sys_time system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_time invokes __se_sys_time.
+2. function __se_sys_time invokes __do_sys_time.
+3. function __do_sys_time invokes kmsan_copy_to_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmsan_copy_to_user.
+
+————————————————————————————————These prompts belong to Node: 【kmsan_unpoison_memory】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmsan_unpoison_memory, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmsan_unpoison_memory in the linux kenrel source code.
+## The kmsan_unpoison_memory function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes kmsan_unpoison_memory.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmsan_unpoison_memory.
+
+————————————————————————————————These prompts belong to Node: 【security_settime】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_settime, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_settime in the linux kenrel source code.
+## The security_settime function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes security_settime.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_settime.
+
+————————————————————————————————These prompts belong to Node: 【timespec64_valid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timespec64_valid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timespec64_valid in the linux kenrel source code.
+## The timespec64_valid function is called in the sys_settimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_settimeofday invokes __se_sys_settimeofday.
+2. function __se_sys_settimeofday invokes __do_sys_settimeofday.
+3. function __do_sys_settimeofday invokes do_sys_settimeofday.
+4. function do_sys_settimeofday invokes timespec64_valid_settod.
+5. function timespec64_valid_settod invokes timespec64_valid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timespec64_valid.
+
+————————————————————————————————These prompts belong to Node: 【get_nohz_timer_target】at below.—————————————————————————————————— 
+# Now I have a kernel internal function get_nohz_timer_target, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: get_nohz_timer_target in the linux kenrel source code.
+## The get_nohz_timer_target function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes switch_hrtimer_base.
+10. function switch_hrtimer_base invokes get_target_base.
+11. function get_target_base invokes get_nohz_timer_target.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: get_nohz_timer_target.
+
+————————————————————————————————These prompts belong to Node: 【schedule】at below.—————————————————————————————————— 
+# Now I have a kernel internal function schedule, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: schedule in the linux kenrel source code.
+## The schedule function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes schedule.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: schedule.
+
+————————————————————————————————These prompts belong to Node: 【_printk】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _printk, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _printk in the linux kenrel source code.
+## The _printk function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes logarithmic_accumulation.
+6. function logarithmic_accumulation invokes accumulate_nsecs_to_secs.
+7. function accumulate_nsecs_to_secs invokes second_overflow.
+8. function second_overflow invokes _printk.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _printk.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_cancel_wait_running】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_cancel_wait_running, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_cancel_wait_running in the linux kenrel source code.
+## The hrtimer_cancel_wait_running function is called in the sys_alarm system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_alarm invokes __se_sys_alarm.
+2. function __se_sys_alarm invokes __do_sys_alarm.
+3. function __do_sys_alarm invokes alarm_setitimer.
+4. function alarm_setitimer invokes do_setitimer.
+5. function do_setitimer invokes hrtimer_cancel_wait_running.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_cancel_wait_running.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_start】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_start, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_start in the linux kenrel source code.
+## The hrtimer_start function is called in the sys_alarm system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_alarm invokes __se_sys_alarm.
+2. function __se_sys_alarm invokes __do_sys_alarm.
+3. function __do_sys_alarm invokes alarm_setitimer.
+4. function alarm_setitimer invokes do_setitimer.
+5. function do_setitimer invokes hrtimer_start.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_start.
+
+————————————————————————————————These prompts belong to Node: 【timespec64_to_ns】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timespec64_to_ns, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timespec64_to_ns in the linux kenrel source code.
+## The timespec64_to_ns function is called in the sys_alarm system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_alarm invokes __se_sys_alarm.
+2. function __se_sys_alarm invokes __do_sys_alarm.
+3. function __do_sys_alarm invokes alarm_setitimer.
+4. function alarm_setitimer invokes do_setitimer.
+5. function do_setitimer invokes set_cpu_itimer.
+6. function set_cpu_itimer invokes timespec64_to_ns.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timespec64_to_ns.
+
+————————————————————————————————These prompts belong to Node: 【tk_xtime】at below.—————————————————————————————————— 
+# Now I have a kernel internal function tk_xtime, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: tk_xtime in the linux kenrel source code.
+## The tk_xtime function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes tk_xtime.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: tk_xtime.
+
+————————————————————————————————These prompts belong to Node: 【queue_work_on】at below.—————————————————————————————————— 
+# Now I have a kernel internal function queue_work_on, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: queue_work_on in the linux kenrel source code.
+## The queue_work_on function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes ntp_notify_cmos_timer.
+5. function ntp_notify_cmos_timer invokes queue_work.
+6. function queue_work invokes queue_work_on.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: queue_work_on.
+
+————————————————————————————————These prompts belong to Node: 【_find_next_bit】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _find_next_bit, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _find_next_bit in the linux kenrel source code.
+## The _find_next_bit function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes find_next_bit.
+6. function find_next_bit invokes _find_next_bit.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _find_next_bit.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_lock_irq】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_lock_irq, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_lock_irq in the linux kenrel source code.
+## The _raw_spin_lock_irq function is called in the sys_getitimer system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_getitimer invokes __se_sys_getitimer.
+2. function __se_sys_getitimer invokes __do_sys_getitimer.
+3. function __do_sys_getitimer invokes do_getitimer.
+4. function do_getitimer invokes _raw_spin_lock_irq.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_lock_irq.
+
+————————————————————————————————These prompts belong to Node: 【_raw_spin_unlock_irq】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _raw_spin_unlock_irq, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _raw_spin_unlock_irq in the linux kenrel source code.
+## The _raw_spin_unlock_irq function is called in the sys_getitimer system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_getitimer invokes __se_sys_getitimer.
+2. function __se_sys_getitimer invokes __do_sys_getitimer.
+3. function __do_sys_getitimer invokes do_getitimer.
+4. function do_getitimer invokes _raw_spin_unlock_irq.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _raw_spin_unlock_irq.
+
+————————————————————————————————These prompts belong to Node: 【audit_ntp_init】at below.—————————————————————————————————— 
+# Now I have a kernel internal function audit_ntp_init, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: audit_ntp_init in the linux kenrel source code.
+## The audit_ntp_init function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes audit_ntp_init.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: audit_ntp_init.
+
+————————————————————————————————These prompts belong to Node: 【__audit_ntp_log】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __audit_ntp_log, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __audit_ntp_log in the linux kenrel source code.
+## The __audit_ntp_log function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes audit_ntp_log.
+5. function audit_ntp_log invokes __audit_ntp_log.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __audit_ntp_log.
+
+————————————————————————————————These prompts belong to Node: 【capable】at below.—————————————————————————————————— 
+# Now I have a kernel internal function capable, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: capable in the linux kenrel source code.
+## The capable function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_validate_timex.
+5. function timekeeping_validate_timex invokes capable.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: capable.
+
+————————————————————————————————These prompts belong to Node: 【pps_clear】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pps_clear, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pps_clear in the linux kenrel source code.
+## The pps_clear function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timekeeping_update.
+5. function timekeeping_update invokes ntp_clear.
+6. function ntp_clear invokes pps_clear.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pps_clear.
+
+————————————————————————————————These prompts belong to Node: 【ntp_tick_length】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ntp_tick_length, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ntp_tick_length in the linux kenrel source code.
+## The ntp_tick_length function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes ntp_tick_length.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ntp_tick_length.
+
+————————————————————————————————These prompts belong to Node: 【__warn_printk】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __warn_printk, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __warn_printk in the linux kenrel source code.
+## The __warn_printk function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes hrtimer_init_sleeper_on_stack.
+5. function hrtimer_init_sleeper_on_stack invokes hrtimer_init_sleeper.
+6. function hrtimer_init_sleeper invokes __hrtimer_init_sleeper.
+7. function __hrtimer_init_sleeper invokes __hrtimer_init.
+8. function __hrtimer_init invokes hrtimer_clockid_to_base.
+9. function hrtimer_clockid_to_base invokes __warn_printk.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __warn_printk.
+
+————————————————————————————————These prompts belong to Node: 【destroy_hrtimer_on_stack】at below.—————————————————————————————————— 
+# Now I have a kernel internal function destroy_hrtimer_on_stack, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: destroy_hrtimer_on_stack in the linux kenrel source code.
+## The destroy_hrtimer_on_stack function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes destroy_hrtimer_on_stack.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: destroy_hrtimer_on_stack.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_callback_running】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_callback_running, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_callback_running in the linux kenrel source code.
+## The hrtimer_callback_running function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes switch_hrtimer_base.
+10. function switch_hrtimer_base invokes hrtimer_callback_running.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_callback_running.
+
+————————————————————————————————These prompts belong to Node: 【timerqueue_del】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerqueue_del, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerqueue_del in the linux kenrel source code.
+## The timerqueue_del function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes remove_hrtimer.
+10. function remove_hrtimer invokes __remove_hrtimer.
+11. function __remove_hrtimer invokes timerqueue_del.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerqueue_del.
+
+————————————————————————————————These prompts belong to Node: 【__hrtimer_hres_active】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __hrtimer_hres_active, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __hrtimer_hres_active in the linux kenrel source code.
+## The __hrtimer_hres_active function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes __hrtimer_hres_active.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __hrtimer_hres_active.
+
+————————————————————————————————These prompts belong to Node: 【__next_base】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __next_base, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __next_base in the linux kenrel source code.
+## The __next_base function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes update_needs_ipi.
+6. function update_needs_ipi invokes __next_base.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __next_base.
+
+————————————————————————————————These prompts belong to Node: 【timerqueue_getnext】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerqueue_getnext, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerqueue_getnext in the linux kenrel source code.
+## The timerqueue_getnext function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes update_needs_ipi.
+6. function update_needs_ipi invokes timerqueue_getnext.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerqueue_getnext.
+
+————————————————————————————————These prompts belong to Node: 【timerqueue_iterate_next】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerqueue_iterate_next, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerqueue_iterate_next in the linux kenrel source code.
+## The timerqueue_iterate_next function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes remove_hrtimer.
+10. function remove_hrtimer invokes __remove_hrtimer.
+11. function __remove_hrtimer invokes hrtimer_force_reprogram.
+12. function hrtimer_force_reprogram invokes hrtimer_update_next_event.
+13. function hrtimer_update_next_event invokes __hrtimer_get_next_event.
+14. function __hrtimer_get_next_event invokes __hrtimer_next_event_base.
+15. function __hrtimer_next_event_base invokes timerqueue_iterate_next.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerqueue_iterate_next.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_get_expires】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_get_expires, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_get_expires in the linux kenrel source code.
+## The hrtimer_get_expires function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_get_expires.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_get_expires.
+
+————————————————————————————————These prompts belong to Node: 【debug_hrtimer_deactivate】at below.—————————————————————————————————— 
+# Now I have a kernel internal function debug_hrtimer_deactivate, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: debug_hrtimer_deactivate in the linux kenrel source code.
+## The debug_hrtimer_deactivate function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes __hrtimer_start_range_ns.
+9. function __hrtimer_start_range_ns invokes remove_hrtimer.
+10. function remove_hrtimer invokes debug_deactivate.
+11. function debug_deactivate invokes debug_hrtimer_deactivate.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: debug_hrtimer_deactivate.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_get_softexpires】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_get_softexpires, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_get_softexpires in the linux kenrel source code.
+## The hrtimer_get_softexpires function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_get_softexpires.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_get_softexpires.
+
+————————————————————————————————These prompts belong to Node: 【cpus_read_lock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function cpus_read_lock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: cpus_read_lock in the linux kenrel source code.
+## The cpus_read_lock function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes cpus_read_lock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: cpus_read_lock.
+
+————————————————————————————————These prompts belong to Node: 【smp_call_function_many】at below.—————————————————————————————————— 
+# Now I have a kernel internal function smp_call_function_many, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: smp_call_function_many in the linux kenrel source code.
+## The smp_call_function_many function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes smp_call_function_many.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: smp_call_function_many.
+
+————————————————————————————————These prompts belong to Node: 【cpus_read_unlock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function cpus_read_unlock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: cpus_read_unlock in the linux kenrel source code.
+## The cpus_read_unlock function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes cpus_read_unlock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: cpus_read_unlock.
+
+————————————————————————————————These prompts belong to Node: 【free_cpumask_var】at below.—————————————————————————————————— 
+# Now I have a kernel internal function free_cpumask_var, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: free_cpumask_var in the linux kenrel source code.
+## The free_cpumask_var function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes free_cpumask_var.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: free_cpumask_var.
+
+————————————————————————————————These prompts belong to Node: 【timerfd_clock_was_set】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timerfd_clock_was_set, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timerfd_clock_was_set in the linux kenrel source code.
+## The timerfd_clock_was_set function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes timerfd_clock_was_set.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timerfd_clock_was_set.
+
+————————————————————————————————These prompts belong to Node: 【on_each_cpu_cond_mask】at below.—————————————————————————————————— 
+# Now I have a kernel internal function on_each_cpu_cond_mask, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: on_each_cpu_cond_mask in the linux kenrel source code.
+## The on_each_cpu_cond_mask function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes on_each_cpu.
+6. function on_each_cpu invokes on_each_cpu_cond_mask.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: on_each_cpu_cond_mask.
+
+————————————————————————————————These prompts belong to Node: 【bitmap_zero】at below.—————————————————————————————————— 
+# Now I have a kernel internal function bitmap_zero, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: bitmap_zero in the linux kenrel source code.
+## The bitmap_zero function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes zalloc_cpumask_var.
+6. function zalloc_cpumask_var invokes cpumask_clear.
+7. function cpumask_clear invokes bitmap_zero.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: bitmap_zero.
+
+————————————————————————————————These prompts belong to Node: 【set_restart_fn】at below.—————————————————————————————————— 
+# Now I have a kernel internal function set_restart_fn, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: set_restart_fn in the linux kenrel source code.
+## The set_restart_fn function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes set_restart_fn.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: set_restart_fn.
+
+————————————————————————————————These prompts belong to Node: 【timer_overrun_to_int】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timer_overrun_to_int, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timer_overrun_to_int in the linux kenrel source code.
+## The timer_overrun_to_int function is called in the sys_timer_getoverrun system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_getoverrun invokes __se_sys_timer_getoverrun.
+2. function __se_sys_timer_getoverrun invokes __do_sys_timer_getoverrun.
+3. function __do_sys_timer_getoverrun invokes timer_overrun_to_int.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timer_overrun_to_int.
+
+————————————————————————————————These prompts belong to Node: 【__rcu_read_lock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __rcu_read_lock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __rcu_read_lock in the linux kenrel source code.
+## The __rcu_read_lock function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes __rcu_read_lock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __rcu_read_lock.
+
+————————————————————————————————These prompts belong to Node: 【__rcu_read_unlock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __rcu_read_unlock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __rcu_read_unlock in the linux kenrel source code.
+## The __rcu_read_unlock function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes rcu_read_unlock.
+5. function rcu_read_unlock invokes __rcu_read_unlock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __rcu_read_unlock.
+
+————————————————————————————————These prompts belong to Node: 【__posix_timers_find】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __posix_timers_find, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __posix_timers_find in the linux kenrel source code.
+## The __posix_timers_find function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_add.
+5. function posix_timer_add invokes __posix_timers_find.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __posix_timers_find.
+
+————————————————————————————————These prompts belong to Node: 【hash32_ptr】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hash32_ptr, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hash32_ptr in the linux kenrel source code.
+## The hash32_ptr function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_add.
+5. function posix_timer_add invokes hash.
+6. function hash invokes hash32_ptr.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hash32_ptr.
+
+————————————————————————————————These prompts belong to Node: 【__hash_32_generic】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __hash_32_generic, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __hash_32_generic in the linux kenrel source code.
+## The __hash_32_generic function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_add.
+5. function posix_timer_add invokes hash.
+6. function hash invokes hash_.
+7. function hash_ invokes __hash_32_generic.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __hash_32_generic.
+
+————————————————————————————————These prompts belong to Node: 【task_tgid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function task_tgid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: task_tgid in the linux kenrel source code.
+## The task_tgid function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes good_sigevent.
+5. function good_sigevent invokes task_tgid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: task_tgid.
+
+————————————————————————————————These prompts belong to Node: 【__hlist_del】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __hlist_del, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __hlist_del in the linux kenrel source code.
+## The __hlist_del function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_unhash_and_free.
+5. function posix_timer_unhash_and_free invokes hlist_del_rcu.
+6. function hlist_del_rcu invokes __hlist_del.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __hlist_del.
+
+————————————————————————————————These prompts belong to Node: 【__list_add_valid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __list_add_valid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __list_add_valid in the linux kenrel source code.
+## The __list_add_valid function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes list_add.
+5. function list_add invokes __list_add.
+6. function __list_add invokes __list_add_valid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __list_add_valid.
+
+————————————————————————————————These prompts belong to Node: 【refcount_warn_saturate】at below.—————————————————————————————————— 
+# Now I have a kernel internal function refcount_warn_saturate, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: refcount_warn_saturate in the linux kenrel source code.
+## The refcount_warn_saturate function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes get_pid.
+5. function get_pid invokes refcount_inc.
+6. function refcount_inc invokes __refcount_inc.
+7. function __refcount_inc invokes __refcount_add.
+8. function __refcount_add invokes refcount_warn_saturate.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: refcount_warn_saturate.
+
+————————————————————————————————These prompts belong to Node: 【find_vpid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function find_vpid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: find_vpid in the linux kenrel source code.
+## The find_vpid function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes good_sigevent.
+5. function good_sigevent invokes find_vpid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: find_vpid.
+
+————————————————————————————————These prompts belong to Node: 【pid_task】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pid_task, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pid_task in the linux kenrel source code.
+## The pid_task function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes good_sigevent.
+5. function good_sigevent invokes pid_task.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pid_task.
+
+————————————————————————————————These prompts belong to Node: 【tk_clock_read】at below.—————————————————————————————————— 
+# Now I have a kernel internal function tk_clock_read, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: tk_clock_read in the linux kenrel source code.
+## The tk_clock_read function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes update_needs_ipi.
+6. function update_needs_ipi invokes hrtimer_update_base.
+7. function hrtimer_update_base invokes ktime_get_update_offsets_now.
+8. function ktime_get_update_offsets_now invokes timekeeping_get_ns.
+9. function timekeeping_get_ns invokes timekeeping_get_delta.
+10. function timekeeping_get_delta invokes tk_clock_read.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: tk_clock_read.
+
+————————————————————————————————These prompts belong to Node: 【timespec64_compare】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timespec64_compare, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timespec64_compare in the linux kenrel source code.
+## The timespec64_compare function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timespec64_compare.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timespec64_compare.
+
+————————————————————————————————These prompts belong to Node: 【raw_write_seqcount_latch】at below.—————————————————————————————————— 
+# Now I have a kernel internal function raw_write_seqcount_latch, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: raw_write_seqcount_latch in the linux kenrel source code.
+## The raw_write_seqcount_latch function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timekeeping_update.
+5. function timekeeping_update invokes update_fast_timekeeper.
+6. function update_fast_timekeeper invokes raw_write_seqcount_latch.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: raw_write_seqcount_latch.
+
+————————————————————————————————These prompts belong to Node: 【raw_notifier_call_chain】at below.—————————————————————————————————— 
+# Now I have a kernel internal function raw_notifier_call_chain, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: raw_notifier_call_chain in the linux kenrel source code.
+## The raw_notifier_call_chain function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timekeeping_update.
+5. function timekeeping_update invokes update_pvclock_gtod.
+6. function update_pvclock_gtod invokes raw_notifier_call_chain.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: raw_notifier_call_chain.
+
+————————————————————————————————These prompts belong to Node: 【_printk_deferred】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _printk_deferred, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _printk_deferred in the linux kenrel source code.
+## The _printk_deferred function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevents_program_event.
+12. function clockevents_program_event invokes clockevents_program_min_delta.
+13. function clockevents_program_min_delta invokes clockevents_increase_min_delta.
+14. function clockevents_increase_min_delta invokes _printk_deferred.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _printk_deferred.
+
+————————————————————————————————These prompts belong to Node: 【tk_normalize_xtime】at below.—————————————————————————————————— 
+# Now I have a kernel internal function tk_normalize_xtime, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: tk_normalize_xtime in the linux kenrel source code.
+## The tk_normalize_xtime function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timekeeping_forward_now.
+5. function timekeeping_forward_now invokes tk_normalize_xtime.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: tk_normalize_xtime.
+
+————————————————————————————————These prompts belong to Node: 【clocksource_delta】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clocksource_delta, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clocksource_delta in the linux kenrel source code.
+## The clocksource_delta function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes update_needs_ipi.
+6. function update_needs_ipi invokes hrtimer_update_base.
+7. function hrtimer_update_base invokes ktime_get_update_offsets_now.
+8. function ktime_get_update_offsets_now invokes timekeeping_get_ns.
+9. function timekeeping_get_ns invokes timekeeping_get_delta.
+10. function timekeeping_get_delta invokes clocksource_delta.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clocksource_delta.
+
+————————————————————————————————These prompts belong to Node: 【timekeeping_delta_to_ns】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timekeeping_delta_to_ns, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timekeeping_delta_to_ns in the linux kenrel source code.
+## The timekeeping_delta_to_ns function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes clock_was_set.
+5. function clock_was_set invokes update_needs_ipi.
+6. function update_needs_ipi invokes hrtimer_update_base.
+7. function hrtimer_update_base invokes ktime_get_update_offsets_now.
+8. function ktime_get_update_offsets_now invokes timekeeping_get_ns.
+9. function timekeeping_get_ns invokes timekeeping_delta_to_ns.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timekeeping_delta_to_ns.
+
+————————————————————————————————These prompts belong to Node: 【tk_set_xtime】at below.—————————————————————————————————— 
+# Now I have a kernel internal function tk_set_xtime, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: tk_set_xtime in the linux kenrel source code.
+## The tk_set_xtime function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes tk_set_xtime.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: tk_set_xtime.
+
+————————————————————————————————These prompts belong to Node: 【add_device_randomness】at below.—————————————————————————————————— 
+# Now I have a kernel internal function add_device_randomness, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: add_device_randomness in the linux kenrel source code.
+## The add_device_randomness function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes add_device_randomness.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: add_device_randomness.
+
+————————————————————————————————These prompts belong to Node: 【__audit_tk_injoffset】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __audit_tk_injoffset, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __audit_tk_injoffset in the linux kenrel source code.
+## The __audit_tk_injoffset function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes audit_tk_injoffset.
+5. function audit_tk_injoffset invokes __audit_tk_injoffset.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __audit_tk_injoffset.
+
+————————————————————————————————These prompts belong to Node: 【audit_context】at below.—————————————————————————————————— 
+# Now I have a kernel internal function audit_context, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: audit_context in the linux kenrel source code.
+## The audit_context function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes audit_tk_injoffset.
+5. function audit_tk_injoffset invokes audit_dummy_context.
+6. function audit_dummy_context invokes audit_context.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: audit_context.
+
+————————————————————————————————These prompts belong to Node: 【div64_u】at below.—————————————————————————————————— 
+# Now I have a kernel internal function div64_u, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: div64_u in the linux kenrel source code.
+## The div64_u function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes timekeeping_adjust.
+6. function timekeeping_adjust invokes div64_u.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: div64_u.
+
+————————————————————————————————These prompts belong to Node: 【ktime_get_real_seconds】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ktime_get_real_seconds, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ktime_get_real_seconds in the linux kenrel source code.
+## The ktime_get_real_seconds function is called in the sys_time system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_time invokes __se_sys_time.
+2. function __se_sys_time invokes __do_sys_time.
+3. function __do_sys_time invokes ktime_get_real_seconds.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ktime_get_real_seconds.
+
+————————————————————————————————These prompts belong to Node: 【__ktime_get_real_seconds】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __ktime_get_real_seconds, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __ktime_get_real_seconds in the linux kenrel source code.
+## The __ktime_get_real_seconds function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes process_adjtimex_modes.
+6. function process_adjtimex_modes invokes process_adj_status.
+7. function process_adj_status invokes __ktime_get_real_seconds.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __ktime_get_real_seconds.
+
+————————————————————————————————These prompts belong to Node: 【timekeeping_check_update】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timekeeping_check_update, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timekeeping_check_update in the linux kenrel source code.
+## The timekeeping_check_update function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes timekeeping_check_update.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timekeeping_check_update.
+
+————————————————————————————————These prompts belong to Node: 【div_s64_rem】at below.—————————————————————————————————— 
+# Now I have a kernel internal function div_s64_rem, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: div_s64_rem in the linux kenrel source code.
+## The div_s64_rem function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes logarithmic_accumulation.
+6. function logarithmic_accumulation invokes accumulate_nsecs_to_secs.
+7. function accumulate_nsecs_to_secs invokes second_overflow.
+8. function second_overflow invokes div_s64_rem.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: div_s64_rem.
+
+————————————————————————————————These prompts belong to Node: 【ntp_offset_chunk】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ntp_offset_chunk, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ntp_offset_chunk in the linux kenrel source code.
+## The ntp_offset_chunk function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes logarithmic_accumulation.
+6. function logarithmic_accumulation invokes accumulate_nsecs_to_secs.
+7. function accumulate_nsecs_to_secs invokes second_overflow.
+8. function second_overflow invokes ntp_offset_chunk.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ntp_offset_chunk.
+
+————————————————————————————————These prompts belong to Node: 【pps_dec_valid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pps_dec_valid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pps_dec_valid in the linux kenrel source code.
+## The pps_dec_valid function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes timekeeping_advance.
+5. function timekeeping_advance invokes logarithmic_accumulation.
+6. function logarithmic_accumulation invokes accumulate_nsecs_to_secs.
+7. function accumulate_nsecs_to_secs invokes second_overflow.
+8. function second_overflow invokes pps_dec_valid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pps_dec_valid.
+
+————————————————————————————————These prompts belong to Node: 【ntp_synced】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ntp_synced, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ntp_synced in the linux kenrel source code.
+## The ntp_synced function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes ntp_notify_cmos_timer.
+5. function ntp_notify_cmos_timer invokes ntp_synced.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ntp_synced.
+
+————————————————————————————————These prompts belong to Node: 【hrtimer_is_queued】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hrtimer_is_queued, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hrtimer_is_queued in the linux kenrel source code.
+## The hrtimer_is_queued function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes ntp_notify_cmos_timer.
+5. function ntp_notify_cmos_timer invokes hrtimer_is_queued.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hrtimer_is_queued.
+
+————————————————————————————————These prompts belong to Node: 【audit_ntp_set_old】at below.—————————————————————————————————— 
+# Now I have a kernel internal function audit_ntp_set_old, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: audit_ntp_set_old in the linux kenrel source code.
+## The audit_ntp_set_old function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes audit_ntp_set_old.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: audit_ntp_set_old.
+
+————————————————————————————————These prompts belong to Node: 【audit_ntp_set_new】at below.—————————————————————————————————— 
+# Now I have a kernel internal function audit_ntp_set_new, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: audit_ntp_set_new in the linux kenrel source code.
+## The audit_ntp_set_new function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes audit_ntp_set_new.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: audit_ntp_set_new.
+
+————————————————————————————————These prompts belong to Node: 【is_error_status】at below.—————————————————————————————————— 
+# Now I have a kernel internal function is_error_status, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: is_error_status in the linux kenrel source code.
+## The is_error_status function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes is_error_status.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: is_error_status.
+
+————————————————————————————————These prompts belong to Node: 【pps_fill_timex】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pps_fill_timex, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pps_fill_timex in the linux kenrel source code.
+## The pps_fill_timex function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes pps_fill_timex.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pps_fill_timex.
+
+————————————————————————————————These prompts belong to Node: 【pps_set_freq】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pps_set_freq, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pps_set_freq in the linux kenrel source code.
+## The pps_set_freq function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes process_adjtimex_modes.
+6. function process_adjtimex_modes invokes pps_set_freq.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pps_set_freq.
+
+————————————————————————————————These prompts belong to Node: 【div64_s】at below.—————————————————————————————————— 
+# Now I have a kernel internal function div64_s, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: div64_s in the linux kenrel source code.
+## The div64_s function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes process_adjtimex_modes.
+6. function process_adjtimex_modes invokes ntp_update_offset.
+7. function ntp_update_offset invokes ntp_update_offset_fll.
+8. function ntp_update_offset_fll invokes div64_s.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: div64_s.
+
+————————————————————————————————These prompts belong to Node: 【pps_reset_freq_interval】at below.—————————————————————————————————— 
+# Now I have a kernel internal function pps_reset_freq_interval, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: pps_reset_freq_interval in the linux kenrel source code.
+## The pps_reset_freq_interval function is called in the sys_adjtimex system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_adjtimex invokes __se_sys_adjtimex.
+2. function __se_sys_adjtimex invokes __do_sys_adjtimex.
+3. function __do_sys_adjtimex invokes do_adjtimex.
+4. function do_adjtimex invokes __do_adjtimex.
+5. function __do_adjtimex invokes process_adjtimex_modes.
+6. function process_adjtimex_modes invokes process_adj_status.
+7. function process_adj_status invokes pps_reset_freq_interval.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: pps_reset_freq_interval.
+
+————————————————————————————————These prompts belong to Node: 【update_vdso_data】at below.—————————————————————————————————— 
+# Now I have a kernel internal function update_vdso_data, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: update_vdso_data in the linux kenrel source code.
+## The update_vdso_data function is called in the sys_stime system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_stime invokes __se_sys_stime.
+2. function __se_sys_stime invokes __do_sys_stime.
+3. function __do_sys_stime invokes do_settimeofday.
+4. function do_settimeofday invokes timekeeping_update.
+5. function timekeeping_update invokes update_vsyscall.
+6. function update_vsyscall invokes update_vdso_data.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: update_vdso_data.
+
+————————————————————————————————These prompts belong to Node: 【update_vsyscall_tz】at below.—————————————————————————————————— 
+# Now I have a kernel internal function update_vsyscall_tz, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: update_vsyscall_tz in the linux kenrel source code.
+## The update_vsyscall_tz function is called in the sys_settimeofday system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_settimeofday invokes __se_sys_settimeofday.
+2. function __se_sys_settimeofday invokes __do_sys_settimeofday.
+3. function __do_sys_settimeofday invokes do_sys_settimeofday.
+4. function do_sys_settimeofday invokes update_vsyscall_tz.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: update_vsyscall_tz.
+
+————————————————————————————————These prompts belong to Node: 【same_thread_group】at below.—————————————————————————————————— 
+# Now I have a kernel internal function same_thread_group, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: same_thread_group in the linux kenrel source code.
+## The same_thread_group function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes good_sigevent.
+5. function good_sigevent invokes same_thread_group.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: same_thread_group.
+
+————————————————————————————————These prompts belong to Node: 【put_pid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function put_pid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: put_pid in the linux kenrel source code.
+## The put_pid function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_free.
+5. function posix_timer_free invokes put_pid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: put_pid.
+
+————————————————————————————————These prompts belong to Node: 【sigqueue_free】at below.—————————————————————————————————— 
+# Now I have a kernel internal function sigqueue_free, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: sigqueue_free in the linux kenrel source code.
+## The sigqueue_free function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_free.
+5. function posix_timer_free invokes sigqueue_free.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: sigqueue_free.
+
+————————————————————————————————These prompts belong to Node: 【call_rcu】at below.—————————————————————————————————— 
+# Now I have a kernel internal function call_rcu, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: call_rcu in the linux kenrel source code.
+## The call_rcu function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_free.
+5. function posix_timer_free invokes call_rcu.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: call_rcu.
+
+————————————————————————————————These prompts belong to Node: 【kmem_cache_free】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmem_cache_free, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmem_cache_free in the linux kenrel source code.
+## The kmem_cache_free function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes alloc_posix_timer.
+5. function alloc_posix_timer invokes kmem_cache_free.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmem_cache_free.
+
+————————————————————————————————These prompts belong to Node: 【hlist_add_head_rcu】at below.—————————————————————————————————— 
+# Now I have a kernel internal function hlist_add_head_rcu, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: hlist_add_head_rcu in the linux kenrel source code.
+## The hlist_add_head_rcu function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes posix_timer_add.
+5. function posix_timer_add invokes hlist_add_head_rcu.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: hlist_add_head_rcu.
+
+————————————————————————————————These prompts belong to Node: 【sigqueue_alloc】at below.—————————————————————————————————— 
+# Now I have a kernel internal function sigqueue_alloc, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: sigqueue_alloc in the linux kenrel source code.
+## The sigqueue_alloc function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes alloc_posix_timer.
+5. function alloc_posix_timer invokes sigqueue_alloc.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: sigqueue_alloc.
+
+————————————————————————————————These prompts belong to Node: 【clear_siginfo】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clear_siginfo, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clear_siginfo in the linux kenrel source code.
+## The clear_siginfo function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes alloc_posix_timer.
+5. function alloc_posix_timer invokes clear_siginfo.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clear_siginfo.
+
+————————————————————————————————These prompts belong to Node: 【kmem_cache_alloc】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmem_cache_alloc, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmem_cache_alloc in the linux kenrel source code.
+## The kmem_cache_alloc function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes alloc_posix_timer.
+5. function alloc_posix_timer invokes kmem_cache_zalloc.
+6. function kmem_cache_zalloc invokes kmem_cache_alloc.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmem_cache_alloc.
+
+————————————————————————————————These prompts belong to Node: 【array_index_mask_nospec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function array_index_mask_nospec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: array_index_mask_nospec in the linux kenrel source code.
+## The array_index_mask_nospec function is called in the sys_timer_create system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_create invokes __se_sys_timer_create.
+2. function __se_sys_timer_create invokes __do_sys_timer_create.
+3. function __do_sys_timer_create invokes do_timer_create.
+4. function do_timer_create invokes clockid_to_kclock.
+5. function clockid_to_kclock invokes array_index_mask_nospec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: array_index_mask_nospec.
+
+————————————————————————————————These prompts belong to Node: 【timer_delete_hook】at below.—————————————————————————————————— 
+# Now I have a kernel internal function timer_delete_hook, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: timer_delete_hook in the linux kenrel source code.
+## The timer_delete_hook function is called in the sys_timer_delete system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_delete invokes __se_sys_timer_delete.
+2. function __se_sys_timer_delete invokes __do_sys_timer_delete.
+3. function __do_sys_timer_delete invokes timer_delete_hook.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: timer_delete_hook.
+
+————————————————————————————————These prompts belong to Node: 【__list_del_entry_valid】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __list_del_entry_valid, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __list_del_entry_valid in the linux kenrel source code.
+## The __list_del_entry_valid function is called in the sys_timer_delete system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_delete invokes __se_sys_timer_delete.
+2. function __se_sys_timer_delete invokes __do_sys_timer_delete.
+3. function __do_sys_timer_delete invokes list_del.
+4. function list_del invokes __list_del_entry.
+5. function __list_del_entry invokes __list_del_entry_valid.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __list_del_entry_valid.
+
+————————————————————————————————These prompts belong to Node: 【__list_del】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __list_del, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __list_del in the linux kenrel source code.
+## The __list_del function is called in the sys_timer_delete system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_timer_delete invokes __se_sys_timer_delete.
+2. function __se_sys_timer_delete invokes __do_sys_timer_delete.
+3. function __do_sys_timer_delete invokes list_del.
+4. function list_del invokes __list_del_entry.
+5. function __list_del_entry invokes __list_del.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __list_del.
+
+————————————————————————————————These prompts belong to Node: 【clockevent_state_oneshot_stopped】at below.—————————————————————————————————— 
+# Now I have a kernel internal function clockevent_state_oneshot_stopped, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: clockevent_state_oneshot_stopped in the linux kenrel source code.
+## The clockevent_state_oneshot_stopped function is called in the sys_nanosleep system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_nanosleep invokes __se_sys_nanosleep.
+2. function __se_sys_nanosleep invokes __do_sys_nanosleep.
+3. function __do_sys_nanosleep invokes hrtimer_nanosleep.
+4. function hrtimer_nanosleep invokes do_nanosleep.
+5. function do_nanosleep invokes hrtimer_sleeper_start_expires.
+6. function hrtimer_sleeper_start_expires invokes hrtimer_start_expires.
+7. function hrtimer_start_expires invokes hrtimer_start_range_ns.
+8. function hrtimer_start_range_ns invokes hrtimer_reprogram.
+9. function hrtimer_reprogram invokes __hrtimer_reprogram.
+10. function __hrtimer_reprogram invokes tick_program_event.
+11. function tick_program_event invokes clockevent_state_oneshot_stopped.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: clockevent_state_oneshot_stopped.

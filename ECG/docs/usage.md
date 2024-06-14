@@ -1,4 +1,27 @@
-## 1. Input payload generate
+## Install Prerequisites
+
+Basic dependencies install (take for example on debain or ubuntu):
+``` bash
+sudo apt update
+sudo apt install make gcc flex bison libncurses-dev libelf-dev libssl-dev
+```
+
+### GCC
+
+If your distro's GCC is older, it's preferable to get the latest GCC from [this](https://gcc.gnu.org/) list. Download and unpack into `$GCC`, and you should have GCC binaries in `$GCC/bin/`
+
+>**Ubuntu 20.04 LTS**: You can ignore this section. GCC is up-to-date.
+
+``` bash
+ls $GCC/bin/
+# Sample output:
+# cpp     gcc-ranlib  x86_64-pc-linux-gnu-gcc        x86_64-pc-linux-gnu-gcc-ranlib
+# gcc     gcov        x86_64-pc-linux-gnu-gcc-9.0.0
+# gcc-ar  gcov-dump   x86_64-pc-linux-gnu-gcc-ar
+# gcc-nm  gcov-tool   x86_64-pc-linux-gnu-gcc-nm
+```
+
+## Input payload generation
 
 ### Install LLVM Compile Chain 
 We refer to the [LLVM installation guidances](https://llvm.org/docs/GettingStarted.html).
@@ -25,32 +48,31 @@ In this step, we need to extract the kernel call graph from kernel source code a
 ```bash
 First, we need to download the kernel source code, for instance, we use the linux kernel version 6.7 to demonstrate the call graph extraction workflow.
 
-# download linux kernel 6.7 
+# Download linux kernel 6.7 
 cd ECG
 git clone https://github.com/torvalds/linux
 cd linux
 export Kernel=$pwd
 git checkout -f 0dd3ee3
 
-# after we have the Linux Kernel source code, we need to compile it.
+# After we have the Linux Kernel source code, we need to compile it.
 ``` bash
 make defconfig  
 make kvmconfig
 make LLVM=1 -j32
 ```
 
-Due to size of linux kernel source code is big. For demonstrating the workflow, we just create a `linux` folder in `ECG` for replacing the real linux kernel folder `linux`. 
+Due to size of linux kernel source code is big. For demonstrating the workflow, we just create a `kernel_cgc` folder in `ECG` for replacing the real linux kernel folder `kernel_cgc`. 
 
 ```bash
 cd ECG/linux
-# go run KernelBitCode.go
 go run KernelBitCode.go -cmd module 
 
-# run build.sh to generate the .bc file, make sure acquire `root` privilege.
+# Run build.sh to generate the .bc file, make sure acquire `root` privilege.
 chmod +x build.sh
 ./build.sh
 
-# Use the opt command convert .bc file to .dot file. This is a sample to show the opt operation. you can replace yourt actual .dot file path.
+# Use the opt command convert .bc file to .dot file. This is a sample to show the opt operation, and you can replace yourt actual .dot file path.
 opt -dot-callgraph-enable-new-pm=0 built-in.bc.callgraph.bc
 ```
 Now, we can acquire the kernel call graph file(built-in.bc.callgraph.dot), then we can extract the targeted module's call graph chain that need contain related system call function.
@@ -66,13 +88,13 @@ python3 convert_prompt.py
 We obtain the targetd module call graph chains prompts, we will use the LLM to help generate the corresponding C code. we will use the [ollama](https://ollama.com/) to get up and running with large language models, such as: Mixtral8x7b, LLama3-8b and so on. 
 
 ```bash
-# install ollama (Linux platform), other platform installation can find in (www.ollama.com/download) page.
+# Install ollama (Linux platform), other platform installation can find in (www.ollama.com/download) page.
 curl -fsSL https://ollama.com/install.sh | sh
 
-# run ollama
+# Run ollama
 ollama serve
 
-# download Mixtral8x7b or LLama3:8b model
+# Download Mixtral8x7b or LLama3:8b model
 ollama pull mixtral:8x7b
 ollama pull llama3:8b
 
@@ -85,19 +107,22 @@ python3 generate_html.py
 # Then, we can get the related LLM's response contains C program from responsed html page.
 gcc -o test test.c
 
-# use strace to obtain the system call trace info, finally copy it to `tracedir folders.
+# To use strace to obtain the system call trace info, finally copy it to `tracedir folders.
 strace -o tracefile -s 65500 -v -xx -f -k /path/to/executable arg1 arg2 .. argN
 
-# use `moonshine` to get the syzlang trace files.
+# To use `moonshine` to get the syzlang trace file. This moonshine/bin is built on Linux kernel x86-64 platform.
+cd benchmarks/moonshine 
 ./moonshine/bin/moonshine -dir [tracedir] -distill [distillCOnfig.json]
 
-# convert `tracedir` to corpus.db using syz-db. (go run syz-db.go)
+# To convert `tracedir` to corpus.db using syz-db. (go run syz-db.go)
+cd ECG
+go build syz-db.go
 ./tools/syz-db/syz-db pack [tracedir]
 
 ```
 Finally, we finish the `corpus.db`. Relevant `corpus.db` of experiment can bu used in the ECG.
 
-## 2. ECG build
+## Build
 
 ### Install golang
 We use golang in ECG, so make sure golang is installed before build ECG.
@@ -117,7 +142,7 @@ export PATH=$GOROOT/bin:$PATH
 In here we use Linux Kernel(Enable Real time Config) v6.7 as an example.
 First we need to have have a compilable Linux
 ```bash
-# download linux kernel 
+# Download linux kernel 
 git clone https://github.com/torvalds/linux
 cd linux
 export Kernel=$pwd
@@ -125,7 +150,7 @@ git checkout -f 0dd3ee3
 
 After we have the Linux Kernel, we need to compile it.
 ``` bash
-# modified configuration
+# Modified configuration
 make defconfig  
 make kvmconfig
 vim .config
@@ -172,7 +197,7 @@ chmod +x create-image.sh
 ```
 Now we have a image stretch.img and a public key.
 
-### Build ECG
+### Compile ECG
 ```bash
 cd ECG
 make
@@ -208,9 +233,9 @@ To kill the running QEMU instance press Ctrl+A and then X or run:
 ``` bash
 kill $(cat vm.pid)
 ```
-If QEMU works, the kernel boots and ssh succeeds, we can shutdown QEMU and try to run ECG.
+If QEMU works, the kernel boots and ssh succeeds, we can shutdown QEMU and try to run `ECG`.
 
-## 3. Usage
+## Usage
 
 Now we can start to prepare a __config.json__ file. Move this __config.json__ to `ECG` directory.
 
