@@ -122,7 +122,7 @@ strace -o tracefile -s 65500 -v -xx -f -k /path/to/executable arg1 arg2 .. argN
 ./tools/syz-db/syz-db pack [tracedir]
 
 ```
-Finally, we finish the `corpus.db`. Relevant`corpus.db`[!] of experiment can be download.
+Finally, we finish the `corpus.db`. Relevant `corpus.db` of experiment can bu used in the ECG.
 
 ## 2. Tool build
 
