@@ -65,7 +65,8 @@ Due to size of linux kernel source code is big. For demonstrating the workflow, 
 
 ```bash
 cd ECG/linux
-go run KernelBitCode.go
+# go run KernelBitCode.go
+go run KernelBitCode.go -cmd module 
 
 # run build.sh to generate the .bc file, make sure acquire `root` privilege.
 chmod +x build.sh
@@ -118,7 +119,7 @@ strace -o tracefile -s 65500 -v -xx -f -k /path/to/executable arg1 arg2 .. argN
 ```
 Finally, we finish the `corpus.db`. Relevant `corpus.db` of experiment can bu used in the ECG.
 
-## 2. Tool build
+## 2. ECG build
 
 ### Install golang
 We use golang in ECG, so make sure golang is installed before build ECG.
@@ -263,7 +264,6 @@ cd ECG
 cp ../corpus/corpus.db .
 ```
 
-```
 Now we can run it.
 
 ``` bash
