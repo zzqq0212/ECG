@@ -176,7 +176,7 @@ CONFIG_SECURITYFS=y
 ```
 
 make it!
-```
+``` bash
 make olddefconfig
 make -j32
 ```
