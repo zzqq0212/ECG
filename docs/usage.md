@@ -1,19 +1,128 @@
 ## 1. Input payload generate
 
 ### Install LLVM Compile Chain 
+We refer to the LLVM installation mannul(!)
+Here, we list the automatic installation for debain/ubuntu.
+```bash
+For convenience there is an automatic installation script available that installs LLVM for you.
+To install the latest stable version:
+bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
+To install a specific version of LLVM:
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh <version number>
+To install all apt.llvm.org packages at once:
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh <version number> all
+# or
+sudo ./llvm.sh all
+
+```
 
 ### Extract Call Graph
+In this step, we need to extract the kernel call graph from kernel source code and api by static analysis.
+```bash
+First, we need to download the kernel source code, for instance, we use the linux kernel 6.7 enabled preemption real-time cnfigs to show the call graph extraction step.
 
+#download linux kernel 6.7 
+git clone https://github.com/torvalds/linux
+cd linux
+export Kernel=$pwd
+git checkout -f 0dd3ee3
+
+After we have the Linux Kernel, we need to compile it.
+# enable real time preemption config
+``` bash
+# modified configuration
+make defconfig  
+make kvmconfig
+
+vim .config
+```
+
+``` vim
+# modified configuration
+CONFIG_PREEMPT=y
+CONFIG_PREEMPT_RT_BASE=y
+CONFIG_HAVE_PREEMPT_LAZY=y
+CONFIG_PREEMPT_LAZY=y
+CONFIG_PREEMPT_RT_FULL=y
+CONFIG_PREEMPT_COUNT=y
+
+CONFIG_KCOV=y 
+CONFIG_DEBUG_INFO=y 
+CONFIG_KASAN=y
+CONFIG_KASAN_INLINE=y 
+CONFIG_CONFIGFS_FS=y
+CONFIG_SECURITYFS=y
+```
+
+make it!
+```
+make olddefconfig
+make -j32
+```
+
+Then, for keep repo's size, we just create a `linux` folder for replacing the real linux kernel folder. 
+
+```bash
+cd linux
+go run GenerateKernelBc.go
+
+# run extractbc.sh to generate the .bc file, make sure acquire `root` privilege.
+./extractbc.sh
+
+# use the opt command convert .bc file to .dot file.
+opt -dot-callgraph-enable-new-pm=0 cg-build.bc 
+```
+
+Now, we can acquire the kernel call graph file(.dot), then we can extract the relevant module's call graph chain that need contain related system call function.
 
 ### Prompt assemble
+```bash
+# run cgpathsearch.py script to obtain call graph chain of targetd moudule, such as fs, mm, net module.
+python3 cgpathsearch.py
 
+# After run the cgpathsearch.py, we can get the similar named file: `save_path_fs.txt` contains all call graph chains within fs module. Then, we use convertToPrompt.py script to assemble prompts.
+python3 convertToPrompt.py
 
-### Call LLM 
+```
 
+### LLM Code Generation 
+We obtain the targetd module call graph chains prompts, we will use the LLM to help generate the corresponding C code. we will use the `ollama` to get up and running with large language models, such as: Mixtral8x7b, LLama3-8b and so on. 
 
-### Input payload 
+```bash
+# install ollama (Linux platform), other platform installation can find in `www.ollama.com/download` website.
+curl -fsSL https://ollama.com/install.sh | sh
 
+# run ollama
+ollama serve
+
+# download Mixtral8x7b or LLama3:8b model
+ollama pull mixtral:8x7b
+ollama pull llama3:8b
+
+# execute the automatic script to interact with LLM in `code` folder
+cd code
+python3 appy.py
+python3 generate_html.py
+
+# Then, we can get the related LLM's response contains C program.
+gcc -o sample sample.c
+
+# use strace to obtain the system call trace info, finally copy it to `tracedir folders.
+strace -o tracefile -s 65500 -v -xx -f -k /path/to/executable arg1 arg2 .. argN
+
+# use `moonshien` to get the syzlang trace files.
+./moonshine/bin/moonshine -dir [tracedir] -distill [distillCOnfig.json]
+
+# convert `tracedir` to corpus.db using syz-db. (go run syz-db.go)
+./tools/syz-db/syz-db pack [tracedir]
+
+```
+Finally, we finish the `corpus.db`. Relevant`corpus.db`[!] of experiment can be download.
 
 ## 2. Tool build
 
@@ -30,7 +139,7 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 ```
 
-### Prepare Kernel
+### Prepare Kernel(similar with `Extract Call Graph` step to compile Linux kernel)
 In here we use Linux Kernel(Enable Real time Config) v6.7 as an example.
 First we need to have have a compilable Linux
 ```bash
@@ -129,7 +238,7 @@ If QEMU works, the kernel boots and ssh succeeds, we can shutdown QEMU and try t
 Now we can start to 
 prepare a __config.json__ file.
 
-move to Rtkaller directory
+move to ECG directory
 
 ``` json 
 {

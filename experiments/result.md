@@ -11,7 +11,7 @@ Here we list the overall experiments results over 6 targets versions:
 | ECG-directed |         47228.6        |         49845.2        |         46180.7        |         44865.5        |         47228.6        |         49856.5        |         47534.1         |
 | DRLF         |  43283.3(+9.12)%  |                        |  41099.7(+12.36)% |  40445.2(+10.93)% |  43585.6(+8.36)%  |  43754.4(+13.95)% |  42802.4(+11.05)%  |
 
-<div align="center">
+<div align="left">
   <img src="https://github.com/zzqq0212/ECG/blob/main/experiments/result.png" height="500px" alt="图片说明" >
 </div>
 
