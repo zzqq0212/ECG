@@ -148,7 +148,7 @@ def process_final_content(content):
     return '\n'.join(new_content)
 
 if __name__ == "__main__":
-    dot_file_path = '/root/zhangqiang/kernel_fuzzing/zq-LLM-OS/ECG/ECG/kernel_cgc/built-in.bc.callgraph-sched.dot' # replace the actual path
+    dot_file_path = 'path' # replace .dot file actual path  /path/to/your/xxx.dot
     
     with open(dot_file_path, 'r') as file:
         dot_file_content = file.read()

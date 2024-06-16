@@ -16,7 +16,7 @@ def get_prompts_from_file(file_path):
                     prompt = []
             else:
                 prompt.append(line)
-        if prompt: 
+        if prompt:
             prompts.append(' '.join(prompt).strip())
     return prompts
 
@@ -37,7 +37,7 @@ def format_response(response):
     for match in code_pattern.finditer(response):
         formatted_response += f"<p>{response[last_end:match.start()].strip()}</p>"
         language = match.group(1)
-        code = match.group(2)
+        code = match.group(2).replace('<', '&lt;').replace('>', '&gt;')
         formatted_response += f"<pre><code class=\"language-{language}\">{code.strip()}</code></pre>"
         last_end = match.end()
     formatted_response += f"<p>{response[last_end:].strip()}</p>"
@@ -75,7 +75,7 @@ def generate_html(file_path):
     print(f"HTML file generated: {output_html}")
 
 if __name__ == '__main__':
-    txt_files_path = 'path'  # please update your actual file folder path
+    txt_files_path = 'path'  # # please update your actual file folder path
     txt_files = [os.path.join(txt_files_path, file) for file in os.listdir(txt_files_path) if file.endswith('.txt')]
     
     for txt_file in txt_files:

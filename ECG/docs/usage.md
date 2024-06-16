@@ -84,6 +84,10 @@ Now, we can acquire the kernel call graph file(built-in.bc.callgraph.dot), then 
 # After run convert_prompt.py script to obtain call graph chain of targetd kernel moudule. Then we can obtain assembled prompts file, such as: convert_prompt_fs_processed.txt
 chmod +x convert_prompt.py
 python3 convert_prompt.py
+
+# We can obtain relevant html file, such as: convert_prompt_fs.processed.txt. Then, we will extract the code from the html file.
+chmod +x extract_code.py
+python3 extract_code.py /path/to/your/convert_prompt_fs_processed.html
 ```
 
 ### LLM Code Generation 
