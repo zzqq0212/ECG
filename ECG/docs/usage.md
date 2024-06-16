@@ -62,10 +62,10 @@ make kvmconfig
 make LLVM=1 -j32
 ```
 
-Due to size of linux kernel source code is big. For demonstrating the workflow, we just create a `kernel_cgc` folder in `ECG` for replacing the real linux kernel folder `kernel_cgc`. 
+Due to size of linux kernel source code is big. For demonstrating the workflow, we just create a `ecg-kernel-control-graph` folder in `ECG` for replacing the real linux kernel folder `linux`. 
 
 ```bash
-cd ECG/linux
+cd ECG/ecg-kernel-control-graph
 go run KernelBitCode.go -cmd module 
 
 # Run build.sh to generate the .bc file, make sure acquire `root` privilege.
@@ -115,7 +115,7 @@ cd benchmarks/moonshine
 ./moonshine/bin/moonshine -dir [tracedir] -distill [distillCOnfig.json]
 
 # To convert `tracedir` to corpus.db using syz-db. (go run syz-db.go)
-cd ECG
+cd ECG/tools/syz-db
 go build syz-db.go
 ./tools/syz-db/syz-db pack [tracedir]
 
