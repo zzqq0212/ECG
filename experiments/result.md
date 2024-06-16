@@ -12,7 +12,7 @@
 | DRLF         |  43283.3(+9.12)%  |                        |  41099.7(+12.36)% |  40445.2(+10.93)% |  43585.6(+8.36)%  |  43754.4(+13.95)% |  42802.4(+11.05)%  |
 
 <div align="left">
-  <img src="https://github.com/zzqq0212/ECG/blob/main/ECG/experiments/coverage.png" height="500px" alt="coverage_pic" >
+  <img src="coverage.png" height="500px" alt="coverage_pic" >
 </div>
 
 ### The below table shows average bug counts of ECG and other fuzzers over 10 rounds of experiments.
