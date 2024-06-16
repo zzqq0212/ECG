@@ -8,7 +8,6 @@ struct call_attrs_t {
 	uint64_t breaks_returns;
 	uint64_t no_generate;
 	uint64_t no_minimize;
-	uint64_t remote_cover;
 };
 
 struct call_props_t { 
@@ -29,8 +28,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "37465694c341059ca64cd859126a5416a7fdbb11"
+#define SYZ_REVISION "235a0db73c02dc1feed468fb162b3d8a0e127db6"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 8589934592
@@ -43,8 +43,9 @@ struct call_props_t {
 
 #if GOARCH_386
 #define GOARCH "386"
-#define SYZ_REVISION "6cec60dae1c1437952b17db0b61a66f41a5beee3"
+#define SYZ_REVISION "f544a15a2d46122eceb20f4060af19b9cd63907f"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 268435456
@@ -79,8 +80,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "c79cf99eba2ae9891835d79a636562f070bb75fd"
+#define SYZ_REVISION "bcc6ae7c32cc72fbaa9daa532cdb202d7b826513"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -115,8 +117,9 @@ struct call_props_t {
 
 #if GOARCH_arm64
 #define GOARCH "arm64"
-#define SYZ_REVISION "254a0558aafc7eb919f4e8207f0eaf3ad9ac6d7a"
+#define SYZ_REVISION "74eb4ada464cfc570ad6499006b4107a7bc97d59"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -151,8 +154,9 @@ struct call_props_t {
 
 #if GOARCH_riscv64
 #define GOARCH "riscv64"
-#define SYZ_REVISION "1e774b322562684274a9ba885796dc89f9423497"
+#define SYZ_REVISION "c5625cf6a97eab6e9804eb1c329b91e6d318819c"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -187,13 +191,29 @@ struct call_props_t {
 
 #endif
 
+#if GOOS_freertos
+#define GOOS "freertos"
+
+#if GOARCH_xtensa
+#define GOARCH "xtensa"
+#define SYZ_REVISION "ada2c32bf8f1e27784670a1c13953a7896be7ff3"
+#define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 0
+#define SYZ_PAGE_SIZE 2048
+#define SYZ_NUM_PAGES 8192
+#define SYZ_DATA_OFFSET 536870912
+#endif
+
+#endif
+
 #if GOOS_fuchsia
 #define GOOS "fuchsia"
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "81824548b34800c0d8ad83ec022d8ff262cd450c"
+#define SYZ_REVISION "bc02eb8172c9f55c6362017ebd321dac80342e52"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -201,8 +221,9 @@ struct call_props_t {
 
 #if GOARCH_arm64
 #define GOARCH "arm64"
-#define SYZ_REVISION "5f183a46b76056fd2a375bd110ddecef9cd3f72d"
+#define SYZ_REVISION "f26ef0bd7dc7cde8aaf0931a039e2e938c3ae121"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -215,8 +236,9 @@ struct call_props_t {
 
 #if GOARCH_386
 #define GOARCH "386"
-#define SYZ_REVISION "f3f253b0c74c111f5f2995edb96c3cebce2f7539"
+#define SYZ_REVISION "2ad005c05d0681467641882256dc57f614f1a50d"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -1226,8 +1248,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "e87a28de456dd7cf9da62a09ab83aa0aaef636d3"
+#define SYZ_REVISION "94b2a8a9714fbcaf7b4a71bd207b3e31139f60be"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -1394,8 +1417,9 @@ struct call_props_t {
 
 #if GOARCH_arm
 #define GOARCH "arm"
-#define SYZ_REVISION "fd1c202d96c879f3f1970b5b5b32fd2534778778"
+#define SYZ_REVISION "7a10cd2070dbeb020b27b286f1df6f784534868e"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -2372,8 +2396,9 @@ struct call_props_t {
 
 #if GOARCH_arm64
 #define GOARCH "arm64"
-#define SYZ_REVISION "1ed7bbd267a7e6f2753d5d79aaaff708f99bdea8"
+#define SYZ_REVISION "b40c5dc492cab69c132d75cb327db71a33a9db7f"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -3257,8 +3282,9 @@ struct call_props_t {
 
 #if GOARCH_mips64le
 #define GOARCH "mips64le"
-#define SYZ_REVISION "b5b57e4589cd8fb843d5d3f441d3564449529d42"
+#define SYZ_REVISION "4e00573c188bf84ed4e1670709906c6afaeaddfa"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -4238,8 +4264,9 @@ struct call_props_t {
 
 #if GOARCH_ppc64le
 #define GOARCH "ppc64le"
-#define SYZ_REVISION "61639e60335b89925bfa89904caf38e8f3120eb8"
+#define SYZ_REVISION "6fcca17bba55002538f81bb3931c9f760ffd0876"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 65536
 #define SYZ_NUM_PAGES 256
 #define SYZ_DATA_OFFSET 536870912
@@ -5228,8 +5255,9 @@ struct call_props_t {
 
 #if GOARCH_riscv64
 #define GOARCH "riscv64"
-#define SYZ_REVISION "b4c77144a7aee01d06dc721ad0645fa7aa46f6e8"
+#define SYZ_REVISION "3c5400660fce4349b4d30cb9874990e403d1485c"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -6113,8 +6141,9 @@ struct call_props_t {
 
 #if GOARCH_s390x
 #define GOARCH "s390x"
-#define SYZ_REVISION "4bedfd4a4c08b8ac4fda7c3e911b8b7e6aa54688"
+#define SYZ_REVISION "c01249ec6d724976bb9926266147031c5db241a6"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 4294963200
@@ -7099,8 +7128,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "707b944bda1cf9d746e7f66575ca3e8d7ab4b791"
+#define SYZ_REVISION "1d52ba9ca66f900e8b8b0d80acd1d3b36bdba9e1"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -7932,8 +7962,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "540fc9df6683a57d8550004ffce02b3453476ca6"
+#define SYZ_REVISION "8cb91bb35914ca9a2576853b82f5a5646143656e"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -7944,10 +7975,165 @@ struct call_props_t {
 #if GOOS_test
 #define GOOS "test"
 
-#if GOARCH_32
-#define GOARCH "32"
-#define SYZ_REVISION "66d50bfb2313a05533938d96176bb478ca8d5407"
+#if GOARCH_32_fork_shmem
+#define GOARCH "32_fork_shmem"
+#define SYZ_REVISION "f63e5fc1f9f9a3dc7705e5ab673a218106b33de6"
+#define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
+#define SYZ_PAGE_SIZE 4096
+#define SYZ_NUM_PAGES 4096
+#define SYZ_DATA_OFFSET 536870912
+#ifndef SYS_breaks_returns
+#define SYS_breaks_returns 0
+#endif
+#ifndef SYS_csource0
+#define SYS_csource0 0
+#endif
+#ifndef SYS_csource1
+#define SYS_csource1 0
+#endif
+#ifndef SYS_csource2
+#define SYS_csource2 0
+#endif
+#ifndef SYS_csource3
+#define SYS_csource3 0
+#endif
+#ifndef SYS_csource4
+#define SYS_csource4 0
+#endif
+#ifndef SYS_csource5
+#define SYS_csource5 0
+#endif
+#ifndef SYS_csource6
+#define SYS_csource6 0
+#endif
+#ifndef SYS_csource7
+#define SYS_csource7 0
+#endif
+#ifndef SYS_disabled0
+#define SYS_disabled0 0
+#endif
+#ifndef SYS_disabled1
+#define SYS_disabled1 0
+#endif
+#ifndef SYS_disabled2
+#define SYS_disabled2 0
+#endif
+#ifndef SYS_fallback
+#define SYS_fallback 0
+#endif
+#ifndef SYS_foo
+#define SYS_foo 0
+#endif
+#ifndef SYS_minimize
+#define SYS_minimize 0
+#endif
+#ifndef SYS_mutate0
+#define SYS_mutate0 0
+#endif
+#ifndef SYS_mutate1
+#define SYS_mutate1 0
+#endif
+#ifndef SYS_mutate10
+#define SYS_mutate10 0
+#endif
+#ifndef SYS_mutate2
+#define SYS_mutate2 0
+#endif
+#ifndef SYS_mutate3
+#define SYS_mutate3 0
+#endif
+#ifndef SYS_mutate4
+#define SYS_mutate4 0
+#endif
+#ifndef SYS_mutate5
+#define SYS_mutate5 0
+#endif
+#ifndef SYS_mutate6
+#define SYS_mutate6 0
+#endif
+#ifndef SYS_mutate7
+#define SYS_mutate7 0
+#endif
+#ifndef SYS_mutate8
+#define SYS_mutate8 0
+#endif
+#ifndef SYS_mutate9
+#define SYS_mutate9 0
+#endif
+#ifndef SYS_mutate_array
+#define SYS_mutate_array 0
+#endif
+#ifndef SYS_mutate_array2
+#define SYS_mutate_array2 0
+#endif
+#ifndef SYS_mutate_buffer
+#define SYS_mutate_buffer 0
+#endif
+#ifndef SYS_mutate_flags
+#define SYS_mutate_flags 0
+#endif
+#ifndef SYS_mutate_flags2
+#define SYS_mutate_flags2 0
+#endif
+#ifndef SYS_mutate_flags3
+#define SYS_mutate_flags3 0
+#endif
+#ifndef SYS_mutate_integer
+#define SYS_mutate_integer 0
+#endif
+#ifndef SYS_mutate_integer2
+#define SYS_mutate_integer2 0
+#endif
+#ifndef SYS_mutate_rangedbuffer
+#define SYS_mutate_rangedbuffer 0
+#endif
+#ifndef SYS_mutate_union
+#define SYS_mutate_union 0
+#endif
+#ifndef SYS_overlay_any
+#define SYS_overlay_any 0
+#endif
+#ifndef SYS_overlay_ctor
+#define SYS_overlay_ctor 0
+#endif
+#ifndef SYS_overlay_uses
+#define SYS_overlay_uses 0
+#endif
+#ifndef SYS_serialize0
+#define SYS_serialize0 0
+#endif
+#ifndef SYS_serialize1
+#define SYS_serialize1 0
+#endif
+#ifndef SYS_serialize2
+#define SYS_serialize2 0
+#endif
+#ifndef SYS_serialize3
+#define SYS_serialize3 0
+#endif
+#ifndef SYS_test
+#define SYS_test 0
+#endif
+#ifndef SYS_test_excessive_args1
+#define SYS_test_excessive_args1 0
+#endif
+#ifndef SYS_test_excessive_args2
+#define SYS_test_excessive_args2 0
+#endif
+#ifndef SYS_test_length15
+#define SYS_test_length15 0
+#endif
+#ifndef SYS_unsupported
+#define SYS_unsupported 0
+#endif
+#endif
+
+#if GOARCH_32_shmem
+#define GOARCH "32_shmem"
+#define SYZ_REVISION "561e78fdbf82c77a054b8431d644022f79d8b25c"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 8192
 #define SYZ_NUM_PAGES 2048
 #define SYZ_DATA_OFFSET 536870912
@@ -8097,163 +8283,11 @@ struct call_props_t {
 #endif
 #endif
 
-#if GOARCH_32_fork
-#define GOARCH "32_fork"
-#define SYZ_REVISION "4e3df328bee29ad84eb517b79744a681e792553d"
-#define SYZ_EXECUTOR_USES_FORK_SERVER 1
-#define SYZ_PAGE_SIZE 4096
-#define SYZ_NUM_PAGES 4096
-#define SYZ_DATA_OFFSET 536870912
-#ifndef SYS_breaks_returns
-#define SYS_breaks_returns 0
-#endif
-#ifndef SYS_csource0
-#define SYS_csource0 0
-#endif
-#ifndef SYS_csource1
-#define SYS_csource1 0
-#endif
-#ifndef SYS_csource2
-#define SYS_csource2 0
-#endif
-#ifndef SYS_csource3
-#define SYS_csource3 0
-#endif
-#ifndef SYS_csource4
-#define SYS_csource4 0
-#endif
-#ifndef SYS_csource5
-#define SYS_csource5 0
-#endif
-#ifndef SYS_csource6
-#define SYS_csource6 0
-#endif
-#ifndef SYS_csource7
-#define SYS_csource7 0
-#endif
-#ifndef SYS_disabled0
-#define SYS_disabled0 0
-#endif
-#ifndef SYS_disabled1
-#define SYS_disabled1 0
-#endif
-#ifndef SYS_disabled2
-#define SYS_disabled2 0
-#endif
-#ifndef SYS_fallback
-#define SYS_fallback 0
-#endif
-#ifndef SYS_foo
-#define SYS_foo 0
-#endif
-#ifndef SYS_minimize
-#define SYS_minimize 0
-#endif
-#ifndef SYS_mutate0
-#define SYS_mutate0 0
-#endif
-#ifndef SYS_mutate1
-#define SYS_mutate1 0
-#endif
-#ifndef SYS_mutate10
-#define SYS_mutate10 0
-#endif
-#ifndef SYS_mutate2
-#define SYS_mutate2 0
-#endif
-#ifndef SYS_mutate3
-#define SYS_mutate3 0
-#endif
-#ifndef SYS_mutate4
-#define SYS_mutate4 0
-#endif
-#ifndef SYS_mutate5
-#define SYS_mutate5 0
-#endif
-#ifndef SYS_mutate6
-#define SYS_mutate6 0
-#endif
-#ifndef SYS_mutate7
-#define SYS_mutate7 0
-#endif
-#ifndef SYS_mutate8
-#define SYS_mutate8 0
-#endif
-#ifndef SYS_mutate9
-#define SYS_mutate9 0
-#endif
-#ifndef SYS_mutate_array
-#define SYS_mutate_array 0
-#endif
-#ifndef SYS_mutate_array2
-#define SYS_mutate_array2 0
-#endif
-#ifndef SYS_mutate_buffer
-#define SYS_mutate_buffer 0
-#endif
-#ifndef SYS_mutate_flags
-#define SYS_mutate_flags 0
-#endif
-#ifndef SYS_mutate_flags2
-#define SYS_mutate_flags2 0
-#endif
-#ifndef SYS_mutate_flags3
-#define SYS_mutate_flags3 0
-#endif
-#ifndef SYS_mutate_integer
-#define SYS_mutate_integer 0
-#endif
-#ifndef SYS_mutate_integer2
-#define SYS_mutate_integer2 0
-#endif
-#ifndef SYS_mutate_rangedbuffer
-#define SYS_mutate_rangedbuffer 0
-#endif
-#ifndef SYS_mutate_union
-#define SYS_mutate_union 0
-#endif
-#ifndef SYS_overlay_any
-#define SYS_overlay_any 0
-#endif
-#ifndef SYS_overlay_ctor
-#define SYS_overlay_ctor 0
-#endif
-#ifndef SYS_overlay_uses
-#define SYS_overlay_uses 0
-#endif
-#ifndef SYS_serialize0
-#define SYS_serialize0 0
-#endif
-#ifndef SYS_serialize1
-#define SYS_serialize1 0
-#endif
-#ifndef SYS_serialize2
-#define SYS_serialize2 0
-#endif
-#ifndef SYS_serialize3
-#define SYS_serialize3 0
-#endif
-#ifndef SYS_test
-#define SYS_test 0
-#endif
-#ifndef SYS_test_excessive_args1
-#define SYS_test_excessive_args1 0
-#endif
-#ifndef SYS_test_excessive_args2
-#define SYS_test_excessive_args2 0
-#endif
-#ifndef SYS_test_length15
-#define SYS_test_length15 0
-#endif
-#ifndef SYS_unsupported
-#define SYS_unsupported 0
-#endif
-#endif
-
 #if GOARCH_64
 #define GOARCH "64"
-#define SYZ_REVISION "7345dd902691b82cc03f969711f9b29d8c1b7816"
+#define SYZ_REVISION "555fd6fd6666d9beab6a379185f45750a6c67da5"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -8405,8 +8439,9 @@ struct call_props_t {
 
 #if GOARCH_64_fork
 #define GOARCH "64_fork"
-#define SYZ_REVISION "dc988933c0159d48aa77da67d357c4e90e9347b1"
+#define SYZ_REVISION "c69681f012f80810740dcfaef84f85ddabbffabc"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 8192
 #define SYZ_NUM_PAGES 2048
 #define SYZ_DATA_OFFSET 536870912
@@ -8558,8 +8593,9 @@ struct call_props_t {
 
 #if GOARCH_64_fuzz
 #define GOARCH "64_fuzz"
-#define SYZ_REVISION "33395dc65d563102dc0e801bcd958086ffffef69"
+#define SYZ_REVISION "5ea4ab158d644279085d0967ec806771ddcc88a3"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 1
+#define SYZ_EXECUTOR_USES_SHMEM 1
 #define SYZ_PAGE_SIZE 8192
 #define SYZ_NUM_PAGES 2048
 #define SYZ_DATA_OFFSET 536870912
@@ -8716,8 +8752,9 @@ struct call_props_t {
 
 #if GOARCH_arm
 #define GOARCH "arm"
-#define SYZ_REVISION "2209cae162ee5076d468ad11ad05e7406a624e4c"
+#define SYZ_REVISION "2bcddd0ce29e8d9be27c30d3ecbc93ffb55cead3"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
@@ -8730,8 +8767,9 @@ struct call_props_t {
 
 #if GOARCH_amd64
 #define GOARCH "amd64"
-#define SYZ_REVISION "e9871cb5e270866fc16141f54f58b8547bdd99f5"
+#define SYZ_REVISION "7ead9dea2d0734951e5dc7663030362c4575c880"
 #define SYZ_EXECUTOR_USES_FORK_SERVER 0
+#define SYZ_EXECUTOR_USES_SHMEM 0
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
