@@ -1,0 +1,1002 @@
+
+————————————————————————————————These prompts belong to Node: 【__module_get】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __module_get, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __module_get in the linux kenrel source code.
+## The __module_get function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes __module_get.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __module_get.
+
+————————————————————————————————These prompts belong to Node: 【module_put】at below.—————————————————————————————————— 
+# Now I have a kernel internal function module_put, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: module_put in the linux kenrel source code.
+## The module_put function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes sock_release.
+8. function sock_release invokes __sock_release.
+9. function __sock_release invokes module_put.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: module_put.
+
+————————————————————————————————These prompts belong to Node: 【_printk】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _printk, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _printk in the linux kenrel source code.
+## The _printk function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes sock_release.
+8. function sock_release invokes __sock_release.
+9. function __sock_release invokes _printk.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _printk.
+
+————————————————————————————————These prompts belong to Node: 【SOCK_INODE】at below.—————————————————————————————————— 
+# Now I have a kernel internal function SOCK_INODE, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: SOCK_INODE in the linux kenrel source code.
+## The SOCK_INODE function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes SOCK_INODE.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: SOCK_INODE.
+
+————————————————————————————————These prompts belong to Node: 【iput】at below.—————————————————————————————————— 
+# Now I have a kernel internal function iput, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: iput in the linux kenrel source code.
+## The iput function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes sock_release.
+8. function sock_release invokes __sock_release.
+9. function __sock_release invokes iput.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: iput.
+
+————————————————————————————————These prompts belong to Node: 【up_write】at below.—————————————————————————————————— 
+# Now I have a kernel internal function up_write, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: up_write in the linux kenrel source code.
+## The up_write function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes sock_release.
+8. function sock_release invokes __sock_release.
+9. function __sock_release invokes inode_unlock.
+10. function inode_unlock invokes up_write.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: up_write.
+
+————————————————————————————————These prompts belong to Node: 【down_write】at below.—————————————————————————————————— 
+# Now I have a kernel internal function down_write, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: down_write in the linux kenrel source code.
+## The down_write function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes sock_release.
+8. function sock_release invokes __sock_release.
+9. function __sock_release invokes inode_lock.
+10. function inode_lock invokes down_write.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: down_write.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_create】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_create, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_create in the linux kenrel source code.
+## The security_socket_create function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes security_socket_create.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_create.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_post_create】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_post_create, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_post_create in the linux kenrel source code.
+## The security_socket_post_create function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes security_socket_post_create.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_post_create.
+
+————————————————————————————————These prompts belong to Node: 【new_inode_pseudo】at below.—————————————————————————————————— 
+# Now I have a kernel internal function new_inode_pseudo, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: new_inode_pseudo in the linux kenrel source code.
+## The new_inode_pseudo function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc.
+7. function sock_alloc invokes new_inode_pseudo.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: new_inode_pseudo.
+
+————————————————————————————————These prompts belong to Node: 【SOCKET_I】at below.—————————————————————————————————— 
+# Now I have a kernel internal function SOCKET_I, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: SOCKET_I in the linux kenrel source code.
+## The SOCKET_I function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc.
+7. function sock_alloc invokes SOCKET_I.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: SOCKET_I.
+
+————————————————————————————————These prompts belong to Node: 【get_next_ino】at below.—————————————————————————————————— 
+# Now I have a kernel internal function get_next_ino, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: get_next_ino in the linux kenrel source code.
+## The get_next_ino function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc.
+7. function sock_alloc invokes get_next_ino.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: get_next_ino.
+
+————————————————————————————————These prompts belong to Node: 【kfree】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kfree, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kfree in the linux kenrel source code.
+## The kfree function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes kfree.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kfree.
+
+————————————————————————————————These prompts belong to Node: 【__request_module】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __request_module, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __request_module in the linux kenrel source code.
+## The __request_module function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes __request_module.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __request_module.
+
+————————————————————————————————These prompts belong to Node: 【__rcu_read_lock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __rcu_read_lock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __rcu_read_lock in the linux kenrel source code.
+## The __rcu_read_lock function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes __rcu_read_lock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __rcu_read_lock.
+
+————————————————————————————————These prompts belong to Node: 【__bad_copy_from】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __bad_copy_from, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __bad_copy_from in the linux kenrel source code.
+## The __bad_copy_from function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __bad_copy_from.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __bad_copy_from.
+
+————————————————————————————————These prompts belong to Node: 【__bad_copy_to】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __bad_copy_to, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __bad_copy_to in the linux kenrel source code.
+## The __bad_copy_to function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __bad_copy_to.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __bad_copy_to.
+
+————————————————————————————————These prompts belong to Node: 【check_object_size】at below.—————————————————————————————————— 
+# Now I have a kernel internal function check_object_size, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: check_object_size in the linux kenrel source code.
+## The check_object_size function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __copy_msghdr.
+8. function __copy_msghdr invokes move_addr_to_kernel.
+9. function move_addr_to_kernel invokes check_object_size.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: check_object_size.
+
+————————————————————————————————These prompts belong to Node: 【_copy_to_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _copy_to_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _copy_to_user in the linux kenrel source code.
+## The _copy_to_user function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes move_addr_to_user.
+7. function move_addr_to_user invokes _copy_to_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _copy_to_user.
+
+————————————————————————————————These prompts belong to Node: 【__copy_overflow】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __copy_overflow, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __copy_overflow in the linux kenrel source code.
+## The __copy_overflow function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes copy_overflow.
+8. function copy_overflow invokes __copy_overflow.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __copy_overflow.
+
+————————————————————————————————These prompts belong to Node: 【in_x32_syscall】at below.—————————————————————————————————— 
+# Now I have a kernel internal function in_x32_syscall, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: in_x32_syscall in the linux kenrel source code.
+## The in_x32_syscall function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_setsockopt.
+4. function __sys_setsockopt invokes in_compat_syscall.
+5. function in_compat_syscall invokes in_32bit_syscall.
+6. function in_32bit_syscall invokes in_x32_syscall.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: in_x32_syscall.
+
+————————————————————————————————These prompts belong to Node: 【_copy_from_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function _copy_from_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: _copy_from_user in the linux kenrel source code.
+## The _copy_from_user function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __copy_msghdr.
+8. function __copy_msghdr invokes move_addr_to_kernel.
+9. function move_addr_to_kernel invokes _copy_from_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: _copy_from_user.
+
+————————————————————————————————These prompts belong to Node: 【IS_ERR】at below.—————————————————————————————————— 
+# Now I have a kernel internal function IS_ERR, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: IS_ERR in the linux kenrel source code.
+## The IS_ERR function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes IS_ERR.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: IS_ERR.
+
+————————————————————————————————These prompts belong to Node: 【PTR_ERR】at below.—————————————————————————————————— 
+# Now I have a kernel internal function PTR_ERR, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: PTR_ERR in the linux kenrel source code.
+## The PTR_ERR function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes PTR_ERR.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: PTR_ERR.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_getsockopt】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_getsockopt, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_getsockopt in the linux kenrel source code.
+## The security_socket_getsockopt function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_getsockopt.
+4. function __sys_getsockopt invokes do_sock_getsockopt.
+5. function do_sock_getsockopt invokes security_socket_getsockopt.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_getsockopt.
+
+————————————————————————————————These prompts belong to Node: 【__warn_printk】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __warn_printk, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __warn_printk in the linux kenrel source code.
+## The __warn_printk function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_getsockopt.
+4. function __sys_getsockopt invokes do_sock_getsockopt.
+5. function do_sock_getsockopt invokes __warn_printk.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __warn_printk.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_setsockopt】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_setsockopt, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_setsockopt in the linux kenrel source code.
+## The security_socket_setsockopt function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_setsockopt.
+4. function __sys_setsockopt invokes do_sock_setsockopt.
+5. function do_sock_setsockopt invokes security_socket_setsockopt.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_setsockopt.
+
+————————————————————————————————These prompts belong to Node: 【KERNEL_SOCKPTR】at below.—————————————————————————————————— 
+# Now I have a kernel internal function KERNEL_SOCKPTR, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: KERNEL_SOCKPTR in the linux kenrel source code.
+## The KERNEL_SOCKPTR function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_setsockopt.
+4. function __sys_setsockopt invokes do_sock_setsockopt.
+5. function do_sock_setsockopt invokes KERNEL_SOCKPTR.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: KERNEL_SOCKPTR.
+
+————————————————————————————————These prompts belong to Node: 【try_module_get】at below.—————————————————————————————————— 
+# Now I have a kernel internal function try_module_get, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: try_module_get in the linux kenrel source code.
+## The try_module_get function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes try_module_get.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: try_module_get.
+
+————————————————————————————————These prompts belong to Node: 【__rcu_read_unlock】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __rcu_read_unlock, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __rcu_read_unlock in the linux kenrel source code.
+## The __rcu_read_unlock function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes rcu_read_unlock.
+8. function rcu_read_unlock invokes __rcu_read_unlock.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __rcu_read_unlock.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_recvmsg】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_recvmsg, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_recvmsg in the linux kenrel source code.
+## The security_socket_recvmsg function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes sock_recvmsg.
+7. function sock_recvmsg invokes security_socket_recvmsg.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_recvmsg.
+
+————————————————————————————————These prompts belong to Node: 【trace_sock_recv_length_enabled】at below.—————————————————————————————————— 
+# Now I have a kernel internal function trace_sock_recv_length_enabled, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: trace_sock_recv_length_enabled in the linux kenrel source code.
+## The trace_sock_recv_length_enabled function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes sock_recvmsg_nosec.
+7. function sock_recvmsg_nosec invokes trace_sock_recv_length_enabled.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: trace_sock_recv_length_enabled.
+
+————————————————————————————————These prompts belong to Node: 【iov_iter_count】at below.—————————————————————————————————— 
+# Now I have a kernel internal function iov_iter_count, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: iov_iter_count in the linux kenrel source code.
+## The iov_iter_count function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes sock_recvmsg_nosec.
+7. function sock_recvmsg_nosec invokes msg_data_left.
+8. function msg_data_left invokes iov_iter_count.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: iov_iter_count.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_connect】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_connect, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_connect in the linux kenrel source code.
+## The security_socket_connect function is called in the sys_connect system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_connect invokes __se_sys_connect.
+2. function __se_sys_connect invokes __do_sys_connect.
+3. function __do_sys_connect invokes __sys_connect.
+4. function __sys_connect invokes __sys_connect_file.
+5. function __sys_connect_file invokes security_socket_connect.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_connect.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_getsockname】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_getsockname, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_getsockname in the linux kenrel source code.
+## The security_socket_getsockname function is called in the sys_getsockname system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_getsockname invokes __se_sys_getsockname.
+2. function __se_sys_getsockname invokes __do_sys_getsockname.
+3. function __do_sys_getsockname invokes __sys_getsockname.
+4. function __sys_getsockname invokes security_socket_getsockname.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_getsockname.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_getpeername】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_getpeername, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_getpeername in the linux kenrel source code.
+## The security_socket_getpeername function is called in the sys_getpeername system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_getpeername invokes __se_sys_getpeername.
+2. function __se_sys_getpeername invokes __do_sys_getpeername.
+3. function __do_sys_getpeername invokes __sys_getpeername.
+4. function __sys_getpeername invokes security_socket_getpeername.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_getpeername.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_sendmsg】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_sendmsg, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_sendmsg in the linux kenrel source code.
+## The security_socket_sendmsg function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_sendto.
+4. function __sys_sendto invokes __sock_sendmsg.
+5. function __sock_sendmsg invokes security_socket_sendmsg.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_sendmsg.
+
+————————————————————————————————These prompts belong to Node: 【trace_sock_send_length_enabled】at below.—————————————————————————————————— 
+# Now I have a kernel internal function trace_sock_send_length_enabled, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: trace_sock_send_length_enabled in the linux kenrel source code.
+## The trace_sock_send_length_enabled function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_sendto.
+4. function __sys_sendto invokes __sock_sendmsg.
+5. function __sock_sendmsg invokes sock_sendmsg_nosec.
+6. function sock_sendmsg_nosec invokes trace_sock_send_length_enabled.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: trace_sock_send_length_enabled.
+
+————————————————————————————————These prompts belong to Node: 【sock_from_file】at below.—————————————————————————————————— 
+# Now I have a kernel internal function sock_from_file, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: sock_from_file in the linux kenrel source code.
+## The sock_from_file function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes sockfd_lookup_light.
+5. function sockfd_lookup_light invokes sock_from_file.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: sock_from_file.
+
+————————————————————————————————These prompts belong to Node: 【fput】at below.—————————————————————————————————— 
+# Now I have a kernel internal function fput, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: fput in the linux kenrel source code.
+## The fput function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes sockfd_lookup_light.
+5. function sockfd_lookup_light invokes fdput.
+6. function fdput invokes fput.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: fput.
+
+————————————————————————————————These prompts belong to Node: 【array_index_mask_nospec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function array_index_mask_nospec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: array_index_mask_nospec in the linux kenrel source code.
+## The array_index_mask_nospec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes array_index_mask_nospec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: array_index_mask_nospec.
+
+————————————————————————————————These prompts belong to Node: 【__audit_socketcall】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __audit_socketcall, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __audit_socketcall in the linux kenrel source code.
+## The __audit_socketcall function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes audit_socketcall.
+4. function audit_socketcall invokes __audit_socketcall.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __audit_socketcall.
+
+————————————————————————————————These prompts belong to Node: 【might_fault】at below.—————————————————————————————————— 
+# Now I have a kernel internal function might_fault, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: might_fault in the linux kenrel source code.
+## The might_fault function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes move_addr_to_user.
+7. function move_addr_to_user invokes might_fault.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: might_fault.
+
+————————————————————————————————These prompts belong to Node: 【kmsan_unpoison_memory】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmsan_unpoison_memory, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmsan_unpoison_memory in the linux kenrel source code.
+## The kmsan_unpoison_memory function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes move_addr_to_user.
+7. function move_addr_to_user invokes kmsan_unpoison_memory.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmsan_unpoison_memory.
+
+————————————————————————————————These prompts belong to Node: 【read_pnet】at below.—————————————————————————————————— 
+# Now I have a kernel internal function read_pnet, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: read_pnet in the linux kenrel source code.
+## The read_pnet function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_listen.
+4. function __sys_listen invokes sock_net.
+5. function sock_net invokes read_pnet.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: read_pnet.
+
+————————————————————————————————These prompts belong to Node: 【kmsan_copy_to_user】at below.—————————————————————————————————— 
+# Now I have a kernel internal function kmsan_copy_to_user, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: kmsan_copy_to_user in the linux kenrel source code.
+## The kmsan_copy_to_user function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes ____sys_recvmsg.
+6. function ____sys_recvmsg invokes move_addr_to_user.
+7. function move_addr_to_user invokes kmsan_copy_to_user.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: kmsan_copy_to_user.
+
+————————————————————————————————These prompts belong to Node: 【alloc_file_pseudo】at below.—————————————————————————————————— 
+# Now I have a kernel internal function alloc_file_pseudo, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: alloc_file_pseudo in the linux kenrel source code.
+## The alloc_file_pseudo function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes alloc_file_pseudo.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: alloc_file_pseudo.
+
+————————————————————————————————These prompts belong to Node: 【stream_open】at below.—————————————————————————————————— 
+# Now I have a kernel internal function stream_open, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: stream_open in the linux kenrel source code.
+## The stream_open function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes sock_alloc_file.
+7. function sock_alloc_file invokes stream_open.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: stream_open.
+
+————————————————————————————————These prompts belong to Node: 【__audit_sockaddr】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __audit_sockaddr, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __audit_sockaddr in the linux kenrel source code.
+## The __audit_sockaddr function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __copy_msghdr.
+8. function __copy_msghdr invokes move_addr_to_kernel.
+9. function move_addr_to_kernel invokes audit_sockaddr.
+10. function audit_sockaddr invokes __audit_sockaddr.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __audit_sockaddr.
+
+————————————————————————————————These prompts belong to Node: 【audit_context】at below.—————————————————————————————————— 
+# Now I have a kernel internal function audit_context, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: audit_context in the linux kenrel source code.
+## The audit_context function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes __copy_msghdr.
+8. function __copy_msghdr invokes move_addr_to_kernel.
+9. function move_addr_to_kernel invokes audit_sockaddr.
+10. function audit_sockaddr invokes audit_dummy_context.
+11. function audit_dummy_context invokes audit_context.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: audit_context.
+
+————————————————————————————————These prompts belong to Node: 【ERR_PTR】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ERR_PTR, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ERR_PTR in the linux kenrel source code.
+## The ERR_PTR function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes ERR_PTR.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ERR_PTR.
+
+————————————————————————————————These prompts belong to Node: 【update_socket_protocol】at below.—————————————————————————————————— 
+# Now I have a kernel internal function update_socket_protocol, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: update_socket_protocol in the linux kenrel source code.
+## The update_socket_protocol function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes update_socket_protocol.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: update_socket_protocol.
+
+————————————————————————————————These prompts belong to Node: 【get_unused_fd_flags】at below.—————————————————————————————————— 
+# Now I have a kernel internal function get_unused_fd_flags, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: get_unused_fd_flags in the linux kenrel source code.
+## The get_unused_fd_flags function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes get_unused_fd_flags.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: get_unused_fd_flags.
+
+————————————————————————————————These prompts belong to Node: 【fd_install】at below.—————————————————————————————————— 
+# Now I have a kernel internal function fd_install, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: fd_install in the linux kenrel source code.
+## The fd_install function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes fd_install.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: fd_install.
+
+————————————————————————————————These prompts belong to Node: 【put_unused_fd】at below.—————————————————————————————————— 
+# Now I have a kernel internal function put_unused_fd, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: put_unused_fd in the linux kenrel source code.
+## The put_unused_fd function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes put_unused_fd.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: put_unused_fd.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_socketpair】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_socketpair, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_socketpair in the linux kenrel source code.
+## The security_socket_socketpair function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socketpair.
+4. function __sys_socketpair invokes security_socket_socketpair.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_socketpair.
+
+————————————————————————————————These prompts belong to Node: 【__audit_fd_pair】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __audit_fd_pair, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __audit_fd_pair in the linux kenrel source code.
+## The __audit_fd_pair function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socketpair.
+4. function __sys_socketpair invokes audit_fd_pair.
+5. function audit_fd_pair invokes __audit_fd_pair.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __audit_fd_pair.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_bind】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_bind, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_bind in the linux kenrel source code.
+## The security_socket_bind function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_bind.
+4. function __sys_bind invokes security_socket_bind.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_bind.
+
+————————————————————————————————These prompts belong to Node: 【__fdget】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __fdget, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __fdget in the linux kenrel source code.
+## The __fdget function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes sockfd_lookup_light.
+5. function sockfd_lookup_light invokes fdget.
+6. function fdget invokes __fdget.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __fdget.
+
+————————————————————————————————These prompts belong to Node: 【__to_fd】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __to_fd, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __to_fd in the linux kenrel source code.
+## The __to_fd function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes sockfd_lookup_light.
+5. function sockfd_lookup_light invokes fdget.
+6. function fdget invokes __to_fd.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __to_fd.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_listen】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_listen, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_listen in the linux kenrel source code.
+## The security_socket_listen function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_listen.
+4. function __sys_listen invokes security_socket_listen.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_listen.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_accept】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_accept, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_accept in the linux kenrel source code.
+## The security_socket_accept function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_accept.
+4. function __sys_accept invokes __sys_accept4_file.
+5. function __sys_accept4_file invokes do_accept.
+6. function do_accept invokes security_socket_accept.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_accept.
+
+————————————————————————————————These prompts belong to Node: 【import_single_range】at below.—————————————————————————————————— 
+# Now I have a kernel internal function import_single_range, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: import_single_range in the linux kenrel source code.
+## The import_single_range function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_sendto.
+4. function __sys_sendto invokes import_single_range.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: import_single_range.
+
+————————————————————————————————These prompts belong to Node: 【USER_SOCKPTR】at below.—————————————————————————————————— 
+# Now I have a kernel internal function USER_SOCKPTR, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: USER_SOCKPTR in the linux kenrel source code.
+## The USER_SOCKPTR function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_setsockopt.
+4. function __sys_setsockopt invokes USER_SOCKPTR.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: USER_SOCKPTR.
+
+————————————————————————————————These prompts belong to Node: 【security_socket_shutdown】at below.—————————————————————————————————— 
+# Now I have a kernel internal function security_socket_shutdown, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: security_socket_shutdown in the linux kenrel source code.
+## The security_socket_shutdown function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_shutdown.
+4. function __sys_shutdown invokes __sys_shutdown_sock.
+5. function __sys_shutdown_sock invokes security_socket_shutdown.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: security_socket_shutdown.
+
+————————————————————————————————These prompts belong to Node: 【import_iovec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function import_iovec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: import_iovec in the linux kenrel source code.
+## The import_iovec function is called in the sys_recvmsg system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_recvmsg invokes __se_sys_recvmsg.
+2. function __se_sys_recvmsg invokes __do_sys_recvmsg.
+3. function __do_sys_recvmsg invokes __sys_recvmsg.
+4. function __sys_recvmsg invokes ___sys_recvmsg.
+5. function ___sys_recvmsg invokes recvmsg_copy_msghdr.
+6. function recvmsg_copy_msghdr invokes copy_msghdr_from_user.
+7. function copy_msghdr_from_user invokes import_iovec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: import_iovec.
+
+————————————————————————————————These prompts belong to Node: 【memcmp】at below.—————————————————————————————————— 
+# Now I have a kernel internal function memcmp, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: memcmp in the linux kenrel source code.
+## The memcmp function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_sendmmsg.
+4. function __sys_sendmmsg invokes ___sys_sendmsg.
+5. function ___sys_sendmsg invokes ____sys_sendmsg.
+6. function ____sys_sendmsg invokes memcmp.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: memcmp.
+
+————————————————————————————————These prompts belong to Node: 【__might_resched】at below.—————————————————————————————————— 
+# Now I have a kernel internal function __might_resched, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: __might_resched in the linux kenrel source code.
+## The __might_resched function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes do_recvmmsg.
+5. function do_recvmmsg invokes __might_resched.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: __might_resched.
+
+————————————————————————————————These prompts belong to Node: 【get_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function get_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: get_timespec in the linux kenrel source code.
+## The get_timespec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes get_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: get_timespec.
+
+————————————————————————————————These prompts belong to Node: 【get_old_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function get_old_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: get_old_timespec in the linux kenrel source code.
+## The get_old_timespec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes get_old_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: get_old_timespec.
+
+————————————————————————————————These prompts belong to Node: 【put_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function put_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: put_timespec in the linux kenrel source code.
+## The put_timespec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes put_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: put_timespec.
+
+————————————————————————————————These prompts belong to Node: 【put_old_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function put_old_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: put_old_timespec in the linux kenrel source code.
+## The put_old_timespec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes put_old_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: put_old_timespec.
+
+————————————————————————————————These prompts belong to Node: 【poll_select_set_timeout】at below.—————————————————————————————————— 
+# Now I have a kernel internal function poll_select_set_timeout, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: poll_select_set_timeout in the linux kenrel source code.
+## The poll_select_set_timeout function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes do_recvmmsg.
+5. function do_recvmmsg invokes poll_select_set_timeout.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: poll_select_set_timeout.
+
+————————————————————————————————These prompts belong to Node: 【ktime_get_ts】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ktime_get_ts, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ktime_get_ts in the linux kenrel source code.
+## The ktime_get_ts function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes do_recvmmsg.
+5. function do_recvmmsg invokes ktime_get_ts.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ktime_get_ts.
+
+————————————————————————————————These prompts belong to Node: 【set_normalized_timespec】at below.—————————————————————————————————— 
+# Now I have a kernel internal function set_normalized_timespec, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: set_normalized_timespec in the linux kenrel source code.
+## The set_normalized_timespec function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_recvmmsg.
+4. function __sys_recvmmsg invokes do_recvmmsg.
+5. function do_recvmmsg invokes timespec64_sub.
+6. function timespec64_sub invokes set_normalized_timespec.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: set_normalized_timespec.
+
+————————————————————————————————These prompts belong to Node: 【___ratelimit】at below.—————————————————————————————————— 
+# Now I have a kernel internal function ___ratelimit, the kernel internal function needs to be invoked from the user mode through the corresponding system call function.
+## Targeted invocation of kernel internal function: ___ratelimit in the linux kenrel source code.
+## The ___ratelimit function is called in the sys_socketcall system call function in linux kernel.
+## Detailed linux kernel internal function invocation chain is shown at below.
+1. function sys_socketcall invokes __se_sys_socketcall.
+2. function __se_sys_socketcall invokes __do_sys_socketcall.
+3. function __do_sys_socketcall invokes __sys_socket.
+4. function __sys_socket invokes __sys_socket_create.
+5. function __sys_socket_create invokes sock_create.
+6. function sock_create invokes __sock_create.
+7. function __sock_create invokes net_ratelimit.
+8. function net_ratelimit invokes ___ratelimit.
+## Based on the show of the kernel internal function chain. please reason step by step. Don't add new kernel module to generate code. Please generate the complete executable C language source code to call the given kernel internal function: ___ratelimit.
